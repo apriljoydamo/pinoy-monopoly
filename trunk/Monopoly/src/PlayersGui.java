@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,8 +30,6 @@ public class PlayersGui extends JFrame{
 	private JButton ExitButton;
 	private JLabel MonopolyLabel;
 	private JPanel StartUpPanel;
-	private JButton HighScoresButton;
-	private JButton InstructionsButton;
 	private JPanel PlayPanel;
 	private JPanel SoloPanel;
 	private JPanel MultiPanel;
@@ -67,6 +66,7 @@ public class PlayersGui extends JFrame{
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	public PlayersGui() {
 		initComponents();
+		
 	}
 
 	private void initComponents() {
@@ -463,33 +463,14 @@ public class PlayersGui extends JFrame{
 		return PlayPanel;
 	}
 
-	private JButton getInstructionsButton() {
-		if (InstructionsButton == null) {
-			InstructionsButton = new JButton();
-			InstructionsButton.setText("Instructions");
-		}
-		return InstructionsButton;
-	}
-
-	private JButton getHighScoresButton() {
-		if (HighScoresButton == null) {
-			HighScoresButton = new JButton();
-			HighScoresButton.setText("High Scores");
-		}
-		return HighScoresButton;
-	}
-
 	private JPanel getStartUpPanel() {
 		if (StartUpPanel == null) {
 			StartUpPanel = new JPanel();
 			StartUpPanel.setBackground(new Color(170, 170, 255));
-			StartUpPanel.setVisible(true);
 			StartUpPanel.setLayout(new GroupLayout());
-			StartUpPanel.add(getMonopolyLabel(), new Constraints(new Leading(437, 10, 10), new Leading(65, 10, 10)));
-			StartUpPanel.add(getHighScoresButton(), new Constraints(new Leading(346, 12, 12), new Leading(357, 10, 10)));
-			StartUpPanel.add(getInstructionsButton(), new Constraints(new Leading(639, 12, 12), new Leading(357, 12, 12)));
-			StartUpPanel.add(getExitButton(), new Constraints(new Leading(639, 97, 10, 10), new Leading(236, 30, 12, 12)));
-			StartUpPanel.add(getNewGameButton(), new Constraints(new Leading(346, 102, 12, 12), new Leading(237, 29, 12, 12)));
+			StartUpPanel.add(getNewGameButton(), new Constraints(new Leading(257, 102, 10, 10), new Leading(560, 29, 10, 10)));
+			StartUpPanel.add(getExitButton(), new Constraints(new Leading(660, 97, 10, 10), new Leading(559, 30, 12, 12)));
+			StartUpPanel.add(getMonopolyLabel(), new Constraints(new Leading(149, 713, 10, 10), new Leading(97, 343, 10, 10)));
 		}
 		return StartUpPanel;
 	}
@@ -498,7 +479,7 @@ public class PlayersGui extends JFrame{
 		if (MonopolyLabel == null) {
 			MonopolyLabel = new JLabel();
 			MonopolyLabel.setFont(new Font("Impact", Font.BOLD, 48));
-			MonopolyLabel.setText("Monopoly");
+			MonopolyLabel.setIcon(new ImageIcon(getClass().getResource("/pMonopoly.png")));
 		}
 		return MonopolyLabel;
 	}
@@ -568,6 +549,7 @@ public class PlayersGui extends JFrame{
 				frame.pack();
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
+				frame.setResizable(false);
 			}
 		});
 	}
