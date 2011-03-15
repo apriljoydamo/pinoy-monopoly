@@ -23,46 +23,6 @@ import org.dyno.visual.swing.layouts.Trailing;
 public class Board extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	private JPanel jlBoardPanel;
-	private JLabel jlFreeParking;
-	private JLabel jlMonopolyMiddle;
-	private JLabel jlGotoJail, jlGo;
-	private JLabel jlNlex;
-	private JLabel jlChance1;
-	private JLabel jlNationalBookStore;
-	private JLabel jlTrinoma;
-	private JLabel jlLrt;
-	private JLabel jlEdsa;
-	private JLabel jlMagsaysayBridge;
-	private JLabel jlMaynilad;
-	private JLabel jlStarCity;
-	private JLabel jlLandMark;
-	private JLabel jlGlorietta;
-	private JLabel jlCommunityChest;
-	private JLabel jlGreenBelt;
-	private JLabel jlNorthEdsaStation;
-	private JLabel jlChance2;
-	private JLabel jlBoracayIsland;
-	private JLabel jlSuperTax;
-	private JLabel jlMoa;
-	private JLabel jlAyalaAve;
-	private JLabel jlCommunityChest1;
-	private JLabel jlMakatiAve;
-	private JLabel jlIncomeTax;
-	private JLabel jlAyalaAveStation;
-	private JLabel jlPuregold;
-	private JLabel jlChance3;
-	private JLabel jlRizalPark;
-	private JLabel jlDelaRosaSt;
-	private JLabel jlChinaTown;
-	private JLabel jlC5Road;
-	private JLabel jlCommunityChest2;
-	private JLabel jlIntramuros;
-	private JLabel jlBuendiaStation;
-	private JLabel jlWalterMart;
-	private JLabel jlSlex;
-	private JLabel jlMeralco;
-	private JLabel jlShopwise;
 	private JPanel jDicePanel;
 	private JButton jRollButton;
 	private JLabel jlDice1o1, jlDice1o2, jlDice1o3, jlDice1o4, jlDice1o5, jlDice1o6, jlDice2o1, jlDice2o2, jlDice2o3, jlDice2o4, jlDice2o5, jlDice2o6;
@@ -70,11 +30,8 @@ public class Board extends JFrame {
 	static Random generator = new  Random();
 	private static int thro, length = 6;
 	public int total;
-	
-
+	Players players = new Players();
 	private JPanel jPlayersPanel;
-	private JLabel jlJustVisiting;
-	private JLabel jlInJail;
 	private JPanel jPanel0;
 	private JTabbedPane jTabbedPane0;
 	private JButton jButton0;
@@ -109,16 +66,10 @@ public class Board extends JFrame {
 	private JPanel jPanel1;
 	//private Component panel;
 	//private static String String = null;
+	
 	private JLabel BoardMonopoly;
-	private JLabel CarToken;
-	private JLabel DogToken;
 	public boolean isRolled = false;
-	private JLabel HatToken;
-	private JLabel IronToken;
-	private JLabel ShipToken;
-	private JLabel ShoeToken;
-	private JLabel ThimbleToken;
-	private JLabel WheelBarrowToken;
+	private JLabel TokenImage;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	public Board() {
 		initComponents();
@@ -126,90 +77,53 @@ public class Board extends JFrame {
 
 	private void initComponents() {
 		setLayout(new GroupLayout());
-		add(getJlBoardPanel(), new Constraints(new Leading(0, 600, 10, 10), new Bilateral(0, 0, 0)));
+		//add(getJlBoardPanel(), new Constraints(new Leading(0, 600, 10, 10), new Bilateral(0, 0, 0)));
 		add(getJPlayersPanel(), new Constraints(new Bilateral(606, 1, 0), new Leading(0, 485, 117, 117)));
 		add(getJDicePanel(), new Constraints(new Bilateral(606, 0, 0), new Bilateral(491, 0, 0)));
 		add(getJPanel1(), new Constraints(new Leading(0, 600, 36, 234), new Bilateral(0, 0, 0)));
 		setSize(827, 602);
 	}
 
-	private JLabel getWheelBarrowToken() {
-		if (WheelBarrowToken == null) {
-			WheelBarrowToken = new JLabel();
-			WheelBarrowToken.setIcon(new ImageIcon(getClass().getResource("/wheelbarrow_token.png")));
-			WheelBarrowToken.setVisible(false);
-		}
-		return WheelBarrowToken;
-	}
-
-	private JLabel getThimbleToken() {
-		if (ThimbleToken == null) {
-			ThimbleToken = new JLabel();
-			ThimbleToken.setIcon(new ImageIcon(getClass().getResource("/thimble_token.png")));
-			ThimbleToken.setVisible(false);
-		}
-		return ThimbleToken;
-	}
-
-	private JLabel getShoeToken() {
-		if (ShoeToken == null) {
-			ShoeToken = new JLabel();
-			ShoeToken.setIcon(new ImageIcon(getClass().getResource("/shoe_token.png")));
-			ShoeToken.setVisible(false);
-		}
-		return ShoeToken;
-	}
-
-	private JLabel getShipToken() {
-		if (ShipToken == null) {
-			ShipToken = new JLabel();
-			ShipToken.setIcon(new ImageIcon(getClass().getResource("/ship_token.png")));
-			ShipToken.setVisible(false);
-		}
-		return ShipToken;
-	}
-
-	private JLabel getIronToken() {
-		if (IronToken == null) {
-			IronToken = new JLabel();
-			IronToken.setIcon(new ImageIcon(getClass().getResource("/iron_token.png")));
-			IronToken.setVisible(false);
-		}
-		return IronToken;
-	}
-
-	private JLabel getHatToken() {
-		if (HatToken == null) {
-			HatToken = new JLabel();
-			HatToken.setIcon(new ImageIcon(getClass().getResource("/hat_token.png")));
-			HatToken.setVisible(false);
-		}
-		return HatToken;
-	}
-
-	public JLabel getDogToken() {
-		if (DogToken == null) {
-			DogToken = new JLabel();
-			DogToken.setIcon(new ImageIcon(getClass().getResource("/dog_token.png")));
-			DogToken.setVisible(false);
+	public JLabel getTokenImage() {
+		if (TokenImage == null) {
+			TokenImage = new JLabel();
+			TokenImage.setVisible(true);
+			TokenImage.setBounds(90, 80, 50, 50);
 			
+			switch(players.LabelToken){
+			case 1:
+				TokenImage.setIcon(new ImageIcon(getClass().getResource("/ship_token.png")));
+				break;
+			case 2:
+				TokenImage.setIcon(new ImageIcon(getClass().getResource("/dog_token.png")));
+				break;
+			case 3:
+				TokenImage.setIcon(new ImageIcon(getClass().getResource("/iron_token.png")));
+				break;
+			case 4: 
+				TokenImage.setIcon(new ImageIcon(getClass().getResource("/shoe_token.png")));
+				break;
+			case 5:
+				TokenImage.setIcon(new ImageIcon(getClass().getResource("/car_token.png")));
+				break;
+			case 6:
+				TokenImage.setIcon(new ImageIcon(getClass().getResource("/thimble_token.png")));
+				break;
+			case 7:
+				TokenImage.setIcon(new ImageIcon(getClass().getResource("/hat_token.png")));
+				break;
+			case 8:
+				TokenImage.setIcon(new ImageIcon(getClass().getResource("/wheelbarrow_token.png")));
+				break;
+			}
 		}
-		return DogToken;
-	}
-
-	private JLabel getCarToken() {
-		if (CarToken == null) {
-			CarToken = new JLabel();
-			CarToken.setIcon(new ImageIcon(getClass().getResource("/car_token.png")));
-			CarToken.setVisible(false);
-		}
-		return CarToken;
+		return TokenImage;
 	}
 
 	private JLabel getBoardMonopoly() {
 		if (BoardMonopoly == null) {
 			BoardMonopoly = new JLabel();
-			BoardMonopoly.setIcon(new ImageIcon(getClass().getResource("/MonopolyBoard.png")));
+			BoardMonopoly.setIcon(new ImageIcon(getClass().getResource("/MonopolyBoardFinal.png")));
 		}
 		return BoardMonopoly;
 	}
@@ -219,14 +133,7 @@ public class Board extends JFrame {
 			jPanel1 = new JPanel();
 			jPanel1.setBackground(Color.black);
 			jPanel1.setLayout(new GroupLayout());
-			jPanel1.add(getCarToken(), new Constraints(new Leading(521, 10, 10), new Leading(555, 10, 10)));
-			jPanel1.add(getDogToken(), new Constraints(new Leading(528, 10, 10), new Leading(530, 10, 10)));
-			jPanel1.add(getHatToken(), new Constraints(new Leading(535, 10, 10), new Leading(546, 10, 10)));
-			jPanel1.add(getIronToken(), new Constraints(new Leading(535, 12, 12), new Leading(539, 10, 10)));
-			jPanel1.add(getShipToken(), new Constraints(new Leading(533, 12, 12), new Leading(530, 12, 12)));
-			jPanel1.add(getShoeToken(), new Constraints(new Leading(538, 12, 12), new Leading(521, 12, 12)));
-			jPanel1.add(getThimbleToken(), new Constraints(new Leading(521, 12, 12), new Leading(566, 12, 12)));
-			jPanel1.add(getWheelBarrowToken(), new Constraints(new Leading(525, 12, 12), new Leading(527, 12, 12)));
+			jPanel1.add(getTokenImage(), new Constraints(new Leading(521, 10, 10), new Leading(555, 10, 10)));
 			jPanel1.add(getBoardMonopoly(), new Constraints(new Leading(0, 12, 12), new Leading(4, 10, 10)));
 			}
 		return jPanel1;
@@ -496,7 +403,8 @@ public class Board extends JFrame {
 		if (jTabbedPane0 == null) {
 			jTabbedPane0 = new JTabbedPane();
 			jTabbedPane0.setBackground(new Color(0, 255, 64));
-			jTabbedPane0.addTab("jPanel0", getJPanel0());
+			jTabbedPane0.addTab("Player " + players.getPlayerName(), getJPanel0());
+			System.out.println(players.getPlayerName());
 		}
 		return jTabbedPane0;
 	}
@@ -538,23 +446,7 @@ public class Board extends JFrame {
 		}
 		return jPanel0;
 	}
-
-	private JLabel getJLInJail() {
-		if (jlInJail == null) {
-			jlInJail = new JLabel();
-			jlInJail.setIcon(new ImageIcon(getClass().getResource("/In Jail.png")));
-		}
-		return jlInJail;
-	}
-
-	private JLabel getJLJustVisiting() {
-		if (jlJustVisiting == null) {
-			jlJustVisiting = new JLabel();
-			jlJustVisiting.setIcon(new ImageIcon(getClass().getResource("/Just Visiting.png")));
-		}
-		return jlJustVisiting;
-	}
-
+	
 	private JPanel getJPlayersPanel() {
 		if (jPlayersPanel == null) {
 			jPlayersPanel = new JPanel();
@@ -755,374 +647,18 @@ public class Board extends JFrame {
 						}
 						
 						total = s + t;
-						System.out.println("Total is" + total);
+						System.out.println("Total is " + total);
+						
+				TokenImage.setLocation(getX() - total, getY());
 				}
 			});
+			
 		}
 		return jRollButton;
 	}
 
-	//public static int returnRandomValue() {
-	//	return thro = 1 + generator.nextInt (length);
-	//}
 	
-	
-/*	public void actionPerformed(ActionEvent e) {
-		
-		Board di = new Board();
-		di.initComponents();
-		
-		int s = 0, t = 0, total;
-		
-		
-		if ("button1".equals(e.getActionCommand())) {
-			
-			for (int i = 0; i < 1; ++i ) {
-				s = di.returnRandomValue();
-				
-				if (s == 1)
-					jlDice1o1.setVisible(true);
-				if (s == 2)
-					jlDice1o2.setVisible(true);
-				if (s == 3)
-					jlDice1o3.setVisible(true);
-				if (s == 4)
-					jlDice1o4.setVisible(true);
-				if (s == 5)
-					jlDice1o5.setVisible(true);
-				if (s == 6)
-					jlDice1o6.setVisible(true);
-			}
-			
-			for (int i = 0; i < 1; ++i) {
-				t = di.returnRandomValue();
-				
-				if (t == 1)
-					jlDice2o1.setVisible(true);
-				if (t == 2)
-					jlDice2o2.setVisible(true);
-				if (t == 3)
-					jlDice2o3.setVisible(true);
-				if (t == 4)
-					jlDice2o4.setVisible(true);
-				if (t == 5)
-					jlDice2o5.setVisible(true);
-				if (t == 6)
-					jlDice2o6.setVisible(true);
-			}
-		}
-		
-		total = s + t;
-		System.out.println("Total is " + total );
-	}
-	
-	/* -------------------------------------------------------------------------------------- */
-
-	private JLabel getJLShopwise() {
-		if (jlShopwise == null) {
-			jlShopwise = new JLabel();
-			jlShopwise.setIcon(new ImageIcon(getClass().getResource("/Shopwise.png")));
-		}
-		return jlShopwise;
-	}
-
-	private JLabel getJLMeralco() {
-		if (jlMeralco == null) {
-			jlMeralco = new JLabel();
-			jlMeralco.setIcon(new ImageIcon(getClass().getResource("/Meralco.png")));
-		}
-		return jlMeralco;
-	}
-
-	private JLabel getJLSlex() {
-		if (jlSlex == null) {
-			jlSlex = new JLabel();
-			jlSlex.setIcon(new ImageIcon(getClass().getResource("/SLEX.png")));
-		}
-		return jlSlex;
-	}
-
-	private JLabel getJLWalterMart() {
-		if (jlWalterMart == null) {
-			jlWalterMart = new JLabel();
-			jlWalterMart.setIcon(new ImageIcon(getClass().getResource("/Walter Mart.png")));
-		}
-		return jlWalterMart;
-	}
-
-	private JLabel getJLBuendiaStation() {
-		if (jlBuendiaStation == null) {
-			jlBuendiaStation = new JLabel();
-			jlBuendiaStation.setIcon(new ImageIcon(getClass().getResource("/Buendia Station.png")));
-		}
-		return jlBuendiaStation;
-	}
-
-	private JLabel getJLIntramuros() {
-		if (jlIntramuros == null) {
-			jlIntramuros = new JLabel();
-			jlIntramuros.setIcon(new ImageIcon(getClass().getResource("/Intramuros.png")));
-		}
-		return jlIntramuros;
-	}
-
-	private JLabel getJLCommunityChest2() {
-		if (jlCommunityChest2 == null) {
-			jlCommunityChest2 = new JLabel();
-			jlCommunityChest2.setIcon(new ImageIcon(getClass().getResource("/Community Chest 2.png")));
-		}
-		return jlCommunityChest2;
-	}
-
-	private JLabel getJLC5Road() {
-		if (jlC5Road == null) {
-			jlC5Road = new JLabel();
-			jlC5Road.setIcon(new ImageIcon(getClass().getResource("/C-5 road.png")));
-		}
-		return jlC5Road;
-	}
-
-	private JLabel getJLChinaTown() {
-		if (jlChinaTown == null) {
-			jlChinaTown = new JLabel();
-			jlChinaTown.setIcon(new ImageIcon(getClass().getResource("/China Town.png")));
-		}
-		return jlChinaTown;
-	}
-
-	private JLabel getJLDelaRosaSt() {
-		if (jlDelaRosaSt == null) {
-			jlDelaRosaSt = new JLabel();
-			jlDelaRosaSt.setIcon(new ImageIcon(getClass().getResource("/Dela Rosa.png")));
-		}
-		return jlDelaRosaSt;
-	}
-
-	private JLabel getJLRizalPark() {
-		if (jlRizalPark == null) {
-			jlRizalPark = new JLabel();
-			jlRizalPark.setIcon(new ImageIcon(getClass().getResource("/Rizal Park.png")));
-		}
-		return jlRizalPark;
-	}
-
-	private JLabel getJLChance3() {
-		if (jlChance3 == null) {
-			jlChance3 = new JLabel();
-			jlChance3.setIcon(new ImageIcon(getClass().getResource("/Chance 1.png")));
-		}
-		return jlChance3;
-	}
-
-	private JLabel getJLPuregold() {
-		if (jlPuregold == null) {
-			jlPuregold = new JLabel();
-			jlPuregold.setIcon(new ImageIcon(getClass().getResource("/Puregold.png")));
-		}
-		return jlPuregold;
-	}
-
-	private JLabel getJLAyalaAveStation() {
-		if (jlAyalaAveStation == null) {
-			jlAyalaAveStation = new JLabel();
-			jlAyalaAveStation.setIcon(new ImageIcon(getClass().getResource("/Ayala Avenue Station.png")));
-		}
-		return jlAyalaAveStation;
-	}
-
-	private JLabel getJLIncomeTax() {
-		if (jlIncomeTax == null) {
-			jlIncomeTax = new JLabel();
-			jlIncomeTax.setIcon(new ImageIcon(getClass().getResource("/Income Tax.png")));
-		}
-		return jlIncomeTax;
-	}
-
-	private JLabel getJLMakatiAve() {
-		if (jlMakatiAve == null) {
-			jlMakatiAve = new JLabel();
-			jlMakatiAve.setIcon(new ImageIcon(getClass().getResource("/Makati Avenue.png")));
-		}
-		return jlMakatiAve;
-	}
-
-	private JLabel getJLCommunityChest1() {
-		if (jlCommunityChest1 == null) {
-			jlCommunityChest1 = new JLabel();
-			jlCommunityChest1.setIcon(new ImageIcon(getClass().getResource("/Community Chest 1.png")));
-		}
-		return jlCommunityChest1;
-	}
-	
-	private JLabel getJLAyalaAve() {
-		if (jlAyalaAve == null) {
-			jlAyalaAve = new JLabel();
-			jlAyalaAve.setIcon(new ImageIcon(getClass().getResource("/Ayala Avenue.png")));
-		}
-		return jlAyalaAve;
-	}
-
-	private JLabel getJLMoa() {
-		if (jlMoa == null) {
-			jlMoa = new JLabel();
-			jlMoa.setIcon(new ImageIcon(getClass().getResource("/SM Mall of Asia.png")));
-		}
-		return jlMoa;
-	}
-
-	private JLabel getJLSuperTax() {
-		if (jlSuperTax == null) {
-			jlSuperTax = new JLabel();
-			jlSuperTax.setIcon(new ImageIcon(getClass().getResource("/Super Tax.png")));
-		}
-		return jlSuperTax;
-	}
-
-	private JLabel getJLBoracayIsland() {
-		if (jlBoracayIsland == null) {
-			jlBoracayIsland = new JLabel();
-			jlBoracayIsland.setIcon(new ImageIcon(getClass().getResource("/Boracay Island.png")));
-		}
-		return jlBoracayIsland;
-	}
-
-	private JLabel getJLChance2() {
-		if (jlChance2 == null) {
-			jlChance2 = new JLabel();
-			jlChance2.setIcon(new ImageIcon(getClass().getResource("/Chance 3.png")));
-		}
-		return jlChance2;
-	}
-
-	private JLabel getJLNorthEdsaStation() {
-		if (jlNorthEdsaStation == null) {
-			jlNorthEdsaStation = new JLabel();
-			jlNorthEdsaStation.setIcon(new ImageIcon(getClass().getResource("/North Edsa Station.png")));
-		}
-		return jlNorthEdsaStation;
-	}
-
-	private JLabel getJLGreenbelt() {
-		if (jlGreenBelt == null) {
-			jlGreenBelt = new JLabel();
-			jlGreenBelt.setIcon(new ImageIcon(getClass().getResource("/Greenbelt.png")));
-		}
-		return jlGreenBelt;
-	}
-
-	private JLabel getJLCommunityChest() {
-		if (jlCommunityChest == null) {
-			jlCommunityChest = new JLabel();
-			jlCommunityChest.setIcon(new ImageIcon(getClass().getResource("/Community Chest 3.png")));
-		}
-		return jlCommunityChest;
-	}
-
-	private JLabel getJLGlorietta() {
-		if (jlGlorietta == null) {
-			jlGlorietta = new JLabel();
-			jlGlorietta.setIcon(new ImageIcon(getClass().getResource("/Glorietta.png")));
-		}
-		return jlGlorietta;
-	}
-
-	private JLabel getJLLandMark() {
-		if (jlLandMark == null) {
-			jlLandMark = new JLabel();
-			jlLandMark.setIcon(new ImageIcon(getClass().getResource("/Landmark.png")));
-		}
-		return jlLandMark;
-	}
-	
-	private JLabel getJLStarCity() {
-		if (jlStarCity == null) {
-			jlStarCity = new JLabel();
-			jlStarCity.setIcon(new ImageIcon(getClass().getResource("/Star City.png")));
-		}
-		return jlStarCity;
-	}
-	
-	private JLabel getJLMagsaysayBridge() {
-		if (jlMagsaysayBridge == null) {
-			jlMagsaysayBridge = new JLabel();
-			jlMagsaysayBridge.setIcon(new ImageIcon(getClass().getResource("/Magsaysay Bridge.png")));
-		}
-		return jlMagsaysayBridge;
-	}
-
-	private JLabel getJLEdsa() {
-		if (jlEdsa == null) {
-			jlEdsa = new JLabel();
-			jlEdsa.setIcon(new ImageIcon(getClass().getResource("/EDSA.png")));
-		}
-		return jlEdsa;
-	}
-	
-	private JLabel getJLLrt() {
-		if (jlLrt == null) {
-			jlLrt = new JLabel();
-			jlLrt.setIcon(new ImageIcon(getClass().getResource("/Taft Avenue Station.png")));
-		}
-		return jlLrt;
-	}
-
-	private JLabel getJLMaynilad() {
-		if (jlMaynilad == null) {
-			jlMaynilad = new JLabel();
-			jlMaynilad.setIcon(new ImageIcon(getClass().getResource("/Maynilad Water Station.png")));
-		}
-		return jlMaynilad;
-	}
-
-	private JLabel getJLTrinoma() {
-		if (jlTrinoma == null) {
-			jlTrinoma = new JLabel();
-			jlTrinoma.setIcon(new ImageIcon(getClass().getResource("/Trinoma.png")));
-		}
-		return jlTrinoma;
-	}
-
-	private JLabel getJLNationalBookStore() {
-		if (jlNationalBookStore == null) {
-			jlNationalBookStore = new JLabel();
-			jlNationalBookStore.setIcon(new ImageIcon(getClass().getResource("/National Bookstore.png")));
-		}
-		return jlNationalBookStore;
-	}
-
-	private JLabel getJLChance1() {
-		if (jlChance1 == null) {
-			jlChance1 = new JLabel();
-			jlChance1.setIcon(new ImageIcon(getClass().getResource("/Chance 2.png")));
-		}
-		return jlChance1;
-	}
-
-	private JLabel getJLNlex() {
-		if (jlNlex == null) {
-			jlNlex = new JLabel();
-			jlNlex.setIcon(new ImageIcon(getClass().getResource("/NLEX.png")));
-		}
-		return jlNlex;
-	}
-
-	private JLabel getJLGotoJail() {
-		if (jlGotoJail == null) {
-			jlGotoJail = new JLabel();
-			jlGotoJail.setIcon(new ImageIcon(getClass().getResource("/Go to Jail.png")));
-		}
-		return jlGotoJail;
-	}
-	
-	private JLabel getJLGo() {
-		if(jlGo == null) {
-			jlGo = new JLabel();
-			jlGo.setIcon(new ImageIcon(getClass().getResource("/Go.png")));
-		}
-		return jlGo;
-	}
-
-	private JPanel getJlBoardPanel() {
+	/*private JPanel getJlBoardPanel() {
 		if (jlBoardPanel == null) {
 			jlBoardPanel = new JPanel();
 			jlBoardPanel.setVisible(false);
@@ -1172,25 +708,7 @@ public class Board extends JFrame {
 			jlBoardPanel.add(getJLInJail(), new Constraints(new Leading(0, 12, 12), new Leading(506, 12, 12)));
 		}
 		return jlBoardPanel;
-	}
-
-	private JLabel getJLFreeParking() {
-		if (jlFreeParking == null) {
-			jlFreeParking = new JLabel();
-			jlFreeParking.setIcon(new ImageIcon(getClass().getResource("/Free Parking.png")));
-			jlFreeParking.setVisible(true);
-		}
-		return jlFreeParking;
-	}
-
-	private JLabel getJLMonopolyMiddle() {
-		if (jlMonopolyMiddle == null) {
-			jlMonopolyMiddle = new JLabel();
-			jlMonopolyMiddle.setIcon(new ImageIcon(getClass().getResource("/Mid.png")));
-		}
-		return jlMonopolyMiddle;
-	}
-
+	}*/
 
 	
 	private static void installLnF() {
@@ -1242,4 +760,18 @@ public class Board extends JFrame {
 	private void jButton0MouseMouseClicked(MouseEvent event) {
 	}
 
+	/*@Override
+	public void run() {
+		while(isRunning){
+			while(isRolling){
+				TokenImage.setLocation(getX() - total, getY());
+			try{
+				Thread.sleep(1000);
+			}catch(InterruptedException e){}
+			}
+			
+		}
+	}*/
 }
+
+
