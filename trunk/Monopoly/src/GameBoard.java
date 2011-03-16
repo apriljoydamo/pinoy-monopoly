@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,13 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
-import org.dyno.visual.swing.layouts.Trailing;
 
 
 //VS4E -- DO NOT REMOVE THIS LINE!
@@ -28,11 +28,21 @@ public class GameBoard extends JFrame {
 	private JLabel lDice1;
 	private JButton bRollDice;
 	Dice dice = new Dice();
+	Players playerOrder[] = new Players[8];
+	int x = 0;
 	private JLabel lBapor;
 	private JLabel lAzkal;
 	private JLabel lIron;
 	private JLabel lShoe;
 	private JLabel lCar;
+	private JLabel lThimble;
+	private JLabel lHat;
+	private JLabel lWheelBarrow;
+	private JPanel pTitleDeeds;
+	private JButton bPlay;
+	private JTextField fPlayerName;
+	private JTextField fPlayerMoney;
+	static int numberOfPlayers;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	public GameBoard() {
 		initComponents();
@@ -42,8 +52,112 @@ public class GameBoard extends JFrame {
 		setLayout(new GroupLayout());
 		add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
 		add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(485, 118, 10, 10)));
-		add(getPlayerPanel(), new Constraints(new Leading(605, 210, 10, 10), new Leading(-17, 500, 10, 10)));
-		setSize(817, 605);
+		add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 500, 10, 10)));
+		setSize(810, 600);
+	}
+
+	private JTextField getPlayerMoneyField() {
+		if (fPlayerMoney == null) {
+			fPlayerMoney = new JTextField();
+			fPlayerMoney.setBackground(new Color(128, 0, 128));
+			fPlayerMoney.setEditable(false);
+			fPlayerMoney.setFont(new Font("Broadway", Font.BOLD, 16));
+			fPlayerMoney.setForeground(new Color(255, 155, 55));
+			fPlayerMoney.setText("fPlayerMoney");
+		}
+		return fPlayerMoney;
+	}
+
+	private JTextField getPlayerNameField() {
+		if (fPlayerName == null) {
+			fPlayerName = new JTextField();
+			fPlayerName.setBackground(new Color(128, 0, 128));
+			fPlayerName.setEditable(false);
+			fPlayerName.setFont(new Font("Ravie", Font.BOLD, 18));
+			fPlayerName.setForeground(new Color(255, 255, 66));
+			fPlayerName.setText("fPlayerName");
+		}
+		return fPlayerName;
+	}
+
+	private JButton getPlayButton() {
+		if (bPlay == null) {
+			bPlay = new JButton();
+			bPlay.setText("CLICK TO PLAY");
+			bPlay.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					bRollDice.setEnabled(true);
+					bPlay.setVisible(false);
+					fPlayerName.setText(playerOrder[x].getPlayerName());
+					fPlayerMoney.setText("$ " + playerOrder[x].getStartMoney());
+					
+					for(int y = 0; y <= numberOfPlayers; y++){
+						if(playerOrder[y].getToken().getAssignedToken() == 1){
+							lBapor.setVisible(true);
+						}
+						if(playerOrder[y].getToken().getAssignedToken() == 2){
+							lAzkal.setVisible(true);
+						}
+						if(playerOrder[y].getToken().getAssignedToken() == 3){
+							lIron.setVisible(true);
+						}
+						if(playerOrder[y].getToken().getAssignedToken() == 4){
+							lShoe.setVisible(true);
+						}
+						if(playerOrder[y].getToken().getAssignedToken() == 5){
+							lCar.setVisible(true);
+						}
+						if(playerOrder[y].getToken().getAssignedToken() == 6){
+							lThimble.setVisible(true);
+						}
+						if(playerOrder[y].getToken().getAssignedToken() == 7){
+							lHat.setVisible(true);
+						}
+						if(playerOrder[y].getToken().getAssignedToken() == 8){
+							lWheelBarrow.setVisible(true);
+						}
+					}
+				}
+			});
+		}
+		return bPlay;
+	}
+
+	private JPanel getTitleDeedsPanel() {
+		if (pTitleDeeds == null) {
+			pTitleDeeds = new JPanel();
+			pTitleDeeds.setVisible(false);
+			pTitleDeeds.setBackground(new Color(221, 149, 227));
+			pTitleDeeds.setLayout(new GroupLayout());
+		}
+		return pTitleDeeds;
+	}
+
+	private JLabel getWheelBarrowLabel() {
+		if (lWheelBarrow == null) {
+			lWheelBarrow = new JLabel();
+			lWheelBarrow.setVisible(false);
+			lWheelBarrow.setIcon(new ImageIcon(getClass().getResource("/wheelbarrow_token.png")));
+		}
+		return lWheelBarrow;
+	}
+
+	private JLabel getHatLabel() {
+		if (lHat == null) {
+			lHat = new JLabel();
+			lHat.setVisible(false);
+			lHat.setIcon(new ImageIcon(getClass().getResource("/hat_token.png")));
+		}
+		return lHat;
+	}
+
+	private JLabel getThimbleLabel() {
+		if (lThimble == null) {
+			lThimble = new JLabel();
+			lThimble.setVisible(false);
+			lThimble.setIcon(new ImageIcon(getClass().getResource("/thimble_token.png")));
+		}
+		return lThimble;
 	}
 
 	private JLabel getCarLabel() {
@@ -95,6 +209,7 @@ public class GameBoard extends JFrame {
 		if (bRollDice == null) {
 			bRollDice = new JButton();
 			bRollDice.setText("Roll Button");
+			bRollDice.setEnabled(false);
 			bRollDice.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					dice.rollDiceResult1();
@@ -190,6 +305,10 @@ public class GameBoard extends JFrame {
 			pPlayer = new JPanel();
 			pPlayer.setBackground(new Color(128, 0, 128));
 			pPlayer.setLayout(new GroupLayout());
+			pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(3, 199, 10, 10), new Leading(109, 388, 10, 10)));
+			pPlayer.add(getPlayButton(), new Constraints(new Leading(8, 188, 12, 12), new Leading(183, 146, 10, 10)));
+			pPlayer.add(getPlayerNameField(), new Constraints(new Leading(10, 171, 10, 10), new Leading(32, 30, 10, 10)));
+			pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(32, 149, 12, 12), new Leading(74, 12, 12)));
 		}
 		return pPlayer;
 	}
@@ -199,13 +318,16 @@ public class GameBoard extends JFrame {
 			pBoard = new JPanel();
 			pBoard.setBackground(new Color(64, 0, 64));
 			pBoard.setLayout(new GroupLayout());
+			pBoard.add(getThimbleLabel(), new Constraints(new Leading(543, 12, 12), new Leading(548, 10, 10)));
+			pBoard.add(getHatLabel(), new Constraints(new Leading(549, 10, 10), new Leading(552, 10, 10)));
+			pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(541, 12, 12), new Leading(557, 10, 10)));
 			pBoard.add(getCarLabel(), new Constraints(new Leading(521, 10, 10), new Leading(514, 10, 10)));
 			pBoard.add(getShoeLabel(), new Constraints(new Leading(555, 10, 10), new Leading(516, 10, 10)));
-			pBoard.add(getIronLabel(), new Constraints(new Leading(554, 12, 12), new Trailing(12, 613, 613)));
-			pBoard.add(getAzkalLabel(), new Constraints(new Leading(518, 12, 12), new Trailing(8, 613, 613)));
-			pBoard.add(getBaporLabel(), new Constraints(new Leading(534, 10, 10), new Trailing(8, 613, 613)));
+			pBoard.add(getIronLabel(), new Constraints(new Leading(554, 12, 12), new Leading(516, 10, 10)));
+			pBoard.add(getAzkalLabel(), new Constraints(new Leading(518, 12, 12), new Leading(515, 10, 10)));
+			pBoard.add(getBaporLabel(), new Constraints(new Leading(534, 10, 10), new Leading(514, 10, 10)));
 			pBoard.add(getMonopolyLabel(), new Constraints(new Leading(5, 10, 10), new Leading(2, 599, 10, 10)));
-			}
+				}
 		return pBoard;
 	}
 
@@ -227,20 +349,6 @@ public class GameBoard extends JFrame {
 	 * It is not expected to be managed by the designer.
 	 * You can modify it as you like.
 	 */
-	public static void main(String[] args) {
-		installLnF();
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				GameBoard frame = new GameBoard();
-				frame.setDefaultCloseOperation(GameBoard.EXIT_ON_CLOSE);
-				frame.setTitle("GameBoard");
-				frame.getContentPane().setPreferredSize(frame.getSize());
-				frame.pack();
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
-			}
-		});
-	}
+	
 
 }
