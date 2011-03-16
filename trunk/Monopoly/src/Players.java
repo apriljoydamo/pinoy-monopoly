@@ -3,7 +3,7 @@
 
 public class Players{
 	
-	private int startMoney = 15000;
+	private int startMoney = 1500;
 	private String playerName;
 	private Token token;
 	private int tempOrder;
@@ -57,10 +57,7 @@ public class Players{
 	public int getTempOrder() {
 		return tempOrder;
 	}
-
-
-
-
+	
 
 	public void setOrder(int order) {
 		this.order = order;
