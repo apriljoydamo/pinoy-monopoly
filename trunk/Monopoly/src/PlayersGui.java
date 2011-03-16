@@ -431,6 +431,7 @@ public class PlayersGui extends JFrame{
 			pSolo = new JPanel();
 			pSolo.setBackground(new Color(140, 255, 140));
 			pSolo.setLayout(new GroupLayout());
+			pSolo.setVisible(false);
 			pSolo.add(getlTypeOfGame(), new Constraints(new Leading(12, 12, 12), new Leading(12, 12, 12)));
 			pSolo.add(getBaporLabel(), new Constraints(new Leading(15, 10, 10), new Leading(65, 10, 10)));
 			pSolo.add(getBaporNameField(), new Constraints(new Leading(83, 151, 10, 10), new Leading(72, 34, 10, 10)));
@@ -503,7 +504,7 @@ public class PlayersGui extends JFrame{
 			pMonopoly = new JPanel();
 			pMonopoly.setBackground(new Color(128, 128, 255));
 			pMonopoly.setLayout(new GroupLayout());
-			pMonopoly.setVisible(false);
+			pMonopoly.setVisible(true);
 			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(98, 717, 10, 10), new Leading(38, 313, 10, 10)));
 			pMonopoly.add(getbNewGame(), new Constraints(new Leading(288, 134, 10, 10), new Leading(376, 64, 10, 10)));
 			pMonopoly.add(getbExit(), new Constraints(new Leading(501, 129, 10, 10), new Leading(376, 64, 12, 12)));
@@ -596,19 +597,22 @@ public class PlayersGui extends JFrame{
                 }
         }
 }
-	public void runBoard() {
+	public void runBoard(){
 		installLnF();
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				Board frame = new Board();
-				frame.setDefaultCloseOperation(Board.EXIT_ON_CLOSE);
-				frame.setTitle("Board");
-				frame.setLayout(null);
+				GameBoard frame = new GameBoard();
+				frame.setDefaultCloseOperation(GameBoard.EXIT_ON_CLOSE);
+				frame.setTitle("GameBoard");
 				frame.getContentPane().setPreferredSize(frame.getSize());
 				frame.pack();
 				frame.setLocationRelativeTo(null);
+				frame.setResizable(false);
 				frame.setVisible(true);
+				frame.playerOrder = playerOrder;
+				GameBoard.numberOfPlayers = numberOfPlayers;
+				
 			}
 		});
 	}
