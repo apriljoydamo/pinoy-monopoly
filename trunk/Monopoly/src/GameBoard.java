@@ -137,7 +137,7 @@ public class GameBoard extends JFrame {
 		if (lWheelBarrow == null) {
 			lWheelBarrow = new JLabel();
 			lWheelBarrow.setVisible(false);
-			lWheelBarrow.setIcon(new ImageIcon(getClass().getResource("/wheelbarrow_token.png")));
+			lWheelBarrow.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/wheelbarrow_token.png")));
 		}
 		return lWheelBarrow;
 	}
@@ -146,7 +146,7 @@ public class GameBoard extends JFrame {
 		if (lHat == null) {
 			lHat = new JLabel();
 			lHat.setVisible(false);
-			lHat.setIcon(new ImageIcon(getClass().getResource("/hat_token.png")));
+			lHat.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/hat_token.png")));
 		}
 		return lHat;
 	}
@@ -155,7 +155,7 @@ public class GameBoard extends JFrame {
 		if (lThimble == null) {
 			lThimble = new JLabel();
 			lThimble.setVisible(false);
-			lThimble.setIcon(new ImageIcon(getClass().getResource("/thimble_token.png")));
+			lThimble.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/thimble_token.png")));
 		}
 		return lThimble;
 	}
@@ -164,7 +164,7 @@ public class GameBoard extends JFrame {
 		if (lCar == null) {
 			lCar = new JLabel();
 			lCar.setVisible(false);
-			lCar.setIcon(new ImageIcon(getClass().getResource("/car_token.png")));
+			lCar.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/car_token.png")));
 		}
 		return lCar;
 	}
@@ -173,7 +173,7 @@ public class GameBoard extends JFrame {
 		if (lShoe == null) {
 			lShoe = new JLabel();
 			lShoe.setVisible(false);
-			lShoe.setIcon(new ImageIcon(getClass().getResource("/shoe_token.png")));
+			lShoe.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/shoe_token.png")));
 		}
 		return lShoe;
 	}
@@ -182,7 +182,7 @@ public class GameBoard extends JFrame {
 		if (lIron == null) {
 			lIron = new JLabel();
 			lIron.setVisible(false);
-			lIron.setIcon(new ImageIcon(getClass().getResource("/iron_token.png")));
+			lIron.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/iron_token.png")));
 		}
 		return lIron;
 	}
@@ -191,7 +191,7 @@ public class GameBoard extends JFrame {
 		if (lAzkal == null) {
 			lAzkal = new JLabel();
 			lAzkal.setVisible(false);
-			lAzkal.setIcon(new ImageIcon(getClass().getResource("/dog_token.png")));
+			lAzkal.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/dog_token.png")));
 		}
 		return lAzkal;
 	}
@@ -200,7 +200,7 @@ public class GameBoard extends JFrame {
 		if (lBapor == null) {
 			lBapor = new JLabel();
 			lBapor.setVisible(false);
-			lBapor.setIcon(new ImageIcon(getClass().getResource("/ship_token.png")));
+			lBapor.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/ship_token.png")));
 		}
 		return lBapor;
 	}
@@ -214,7 +214,7 @@ public class GameBoard extends JFrame {
 				public void actionPerformed(ActionEvent e){
 					dice.rollDiceResult1();
 					dice.rollDiceResult2();
-			
+				
 			switch(dice.getDice1stResult()){
 			case 1:
 				lDice1.setIcon(new ImageIcon(getClass().getResource("/diceOne.png")));
@@ -295,7 +295,7 @@ public class GameBoard extends JFrame {
 			pDice.setLayout(new GroupLayout());
 			pDice.add(getDice1Label(), new Constraints(new Leading(49, 10, 10), new Leading(28, 10, 10)));
 			pDice.add(getDice2Label(), new Constraints(new Leading(124, 10, 10), new Leading(28, 12, 12)));
-			pDice.add(getRollDice(), new Constraints(new Leading(64, 10, 10), new Leading(73, 10, 10)));
+			pDice.add(getRollDice(), new Constraints(new Leading(54, 10, 10), new Leading(75, 12, 12)));
 		}
 		return pDice;
 	}
@@ -318,16 +318,16 @@ public class GameBoard extends JFrame {
 			pBoard = new JPanel();
 			pBoard.setBackground(new Color(64, 0, 64));
 			pBoard.setLayout(new GroupLayout());
-			pBoard.add(getThimbleLabel(), new Constraints(new Leading(543, 12, 12), new Leading(548, 10, 10)));
-			pBoard.add(getHatLabel(), new Constraints(new Leading(549, 10, 10), new Leading(552, 10, 10)));
-			pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(541, 12, 12), new Leading(557, 10, 10)));
+			pBoard.add(getIronLabel(), new Constraints(new Leading(524, 12, 12), new Leading(514, 12, 12)));
+			pBoard.add(getShoeLabel(), new Constraints(new Leading(539, 10, 10), new Leading(518, 12, 12)));
+			pBoard.add(getThimbleLabel(), new Constraints(new Leading(532, 10, 10), new Leading(518, 10, 10)));
+			pBoard.add(getHatLabel(), new Constraints(new Leading(534, 12, 12), new Leading(522, 10, 10)));
+			pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(524, 12, 12), new Leading(527, 12, 12)));
 			pBoard.add(getCarLabel(), new Constraints(new Leading(521, 10, 10), new Leading(514, 10, 10)));
-			pBoard.add(getShoeLabel(), new Constraints(new Leading(555, 10, 10), new Leading(516, 10, 10)));
-			pBoard.add(getIronLabel(), new Constraints(new Leading(554, 12, 12), new Leading(516, 10, 10)));
 			pBoard.add(getAzkalLabel(), new Constraints(new Leading(518, 12, 12), new Leading(515, 10, 10)));
 			pBoard.add(getBaporLabel(), new Constraints(new Leading(534, 10, 10), new Leading(514, 10, 10)));
 			pBoard.add(getMonopolyLabel(), new Constraints(new Leading(5, 10, 10), new Leading(2, 599, 10, 10)));
-				}
+			}
 		return pBoard;
 	}
 
