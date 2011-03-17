@@ -8,6 +8,7 @@ public class Players{
 	private Token token;
 	private int tempOrder;
 	private int order = 1;
+	private int totalSteps;
 	
 	//FUNCTIONs
 
@@ -66,6 +67,16 @@ public class Players{
 
 	public int getOrder() {
 		return order;
+	}
+
+
+	public void setTotalSteps(int totalSteps) {
+		this.totalSteps = totalSteps;
+	}
+
+
+	public int getTotalSteps() {
+		return totalSteps;
 	}
 }
 
