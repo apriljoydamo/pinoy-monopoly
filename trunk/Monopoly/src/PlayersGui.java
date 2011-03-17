@@ -400,7 +400,6 @@ public class PlayersGui extends JFrame{
 						insertOrder(initialNumPlayer);
 						rearrangeArray(initialNumPlayer);
 						runBoard();
-						//System.exit(0);
 					}
 			});
 		}
@@ -612,7 +611,6 @@ public class PlayersGui extends JFrame{
 				frame.setVisible(true);
 				frame.playerOrder = playerOrder;
 				GameBoard.numberOfPlayers = numberOfPlayers;
-				
 			}
 		});
 	}
