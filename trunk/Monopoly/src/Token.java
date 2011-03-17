@@ -7,8 +7,8 @@ public class Token extends JLabel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int xLocation = 508;
-	private int yLocation = 508;
+	private int xLocation = 520;
+	private int yLocation = 520;
 	private int assignedToken;
 	
 	public Token(){
