@@ -14,6 +14,7 @@ import javax.swing.UIManager;
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
+import org.dyno.visual.swing.layouts.Trailing;
 
 
 //VS4E -- DO NOT REMOVE THIS LINE!
@@ -45,6 +46,7 @@ public class GameBoard extends JFrame implements Runnable {
 	static int numberOfPlayers;
 	Thread t;
 	boolean isRolling, isRunning;
+	private JButton bEndTurn;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	public GameBoard() {
 		initComponents();
@@ -58,6 +60,24 @@ public class GameBoard extends JFrame implements Runnable {
 		setSize(810, 600);
 	}
 
+	private JButton getEndTurnButton() {
+		if (bEndTurn == null) {
+			bEndTurn = new JButton();
+			bEndTurn.setEnabled(false);
+			bEndTurn.setText("End Turn");
+			bEndTurn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent event) {
+					 x++;
+				        if(x==numberOfPlayers){
+				                x = 0;
+				        }
+				        fPlayerName.setText(playerOrder[x].getPlayerName());
+					}
+			});
+		}
+		return bEndTurn;
+	}
+
 	private JTextField getPlayerMoneyField() {
 		if (fPlayerMoney == null) {
 			fPlayerMoney = new JTextField();
@@ -65,7 +85,7 @@ public class GameBoard extends JFrame implements Runnable {
 			fPlayerMoney.setEditable(false);
 			fPlayerMoney.setFont(new Font("Broadway", Font.BOLD, 16));
 			fPlayerMoney.setForeground(new Color(255, 155, 55));
-			fPlayerMoney.setText("fPlayerMoney");
+			fPlayerMoney.setText("P 0000.00");
 		}
 		return fPlayerMoney;
 	}
@@ -77,7 +97,7 @@ public class GameBoard extends JFrame implements Runnable {
 			fPlayerName.setEditable(false);
 			fPlayerName.setFont(new Font("Ravie", Font.BOLD, 18));
 			fPlayerName.setForeground(new Color(255, 255, 66));
-			fPlayerName.setText("fPlayerName");
+			fPlayerName.setText("Player");
 		}
 		return fPlayerName;
 	}
@@ -226,6 +246,7 @@ public class GameBoard extends JFrame implements Runnable {
 				public void actionPerformed(ActionEvent e){
 					dice.rollDiceResult1();
 					dice.rollDiceResult2();
+					bEndTurn.setEnabled(true);
 					playerOrder[x].setTotalSteps((dice.getDice1stResult() + dice.getDice2ndResult())*3);
 					System.out.println(playerOrder[x].getTotalSteps());
 					isRolling = true;
@@ -324,9 +345,10 @@ public class GameBoard extends JFrame implements Runnable {
 			pPlayer.setBackground(new Color(128, 0, 128));
 			pPlayer.setLayout(new GroupLayout());
 			pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(3, 199, 10, 10), new Leading(109, 388, 10, 10)));
-			pPlayer.add(getPlayButton(), new Constraints(new Leading(8, 188, 12, 12), new Leading(183, 146, 10, 10)));
 			pPlayer.add(getPlayerNameField(), new Constraints(new Leading(10, 171, 10, 10), new Leading(32, 30, 10, 10)));
 			pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(32, 149, 12, 12), new Leading(74, 12, 12)));
+			pPlayer.add(getPlayButton(), new Constraints(new Leading(8, 188, 12, 12), new Leading(111, 146, 10, 10)));
+			pPlayer.add(getEndTurnButton(), new Constraints(new Trailing(12, 15, 214), new Leading(468, 10, 10)));
 		}
 		return pPlayer;
 	}
@@ -345,7 +367,7 @@ public class GameBoard extends JFrame implements Runnable {
 			pBoard.add(getAzkalLabel(), new Constraints(new Leading(518, 12, 12), new Leading(515, 10, 10)));
 			pBoard.add(getBaporLabel(), new Constraints(new Leading(534, 10, 10), new Leading(514, 10, 10)));
 			pBoard.add(getMonopolyLabel(), new Constraints(new Leading(5, 10, 10), new Leading(2, 599, 10, 10)));
-			}
+		}
 		return pBoard;
 	}
 
@@ -360,8 +382,8 @@ public class GameBoard extends JFrame implements Runnable {
 					+ " on this platform:" + e.getMessage());
 		}
 	}
-//METHODS
-	/*public void updatePlayerToken(){
+//METHods
+/*	public void updatePlayerToken(){
 		if(playerOrder[x].getToken().getAssignedLabel()==1)
              currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token1_b.png")));
 		if(orderedPlayer[counter].getAssignedLabel()==2)
@@ -456,4 +478,5 @@ public class GameBoard extends JFrame implements Runnable {
 					lWheelBarrow.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
 				}
 	}
+
 }
