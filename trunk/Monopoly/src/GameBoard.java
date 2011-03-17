@@ -17,7 +17,7 @@ import org.dyno.visual.swing.layouts.Leading;
 
 
 //VS4E -- DO NOT REMOVE THIS LINE!
-public class GameBoard extends JFrame {
+public class GameBoard extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel pBoard;
@@ -43,6 +43,8 @@ public class GameBoard extends JFrame {
 	private JTextField fPlayerName;
 	private JTextField fPlayerMoney;
 	static int numberOfPlayers;
+	Thread t;
+	boolean isRolling, isRunning;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	public GameBoard() {
 		initComponents();
@@ -115,7 +117,9 @@ public class GameBoard extends JFrame {
 						}
 						if(playerOrder[y].getToken().getAssignedToken() == 8){
 							lWheelBarrow.setVisible(true);
+							
 						}
+						//updateTokenUsed();
 					}
 				}
 			});
@@ -137,6 +141,7 @@ public class GameBoard extends JFrame {
 		if (lWheelBarrow == null) {
 			lWheelBarrow = new JLabel();
 			lWheelBarrow.setVisible(false);
+			lWheelBarrow.setBounds(500,500,50,50);
 			lWheelBarrow.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/wheelbarrow_token.png")));
 		}
 		return lWheelBarrow;
@@ -146,6 +151,7 @@ public class GameBoard extends JFrame {
 		if (lHat == null) {
 			lHat = new JLabel();
 			lHat.setVisible(false);
+			lHat.setBounds(500,500,50,50);
 			lHat.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/hat_token.png")));
 		}
 		return lHat;
@@ -155,6 +161,7 @@ public class GameBoard extends JFrame {
 		if (lThimble == null) {
 			lThimble = new JLabel();
 			lThimble.setVisible(false);
+			lThimble.setBounds(500,500,50,50);
 			lThimble.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/thimble_token.png")));
 		}
 		return lThimble;
@@ -164,6 +171,7 @@ public class GameBoard extends JFrame {
 		if (lCar == null) {
 			lCar = new JLabel();
 			lCar.setVisible(false);
+			lCar.setBounds(500,500,50,50);
 			lCar.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/car_token.png")));
 		}
 		return lCar;
@@ -173,6 +181,7 @@ public class GameBoard extends JFrame {
 		if (lShoe == null) {
 			lShoe = new JLabel();
 			lShoe.setVisible(false);
+			lShoe.setBounds(500,500,50,50);
 			lShoe.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/shoe_token.png")));
 		}
 		return lShoe;
@@ -182,6 +191,7 @@ public class GameBoard extends JFrame {
 		if (lIron == null) {
 			lIron = new JLabel();
 			lIron.setVisible(false);
+			lIron.setBounds(500,500,50,50);
 			lIron.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/iron_token.png")));
 		}
 		return lIron;
@@ -191,6 +201,7 @@ public class GameBoard extends JFrame {
 		if (lAzkal == null) {
 			lAzkal = new JLabel();
 			lAzkal.setVisible(false);
+			lAzkal.setBounds(500,500,50,50);
 			lAzkal.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/dog_token.png")));
 		}
 		return lAzkal;
@@ -200,6 +211,7 @@ public class GameBoard extends JFrame {
 		if (lBapor == null) {
 			lBapor = new JLabel();
 			lBapor.setVisible(false);
+			lBapor.setBounds(500, 500, 50, 50);
 			lBapor.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/ship_token.png")));
 		}
 		return lBapor;
@@ -214,7 +226,12 @@ public class GameBoard extends JFrame {
 				public void actionPerformed(ActionEvent e){
 					dice.rollDiceResult1();
 					dice.rollDiceResult2();
-				
+					playerOrder[x].setTotalSteps((dice.getDice1stResult() + dice.getDice2ndResult())*3);
+					System.out.println(playerOrder[x].getTotalSteps());
+					isRolling = true;
+					isRunning = true;
+					startThread();
+					
 			switch(dice.getDice1stResult()){
 			case 1:
 				lDice1.setIcon(new ImageIcon(getClass().getResource("/diceOne.png")));
@@ -259,7 +276,8 @@ public class GameBoard extends JFrame {
 					
 				}
 			});
-		}
+		}	
+					
 		return bRollDice;
 	}
 
@@ -342,13 +360,100 @@ public class GameBoard extends JFrame {
 					+ " on this platform:" + e.getMessage());
 		}
 	}
+//METHODS
+	/*public void updatePlayerToken(){
+		if(playerOrder[x].getToken().getAssignedLabel()==1)
+             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token1_b.png")));
+		if(orderedPlayer[counter].getAssignedLabel()==2)
+             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token2_b.png")));
+		if(orderedPlayer[counter].getAssignedLabel()==3)
+             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token3_b.png")));
+		if(orderedPlayer[counter].getAssignedLabel()==4)
+             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token4_b.png")));
+		if(orderedPlayer[counter].getAssignedLabel()==5)
+             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token5_b.png")));
+		if(orderedPlayer[counter].getAssignedLabel()==6)
+             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token6_b.png")));
+		if(orderedPlayer[counter].getAssignedLabel()==7)
+             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token7_b.png")));
+		if(orderedPlayer[counter].getAssignedLabel()==8)
+             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token8_b.png")));
+}
+	}*/
+//THIS IS WHERE THREAD STARTS
+	public void startThread(){
+		t = new Thread(this);
+		t.start();
+	}
+	@SuppressWarnings("static-access")
+	public void run(){
+				if(playerOrder[x].getToken().getxLocation() > 27 && playerOrder[x].getToken().getyLocation() == 520){ // from go to just visiting
+					try{
+						for(int a = 0; a < 29; a++){
+							playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-17);
+							System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
+							updateTokenPosition();
+							t.sleep(250);
+							System.out.println("okei! " + a);
+						}
+					}
+					catch(InterruptedException e){}
+				}
+				
+				else if(playerOrder[x].getToken().getxLocation() == 27 && playerOrder[x].getToken().getyLocation() > 10){ // from just visiting to free parking
+					try{
+						for(int a = 0; a < 30; a++){
+							playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-17);
+							System.out.println(playerOrder[x].getToken().getxLocation()+" "+ playerOrder[x].getToken().getyLocation());
+							updateTokenPosition();
+							t.sleep(250);
+						}
+					}catch(InterruptedException e){}
+				}
+				
+				else if(playerOrder[x].getToken().getxLocation() < 500 && playerOrder[x].getToken().getyLocation() == 10){ //  from free parking to go to jail
+					try{
+						for(int a = 0; a < 29; a++){
+							playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+17);
+							System.out.println(playerOrder[x].getToken().getxLocation()+" "+ playerOrder[x].getToken().getyLocation());
+							updateTokenPosition();
+							t.sleep(250);
+						}
+					}catch(InterruptedException e){}
+				}
+				
 
-	/**
-	 * Main entry of the class.
-	 * Note: This class is only created so that you can easily preview the result at runtime.
-	 * It is not expected to be managed by the designer.
-	 * You can modify it as you like.
-	 */
+				else if(playerOrder[x].getToken().getxLocation() == 520 && playerOrder[x].getToken().getyLocation() >= 10){ // from  go to jail to go
+					try{
+						for(int a = 0; a < 30; a++){
+							playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+17);
+							System.out.println(playerOrder[x].getToken().getxLocation()+" "+ playerOrder[x].getToken().getyLocation());
+							updateTokenPosition();
+							t.sleep(250);
+						}
+					}catch(InterruptedException e){}
+					
+				}
+			
+	}
 	
-
+	public void updateTokenPosition(){
+				if(playerOrder[x].getToken().getAssignedToken() == 1){
+					lBapor.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+				}if(playerOrder[x].getToken().getAssignedToken() == 2){
+					lAzkal.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+				}if(playerOrder[x].getToken().getAssignedToken() == 3){
+					lIron.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+				}if(playerOrder[x].getToken().getAssignedToken() == 4){
+					lShoe.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+				}if(playerOrder[x].getToken().getAssignedToken() == 5){
+					lCar.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+				}if(playerOrder[x].getToken().getAssignedToken() == 6){
+					lThimble.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+				}if(playerOrder[x].getToken().getAssignedToken() == 7){
+					lHat.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+				}if(playerOrder[x].getToken().getAssignedToken() == 8){
+					lWheelBarrow.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+				}
+	}
 }
