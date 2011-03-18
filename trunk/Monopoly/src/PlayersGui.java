@@ -235,7 +235,7 @@ public class PlayersGui extends JFrame{
 	private JTextField getWheelBarrowNameField() {
 		if (wheelBarrowNameField == null) {
 			wheelBarrowNameField = new JTextField();
-			wheelBarrowNameField.setText("Enter Name");
+			wheelBarrowNameField.setText(" ");
 		}
 		return wheelBarrowNameField;
 	}
@@ -243,7 +243,7 @@ public class PlayersGui extends JFrame{
 	private JTextField getHatNameField() {
 		if (hatNameField == null) {
 			hatNameField = new JTextField();
-			hatNameField.setText("Enter Name");
+			hatNameField.setText(" ");
 		}
 		return hatNameField;
 	}
@@ -251,7 +251,7 @@ public class PlayersGui extends JFrame{
 	private JTextField getThimbleNameField() {
 		if (thimbleNameField == null) {
 			thimbleNameField = new JTextField();
-			thimbleNameField.setText("Enter Name");
+			thimbleNameField.setText(" ");
 		}
 		return thimbleNameField;
 	}
@@ -259,7 +259,7 @@ public class PlayersGui extends JFrame{
 	private JTextField getCarNameField() {
 		if (carNameField == null) {
 			carNameField = new JTextField();
-			carNameField.setText("Enter Name");
+			carNameField.setText(" ");
 		}
 		return carNameField;
 	}
@@ -267,7 +267,7 @@ public class PlayersGui extends JFrame{
 	private JTextField getShoeNameField() {
 		if (shoeNameField == null) {
 			shoeNameField = new JTextField();
-			shoeNameField.setText("Enter Name");
+			shoeNameField.setText(" ");
 		}
 		return shoeNameField;
 	}
@@ -275,7 +275,7 @@ public class PlayersGui extends JFrame{
 	private JTextField getIronNameField() {
 		if (ironNameField == null) {
 			ironNameField = new JTextField();
-			ironNameField.setText("Enter Name");
+			ironNameField.setText(" ");
 		}
 		return ironNameField;
 	}
@@ -283,7 +283,7 @@ public class PlayersGui extends JFrame{
 	private JTextField getAzkalNameField() {
 		if (azkalNameField == null) {
 			azkalNameField = new JTextField();
-			azkalNameField.setText("Enter Name");
+			azkalNameField.setText(" ");
 		}
 		return azkalNameField;
 	}
@@ -291,7 +291,7 @@ public class PlayersGui extends JFrame{
 	private JTextField getBaporNameField() {
 		if (baporNameField == null) {
 			baporNameField = new JTextField();
-			baporNameField.setText("Enter Name");
+			baporNameField.setText(" ");
 		}
 		return baporNameField;
 	}
