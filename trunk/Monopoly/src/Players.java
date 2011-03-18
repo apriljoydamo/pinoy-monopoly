@@ -9,6 +9,7 @@ public class Players{
 	private int tempOrder;
 	private int order = 1;
 	private int totalSteps;
+	private int position = 0;
 	
 	//FUNCTIONs
 
@@ -77,6 +78,16 @@ public class Players{
 
 	public int getTotalSteps() {
 		return totalSteps;
+	}
+
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+
+	public int getPosition() {
+		return position;
 	}
 }
 
