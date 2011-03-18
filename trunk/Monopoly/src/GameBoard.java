@@ -45,7 +45,7 @@ public class GameBoard extends JFrame implements Runnable {
 	private JTextField fPlayerMoney;
 	static int numberOfPlayers;
 	Thread t;
-	boolean isRolling, isRunning;
+	//boolean isRunning;
 	private JButton bEndTurn;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	public GameBoard() {
@@ -161,7 +161,7 @@ public class GameBoard extends JFrame implements Runnable {
 		if (lWheelBarrow == null) {
 			lWheelBarrow = new JLabel();
 			lWheelBarrow.setVisible(false);
-			lWheelBarrow.setBounds(500,500,50,50);
+			//lWheelBarrow.setBounds(500,500,50,50);
 			lWheelBarrow.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/wheelbarrow_token.png")));
 		}
 		return lWheelBarrow;
@@ -171,7 +171,7 @@ public class GameBoard extends JFrame implements Runnable {
 		if (lHat == null) {
 			lHat = new JLabel();
 			lHat.setVisible(false);
-			lHat.setBounds(500,500,50,50);
+			//lHat.setBounds(500,500,50,50);
 			lHat.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/hat_token.png")));
 		}
 		return lHat;
@@ -181,7 +181,7 @@ public class GameBoard extends JFrame implements Runnable {
 		if (lThimble == null) {
 			lThimble = new JLabel();
 			lThimble.setVisible(false);
-			lThimble.setBounds(500,500,50,50);
+			//lThimble.setBounds(500,500,50,50);
 			lThimble.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/thimble_token.png")));
 		}
 		return lThimble;
@@ -191,7 +191,7 @@ public class GameBoard extends JFrame implements Runnable {
 		if (lCar == null) {
 			lCar = new JLabel();
 			lCar.setVisible(false);
-			lCar.setBounds(500,500,50,50);
+			//lCar.setBounds(500,500,50,50);
 			lCar.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/car_token.png")));
 		}
 		return lCar;
@@ -201,7 +201,7 @@ public class GameBoard extends JFrame implements Runnable {
 		if (lShoe == null) {
 			lShoe = new JLabel();
 			lShoe.setVisible(false);
-			lShoe.setBounds(500,500,50,50);
+			//lShoe.setBounds(500,500,50,50);
 			lShoe.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/shoe_token.png")));
 		}
 		return lShoe;
@@ -211,7 +211,7 @@ public class GameBoard extends JFrame implements Runnable {
 		if (lIron == null) {
 			lIron = new JLabel();
 			lIron.setVisible(false);
-			lIron.setBounds(500,500,50,50);
+			//lIron.setBounds(500,500,50,50);
 			lIron.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/iron_token.png")));
 		}
 		return lIron;
@@ -221,7 +221,7 @@ public class GameBoard extends JFrame implements Runnable {
 		if (lAzkal == null) {
 			lAzkal = new JLabel();
 			lAzkal.setVisible(false);
-			lAzkal.setBounds(500,500,50,50);
+			//lAzkal.setBounds(500,500,50,50);
 			lAzkal.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/dog_token.png")));
 		}
 		return lAzkal;
@@ -231,7 +231,7 @@ public class GameBoard extends JFrame implements Runnable {
 		if (lBapor == null) {
 			lBapor = new JLabel();
 			lBapor.setVisible(false);
-			lBapor.setBounds(500, 500, 50, 50);
+			//lBapor.setBounds(500, 500, 50, 50);
 			lBapor.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/ship_token.png")));
 		}
 		return lBapor;
@@ -247,10 +247,8 @@ public class GameBoard extends JFrame implements Runnable {
 					dice.rollDiceResult1();
 					dice.rollDiceResult2();
 					bEndTurn.setEnabled(true);
-					playerOrder[x].setTotalSteps((dice.getDice1stResult() + dice.getDice2ndResult())*3);
+					playerOrder[x].setTotalSteps(dice.getDice1stResult() + dice.getDice2ndResult());
 					System.out.println(playerOrder[x].getTotalSteps());
-					isRolling = true;
-					isRunning = true;
 					startThread();
 					
 			switch(dice.getDice1stResult()){
@@ -358,16 +356,16 @@ public class GameBoard extends JFrame implements Runnable {
 			pBoard = new JPanel();
 			pBoard.setBackground(new Color(64, 0, 64));
 			pBoard.setLayout(new GroupLayout());
-			pBoard.add(getIronLabel(), new Constraints(new Leading(524, 12, 12), new Leading(514, 12, 12)));
-			pBoard.add(getShoeLabel(), new Constraints(new Leading(539, 10, 10), new Leading(518, 12, 12)));
-			pBoard.add(getThimbleLabel(), new Constraints(new Leading(532, 10, 10), new Leading(518, 10, 10)));
-			pBoard.add(getHatLabel(), new Constraints(new Leading(534, 12, 12), new Leading(522, 10, 10)));
-			pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(524, 12, 12), new Leading(527, 12, 12)));
-			pBoard.add(getCarLabel(), new Constraints(new Leading(521, 10, 10), new Leading(514, 10, 10)));
-			pBoard.add(getAzkalLabel(), new Constraints(new Leading(518, 12, 12), new Leading(515, 10, 10)));
-			pBoard.add(getBaporLabel(), new Constraints(new Leading(534, 10, 10), new Leading(514, 10, 10)));
+			pBoard.add(getBaporLabel(), new Constraints(new Leading(515, 10, 10), new Leading(527, 12, 12)));
+			pBoard.add(getAzkalLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 10, 10)));
+			pBoard.add(getIronLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+			pBoard.add(getShoeLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+			pBoard.add(getCarLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+			pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+			pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+			pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
 			pBoard.add(getMonopolyLabel(), new Constraints(new Leading(5, 10, 10), new Leading(2, 599, 10, 10)));
-		}
+			}
 		return pBoard;
 	}
 
@@ -408,55 +406,89 @@ public class GameBoard extends JFrame implements Runnable {
 		t.start();
 	}
 	@SuppressWarnings("static-access")
-	public void run(){
-				if(playerOrder[x].getToken().getxLocation() > 27 && playerOrder[x].getToken().getyLocation() == 520){ // from go to just visiting
+	public void run(){	
+		for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
+			if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
 					try{
-						for(int a = 0; a < 29; a++){
-							playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-17);
-							System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
-							updateTokenPosition();
-							t.sleep(250);
-							System.out.println("okei! " + a);
-						}
+							if(playerOrder[x].getPosition() == 0 || playerOrder[x].getPosition() == 9){
+								playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-63);
+								System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
+								updateTokenPosition();
+								t.sleep(250);
+								System.out.println("if " + a);
+							}else{
+								playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-47);
+								System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
+								updateTokenPosition();
+								t.sleep(250);
+								System.out.println("else " + a);
+							}
+							playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
+							System.out.println("updatedPosition "+playerOrder[x].getPosition());
 					}
 					catch(InterruptedException e){}
-				}
-				
-				else if(playerOrder[x].getToken().getxLocation() == 27 && playerOrder[x].getToken().getyLocation() > 10){ // from just visiting to free parking
+				}else if(playerOrder[x].getPosition() >= 10 && playerOrder[x].getPosition() < 20){ // from just visiting to free parking
 					try{
-						for(int a = 0; a < 30; a++){
-							playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-17);
-							System.out.println(playerOrder[x].getToken().getxLocation()+" "+ playerOrder[x].getToken().getyLocation());
-							updateTokenPosition();
-							t.sleep(250);
-						}
+							if(playerOrder[x].getPosition() == 10 || playerOrder[x].getPosition() == 19){
+								playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-63);
+								System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
+								updateTokenPosition();
+								t.sleep(250);
+								System.out.println("if " + a);
+							}else{
+								playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-47);
+								System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
+								updateTokenPosition();
+								t.sleep(250);
+								System.out.println("else " + a);
+							}
+							playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
+							System.out.println("updatedPosition "+playerOrder[x].getPosition());
 					}catch(InterruptedException e){}
-				}
-				
-				else if(playerOrder[x].getToken().getxLocation() < 500 && playerOrder[x].getToken().getyLocation() == 10){ //  from free parking to go to jail
+				}else if(playerOrder[x].getPosition() >= 20 && playerOrder[x].getPosition() < 30){ //  from free parking to go to jail
 					try{
-						for(int a = 0; a < 29; a++){
-							playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+17);
-							System.out.println(playerOrder[x].getToken().getxLocation()+" "+ playerOrder[x].getToken().getyLocation());
-							updateTokenPosition();
-							t.sleep(250);
-						}
+							if(playerOrder[x].getPosition() == 20 || playerOrder[x].getPosition() == 29){
+								playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+63);
+								System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
+								updateTokenPosition();
+								t.sleep(250);
+								System.out.println("if " + a);
+							}else{
+								playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+47);
+								System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
+								updateTokenPosition();
+								t.sleep(250);
+								System.out.println("else " + a);
+							}
+							playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
+							System.out.println("updatedPosition "+playerOrder[x].getPosition());
+							if(playerOrder[x].getPosition() == 30){
+							}
 					}catch(InterruptedException e){}
-				}
-				
-
-				else if(playerOrder[x].getToken().getxLocation() == 520 && playerOrder[x].getToken().getyLocation() >= 10){ // from  go to jail to go
+				}else if(playerOrder[x].getPosition() >= 30 && playerOrder[x].getPosition() < 40){ // from  go to jail to go
 					try{
-						for(int a = 0; a < 30; a++){
-							playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+17);
-							System.out.println(playerOrder[x].getToken().getxLocation()+" "+ playerOrder[x].getToken().getyLocation());
-							updateTokenPosition();
-							t.sleep(250);
-						}
+							if(playerOrder[x].getPosition() == 30 || playerOrder[x].getPosition() == 39){
+								playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+63);
+								System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
+								updateTokenPosition();
+								t.sleep(250);
+								System.out.println("if " + a);
+							}else{
+								playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+47);
+								System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
+								updateTokenPosition();
+								t.sleep(250);
+								System.out.println("else " + a);
+							}
+							playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
+							System.out.println("updatedPosition "+playerOrder[x].getPosition());
+							if(playerOrder[x].getPosition() == 40){
+								playerOrder[x].setPosition(0);
+							}
 					}catch(InterruptedException e){}
 					
 				}
-			
+		}
 	}
 	
 	public void updateTokenPosition(){
