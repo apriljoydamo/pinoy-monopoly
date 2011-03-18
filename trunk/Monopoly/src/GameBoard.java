@@ -67,12 +67,15 @@ public class GameBoard extends JFrame implements Runnable {
 			bEndTurn.setText("End Turn");
 			bEndTurn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent event) {
+					
 					 x++;
 				        if(x==numberOfPlayers){
 				                x = 0;
 				        }
 				        fPlayerName.setText(playerOrder[x].getPlayerName());
+				        fPlayerMoney.setText("P "+ playerOrder[x].getStartMoney());
 					}
+				
 			});
 		}
 		return bEndTurn;
@@ -111,7 +114,7 @@ public class GameBoard extends JFrame implements Runnable {
 					bRollDice.setEnabled(true);
 					bPlay.setVisible(false);
 					fPlayerName.setText(playerOrder[x].getPlayerName());
-					fPlayerMoney.setText("$ " + playerOrder[x].getStartMoney());
+					fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
 					
 					for(int y = 0; y <= numberOfPlayers; y++){
 						if(playerOrder[y].getToken().getAssignedToken() == 1){
@@ -482,9 +485,8 @@ public class GameBoard extends JFrame implements Runnable {
 							}
 							playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
 							System.out.println("updatedPosition "+playerOrder[x].getPosition());
-							if(playerOrder[x].getPosition() == 40){
-								playerOrder[x].setPosition(0);
-							}
+							passedGo();
+
 					}catch(InterruptedException e){}
 					
 				}
@@ -510,5 +512,12 @@ public class GameBoard extends JFrame implements Runnable {
 					lWheelBarrow.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
 				}
 	}
-
+	
+	public void passedGo(){
+		if(playerOrder[x].getPosition() == 40){
+			playerOrder[x].setPosition(0);
+			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
+			fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
+		}
+	}
 }
