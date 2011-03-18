@@ -363,6 +363,7 @@ public class PlayersGui extends JFrame{
 		if (bBackToMenu == null) {
 			bBackToMenu = new JButton();
 			bBackToMenu.setText("Back to Menu");
+			bBackToMenu.setEnabled(false);
 			bBackToMenu.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					baporNameField.setText("");
