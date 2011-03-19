@@ -21,34 +21,25 @@ import org.dyno.visual.swing.layouts.Trailing;
 public class GameBoard extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel pBoard;
-	private JPanel pPlayer;
-	private JPanel pDice;
-	private JLabel lMonopoly;
-	private JLabel lDice2;
-	private JLabel lDice1;
-	private JButton bRollDice;
-	Dice dice = new Dice();
+	private JPanel pBoard, pPlayer, pDice, pTitleDeeds;
+	private JLabel lMonopoly, lDice2, lDice1;
+	private JLabel lBapor, lAzkal, lIron, lShoe, lCar, lThimble, lHat,lWheelBarrow;
+	private JButton bRollDice, bPlay, bEndTurn;
+	private JTextField fPlayerName, fPlayerMoney;
+	
+	Dice dice[] = new Dice[2];
 	Players playerOrder[] = new Players[8];
-	int x = 0;
-	private JLabel lBapor;
-	private JLabel lAzkal;
-	private JLabel lIron;
-	private JLabel lShoe;
-	private JLabel lCar;
-	private JLabel lThimble;
-	private JLabel lHat;
-	private JLabel lWheelBarrow;
-	private JPanel pTitleDeeds;
-	private JButton bPlay;
-	private JTextField fPlayerName;
-	private JTextField fPlayerMoney;
+	Rules rules = new Rules();
+	
 	static int numberOfPlayers;
+	int x = 0, doubleDice = 0;
 	Thread t;
-	//boolean isRunning;
-	private JButton bEndTurn;
+	
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
+	
 	public GameBoard() {
+		dice[0] = new Dice();
+		dice[1] = new Dice();
 		initComponents();
 	}
 
@@ -59,7 +50,8 @@ public class GameBoard extends JFrame implements Runnable {
 		add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 500, 10, 10)));
 		setSize(810, 600);
 	}
-
+	
+//////////////////////////////////BUTTONS///////////////////////////////////
 	private JButton getEndTurnButton() {
 		if (bEndTurn == null) {
 			bEndTurn = new JButton();
@@ -80,31 +72,7 @@ public class GameBoard extends JFrame implements Runnable {
 		}
 		return bEndTurn;
 	}
-
-	private JTextField getPlayerMoneyField() {
-		if (fPlayerMoney == null) {
-			fPlayerMoney = new JTextField();
-			fPlayerMoney.setBackground(new Color(128, 0, 128));
-			fPlayerMoney.setEditable(false);
-			fPlayerMoney.setFont(new Font("Broadway", Font.BOLD, 16));
-			fPlayerMoney.setForeground(new Color(255, 155, 55));
-			fPlayerMoney.setText("P 0000.00");
-		}
-		return fPlayerMoney;
-	}
-
-	private JTextField getPlayerNameField() {
-		if (fPlayerName == null) {
-			fPlayerName = new JTextField();
-			fPlayerName.setBackground(new Color(128, 0, 128));
-			fPlayerName.setEditable(false);
-			fPlayerName.setFont(new Font("Ravie", Font.BOLD, 18));
-			fPlayerName.setForeground(new Color(255, 255, 66));
-			fPlayerName.setText("Player");
-		}
-		return fPlayerName;
-	}
-
+	
 	private JButton getPlayButton() {
 		if (bPlay == null) {
 			bPlay = new JButton();
@@ -142,7 +110,6 @@ public class GameBoard extends JFrame implements Runnable {
 							lWheelBarrow.setVisible(true);
 							
 						}
-						//updateTokenUsed();
 					}
 				}
 			});
@@ -150,94 +117,29 @@ public class GameBoard extends JFrame implements Runnable {
 		return bPlay;
 	}
 
-	private JPanel getTitleDeedsPanel() {
-		if (pTitleDeeds == null) {
-			pTitleDeeds = new JPanel();
-			pTitleDeeds.setVisible(false);
-			pTitleDeeds.setBackground(new Color(221, 149, 227));
-			pTitleDeeds.setLayout(new GroupLayout());
+/////////////////////////////TEXT FIELDS////////////////////////////////////
+	private JTextField getPlayerMoneyField() {
+		if (fPlayerMoney == null) {
+			fPlayerMoney = new JTextField();
+			fPlayerMoney.setBackground(new Color(128, 0, 128));
+			fPlayerMoney.setEditable(false);
+			fPlayerMoney.setFont(new Font("Broadway", Font.BOLD, 16));
+			fPlayerMoney.setForeground(new Color(255, 155, 55));
+			fPlayerMoney.setText("P 0000.00");
 		}
-		return pTitleDeeds;
+		return fPlayerMoney;
 	}
 
-	private JLabel getWheelBarrowLabel() {
-		if (lWheelBarrow == null) {
-			lWheelBarrow = new JLabel();
-			lWheelBarrow.setVisible(false);
-			//lWheelBarrow.setBounds(500,500,50,50);
-			lWheelBarrow.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/wheelbarrow_token.png")));
+	private JTextField getPlayerNameField() {
+		if (fPlayerName == null) {
+			fPlayerName = new JTextField();
+			fPlayerName.setBackground(new Color(128, 0, 128));
+			fPlayerName.setEditable(false);
+			fPlayerName.setFont(new Font("Ravie", Font.BOLD, 18));
+			fPlayerName.setForeground(new Color(255, 255, 66));
+			fPlayerName.setText("Player");
 		}
-		return lWheelBarrow;
-	}
-
-	private JLabel getHatLabel() {
-		if (lHat == null) {
-			lHat = new JLabel();
-			lHat.setVisible(false);
-			//lHat.setBounds(500,500,50,50);
-			lHat.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/hat_token.png")));
-		}
-		return lHat;
-	}
-
-	private JLabel getThimbleLabel() {
-		if (lThimble == null) {
-			lThimble = new JLabel();
-			lThimble.setVisible(false);
-			//lThimble.setBounds(500,500,50,50);
-			lThimble.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/thimble_token.png")));
-		}
-		return lThimble;
-	}
-
-	private JLabel getCarLabel() {
-		if (lCar == null) {
-			lCar = new JLabel();
-			lCar.setVisible(false);
-			//lCar.setBounds(500,500,50,50);
-			lCar.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/car_token.png")));
-		}
-		return lCar;
-	}
-
-	private JLabel getShoeLabel() {
-		if (lShoe == null) {
-			lShoe = new JLabel();
-			lShoe.setVisible(false);
-			//lShoe.setBounds(500,500,50,50);
-			lShoe.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/shoe_token.png")));
-		}
-		return lShoe;
-	}
-
-	private JLabel getIronLabel() {
-		if (lIron == null) {
-			lIron = new JLabel();
-			lIron.setVisible(false);
-			//lIron.setBounds(500,500,50,50);
-			lIron.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/iron_token.png")));
-		}
-		return lIron;
-	}
-
-	private JLabel getAzkalLabel() {
-		if (lAzkal == null) {
-			lAzkal = new JLabel();
-			lAzkal.setVisible(false);
-			//lAzkal.setBounds(500,500,50,50);
-			lAzkal.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/dog_token.png")));
-		}
-		return lAzkal;
-	}
-
-	private JLabel getBaporLabel() {
-		if (lBapor == null) {
-			lBapor = new JLabel();
-			lBapor.setVisible(false);
-			//lBapor.setBounds(500, 500, 50, 50);
-			lBapor.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/ship_token.png")));
-		}
-		return lBapor;
+		return fPlayerName;
 	}
 
 	private JButton getRollDice() {
@@ -247,14 +149,15 @@ public class GameBoard extends JFrame implements Runnable {
 			bRollDice.setEnabled(false);
 			bRollDice.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					dice.rollDiceResult1();
-					dice.rollDiceResult2();
+					dice[0].rollDiceResult1();
+					dice[1].rollDiceResult2();
 					bEndTurn.setEnabled(true);
-					playerOrder[x].setTotalSteps(dice.getDice1stResult() + dice.getDice2ndResult());
+					playerOrder[x].setTotalSteps(dice[0].getDice1stResult() + dice[1].getDice2ndResult());
 					System.out.println(playerOrder[x].getTotalSteps());
+					checkForDoubles();
 					startThread();
 					
-			switch(dice.getDice1stResult()){
+			switch(dice[0].getDice1stResult()){
 			case 1:
 				lDice1.setIcon(new ImageIcon(getClass().getResource("/diceOne.png")));
 				break;
@@ -275,7 +178,7 @@ public class GameBoard extends JFrame implements Runnable {
 				break;
 			}
 			
-			switch(dice.getDice2ndResult()){
+			switch(dice[1].getDice2ndResult()){
 			case 1:
 				lDice2.setIcon(new ImageIcon(getClass().getResource("/diceOne.png")));
 				break;
@@ -302,6 +205,79 @@ public class GameBoard extends JFrame implements Runnable {
 					
 		return bRollDice;
 	}
+	
+////////////////////////////////////LABELS////////////////////////////////
+	private JLabel getWheelBarrowLabel() {
+		if (lWheelBarrow == null) {
+			lWheelBarrow = new JLabel();
+			lWheelBarrow.setVisible(false);
+			lWheelBarrow.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/wheelbarrow_token.png")));
+		}
+		return lWheelBarrow;
+	}
+
+	private JLabel getHatLabel() {
+		if (lHat == null) {
+			lHat = new JLabel();
+			lHat.setVisible(false);
+			lHat.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/hat_token.png")));
+		}
+		return lHat;
+	}
+
+	private JLabel getThimbleLabel() {
+		if (lThimble == null) {
+			lThimble = new JLabel();
+			lThimble.setVisible(false);
+			lThimble.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/thimble_token.png")));
+		}
+		return lThimble;
+	}
+
+	private JLabel getCarLabel() {
+		if (lCar == null) {
+			lCar = new JLabel();
+			lCar.setVisible(false);
+			lCar.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/car_token.png")));
+		}
+		return lCar;
+	}
+
+	private JLabel getShoeLabel() {
+		if (lShoe == null) {
+			lShoe = new JLabel();
+			lShoe.setVisible(false);
+			lShoe.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/shoe_token.png")));
+		}
+		return lShoe;
+	}
+
+	private JLabel getIronLabel() {
+		if (lIron == null) {
+			lIron = new JLabel();
+			lIron.setVisible(false);
+			lIron.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/iron_token.png")));
+		}
+		return lIron;
+	}
+
+	private JLabel getAzkalLabel() {
+		if (lAzkal == null) {
+			lAzkal = new JLabel();
+			lAzkal.setVisible(false);
+			lAzkal.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/dog_token.png")));
+		}
+		return lAzkal;
+	}
+
+	private JLabel getBaporLabel() {
+		if (lBapor == null) {
+			lBapor = new JLabel();
+			lBapor.setVisible(false);
+			lBapor.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/ship_token.png")));
+		}
+		return lBapor;
+	}
 
 	private JLabel getDice1Label() {
 		if (lDice1 == null) {
@@ -326,6 +302,17 @@ public class GameBoard extends JFrame implements Runnable {
 			lMonopoly.setIcon(new ImageIcon(getClass().getResource("/MonopolyBoardFinal.png")));
 		}
 		return lMonopoly;
+	}
+
+////////////////////////////////PANELS////////////////////////////////
+	private JPanel getTitleDeedsPanel() {
+		if (pTitleDeeds == null) {
+			pTitleDeeds = new JPanel();
+			pTitleDeeds.setVisible(false);
+			pTitleDeeds.setBackground(new Color(221, 149, 227));
+			pTitleDeeds.setLayout(new GroupLayout());
+		}
+		return pTitleDeeds;
 	}
 
 	private JPanel getDicePanel() {
@@ -372,6 +359,7 @@ public class GameBoard extends JFrame implements Runnable {
 		return pBoard;
 	}
 
+	@SuppressWarnings("unused")
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -383,27 +371,8 @@ public class GameBoard extends JFrame implements Runnable {
 					+ " on this platform:" + e.getMessage());
 		}
 	}
-//METHods
-/*	public void updatePlayerToken(){
-		if(playerOrder[x].getToken().getAssignedLabel()==1)
-             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token1_b.png")));
-		if(orderedPlayer[counter].getAssignedLabel()==2)
-             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token2_b.png")));
-		if(orderedPlayer[counter].getAssignedLabel()==3)
-             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token3_b.png")));
-		if(orderedPlayer[counter].getAssignedLabel()==4)
-             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token4_b.png")));
-		if(orderedPlayer[counter].getAssignedLabel()==5)
-             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token5_b.png")));
-		if(orderedPlayer[counter].getAssignedLabel()==6)
-             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token6_b.png")));
-		if(orderedPlayer[counter].getAssignedLabel()==7)
-             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token7_b.png")));
-		if(orderedPlayer[counter].getAssignedLabel()==8)
-             currentToken.setIcon(new ImageIcon(getClass().getResource("/images/token8_b.png")));
-}
-	}*/
-//THIS IS WHERE THREAD STARTS
+
+//////////////////////////////////THIS IS WHERE THREAD STARTS/////////////////////////////////////
 	public void startThread(){
 		t = new Thread(this);
 		t.start();
@@ -492,7 +461,8 @@ public class GameBoard extends JFrame implements Runnable {
 				}
 		}
 	}
-	
+
+///////////////////////////////////////METHODS USED IN BOARD/////////////////////////////////////
 	public void updateTokenPosition(){
 				if(playerOrder[x].getToken().getAssignedToken() == 1){
 					lBapor.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
@@ -518,6 +488,13 @@ public class GameBoard extends JFrame implements Runnable {
 			playerOrder[x].setPosition(0);
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
 			fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
+		}
+	}
+	
+	public void checkForDoubles(){
+		if(dice[0].getDice1stResult() == dice[1].getDice2ndResult()){
+			doubleDice++;
+			System.out.println("doubleDice = "+doubleDice);
 		}
 	}
 }
