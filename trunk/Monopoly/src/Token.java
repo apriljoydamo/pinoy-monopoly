@@ -3,9 +3,7 @@ import javax.swing.JLabel;
 
 
 public class Token extends JLabel{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private int xLocation = 525;
 	private int yLocation = 525;
@@ -15,7 +13,7 @@ public class Token extends JLabel{
 	}
 	
 	
-	//GETTER AND SETTER
+/////////////////////////GETTER AND SETTER//////////////////////////////
 	public void setxLocation(int xLocation) {
 		this.xLocation = xLocation;
 	}
