@@ -92,7 +92,7 @@ public class GameBoard extends JFrame implements Runnable {
                                                 }
                                                 if(playerOrder[y].getToken().getAssignedToken() == 3){
                                                         lIron.setVisible(true);
-                                                }
+                                                } 
                                                 if(playerOrder[y].getToken().getAssignedToken() == 4){
                                                         lShoe.setVisible(true);
                                                 }
@@ -379,20 +379,21 @@ public class GameBoard extends JFrame implements Runnable {
         @SuppressWarnings("static-access")
         public void run(){      
                 for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
-                        if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
+                        
+                		if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
                                         try{
                                                         if(playerOrder[x].getPosition() == 0 || playerOrder[x].getPosition() == 9){
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-63);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
                                                                 t.sleep(250);
-                                                                System.out.println("if " + a);
+                                                                //System.out.println("if " + a);
                                                         }else{
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
                                                                 t.sleep(250);
-                                                                System.out.println("else " + a);
+                                                                //System.out.println("else " + a);
                                                         }
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
@@ -405,13 +406,13 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
                                                                 t.sleep(250);
-                                                                System.out.println("if " + a);
+                                                                //System.out.println("if " + a);
                                                         }else{
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
                                                                 t.sleep(250);
-                                                                System.out.println("else " + a);
+                                                                //System.out.println("else " + a);
                                                         }
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
@@ -423,13 +424,13 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
                                                                 t.sleep(250);
-                                                                System.out.println("if " + a);
+                                                                //System.out.println("if " + a);
                                                         }else{
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
                                                                 t.sleep(250);
-                                                                System.out.println("else " + a);
+                                                                //System.out.println("else " + a);
                                                         }
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
@@ -443,13 +444,13 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
                                                                 t.sleep(250);
-                                                                System.out.println("if " + a);
+                                                                //System.out.println("if " + a);
                                                         }else{
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
                                                                 t.sleep(250);
-                                                                System.out.println("else " + a);
+                                                                //System.out.println("else " + a);
                                                         }
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
@@ -495,5 +496,7 @@ public class GameBoard extends JFrame implements Runnable {
                         doubleDice++;
                         System.out.println("doubleDice = "+doubleDice);
                 }
+                
         }
+        
 }
