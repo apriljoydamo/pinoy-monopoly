@@ -34,8 +34,7 @@ public class GameBoard extends JFrame implements Runnable {
         static int numberOfPlayers;
         int x = 0, doubleDice = 0;
         Thread t;
-        
-        private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
+		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
         
         public GameBoard() {
                 dice[0] = new Dice();
@@ -316,18 +315,18 @@ public class GameBoard extends JFrame implements Runnable {
         }
 
         private JPanel getDicePanel() {
-                if (pDice == null) {
-                        pDice = new JPanel();
-                        pDice.setBackground(new Color(128, 0, 255));
-                        pDice.setLayout(new GroupLayout());
-                        pDice.add(getDice1Label(), new Constraints(new Leading(49, 10, 10), new Leading(28, 10, 10)));
-                        pDice.add(getDice2Label(), new Constraints(new Leading(124, 10, 10), new Leading(28, 12, 12)));
-                        pDice.add(getRollDice(), new Constraints(new Leading(54, 10, 10), new Leading(75, 12, 12)));
-                }
-                return pDice;
-        }
+			if (pDice == null) {
+				pDice = new JPanel();
+				pDice.setBackground(new Color(128, 0, 255));
+				pDice.setLayout(new GroupLayout());
+				pDice.add(getDice2Label(), new Constraints(new Leading(123, 10, 10), new Leading(19, 10, 10)));
+				pDice.add(getDice1Label(), new Constraints(new Leading(50, 10, 10), new Leading(19, 12, 12)));
+				pDice.add(getRollDice(), new Constraints(new Leading(62, 12, 12), new Leading(77, 12, 12)));
+			}
+			return pDice;
+		}
 
-        private JPanel getPlayerPanel() {
+		private JPanel getPlayerPanel() {
                 if (pPlayer == null) {
                         pPlayer = new JPanel();
                         pPlayer.setBackground(new Color(128, 0, 128));
