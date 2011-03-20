@@ -349,7 +349,7 @@ public class PlayersGui extends JFrame{
 	private JLabel getThimbleLabel() {
 		if (thimbleLabel == null) {
 			thimbleLabel = new JLabel();
-			thimbleLabel.setIcon(new ImageIcon(getClass().getResource("/thimble_token.png")));
+			thimbleLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/thimble_token.png")));
 		}
 		return thimbleLabel;
 	}
@@ -357,7 +357,7 @@ public class PlayersGui extends JFrame{
 	private JLabel getWheelBarrowLabel() {
 		if (wheelBarrowLabel == null) {
 			wheelBarrowLabel = new JLabel();
-			wheelBarrowLabel.setIcon(new ImageIcon(getClass().getResource("/wheelbarrow_token.png")));
+			wheelBarrowLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/wheelbarrow_token.png")));
 		}
 		return wheelBarrowLabel;
 	}
@@ -365,7 +365,7 @@ public class PlayersGui extends JFrame{
 	private JLabel getHatLabel() {
 		if (hatLabel == null) {
 			hatLabel = new JLabel();
-			hatLabel.setIcon(new ImageIcon(getClass().getResource("/hat_token.png")));
+			hatLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/hat_token.png")));
 		}
 		return hatLabel;
 	}
@@ -373,7 +373,7 @@ public class PlayersGui extends JFrame{
 	private JLabel getCarLabel() {
 		if (carLabel == null) {
 			carLabel = new JLabel();
-			carLabel.setIcon(new ImageIcon(getClass().getResource("/car_token.png")));
+			carLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/car_token.png")));
 		}
 		return carLabel;
 	}
@@ -381,14 +381,14 @@ public class PlayersGui extends JFrame{
 	private JLabel getIronLabel() {
 		if (ironLabel == null) {
 			ironLabel = new JLabel();
-			ironLabel.setIcon(new ImageIcon(getClass().getResource("/iron_token.png")));
+			ironLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/iron_token.png")));
 		}
 		return ironLabel;
 	}
 	private JLabel getShoeLabel() {
 		if (shoeLabel == null) {
 			shoeLabel = new JLabel();
-			shoeLabel.setIcon(new ImageIcon(getClass().getResource("/shoe_token.png")));
+			shoeLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/shoe_token.png")));
 		}
 		return shoeLabel;
 	}
@@ -396,7 +396,7 @@ public class PlayersGui extends JFrame{
 	private JLabel getAzkalLabel() {
 		if (azkalLabel == null) {
 			azkalLabel = new JLabel();
-			azkalLabel.setIcon(new ImageIcon(getClass().getResource("/dog_token.png")));
+			azkalLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/dog_token.png")));
 		}
 		return azkalLabel;
 	}
@@ -404,7 +404,7 @@ public class PlayersGui extends JFrame{
 	private JLabel getBaporLabel() {
 		if (baporLabel == null) {
 			baporLabel = new JLabel();
-			baporLabel.setIcon(new ImageIcon(getClass().getResource("/ship_token.png")));
+			baporLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/ship_token.png")));
 		}
 		return baporLabel;
 	}
@@ -420,7 +420,7 @@ public class PlayersGui extends JFrame{
 	private JLabel getlMonopolyLogo() {
 		if (lMonopolyLogo == null) {
 			lMonopolyLogo = new JLabel();
-			lMonopolyLogo.setIcon(new ImageIcon(getClass().getResource("/pMonopoly.png")));
+			lMonopolyLogo.setIcon(new ImageIcon(getClass().getResource("/b&dice/pMonopoly.png")));
 		}
 		return lMonopolyLogo;
 	}
