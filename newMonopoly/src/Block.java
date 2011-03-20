@@ -10,7 +10,13 @@ public class Block {
 	private Chance chance;
 	private CommunityChest cChest;
 	
+	public Block(String name, int location){
+		this.setName(name);
+		this.setLocation(location);
+	}
+	
 ////////////////////////GETTERS AND SETTERS/////////////////////////////
+
 	public void setLocation(int location) {
 		this.location = location;
 	}
@@ -23,37 +29,37 @@ public class Block {
 	public String getName() {
 		return name;
 	}
-	public void setStation(Station station) {
+	public Block(Station station) {
 		this.station = station;
 	}
 	public Station getStation() {
 		return station;
 	}
-	public void setUtilities(Utilities utilities) {
+	public Block(Utilities utilities) {
 		this.utilities = utilities;
 	}
 	public Utilities getUtilities() {
 		return utilities;
 	}
-	public void setEstate(Estate estate) {
+	public Block(Estate estate) {
 		this.estate = estate;
 	}
 	public Estate getEstate() {
 		return estate;
 	}
-	public void setTax(Tax tax) {
+	public Block(Tax tax) {
 		this.tax = tax;
 	}
 	public Tax getTax() {
 		return tax;
 	}
-	public void setChance(Chance chance) {
+	public Block(Chance chance) {
 		this.chance = chance;
 	}
 	public Chance getChance() {
 		return chance;
 	}
-	public void setcChest(CommunityChest cChest) {
+	public Block(CommunityChest cChest) {
 		this.cChest = cChest;
 	}
 	public CommunityChest getcChest() {
