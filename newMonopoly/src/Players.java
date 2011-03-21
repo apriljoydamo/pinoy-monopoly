@@ -2,7 +2,7 @@
 public class Players{
         
         private int tempOrder, totalSteps;
-        private int order = 1, startMoney = 1500, position = 0;
+        private int order = 1, startMoney = 1500, position = 0, doubleDice = 0;
         private String playerName;
         private Token token;
         
@@ -84,5 +84,16 @@ public class Players{
         public int getPosition() {
                 return position;
         }
+
+
+		public void setDoubleDice(int doubleDice) {
+			this.doubleDice = doubleDice;
+		}
+
+
+		public int getDoubleDice() {
+			return doubleDice;
+		}
+
 }
 
