@@ -32,7 +32,7 @@ public class GameBoard extends JFrame implements Runnable {
       //  Rules rules = new Rules();
         
         static int numberOfPlayers;
-        int x = 0, doubleDice = 0;
+        int x = 0;
         Thread t;
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
         
@@ -491,10 +491,43 @@ public class GameBoard extends JFrame implements Runnable {
                 }
         }
         
+        public void goToJail(){
+                 	if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3 ){
+         	        			playerOrder[x].setPosition(10);
+         		        		playerOrder[x].getToken().setxLocation(23);
+         		        		playerOrder[x].getToken().setyLocation(525);
+         		
+         		        		if(playerOrder[x].getToken().getAssignedToken() == 1){
+         		        			lBapor.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+         		        		}
+         		        		if(playerOrder[x].getToken().getAssignedToken() == 2){
+         		        			lAzkal.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+         		        		}
+         		        		if(playerOrder[x].getToken().getAssignedToken() == 3){
+         		        			lIron.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation() );
+         		        		}
+         		        		if(playerOrder[x].getToken().getAssignedToken() == 4){
+         		        			lShoe.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation() );
+         		        		}
+         		        		if(playerOrder[x].getToken().getAssignedToken() == 5){
+         		        			lCar.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+         		        		}
+         		        		if(playerOrder[x].getToken().getAssignedToken() == 6){
+         		        			lThimble.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+         		        		}
+         		        		if(playerOrder[x].getToken().getAssignedToken() == 7){
+         		        			lHat.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+         		        		}
+         		        		if(playerOrder[x].getToken().getAssignedToken() == 8){
+         		        			lWheelBarrow.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
+         		        		}
+         		        	}
+         		        }
+        
         public void checkForDoubles(){
                 if(dice[0].getDice1stResult() == dice[1].getDice2ndResult()){
-                        doubleDice++;
-                        System.out.println("doubleDice = "+doubleDice);
+                        playerOrder[x].setDoubleDice(playerOrder[x].getDoubleDice() + 1);
+                        System.out.println("doubleDice of "+ x + " = " + playerOrder[x].getDoubleDice());
                 }
                 
         }
