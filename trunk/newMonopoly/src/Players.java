@@ -2,9 +2,10 @@
 public class Players{
         
         private int tempOrder, totalSteps;
-        private int order = 1, startMoney = 1500, position = 0, doubleDice = 0;
+        private int order = 1, startMoney = 1500, position = 0, doubleDice = 0, lastStep = 0;
         private String playerName;
         private Token token;
+        private boolean isJailed = false;
         
         
         
@@ -94,6 +95,28 @@ public class Players{
 		public int getDoubleDice() {
 			return doubleDice;
 		}
+
+
+		public void setJailed(boolean isJailed) {
+			this.isJailed = isJailed;
+		}
+
+
+		public boolean isJailed() {
+			return isJailed;
+		}
+
+		public void setLastStep(int lastStep) {
+			this.lastStep = lastStep;
+			
+		}
+
+
+		public int getLastStep() {
+			return lastStep;
+		}
+
+
 
 }
 
