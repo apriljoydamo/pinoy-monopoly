@@ -21,8 +21,6 @@ import org.dyno.visual.swing.layouts.Leading;
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class PlayersGui extends JFrame{
 	private static final long serialVersionUID = 1L;
-	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
-	
 	private static Players playerArray[] = new Players[8];
 	private static Players playerOrder[] = new Players[8];
 	private static int[] tempOrder = new int[8];
@@ -37,6 +35,7 @@ public class PlayersGui extends JFrame{
 	private JLabel baporLabel, azkalLabel, shoeLabel, ironLabel, carLabel, thimbleLabel, hatLabel, wheelBarrowLabel;
 	private JTextField baporNameField, azkalNameField, ironNameField, shoeNameField, carNameField, thimbleNameField, hatNameField, wheelBarrowNameField;
 	private JButton baporEnterButton, azkalEnterButton, ironEnterButton, shoeEnterButton, carEnterButton, thimbleEnterButton, hatEnterButton, wheelBarrowEnterButton;
+	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	
 	public PlayersGui() {
 		initComponents();
@@ -420,12 +419,12 @@ public class PlayersGui extends JFrame{
 	private JLabel getlMonopolyLogo() {
 		if (lMonopolyLogo == null) {
 			lMonopolyLogo = new JLabel();
-			lMonopolyLogo.setIcon(new ImageIcon(getClass().getResource("/b&dice/pMonopoly.png")));
+			lMonopolyLogo.setIcon(new ImageIcon(getClass().getResource("/designs/welcome_screen.png")));
 		}
 		return lMonopolyLogo;
 	}
-	
-/////////////////////////////////////PANELS//////////////////////////////////		
+
+	/////////////////////////////////////PANELS//////////////////////////////////		
 	private JPanel getpPlay() {
 		if (pPlay == null) {
 			pPlay = new JPanel();
@@ -478,10 +477,9 @@ public class PlayersGui extends JFrame{
 			pMonopoly = new JPanel();
 			pMonopoly.setBackground(new Color(128, 128, 255));
 			pMonopoly.setLayout(new GroupLayout());
-			pMonopoly.setVisible(true);
-			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(98, 717, 10, 10), new Leading(38, 313, 10, 10)));
 			pMonopoly.add(getbNewGame(), new Constraints(new Leading(288, 134, 10, 10), new Leading(376, 64, 10, 10)));
 			pMonopoly.add(getbExit(), new Constraints(new Leading(501, 129, 10, 10), new Leading(376, 64, 12, 12)));
+			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(0, 12, 12), new Leading(-8, 560, 10, 10)));
 		}
 		return pMonopoly;
 	}
