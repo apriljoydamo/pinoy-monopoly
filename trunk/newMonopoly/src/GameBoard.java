@@ -116,6 +116,72 @@ public class GameBoard extends JFrame implements Runnable {
                 return bPlay;
         }
 
+        private JButton getRollDice() {
+            if (bRollDice == null) {
+                    bRollDice = new JButton();
+                    bRollDice.setText("Roll Button");
+                    bRollDice.setEnabled(false);
+                    bRollDice.addActionListener(new ActionListener(){
+                            public void actionPerformed(ActionEvent e){
+                                    dice[0].rollDiceResult1();
+                                    dice[1].rollDiceResult2();
+                                    bEndTurn.setEnabled(true);
+                                    playerOrder[x].setTotalSteps(dice[0].getDice1stResult() + dice[1].getDice2ndResult());
+                                    playerOrder[x].setLastStep(playerOrder[x].getTotalSteps() + playerOrder[x].getPosition());
+                                    System.out.println(" Last Step: " +playerOrder[x].getLastStep());
+                                    System.out.println("Total Steps: "+playerOrder[x].getTotalSteps());
+                                    checkForDoubles();
+                                    goToJail();
+                                    startThread();
+                                    
+                    switch(dice[0].getDice1stResult()){
+                    case 1:
+                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceOne.png")));
+                            break;
+                    case 2:
+                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceTwo.png")));
+                            break;
+                    case 3:
+                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceThree.png")));
+                            break;
+                    case 4:
+                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFour.png")));
+                            break;
+                    case 5:
+                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFive.png")));
+                            break;
+                    case 6:
+                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceSix.png")));
+                            break;
+                    }
+                    
+                    switch(dice[1].getDice2ndResult()){
+                    case 1:
+                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceOne.png")));
+                            break;
+                    case 2:
+                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceTwo.png")));
+                            break;
+                    case 3:
+                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceThree.png")));
+                            break;
+                    case 4:
+                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFour.png")));
+                            break;
+                    case 5:
+                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFive.png")));
+                            break;
+                    case 6:
+                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceSix.png")));
+                            break;
+                    }
+                                    
+                            }
+                    });
+            }       
+                                    
+            return bRollDice;
+    }
 /////////////////////////////TEXT FIELDS////////////////////////////////////
         private JTextField getPlayerMoneyField() {
                 if (fPlayerMoney == null) {
@@ -141,69 +207,7 @@ public class GameBoard extends JFrame implements Runnable {
                 return fPlayerName;
         }
 
-        private JButton getRollDice() {
-                if (bRollDice == null) {
-                        bRollDice = new JButton();
-                        bRollDice.setText("Roll Button");
-                        bRollDice.setEnabled(false);
-                        bRollDice.addActionListener(new ActionListener(){
-                                public void actionPerformed(ActionEvent e){
-                                        dice[0].rollDiceResult1();
-                                        dice[1].rollDiceResult2();
-                                        bEndTurn.setEnabled(true);
-                                        playerOrder[x].setTotalSteps(dice[0].getDice1stResult() + dice[1].getDice2ndResult());
-                                        System.out.println(playerOrder[x].getTotalSteps());
-                                        checkForDoubles();
-                                        startThread();
-                                        
-                        switch(dice[0].getDice1stResult()){
-                        case 1:
-                                lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceOne.png")));
-                                break;
-                        case 2:
-                                lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceTwo.png")));
-                                break;
-                        case 3:
-                                lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceThree.png")));
-                                break;
-                        case 4:
-                                lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFour.png")));
-                                break;
-                        case 5:
-                                lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFive.png")));
-                                break;
-                        case 6:
-                                lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceSix.png")));
-                                break;
-                        }
-                        
-                        switch(dice[1].getDice2ndResult()){
-                        case 1:
-                                lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceOne.png")));
-                                break;
-                        case 2:
-                                lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceTwo.png")));
-                                break;
-                        case 3:
-                                lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceThree.png")));
-                                break;
-                        case 4:
-                                lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFour.png")));
-                                break;
-                        case 5:
-                                lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFive.png")));
-                                break;
-                        case 6:
-                                lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceSix.png")));
-                                break;
-                        }
-                                        
-                                }
-                        });
-                }       
-                                        
-                return bRollDice;
-        }
+        
         
 ////////////////////////////////////LABELS////////////////////////////////
         private JLabel getWheelBarrowLabel() {
@@ -378,7 +382,7 @@ public class GameBoard extends JFrame implements Runnable {
         }
         @SuppressWarnings("static-access")
         public void run(){      
-                for(int a = 0; a <= 30; a++){
+                for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
                         
                 		if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
                                         try{
@@ -414,6 +418,8 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 t.sleep(250);
                                                                 //System.out.println("else " + a);
                                                         }
+                                                        playerOrder[x].setLastStep(playerOrder[x].getPosition()+playerOrder[x].getTotalSteps());
+                                                        System.out.println(" Last Step: " +playerOrder[x].getLastStep());
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
                                         }catch(InterruptedException e){}
@@ -432,7 +438,7 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 t.sleep(250);
                                                                 //System.out.println("else " + a);
                                                         }
-                                                        playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
+                                                       playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
                                                         if(playerOrder[x].getPosition() == 30){
                                                         }
@@ -455,39 +461,59 @@ public class GameBoard extends JFrame implements Runnable {
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
                                                         passedGo();
+                                                        
 
                                         }catch(InterruptedException e){}
                                         
                                 }
-                		////////GO TO JAIL
-                				if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3){
-                					if(playerOrder[x].getPosition() == 30){	// if player stepped on go to jail
-                						for(int b = 0; b <= 9; b++){ // from go to jail to go block
-                							playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation() + 50);
-                							try {
-												t.sleep(250);
-												updateTokenPosition();
-											} catch (InterruptedException e) {
-												e.printStackTrace();
-											}
-											playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-											System.out.println("updatedPosition "+playerOrder[x].getPosition());
-											passedGo();
-                						}
-                						}else if(playerOrder[x].getPosition() == 1){
-                						for(int c = 0; c <= 10; c++){  // from Go block to Jail
-                							playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation() - 50);
-                							try {
-												t.sleep(250);
-												updateTokenPosition();
-											} catch (InterruptedException e) {
-												e.printStackTrace();
-											}
-											playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-											System.out.println("updatedPosition "+playerOrder[x].getPosition());
-        								}
-                					}	
-                			}
+                		 ////////GO TO JAIL
+    					if(playerOrder[x].getLastStep() == 30 || playerOrder[x].getDoubleDice() == 3){
+    						playerOrder[x].setJailed(true);
+    						System.out.println(playerOrder[x].isJailed());
+    						while(playerOrder[x].getPosition() != 10){
+    							if(playerOrder[x].getPosition() < 10){
+    								playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation() - 50);
+    								System.out.println("updatedPosition "+playerOrder[x].getPosition());
+    								updateTokenPosition();
+    								try {
+										t.sleep(500);
+									} catch (InterruptedException e) {
+										e.printStackTrace();
+									}
+    							}else if(playerOrder[x].getPosition() > 10 && playerOrder[x].getPosition() < 20){
+    								playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation() - 50);
+    								System.out.println("updatedPosition "+playerOrder[x].getPosition());
+									updateTokenPosition();
+									try {
+										t.sleep(500);
+									} catch (InterruptedException e) {
+										e.printStackTrace();
+									}
+    							}else if(playerOrder[x].getPosition() >= 20 && playerOrder[x].getPosition() < 30){
+    								playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation() + 50);
+    								System.out.println("updatedPosition "+playerOrder[x].getPosition());
+									updateTokenPosition();
+									try {
+										t.sleep(500);
+									} catch (InterruptedException e) {
+										e.printStackTrace();
+									}
+    							}else if(playerOrder[x].getPosition() >= 30 && playerOrder[x].getPosition() < 40){
+    								playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation() + 50);
+    								System.out.println("updatedPosition "+playerOrder[x].getPosition());
+									updateTokenPosition();
+									try {
+										t.sleep(500);
+									} catch (InterruptedException e) {
+										e.printStackTrace();
+									}
+    							}
+    							playerOrder[x].setPosition(playerOrder[x].getPosition() + 1);
+        						if(playerOrder[x].getPosition() == 40){
+    								playerOrder[x].setPosition(0);
+    							}
+    						}
+    					}
                 }
         }
 
@@ -515,16 +541,20 @@ public class GameBoard extends JFrame implements Runnable {
         public void passedGo(){
                 if(playerOrder[x].getPosition() == 40){
                         playerOrder[x].setPosition(0);
+                        playerOrder[x].setLastStep(playerOrder[x].getLastStep()+playerOrder[x].getPosition());
                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
                         fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
                 }
         }
         
-       /* public void goToJail(){
-                 	if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3 ){
-         	        			//playerOrder[x].setPosition(10);
-         		        		//playerOrder[x].getToken().setxLocation(23);
-         		        		//playerOrder[x].getToken().setyLocation(525);
+        //@SuppressWarnings("static-access")
+		public void goToJail(){
+        
+        }
+                 /*	if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3 ){
+         	        			playerOrder[x].setPosition(10);
+         		        		playerOrder[x].getToken().setxLocation(23);
+         		        		playerOrder[x].getToken().setyLocation(462);
                  				
          		        		if(playerOrder[x].getToken().getAssignedToken() == 1){
          		        			lBapor.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
@@ -551,8 +581,8 @@ public class GameBoard extends JFrame implements Runnable {
          		        			lWheelBarrow.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
          		        		}
          		        	}
-         		        }
-        */
+         		        
+        }*/
         public void checkForDoubles(){
                 if(dice[0].getDice1stResult() == dice[1].getDice2ndResult()){
                         playerOrder[x].setDoubleDice(playerOrder[x].getDoubleDice() + 1);
