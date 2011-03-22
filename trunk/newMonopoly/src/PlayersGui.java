@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -36,19 +37,18 @@ public class PlayersGui extends JFrame{
 	private JTextField baporNameField, azkalNameField, ironNameField, shoeNameField, carNameField, thimbleNameField, hatNameField, wheelBarrowNameField;
 	private JButton baporEnterButton, azkalEnterButton, ironEnterButton, shoeEnterButton, carEnterButton, thimbleEnterButton, hatEnterButton, wheelBarrowEnterButton;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
-	
 	public PlayersGui() {
 		initComponents();
 	}
 
 	private void initComponents() {
 		setLayout(new GroupLayout());
-		add(getpMonopoly(), new Constraints(new Leading(-6, 1245, 10, 10), new Leading(0, 655, 501, 501)));
 		add(getpSolo(), new Constraints(new Bilateral(0, 0, 826), new Leading(0, 702, 12, 12)));
-		setSize(890, 550);
+		add(getpMonopoly(), new Constraints(new Leading(-6, 1245, 10, 10), new Leading(0, 10, 10)));
+		setSize(885, 540);
 	}
 
-///////////////////////////////BUTTONS////////////////////////////////////////////////
+	///////////////////////////////BUTTONS////////////////////////////////////////////////
 	private JButton getWheelBarrowEnterButton() {
 		if (wheelBarrowEnterButton == null) {
 			wheelBarrowEnterButton = new JButton();
@@ -253,9 +253,14 @@ public class PlayersGui extends JFrame{
 	private JButton getbExit() {
 		if (bExit == null) {
 			bExit = new JButton();
-			bExit.setText("Exit");
-			bExit.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			bExit.setBackground(new Color(128, 255, 128));
+			bExit.setIcon(new ImageIcon(getClass().getResource("/Designs/Exit_Button.png")));
+			bExit.setBorderPainted(false);
+			bExit.setOpaque(false);
+			bExit.setContentAreaFilled(false);
+			bExit.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					System.exit(0);
 				}
 			});
@@ -266,12 +271,14 @@ public class PlayersGui extends JFrame{
 	private JButton getbNewGame() {
 		if (bNewGame == null) {
 			bNewGame = new JButton();
-			bNewGame.setText("New Game");
-			bNewGame.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			bNewGame.setIcon(new ImageIcon(getClass().getResource("/Designs/Start_Button.png")));
+			bNewGame.setOpaque(false);
+			bNewGame.setContentAreaFilled(false);
+			bNewGame.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					pMonopoly.setVisible(false);
 					pSolo.setVisible(true);
-					//pMulti.setVisible(true);
 					pPlay.setVisible(true);
 				}
 			});
@@ -279,7 +286,7 @@ public class PlayersGui extends JFrame{
 		return bNewGame;
 	}
 
-///////////////////////////TEXT FIELDS//////////////////////////////////////
+	///////////////////////////TEXT FIELDS//////////////////////////////////////
 	private JTextField getWheelBarrowNameField() {
 		if (wheelBarrowNameField == null) {
 			wheelBarrowNameField = new JTextField();
@@ -419,6 +426,7 @@ public class PlayersGui extends JFrame{
 	private JLabel getlMonopolyLogo() {
 		if (lMonopolyLogo == null) {
 			lMonopolyLogo = new JLabel();
+			lMonopolyLogo.setHorizontalAlignment(SwingConstants.TRAILING);
 			lMonopolyLogo.setIcon(new ImageIcon(getClass().getResource("/designs/welcome_screen.png")));
 		}
 		return lMonopolyLogo;
@@ -477,9 +485,9 @@ public class PlayersGui extends JFrame{
 			pMonopoly = new JPanel();
 			pMonopoly.setBackground(new Color(128, 128, 255));
 			pMonopoly.setLayout(new GroupLayout());
-			pMonopoly.add(getbNewGame(), new Constraints(new Leading(288, 134, 10, 10), new Leading(376, 64, 10, 10)));
-			pMonopoly.add(getbExit(), new Constraints(new Leading(501, 129, 10, 10), new Leading(376, 64, 12, 12)));
-			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(0, 12, 12), new Leading(-8, 560, 10, 10)));
+			pMonopoly.add(getbExit(), new Constraints(new Leading(832, 68, 10, 10), new Leading(-3, 64, 10, 10)));
+			pMonopoly.add(getbNewGame(), new Constraints(new Leading(358, 200, 10, 10), new Leading(399, 93, 10, 10)));
+			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(0, 12, 12), new Bilateral(-8, 0, 561)));
 		}
 		return pMonopoly;
 	}
