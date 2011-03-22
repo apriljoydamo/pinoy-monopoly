@@ -17,27 +17,27 @@ public class Block {
 	}
 	
 	public Block(Station station) {
-		this.station = station;
+		this.setStation(station);
 	}
 	
 	public Block(Utilities utilities) {
-		this.utilities = utilities;
+		this.setUtilities(utilities);
 	}
 	
 	public Block(Estate estate) {
-		this.estate = estate;
+		this.setEstate(estate);
 	}
 	
 	public Block(Tax tax) {
-		this.tax = tax;
+		this.setTax(tax);
 	}
 	
 	public Block(Chance chance) {
-		this.chance = chance;
+		this.setChance(chance);
 	}
 	
 	public Block(CommunityChest cChest) {
-		this.cChest = cChest;
+		this.setCommunityChest(cChest);
 	}
 	
 ////////////////////////GETTERS AND SETTERS/////////////////////////////
