@@ -378,7 +378,7 @@ public class GameBoard extends JFrame implements Runnable {
         }
         @SuppressWarnings("static-access")
         public void run(){      
-                for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
+                for(int a = 0; a <= 30; a++){
                         
                 		if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
                                         try{
@@ -459,6 +459,35 @@ public class GameBoard extends JFrame implements Runnable {
                                         }catch(InterruptedException e){}
                                         
                                 }
+                		////////GO TO JAIL
+                				if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3){
+                					if(playerOrder[x].getPosition() == 30){	// if player stepped on go to jail
+                						for(int b = 0; b <= 9; b++){ // from go to jail to go block
+                							playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation() + 50);
+                							try {
+												t.sleep(250);
+												updateTokenPosition();
+											} catch (InterruptedException e) {
+												e.printStackTrace();
+											}
+											playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
+											System.out.println("updatedPosition "+playerOrder[x].getPosition());
+											passedGo();
+                						}
+                						}else if(playerOrder[x].getPosition() == 1){
+                						for(int c = 0; c <= 10; c++){  // from Go block to Jail
+                							playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation() - 50);
+                							try {
+												t.sleep(250);
+												updateTokenPosition();
+											} catch (InterruptedException e) {
+												e.printStackTrace();
+											}
+											playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
+											System.out.println("updatedPosition "+playerOrder[x].getPosition());
+        								}
+                					}	
+                			}
                 }
         }
 
@@ -491,12 +520,12 @@ public class GameBoard extends JFrame implements Runnable {
                 }
         }
         
-        public void goToJail(){
+       /* public void goToJail(){
                  	if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3 ){
-         	        			playerOrder[x].setPosition(10);
-         		        		playerOrder[x].getToken().setxLocation(23);
-         		        		playerOrder[x].getToken().setyLocation(525);
-         		
+         	        			//playerOrder[x].setPosition(10);
+         		        		//playerOrder[x].getToken().setxLocation(23);
+         		        		//playerOrder[x].getToken().setyLocation(525);
+                 				
          		        		if(playerOrder[x].getToken().getAssignedToken() == 1){
          		        			lBapor.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
          		        		}
@@ -523,7 +552,7 @@ public class GameBoard extends JFrame implements Runnable {
          		        		}
          		        	}
          		        }
-        
+        */
         public void checkForDoubles(){
                 if(dice[0].getDice1stResult() == dice[1].getDice2ndResult()){
                         playerOrder[x].setDoubleDice(playerOrder[x].getDoubleDice() + 1);
