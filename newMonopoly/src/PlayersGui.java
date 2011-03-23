@@ -33,7 +33,6 @@ public class PlayersGui extends JFrame{
 	private JPanel pMonopoly, pSolo, pPlay;
 	private JLabel lMonopolyLogo, lTypeOfGame;
 	private JButton bNewGame, bExit, bPlay, bBackToMenu;
-	private JLabel baporLabel, azkalLabel, shoeLabel, ironLabel, carLabel, thimbleLabel, hatLabel, wheelBarrowLabel;
 	private JTextField baporNameField, azkalNameField, ironNameField, shoeNameField, carNameField, thimbleNameField, hatNameField, wheelBarrowNameField;
 	private JButton baporEnterButton, azkalEnterButton, ironEnterButton, shoeEnterButton, carEnterButton, thimbleEnterButton, hatEnterButton, wheelBarrowEnterButton;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
@@ -45,21 +44,22 @@ public class PlayersGui extends JFrame{
 		setLayout(new GroupLayout());
 		add(getpSolo(), new Constraints(new Bilateral(0, 0, 826), new Leading(0, 702, 12, 12)));
 		add(getpMonopoly(), new Constraints(new Leading(-6, 1245, 10, 10), new Leading(0, 10, 10)));
-		setSize(885, 540);
+		setSize(890, 550);
 	}
 
-	///////////////////////////////BUTTONS////////////////////////////////////////////////
 	private JButton getWheelBarrowEnterButton() {
 		if (wheelBarrowEnterButton == null) {
 			wheelBarrowEnterButton = new JButton();
-			wheelBarrowEnterButton.setText("Enter");
-			wheelBarrowEnterButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			wheelBarrowEnterButton.setIcon(new ImageIcon(getClass().getResource("/Designs/enter_btn.png")));
+			wheelBarrowEnterButton.setOpaque(false);
+			wheelBarrowEnterButton.setContentAreaFilled(false);
+			wheelBarrowEnterButton.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(wheelBarrowNameField.getText());
 					playerArray[x].getToken().setAssignedToken(8);
 					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
-					//System.out.println("labelToken " + players.getLabelToken());
 					wheelBarrowEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
 				}
@@ -71,14 +71,16 @@ public class PlayersGui extends JFrame{
 	private JButton getHatEnterButton() {
 		if (hatEnterButton == null) {
 			hatEnterButton = new JButton();
-			hatEnterButton.setText("Enter");
-			hatEnterButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			hatEnterButton.setIcon(new ImageIcon(getClass().getResource("/Designs/enter_btn.png")));
+			hatEnterButton.setOpaque(false);
+			hatEnterButton.setContentAreaFilled(false);
+			hatEnterButton.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(hatNameField.getText());
 					playerArray[x].getToken().setAssignedToken(7);
 					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
-					//System.out.println("labelToken " + players.getLabelToken());
 					hatEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
 				}
@@ -90,14 +92,16 @@ public class PlayersGui extends JFrame{
 	private JButton getThimbleEnterButton() {
 		if (thimbleEnterButton == null) {
 			thimbleEnterButton = new JButton();
-			thimbleEnterButton.setText("Enter");
-			thimbleEnterButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			thimbleEnterButton.setIcon(new ImageIcon(getClass().getResource("/Designs/enter_btn.png")));
+			thimbleEnterButton.setOpaque(false);
+			thimbleEnterButton.setContentAreaFilled(false);
+			thimbleEnterButton.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(thimbleNameField.getText());
 					playerArray[x].getToken().setAssignedToken(6);
 					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
-					//System.out.println("labelToken " + players.getLabelToken());
 					thimbleEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
 				}
@@ -109,14 +113,16 @@ public class PlayersGui extends JFrame{
 	private JButton getCarEnterButton() {
 		if (carEnterButton == null) {
 			carEnterButton = new JButton();
-			carEnterButton.setText("Enter");
-			carEnterButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			carEnterButton.setIcon(new ImageIcon(getClass().getResource("/Designs/enter_btn.png")));
+			carEnterButton.setOpaque(false);
+			carEnterButton.setContentAreaFilled(false);
+			carEnterButton.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(carNameField.getText());
 					playerArray[x].getToken().setAssignedToken(5);
 					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
-					//System.out.println("labelToken " + players.getLabelToken());
 					carEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
 				}
@@ -128,15 +134,17 @@ public class PlayersGui extends JFrame{
 	private JButton getShoeEnterButton() {
 		if (shoeEnterButton == null) {
 			shoeEnterButton = new JButton();
-			shoeEnterButton.setText("Enter");
-			shoeEnterButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			shoeEnterButton.setIcon(new ImageIcon(getClass().getResource("/Designs/enter_btn.png")));
+			shoeEnterButton.setOpaque(false);
+			shoeEnterButton.setContentAreaFilled(false);
+			shoeEnterButton.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(shoeNameField.getText());
 					playerArray[x].getToken().setAssignedToken(4);
 					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
-					//System.out.println("labelToken " + players.getLabelToken());
-					shoeEnterButton.setEnabled(false);		
+					shoeEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
 				}
 			});
@@ -147,14 +155,16 @@ public class PlayersGui extends JFrame{
 	private JButton getIronEnterButton() {
 		if (ironEnterButton == null) {
 			ironEnterButton = new JButton();
-			ironEnterButton.setText("Enter");
-			ironEnterButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			ironEnterButton.setIcon(new ImageIcon(getClass().getResource("/Designs/enter_btn.png")));
+			ironEnterButton.setOpaque(false);
+			ironEnterButton.setContentAreaFilled(false);
+			ironEnterButton.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(ironNameField.getText());
 					playerArray[x].getToken().setAssignedToken(3);
 					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
-					//System.out.println("labelToken " + players.getLabelToken());
 					ironEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
 				}
@@ -166,14 +176,16 @@ public class PlayersGui extends JFrame{
 	private JButton getAzkalEnterButton() {
 		if (azkalEnterButton == null) {
 			azkalEnterButton = new JButton();
-			azkalEnterButton.setText("Enter");
-			azkalEnterButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			azkalEnterButton.setIcon(new ImageIcon(getClass().getResource("/Designs/enter_btn.png")));
+			azkalEnterButton.setOpaque(false);
+			azkalEnterButton.setContentAreaFilled(false);
+			azkalEnterButton.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(azkalNameField.getText());
 					playerArray[x].getToken().setAssignedToken(2);
 					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
-					//System.out.println("labelToken " + players.getLabelToken());
 					azkalEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
 				}
@@ -185,30 +197,35 @@ public class PlayersGui extends JFrame{
 	private JButton getBaporEnterButton() {
 		if (baporEnterButton == null) {
 			baporEnterButton = new JButton();
-			baporEnterButton.setText("Enter");
-			baporEnterButton.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			baporEnterButton.setIcon(new ImageIcon(getClass().getResource("/Designs/enter_btn.png")));
+			baporEnterButton.setOpaque(false);
+			baporEnterButton.setContentAreaFilled(false);
+			baporEnterButton.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(baporNameField.getText());
 					playerArray[x].getToken().setAssignedToken(1);
 					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
-					//System.out.println("labelToken " + players.getLabelToken());
 					baporEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
 				}
 			});
-
 		}
 		return baporEnterButton;
 	}
-	
+
 	private JButton getbBackToMenu() {
 		if (bBackToMenu == null) {
 			bBackToMenu = new JButton();
-			bBackToMenu.setText("Back to Menu");
+			bBackToMenu.setIcon(new ImageIcon(getClass().getResource("/Designs/back_btn.png")));
+			bBackToMenu.setBorderPainted(false);
+			bBackToMenu.setOpaque(false);
+			bBackToMenu.setContentAreaFilled(false);
 			bBackToMenu.setEnabled(false);
-			bBackToMenu.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
+			bBackToMenu.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
 					baporNameField.setText("");
 					azkalNameField.setText("");
 					ironNameField.setText("");
@@ -237,14 +254,18 @@ public class PlayersGui extends JFrame{
 	private JButton getbPlay() {
 		if (bPlay == null) {
 			bPlay = new JButton();
-			bPlay.setText("Play");
+			bPlay.setIcon(new ImageIcon(getClass().getResource("/Designs/play_btn.png")));
+			bPlay.setBorderPainted(false);
+			bPlay.setOpaque(false);
+			bPlay.setContentAreaFilled(false);
 			bPlay.setEnabled(false);
-			bPlay.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-						insertOrder(initialNumPlayer);
-						rearrangeArray(initialNumPlayer);
-						runBoard();
-					}
+			bPlay.addActionListener(new ActionListener() {
+	
+				public void actionPerformed(ActionEvent event) {
+					insertOrder(initialNumPlayer);
+					rearrangeArray(initialNumPlayer);
+					runBoard();
+				}
 			});
 		}
 		return bPlay;
@@ -314,7 +335,7 @@ public class PlayersGui extends JFrame{
 	private JTextField getCarNameField() {
 		if (carNameField == null) {
 			carNameField = new JTextField();
-			carNameField.setText(" ");
+			carNameField.setBackground(Color.white);
 		}
 		return carNameField;
 	}
@@ -352,73 +373,11 @@ public class PlayersGui extends JFrame{
 	}
 
 //////////////////////////////////////LABELS///////////////////////////////
-	private JLabel getThimbleLabel() {
-		if (thimbleLabel == null) {
-			thimbleLabel = new JLabel();
-			thimbleLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/thimble_token.png")));
-		}
-		return thimbleLabel;
-	}
-
-	private JLabel getWheelBarrowLabel() {
-		if (wheelBarrowLabel == null) {
-			wheelBarrowLabel = new JLabel();
-			wheelBarrowLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/wheelbarrow_token.png")));
-		}
-		return wheelBarrowLabel;
-	}
-
-	private JLabel getHatLabel() {
-		if (hatLabel == null) {
-			hatLabel = new JLabel();
-			hatLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/hat_token.png")));
-		}
-		return hatLabel;
-	}
-
-	private JLabel getCarLabel() {
-		if (carLabel == null) {
-			carLabel = new JLabel();
-			carLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/car_token.png")));
-		}
-		return carLabel;
-	}
-
-	private JLabel getIronLabel() {
-		if (ironLabel == null) {
-			ironLabel = new JLabel();
-			ironLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/iron_token.png")));
-		}
-		return ironLabel;
-	}
-	private JLabel getShoeLabel() {
-		if (shoeLabel == null) {
-			shoeLabel = new JLabel();
-			shoeLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/shoe_token.png")));
-		}
-		return shoeLabel;
-	}
-
-	private JLabel getAzkalLabel() {
-		if (azkalLabel == null) {
-			azkalLabel = new JLabel();
-			azkalLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/dog_token.png")));
-		}
-		return azkalLabel;
-	}
-
-	private JLabel getBaporLabel() {
-		if (baporLabel == null) {
-			baporLabel = new JLabel();
-			baporLabel.setIcon(new ImageIcon(getClass().getResource("/latest_tokens/ship_token.png")));
-		}
-		return baporLabel;
-	}
 
 	private JLabel getlTypeOfGame() {
 		if (lTypeOfGame == null) {
 			lTypeOfGame = new JLabel();
-			lTypeOfGame.setText("Choose Token:");
+			lTypeOfGame.setIcon(new ImageIcon(getClass().getResource("/Designs/chooseToken_bg.jpg")));
 		}
 		return lTypeOfGame;
 	}
@@ -428,54 +387,35 @@ public class PlayersGui extends JFrame{
 			lMonopolyLogo = new JLabel();
 			lMonopolyLogo.setHorizontalAlignment(SwingConstants.TRAILING);
 			lMonopolyLogo.setIcon(new ImageIcon(getClass().getResource("/designs/welcome_screen.png")));
+			lMonopolyLogo.setVisible(true);
 		}
 		return lMonopolyLogo;
 	}
 
-	/////////////////////////////////////PANELS//////////////////////////////////		
-	private JPanel getpPlay() {
-		if (pPlay == null) {
-			pPlay = new JPanel();
-			pPlay.setBackground(new Color(60, 67, 162));
-			pPlay.setLayout(new GroupLayout());
-			pPlay.add(getbBackToMenu(), new Constraints(new Leading(550, 153, 10, 10), new Leading(54, 42, 10, 10)));
-			pPlay.add(getbPlay(), new Constraints(new Leading(209, 144, 10, 10), new Leading(54, 43, 12, 12)));
-		}
-		return pPlay;
-	}
-	
 	private JPanel getpSolo() {
 		if (pSolo == null) {
 			pSolo = new JPanel();
 			pSolo.setBackground(new Color(140, 255, 140));
 			pSolo.setLayout(new GroupLayout());
-			pSolo.setVisible(false);
-			pSolo.add(getlTypeOfGame(), new Constraints(new Leading(12, 12, 12), new Leading(12, 12, 12)));
-			pSolo.add(getBaporLabel(), new Constraints(new Leading(15, 10, 10), new Leading(65, 10, 10)));
-			pSolo.add(getBaporNameField(), new Constraints(new Leading(83, 151, 10, 10), new Leading(72, 34, 10, 10)));
-			pSolo.add(getBaporEnterButton(), new Constraints(new Leading(269, 10, 10), new Leading(75, 12, 12)));
-			pSolo.add(getAzkalLabel(), new Constraints(new Leading(20, 12, 12), new Leading(149, 10, 10)));
-			pSolo.add(getAzkalNameField(), new Constraints(new Leading(83, 150, 12, 12), new Leading(156, 34, 12, 12)));
-			pSolo.add(getAzkalEnterButton(), new Constraints(new Leading(269, 12, 12), new Leading(164, 12, 12)));
-			pSolo.add(getIronLabel(), new Constraints(new Leading(19, 12, 12), new Leading(252, 12, 12)));
-			pSolo.add(getIronNameField(), new Constraints(new Leading(83, 150, 12, 12), new Leading(254, 34, 12, 12)));
-			pSolo.add(getIronEnterButton(), new Constraints(new Leading(269, 12, 12), new Leading(258, 12, 12)));
-			pSolo.add(getShoeLabel(), new Constraints(new Leading(24, 10, 10), new Leading(351, 10, 10)));
-			pSolo.add(getShoeNameField(), new Constraints(new Leading(83, 150, 12, 12), new Leading(353, 34, 10, 10)));
-			pSolo.add(getShoeEnterButton(), new Constraints(new Leading(269, 12, 12), new Leading(357, 12, 12)));
-			pSolo.add(getThimbleLabel(), new Constraints(new Leading(481, 12, 12), new Leading(143, 10, 10)));
-			pSolo.add(getCarLabel(), new Constraints(new Leading(473, 12, 12), new Leading(68, 12, 12)));
-			pSolo.add(getCarNameField(), new Constraints(new Leading(545, 150, 12, 12), new Leading(68, 38, 12, 12)));
-			pSolo.add(getCarEnterButton(), new Constraints(new Leading(733, 12, 12), new Leading(74, 12, 12)));
-			pSolo.add(getThimbleNameField(), new Constraints(new Leading(545, 150, 12, 12), new Leading(152, 38, 12, 12)));
-			pSolo.add(getThimbleEnterButton(), new Constraints(new Leading(733, 12, 12), new Leading(158, 12, 12)));
-			pSolo.add(getHatLabel(), new Constraints(new Leading(483, 10, 10), new Leading(258, 12, 12)));
-			pSolo.add(getHatNameField(), new Constraints(new Leading(546, 150, 12, 12), new Leading(253, 36, 12, 12)));
-			pSolo.add(getHatEnterButton(), new Constraints(new Leading(733, 12, 12), new Leading(258, 12, 12)));
-			pSolo.add(getWheelBarrowNameField(), new Constraints(new Leading(549, 150, 10, 10), new Leading(351, 38, 12, 12)));
-			pSolo.add(getWheelBarrowLabel(), new Constraints(new Leading(484, 12, 12), new Leading(352, 12, 12)));
-			pSolo.add(getWheelBarrowEnterButton(), new Constraints(new Leading(733, 12, 12), new Leading(360, 12, 12)));
-			pSolo.add(getpPlay(), new Constraints(new Leading(0, 890, 10, 10), new Leading(424, 125, 10, 10)));
+			pSolo.add(getShoeEnterButton(), new Constraints(new Leading(273, 76, 10, 10), new Leading(495, 26, 10, 10)));
+			pSolo.add(getIronEnterButton(), new Constraints(new Leading(273, 76, 12, 12), new Leading(388, 26, 10, 10)));
+			pSolo.add(getAzkalEnterButton(), new Constraints(new Leading(273, 76, 12, 12), new Leading(281, 26, 10, 10)));
+			pSolo.add(getBaporEnterButton(), new Constraints(new Leading(273, 76, 12, 12), new Leading(174, 25, 12, 12)));
+			pSolo.add(getIronNameField(), new Constraints(new Leading(145, 198, 12, 12), new Leading(353, 29, 12, 12)));
+			pSolo.add(getAzkalNameField(), new Constraints(new Leading(145, 198, 12, 12), new Leading(247, 28, 12, 12)));
+			pSolo.add(getBaporNameField(), new Constraints(new Leading(145, 198, 12, 12), new Leading(141, 29, 10, 10)));
+			pSolo.add(getHatNameField(), new Constraints(new Leading(477, 198, 12, 12), new Leading(353, 29, 12, 12)));
+			pSolo.add(getThimbleNameField(), new Constraints(new Leading(477, 198, 12, 12), new Leading(247, 28, 12, 12)));
+			pSolo.add(getWheelBarrowEnterButton(), new Constraints(new Leading(604, 76, 10, 10), new Leading(495, 25, 12, 12)));
+			pSolo.add(getHatEnterButton(), new Constraints(new Leading(604, 76, 12, 12), new Leading(388, 26, 12, 12)));
+			pSolo.add(getThimbleEnterButton(), new Constraints(new Leading(604, 76, 12, 12), new Leading(281, 26, 12, 12)));
+			pSolo.add(getCarEnterButton(), new Constraints(new Leading(604, 77, 12, 12), new Leading(174, 26, 12, 12)));
+			pSolo.add(getbPlay(), new Constraints(new Leading(726, 161, 10, 10), new Leading(101, 158, 10, 10)));
+			pSolo.add(getbBackToMenu(), new Constraints(new Leading(845, 42, 12, 12), new Leading(501, 42, 12, 12)));
+			pSolo.add(getCarNameField(), new Constraints(new Leading(477, 198, 12, 12), new Leading(141, 29, 12, 12)));
+			pSolo.add(getShoeNameField(), new Constraints(new Leading(145, 198, 12, 12), new Leading(461, 28, 12, 12)));
+			pSolo.add(getWheelBarrowNameField(), new Constraints(new Leading(477, 198, 12, 12), new Leading(461, 28, 12, 12)));
+			pSolo.add(getlTypeOfGame(), new Constraints(new Leading(0, 12, 12), new Leading(0, 12, 12)));
 		}
 		return pSolo;
 	}
@@ -488,6 +428,7 @@ public class PlayersGui extends JFrame{
 			pMonopoly.add(getbExit(), new Constraints(new Leading(832, 68, 10, 10), new Leading(-3, 64, 10, 10)));
 			pMonopoly.add(getbNewGame(), new Constraints(new Leading(358, 200, 10, 10), new Leading(399, 93, 10, 10)));
 			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(0, 12, 12), new Bilateral(-8, 0, 561)));
+			pMonopoly.setVisible(true);
 		}
 		return pMonopoly;
 	}
