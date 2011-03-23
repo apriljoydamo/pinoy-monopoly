@@ -461,7 +461,7 @@ public class PlayersGui extends JFrame{
 			@Override
 			public void run() {
 				PlayersGui frame = new PlayersGui();
-				frame.setDefaultCloseOperation(PlayersGui.EXIT_ON_CLOSE);
+				frame.setDefaultCloseOperation(PlayersGui.DO_NOTHING_ON_CLOSE);
 				frame.setTitle("PlayersGui");
 				frame.getContentPane().setPreferredSize(frame.getSize());
 				frame.pack();
