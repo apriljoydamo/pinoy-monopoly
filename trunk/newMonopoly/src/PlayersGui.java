@@ -292,6 +292,7 @@ public class PlayersGui extends JFrame{
 	private JButton getbNewGame() {
 		if (bNewGame == null) {
 			bNewGame = new JButton();
+			bNewGame.setBackground(new Color(7, 24, 235));
 			bNewGame.setIcon(new ImageIcon(getClass().getResource("/Designs/Start_Button.png")));
 			bNewGame.setOpaque(false);
 			bNewGame.setContentAreaFilled(false);
@@ -424,11 +425,11 @@ public class PlayersGui extends JFrame{
 	private JPanel getpMonopoly() {
 		if (pMonopoly == null) {
 			pMonopoly = new JPanel();
-			pMonopoly.setBackground(new Color(128, 128, 255));
+			pMonopoly.setBackground(new Color(215, 253, 187));
 			pMonopoly.setLayout(new GroupLayout());
 			pMonopoly.add(getbExit(), new Constraints(new Leading(832, 68, 10, 10), new Leading(-3, 64, 10, 10)));
 			pMonopoly.add(getbNewGame(), new Constraints(new Leading(358, 200, 10, 10), new Leading(399, 93, 10, 10)));
-			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(7, 12, 12), new Leading(2, 10, 10)));
+			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(7, 12, 12), new Leading(0, 563, 12, 12)));
 		}
 		return pMonopoly;
 	}
