@@ -416,6 +416,7 @@ public class PlayersGui extends JFrame{
 			pSolo.add(getShoeNameField(), new Constraints(new Leading(145, 198, 12, 12), new Leading(461, 28, 12, 12)));
 			pSolo.add(getWheelBarrowNameField(), new Constraints(new Leading(477, 198, 12, 12), new Leading(461, 28, 12, 12)));
 			pSolo.add(getlTypeOfGame(), new Constraints(new Leading(0, 12, 12), new Leading(0, 12, 12)));
+			pSolo.setVisible(false);
 		}
 		return pSolo;
 	}
@@ -427,8 +428,7 @@ public class PlayersGui extends JFrame{
 			pMonopoly.setLayout(new GroupLayout());
 			pMonopoly.add(getbExit(), new Constraints(new Leading(832, 68, 10, 10), new Leading(-3, 64, 10, 10)));
 			pMonopoly.add(getbNewGame(), new Constraints(new Leading(358, 200, 10, 10), new Leading(399, 93, 10, 10)));
-			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(0, 12, 12), new Bilateral(-8, 0, 561)));
-			pMonopoly.setVisible(true);
+			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(7, 12, 12), new Leading(2, 10, 10)));
 		}
 		return pMonopoly;
 	}
