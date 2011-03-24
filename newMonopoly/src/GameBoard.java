@@ -9,12 +9,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import org.dyno.visual.swing.layouts.Bilateral;
 import org.dyno.visual.swing.layouts.Constraints;
 import org.dyno.visual.swing.layouts.GroupLayout;
 import org.dyno.visual.swing.layouts.Leading;
-import org.dyno.visual.swing.layouts.Trailing;
 
 
 //VS4E -- DO NOT REMOVE THIS LINE!
@@ -34,155 +35,180 @@ public class GameBoard extends JFrame implements Runnable {
         static int numberOfPlayers;
         int x = 0;
         Thread t;
+		private JPanel pClicktoPlay;
+		private JLabel lClicktoPlay;
+		private JLabel lPlayerPanelImage;
+		private JLabel ldicebg;
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
-        
-        public GameBoard() {
+		public GameBoard() {
                 dice[0] = new Dice();
                 dice[1] = new Dice();
                 initComponents();
         }
 
         private void initComponents() {
-                setLayout(new GroupLayout());
-                add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
-                add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(485, 118, 10, 10)));
-                add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 500, 10, 10)));
-                setSize(810, 600);
-        }
-        
-//////////////////////////////////BUTTONS///////////////////////////////////
-        private JButton getEndTurnButton() {
-                if (bEndTurn == null) {
-                        bEndTurn = new JButton();
-                        bEndTurn.setEnabled(false);
-                        bEndTurn.setText("End Turn");
-                        bEndTurn.addActionListener(new ActionListener() {
-                                public void actionPerformed(ActionEvent event) {
-                                        
-                                         x++;
-                                        if(x==numberOfPlayers){
-                                                x = 0;
-                                        }
-                                        fPlayerName.setText(playerOrder[x].getPlayerName());
-                                        fPlayerMoney.setText("P "+ playerOrder[x].getStartMoney());
-                                        }
-                                
-                        });
-                }
-                return bEndTurn;
-        }
-        
-        private JButton getPlayButton() {
-                if (bPlay == null) {
-                        bPlay = new JButton();
-                        bPlay.setText("CLICK TO PLAY");
-                        bPlay.addActionListener(new ActionListener(){
-                                public void actionPerformed(ActionEvent e){
-                                        bRollDice.setEnabled(true);
-                                        bPlay.setVisible(false);
-                                        fPlayerName.setText(playerOrder[x].getPlayerName());
-                                        fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
-                                        
-                                        for(int y = 0; y <= numberOfPlayers; y++){
-                                                if(playerOrder[y].getToken().getAssignedToken() == 1){
-                                                        lBapor.setVisible(true);
-                                                }
-                                                if(playerOrder[y].getToken().getAssignedToken() == 2){
-                                                        lAzkal.setVisible(true);
-                                                }
-                                                if(playerOrder[y].getToken().getAssignedToken() == 3){
-                                                        lIron.setVisible(true);
-                                                } 
-                                                if(playerOrder[y].getToken().getAssignedToken() == 4){
-                                                        lShoe.setVisible(true);
-                                                }
-                                                if(playerOrder[y].getToken().getAssignedToken() == 5){
-                                                        lCar.setVisible(true);
-                                                }
-                                                if(playerOrder[y].getToken().getAssignedToken() == 6){
-                                                        lThimble.setVisible(true);
-                                                }
-                                                if(playerOrder[y].getToken().getAssignedToken() == 7){
-                                                        lHat.setVisible(true);
-                                                }
-                                                if(playerOrder[y].getToken().getAssignedToken() == 8){
-                                                        lWheelBarrow.setVisible(true);
-                                                        
-                                                }
-                                        }
-                                }
-                        });
-                }
-                return bPlay;
-        }
+			setLayout(new GroupLayout());
+			add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
+			add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
+			add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
+			add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
+			setSize(805, 595);
+		}
 
-        private JButton getRollDice() {
-            if (bRollDice == null) {
-                    bRollDice = new JButton();
-                    bRollDice.setText("Roll Button");
-                    bRollDice.setEnabled(false);
-                    bRollDice.addActionListener(new ActionListener(){
-                            public void actionPerformed(ActionEvent e){
-                                    dice[0].rollDiceResult1();
-                                    dice[1].rollDiceResult2();
-                                    bEndTurn.setEnabled(true);
-                                    playerOrder[x].setTotalSteps(dice[0].getDice1stResult() + dice[1].getDice2ndResult());
-                                    playerOrder[x].setLastStep(playerOrder[x].getTotalSteps() + playerOrder[x].getPosition());
-                                    System.out.println(" Last Step: " +playerOrder[x].getLastStep());
-                                    System.out.println("Total Steps: "+playerOrder[x].getTotalSteps());
-                                    checkForDoubles();
-                                    goToJail();
-                                    startThread();
-                                    
-                    switch(dice[0].getDice1stResult()){
-                    case 1:
-                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceOne.png")));
-                            break;
-                    case 2:
-                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceTwo.png")));
-                            break;
-                    case 3:
-                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceThree.png")));
-                            break;
-                    case 4:
-                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFour.png")));
-                            break;
-                    case 5:
-                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFive.png")));
-                            break;
-                    case 6:
-                            lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceSix.png")));
-                            break;
-                    }
-                    
-                    switch(dice[1].getDice2ndResult()){
-                    case 1:
-                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceOne.png")));
-                            break;
-                    case 2:
-                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceTwo.png")));
-                            break;
-                    case 3:
-                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceThree.png")));
-                            break;
-                    case 4:
-                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFour.png")));
-                            break;
-                    case 5:
-                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFive.png")));
-                            break;
-                    case 6:
-                            lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceSix.png")));
-                            break;
-                    }
-                                    
-                            }
-                    });
-            }       
-                                    
-            return bRollDice;
-    }
-/////////////////////////////TEXT FIELDS////////////////////////////////////
+		private JLabel getDicebgLabel() {
+			if (ldicebg == null) {
+				ldicebg = new JLabel();
+				ldicebg.setHorizontalAlignment(SwingConstants.TRAILING);
+				ldicebg.setIcon(new ImageIcon(getClass().getResource("/Designs/rollDice_bg.png")));
+			}
+			return ldicebg;
+		}
+
+		private JLabel getPlayerPanelImageLabel() {
+			if (lPlayerPanelImage == null) {
+				lPlayerPanelImage = new JLabel();
+				lPlayerPanelImage.setIcon(new ImageIcon(getClass().getResource("/Designs/PlayerPanel.jpg")));
+			}
+			return lPlayerPanelImage;
+		}
+
+		private JButton getEndTurnButton() {
+			if (bEndTurn == null) {
+				bEndTurn = new JButton();
+				bEndTurn.setIcon(new ImageIcon(getClass().getResource("/Designs/endTurn_btn.png")));
+				bEndTurn.setEnabled(false);
+				bEndTurn.addActionListener(new ActionListener() {
+		
+					public void actionPerformed(ActionEvent event) {
+						x++;
+						if (x == numberOfPlayers) {
+							x = 0;
+						}
+						fPlayerName.setText(playerOrder[x].getPlayerName());
+						fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
+					}
+				});
+			}
+			return bEndTurn;
+		}
+
+		private JButton getPlayButton() {
+			if (bPlay == null) {
+				bPlay = new JButton();
+				bPlay.setIcon(new ImageIcon(getClass().getResource("/Designs/clcktoPlay_btn.png")));
+				bPlay.setBorderPainted(false);
+				bPlay.setOpaque(false);
+				bPlay.setFocusPainted(false);
+				bPlay.setBorder(null);
+				bPlay.setContentAreaFilled(false);
+				bPlay.addActionListener(new ActionListener() {
+		
+					public void actionPerformed(ActionEvent event) {
+						bRollDice.setEnabled(true);
+						bPlay.setVisible(false);
+						pBoard.setVisible(true);
+						pDice.setVisible(true);
+						pPlayer.setVisible(true);
+						pClicktoPlay.setVisible(false);
+						fPlayerName.setText(playerOrder[x].getPlayerName());
+						fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
+						for (int y = 0; y <= numberOfPlayers; y++) {
+							if (playerOrder[y].getToken().getAssignedToken() == 1) {
+								lBapor.setVisible(true);
+							}
+							if (playerOrder[y].getToken().getAssignedToken() == 2) {
+								lAzkal.setVisible(true);
+							}
+							if (playerOrder[y].getToken().getAssignedToken() == 3) {
+								lIron.setVisible(true);
+							}
+							if (playerOrder[y].getToken().getAssignedToken() == 4) {
+								lShoe.setVisible(true);
+							}
+							if (playerOrder[y].getToken().getAssignedToken() == 5) {
+								lCar.setVisible(true);
+							}
+							if (playerOrder[y].getToken().getAssignedToken() == 6) {
+								lThimble.setVisible(true);
+							}
+							if (playerOrder[y].getToken().getAssignedToken() == 7) {
+								lHat.setVisible(true);
+							}
+							if (playerOrder[y].getToken().getAssignedToken() == 8) {
+								lWheelBarrow.setVisible(true);
+							}
+						}
+					}
+				});
+			}
+			return bPlay;
+		}
+
+		private JButton getRollDice() {
+			if (bRollDice == null) {
+				bRollDice = new JButton();
+				bRollDice.setIcon(new ImageIcon(getClass().getResource("/Designs/rollDice_btn.png")));
+				bRollDice.setBorderPainted(false);
+				bRollDice.setOpaque(false);
+				bRollDice.setContentAreaFilled(false);
+				bRollDice.setEnabled(false);
+				bRollDice.addActionListener(new ActionListener() {
+		
+					public void actionPerformed(ActionEvent event) {
+						dice[0].rollDiceResult1();
+						dice[1].rollDiceResult2();
+						bEndTurn.setEnabled(true);
+						playerOrder[x].setTotalSteps(dice[0].getDice1stResult() + dice[1].getDice2ndResult());
+						System.out.println(playerOrder[x].getTotalSteps());
+						checkForDoubles();
+						startThread();
+						switch (dice[0].getDice1stResult()) {
+						case 1:
+							lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceOne.png")));
+							break;
+						case 2:
+							lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceTwo.png")));
+							break;
+						case 3:
+							lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceThree.png")));
+							break;
+						case 4:
+							lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFour.png")));
+							break;
+						case 5:
+							lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFive.png")));
+							break;
+						case 6:
+							lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceSix.png")));
+							break;
+						}
+						switch (dice[1].getDice2ndResult()) {
+						case 1:
+							lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceOne.png")));
+							break;
+						case 2:
+							lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceTwo.png")));
+							break;
+						case 3:
+							lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceThree.png")));
+							break;
+						case 4:
+							lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFour.png")));
+							break;
+						case 5:
+							lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceFive.png")));
+							break;
+						case 6:
+							lDice2.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceSix.png")));
+							break;
+						}
+					}
+				});
+			}
+			return bRollDice;
+		}
+
+		/////////////////////////////TEXT FIELDS////////////////////////////////////
         private JTextField getPlayerMoneyField() {
                 if (fPlayerMoney == null) {
                         fPlayerMoney = new JTextField();
@@ -210,7 +236,17 @@ public class GameBoard extends JFrame implements Runnable {
         
         
 ////////////////////////////////////LABELS////////////////////////////////
-        private JLabel getWheelBarrowLabel() {
+        
+        private JLabel getClicktoPlayLabel() {
+			if (lClicktoPlay == null) {
+				lClicktoPlay = new JLabel();
+				lClicktoPlay.setHorizontalAlignment(SwingConstants.TRAILING);
+				lClicktoPlay.setIcon(new ImageIcon(getClass().getResource("/Designs/clicktoplay_bg.jpg")));
+			}
+			return lClicktoPlay;
+		}
+
+		private JLabel getWheelBarrowLabel() {
                 if (lWheelBarrow == null) {
                         lWheelBarrow = new JLabel();
                         lWheelBarrow.setVisible(false);
@@ -307,8 +343,19 @@ public class GameBoard extends JFrame implements Runnable {
                 return lMonopoly;
         }
 
-////////////////////////////////PANELS////////////////////////////////
-        private JPanel getTitleDeedsPanel() {
+private JPanel getClickToPlayPanel() {
+			if (pClicktoPlay == null) {
+				pClicktoPlay = new JPanel();
+				pClicktoPlay.setBackground(Color.black);
+				pClicktoPlay.setLayout(new GroupLayout());
+				pClicktoPlay.add(getPlayButton(), new Constraints(new Leading(292, 233, 12, 12), new Leading(282, 227, 10, 10)));
+				pClicktoPlay.add(getClicktoPlayLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 12, 12)));
+				pClicktoPlay.setVisible(true);
+			}
+			return pClicktoPlay;
+		}
+
+private JPanel getTitleDeedsPanel() {
                 if (pTitleDeeds == null) {
                         pTitleDeeds = new JPanel();
                         pTitleDeeds.setVisible(false);
@@ -319,32 +366,35 @@ public class GameBoard extends JFrame implements Runnable {
         }
 
         private JPanel getDicePanel() {
-			if (pDice == null) {
-				pDice = new JPanel();
-				pDice.setBackground(new Color(128, 0, 255));
-				pDice.setLayout(new GroupLayout());
-				pDice.add(getDice2Label(), new Constraints(new Leading(123, 10, 10), new Leading(19, 10, 10)));
-				pDice.add(getDice1Label(), new Constraints(new Leading(50, 10, 10), new Leading(19, 12, 12)));
-				pDice.add(getRollDice(), new Constraints(new Leading(62, 12, 12), new Leading(77, 12, 12)));
-			}
-			return pDice;
-		}
+	if (pDice == null) {
+		pDice = new JPanel();
+		pDice.setBackground(Color.white);
+		pDice.setLayout(new GroupLayout());
+		pDice.add(getDice2Label(), new Constraints(new Leading(118, 10, 10), new Leading(44, 10, 10)));
+		pDice.add(getDice1Label(), new Constraints(new Leading(46, 10, 10), new Leading(44, 77, 77)));
+		pDice.add(getRollDice(), new Constraints(new Leading(26, 160, 12, 12), new Leading(102, 12, 12)));
+		pDice.add(getDicebgLabel(), new Constraints(new Leading(12, 12, 12), new Leading(8, 10, 10)));
+		pDice.setVisible(false);
+	}
+	return pDice;
+}
 
 		private JPanel getPlayerPanel() {
-                if (pPlayer == null) {
-                        pPlayer = new JPanel();
-                        pPlayer.setBackground(new Color(128, 0, 128));
-                        pPlayer.setLayout(new GroupLayout());
-                        pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(3, 199, 10, 10), new Leading(109, 388, 10, 10)));
-                        pPlayer.add(getPlayerNameField(), new Constraints(new Leading(10, 171, 10, 10), new Leading(32, 30, 10, 10)));
-                        pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(32, 149, 12, 12), new Leading(74, 12, 12)));
-                        pPlayer.add(getPlayButton(), new Constraints(new Leading(8, 188, 12, 12), new Leading(111, 146, 10, 10)));
-                        pPlayer.add(getEndTurnButton(), new Constraints(new Trailing(12, 15, 214), new Leading(468, 10, 10)));
-                }
-                return pPlayer;
-        }
+			if (pPlayer == null) {
+				pPlayer = new JPanel();
+				pPlayer.setBackground(Color.magenta);
+				pPlayer.setLayout(new GroupLayout());
+				pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(3, 199, 10, 10), new Leading(109, 388, 10, 10)));
+				pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(37, 151, 10, 10), new Leading(128, 32, 10, 10)));
+				pPlayer.add(getPlayerNameField(), new Constraints(new Leading(36, 152, 12, 12), new Leading(51, 33, 10, 10)));
+				pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
+				pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
+				pPlayer.setVisible(false);
+			}
+			return pPlayer;
+		}
 
-        private JPanel getBoardPanel() {
+		private JPanel getBoardPanel() {
                 if (pBoard == null) {
                         pBoard = new JPanel();
                         pBoard.setBackground(new Color(64, 0, 64));
@@ -358,6 +408,7 @@ public class GameBoard extends JFrame implements Runnable {
                         pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
                         pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
                         pBoard.add(getMonopolyLabel(), new Constraints(new Leading(5, 10, 10), new Leading(2, 599, 10, 10)));
+                        pBoard.setVisible(false);
                         }
                 return pBoard;
         }
@@ -390,13 +441,13 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-63);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(250);
+                                                                t.sleep(500);
                                                                 //System.out.println("if " + a);
                                                         }else{
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(250);
+                                                                t.sleep(500);
                                                                 //System.out.println("else " + a);
                                                         }
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
@@ -409,13 +460,13 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-63);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(250);
+                                                                t.sleep(500);
                                                                 //System.out.println("if " + a);
                                                         }else{
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(250);
+                                                                t.sleep(500);
                                                                 //System.out.println("else " + a);
                                                         }
                                                         playerOrder[x].setLastStep(playerOrder[x].getPosition()+playerOrder[x].getTotalSteps());
@@ -429,13 +480,13 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+63);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(250);
+                                                                t.sleep(500);
                                                                 //System.out.println("if " + a);
                                                         }else{
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(250);
+                                                                t.sleep(500);
                                                                 //System.out.println("else " + a);
                                                         }
                                                        playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
@@ -449,13 +500,13 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+63);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(250);
+                                                                t.sleep(500);
                                                                 //System.out.println("if " + a);
                                                         }else{
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(250);
+                                                                t.sleep(500);
                                                                 //System.out.println("else " + a);
                                                         }
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
