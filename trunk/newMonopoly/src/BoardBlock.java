@@ -1,6 +1,6 @@
 
 public class BoardBlock {
-	private Block[] block = new Block[40];
+/*	private Block[] block = new Block[40];
 	
 	public BoardBlock(){												/////RETURNS THE FF:
 		block[0] = new Block("Go", 0);									//go
@@ -56,4 +56,5 @@ public class BoardBlock {
 	public Block[] getBlock() {
 		return block;
 	}
+*/
 }
