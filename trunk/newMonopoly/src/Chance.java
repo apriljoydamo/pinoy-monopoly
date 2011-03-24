@@ -1,16 +1,16 @@
 
 import java.util.Random;
 
-public class Chance extends Block{
+public class Chance{
 	
 	
 	private int chanceRandom;
 	
-	public int ShuffleChance(){
-		Random random = new Random();
-		setChanceRandom(random.nextInt(16) + 1);
+	Random random = new Random();
+	public int randomChance = random.nextInt(16) + 1;
 		
-        switch(getChanceRandom()){
+	public void shuffleChance(int chance){
+        switch(chance){
         case 1:
                 System.out.println("Speeding fine P15.");
                 break;
@@ -60,11 +60,6 @@ public class Chance extends Block{
 	    		System.out.println("You have won a crossword competition. Collect P100.");
 	    		break;
         }
-		
-		
-		
-		return getChanceRandom();
-		
 	}
 	
 	
@@ -76,14 +71,8 @@ public class Chance extends Block{
 	}
 	
 	
-	public void setChanceRandom(int chanceRandom) {
-		this.chanceRandom = chanceRandom;
+	public void setChanceRandom(int randomChance) {
+		this.chanceRandom = randomChance;
 	}
-	
-/////////////////////////////////////////////////	
 
-	public Chance(String name, int location){
-		super(name, location);
-		
-	}
 }
