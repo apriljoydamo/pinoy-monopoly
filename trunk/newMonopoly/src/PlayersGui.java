@@ -279,6 +279,7 @@ public class PlayersGui extends JFrame{
 			bExit.setBorderPainted(false);
 			bExit.setOpaque(false);
 			bExit.setContentAreaFilled(false);
+			bExit.setFocusable(false);
 			bExit.addActionListener(new ActionListener() {
 	
 				public void actionPerformed(ActionEvent event) {
