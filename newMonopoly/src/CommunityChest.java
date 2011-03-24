@@ -1,15 +1,16 @@
 import java.util.Random;
 
 
-public class CommunityChest extends Block {
-	
+public class CommunityChest{
 	private int communityChestRandom;
 	
-	public int shuffleCommunityChest(){
-		Random random = new Random();
-		setCommunityChestRandom(random.nextInt(16) + 1);
+	
+	Random random = new Random();
+	public int ccRandom = (random.nextInt(16) + 1);
+	
+	public void shuffleCommunityChest(int chest){
 		
-		switch(getCommunityChestRandom()){
+		switch(chest){
         case 1:
                 System.out.println("Bank error in your favour. Collect P200.");
                 break;
@@ -58,28 +59,22 @@ public class CommunityChest extends Block {
         case 16:
 	    		System.out.println("You inherit P100.");
 	    		break;
-        }
-		
-		return communityChestRandom;
+	    		
+		}
 	}
 	
 	
 
 //////////GETTER and SETTER//////////
-
-	public void setCommunityChestRandom(int communityChestRandom) {
-		this.communityChestRandom = communityChestRandom;
+	
+	
+	public void setCommunityChestRandom(int ccRandom) {
+		this.communityChestRandom = ccRandom;
 	}
 
 
 	public int getCommunityChestRandom() {
 		return communityChestRandom;
 	}
-	
-////////////////////////////////////////
 
-	public CommunityChest(String name, int location){
-		super(name, location);
-		
-	}
 }
