@@ -183,8 +183,6 @@ public class GameBoard extends JFrame implements Runnable {
 						bEndTurn.setEnabled(true);
 						
 						playerOrder[x].setTotalSteps(dice[0].getDice1stResult() + dice[1].getDice2ndResult());
-                        //playerOrder[x].setLastStep(playerOrder[x].getTotalSteps() + playerOrder[x].getPosition());
-                        //System.out.println("Last Step: " +playerOrder[x].getLastStep());
                         System.out.println("Total Steps: "+playerOrder[x].getTotalSteps());
                   
                         //goToJail();
@@ -467,6 +465,8 @@ private JPanel getDicePanel() {
        
         @SuppressWarnings("static-access")
 		public void run(){      
+        	playerOrder[x].setLastStep(playerOrder[x].getTotalSteps() + playerOrder[x].getPosition());
+            System.out.println("Last Step: " +playerOrder[x].getLastStep());
                 for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
                         
                 		if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
@@ -544,8 +544,10 @@ private JPanel getDicePanel() {
                                 }
                 				if(playerOrder[x].getPosition() == 40){		//position goes back to 0 if token passed GO
     								playerOrder[x].setPosition(0);
+    								passedGo();
     							}
-                				checkBoard();
+                				
+                                checkBoard();
                 }
         }
 
@@ -553,7 +555,7 @@ private JPanel getDicePanel() {
 ///////////////////////////////////////METHODS USED IN BOARD/////////////////////////////////////
         
         public void checkBoard(){
-        	switch(playerOrder[x].getPosition()){
+        	switch(playerOrder[x].getLastStep()){
 			
 			case 1:
 				//buyOrNot();
@@ -668,13 +670,9 @@ private JPanel getDicePanel() {
 			case 39:
 				//buyOrNot();
 				break;
-			case 40:
-				passedGo();
-				break;
-					
-	
 			}
         }
+        
         public void updateTokenPosition(){
                                 if(playerOrder[x].getToken().getAssignedToken() == 1){
                                         lBapor.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
@@ -695,7 +693,8 @@ private JPanel getDicePanel() {
                                 }
         }
         
-        public void passedGo(){
+        
+		public void passedGo(){
                 if(playerOrder[x].getPosition() == 40){
                         playerOrder[x].setPosition(0);
                         playerOrder[x].setLastStep(playerOrder[x].getLastStep()+playerOrder[x].getPosition());
@@ -707,6 +706,7 @@ private JPanel getDicePanel() {
                 		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney());	//money does not change
                 		playerOrder[x].getToken().setLocation(23, 462);
                 		playerOrder[x].setPosition(10);
+                		//t.stop();
                 	}
                 }
         }
@@ -715,12 +715,12 @@ private JPanel getDicePanel() {
 		@SuppressWarnings("deprecation")
 		public void goToJail(){
 					//if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3){
-         	        			t.stop();
-								playerOrder[x].setPosition(10);
+         	        			playerOrder[x].setPosition(10);
          		        		playerOrder[x].getToken().setxLocation(23);
          		        		playerOrder[x].getToken().setyLocation(525);
          		        		playerOrder[x].setJailed(true);
          		        		updateTokenPosition();
+         		        		t.stop();
          		        		/* pChoosePayOrTryDice.setVisible(true);
          		        		 * if(pay50 == true){		//method for PAY if chosen
          		        		 *  	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
