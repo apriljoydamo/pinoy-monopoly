@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,7 +31,9 @@ public class GameBoard extends JFrame implements Runnable {
         
         Dice dice[] = new Dice[2];
         Players playerOrder[] = new Players[8];
-      //  Rules rules = new Rules();
+        Random random = new Random();
+        CommunityChest chest = new CommunityChest();
+        Chance chance = new Chance();
         
         static int numberOfPlayers;
         int x = 0;
@@ -39,8 +42,12 @@ public class GameBoard extends JFrame implements Runnable {
 		private JLabel lClicktoPlay;
 		private JLabel lPlayerPanelImage;
 		private JLabel ldicebg;
+
 		private JLabel lTitleDeedImage;
+
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
+		
+		
 		public GameBoard() {
                 dice[0] = new Dice();
                 dice[1] = new Dice();
@@ -55,6 +62,9 @@ public class GameBoard extends JFrame implements Runnable {
 			add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
 			setSize(805, 595);
 		}
+
+//////////////////////////////////BUTTONS/////////////////////////////////////////////
+
 
 		private JLabel getTitleDeedImageLabel() {
 			if (lTitleDeedImage == null) {
@@ -82,6 +92,7 @@ public class GameBoard extends JFrame implements Runnable {
 			return lPlayerPanelImage;
 		}
 
+
 		private JButton getEndTurnButton() {
 			if (bEndTurn == null) {
 				bEndTurn = new JButton();
@@ -89,7 +100,7 @@ public class GameBoard extends JFrame implements Runnable {
 				bEndTurn.setEnabled(false);
 				bEndTurn.addActionListener(new ActionListener() {
 		
-					public void actionPerformed(ActionEvent event) {
+					public void actionPerformed(ActionEvent event) {		//next player
 						x++;
 						if (x == numberOfPlayers) {
 							x = 0;
@@ -113,7 +124,7 @@ public class GameBoard extends JFrame implements Runnable {
 				bPlay.setContentAreaFilled(false);
 				bPlay.addActionListener(new ActionListener() {
 		
-					public void actionPerformed(ActionEvent event) {
+					public void actionPerformed(ActionEvent event) {			//hides what is not needed and shows all tokens used by the players
 						bRollDice.setEnabled(true);
 						bPlay.setVisible(false);
 						pBoard.setVisible(true);
@@ -168,11 +179,18 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						dice[0].rollDiceResult1();
 						dice[1].rollDiceResult2();
+						
 						bEndTurn.setEnabled(true);
+						
 						playerOrder[x].setTotalSteps(dice[0].getDice1stResult() + dice[1].getDice2ndResult());
-						System.out.println(playerOrder[x].getTotalSteps());
-						checkForDoubles();
+                        //playerOrder[x].setLastStep(playerOrder[x].getTotalSteps() + playerOrder[x].getPosition());
+                        //System.out.println("Last Step: " +playerOrder[x].getLastStep());
+                        System.out.println("Total Steps: "+playerOrder[x].getTotalSteps());
+                  
+                        //goToJail();
+                        checkForDoubles();
 						startThread();
+                        
 						switch (dice[0].getDice1stResult()) {
 						case 1:
 							lDice1.setIcon(new ImageIcon(getClass().getResource("/b&dice/diceOne.png")));
@@ -220,6 +238,7 @@ public class GameBoard extends JFrame implements Runnable {
 		}
 
 		/////////////////////////////TEXT FIELDS////////////////////////////////////
+
         private JTextField getPlayerMoneyField() {
                 if (fPlayerMoney == null) {
                         fPlayerMoney = new JTextField();
@@ -248,6 +267,7 @@ public class GameBoard extends JFrame implements Runnable {
         
 ////////////////////////////////////LABELS////////////////////////////////
         
+      
         private JLabel getClicktoPlayLabel() {
 			if (lClicktoPlay == null) {
 				lClicktoPlay = new JLabel();
@@ -353,6 +373,8 @@ public class GameBoard extends JFrame implements Runnable {
                 }
                 return lMonopoly;
         }
+        
+///////////////////////////////////////////PANELS///////////////////////////////////////////
 
 private JPanel getClickToPlayPanel() {
 			if (pClicktoPlay == null) {
@@ -442,8 +464,9 @@ private JPanel getDicePanel() {
                 t = new Thread(this);
                 t.start();
         }
+       
         @SuppressWarnings("static-access")
-        public void run(){      
+		public void run(){      
                 for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
                         
                 		if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
@@ -452,134 +475,206 @@ private JPanel getDicePanel() {
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-63);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(500);
-                                                                //System.out.println("if " + a);
+                                                                t.sleep(250);
                                                         }else{
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(500);
-                                                                //System.out.println("else " + a);
+                                                                t.sleep(250);
                                                         }
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
                                         }
                                         catch(InterruptedException e){}
+                                        
                                 }else if(playerOrder[x].getPosition() >= 10 && playerOrder[x].getPosition() < 20){ // from just visiting to free parking
                                         try{
                                                         if(playerOrder[x].getPosition() == 10 || playerOrder[x].getPosition() == 19){
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-63);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(500);
-                                                                //System.out.println("if " + a);
+                                                                t.sleep(250);
                                                         }else{
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(500);
-                                                                //System.out.println("else " + a);
+                                                                t.sleep(250);
                                                         }
-                                                        playerOrder[x].setLastStep(playerOrder[x].getPosition()+playerOrder[x].getTotalSteps());
-                                                        System.out.println(" Last Step: " +playerOrder[x].getLastStep());
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
                                         }catch(InterruptedException e){}
+                                        
                                 }else if(playerOrder[x].getPosition() >= 20 && playerOrder[x].getPosition() < 30){ //  from free parking to go to jail
                                         try{
                                                         if(playerOrder[x].getPosition() == 20 || playerOrder[x].getPosition() == 29){
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+63);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(500);
-                                                                //System.out.println("if " + a);
+                                                                t.sleep(250);
                                                         }else{
                                                                 playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(500);
-                                                                //System.out.println("else " + a);
+                                                                t.sleep(250);
                                                         }
-                                                       playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
+                                                        playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
-                                                        if(playerOrder[x].getPosition() == 30){
-                                                        }
                                         }catch(InterruptedException e){}
+                                        
                                 }else if(playerOrder[x].getPosition() >= 30 && playerOrder[x].getPosition() < 40){ // from  go to jail to go
                                         try{
                                                         if(playerOrder[x].getPosition() == 30 || playerOrder[x].getPosition() == 39){
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+63);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(500);
-                                                                //System.out.println("if " + a);
+                                                                t.sleep(250);
                                                         }else{
                                                                 playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+47);
                                                                 System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
                                                                 updateTokenPosition();
-                                                                t.sleep(500);
-                                                                //System.out.println("else " + a);
+                                                                t.sleep(250);
                                                         }
                                                         playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
                                                         System.out.println("updatedPosition "+playerOrder[x].getPosition());
-                                                        passedGo();
+                                                        
                                                         
 
                                         }catch(InterruptedException e){}
                                         
                                 }
-                		 ////////GO TO JAIL
-    					if(playerOrder[x].getLastStep() == 30 || playerOrder[x].getDoubleDice() == 3){
-    						playerOrder[x].setJailed(true);
-    						System.out.println(playerOrder[x].isJailed());
-    						while(playerOrder[x].getPosition() != 10){
-    							if(playerOrder[x].getPosition() < 10){
-    								playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation() - 50);
-    								System.out.println("updatedPosition "+playerOrder[x].getPosition());
-    								updateTokenPosition();
-    								try {
-										t.sleep(500);
-									} catch (InterruptedException e) {
-										e.printStackTrace();
-									}
-    							}else if(playerOrder[x].getPosition() > 10 && playerOrder[x].getPosition() < 20){
-    								playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation() - 50);
-    								System.out.println("updatedPosition "+playerOrder[x].getPosition());
-									updateTokenPosition();
-									try {
-										t.sleep(500);
-									} catch (InterruptedException e) {
-										e.printStackTrace();
-									}
-    							}else if(playerOrder[x].getPosition() >= 20 && playerOrder[x].getPosition() < 30){
-    								playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation() + 50);
-    								System.out.println("updatedPosition "+playerOrder[x].getPosition());
-									updateTokenPosition();
-									try {
-										t.sleep(500);
-									} catch (InterruptedException e) {
-										e.printStackTrace();
-									}
-    							}else if(playerOrder[x].getPosition() >= 30 && playerOrder[x].getPosition() < 40){
-    								playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation() + 50);
-    								System.out.println("updatedPosition "+playerOrder[x].getPosition());
-									updateTokenPosition();
-									try {
-										t.sleep(500);
-									} catch (InterruptedException e) {
-										e.printStackTrace();
-									}
-    							}
-    							playerOrder[x].setPosition(playerOrder[x].getPosition() + 1);
-        						if(playerOrder[x].getPosition() == 40){
+                				if(playerOrder[x].getPosition() == 40){		//position goes back to 0 if token passed GO
     								playerOrder[x].setPosition(0);
     							}
-    						}
-    					}
+                				checkBoard();
                 }
         }
 
+        
 ///////////////////////////////////////METHODS USED IN BOARD/////////////////////////////////////
+        
+        public void checkBoard(){
+        	switch(playerOrder[x].getPosition()){
+			
+			case 1:
+				//buyOrNot();
+				break;
+			case 2:
+				chest.shuffleCommunityChest(chest.getCommunityChestRandom());
+				break;
+			case 3:
+				//buyOrNot();
+				break;
+			case 4:
+				playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
+				System.out.println("Paid 200 tax!");
+				break;
+			case 5:
+				//buyOrNot();
+				break;
+			case 6:
+				//buyOrNot();
+				break;
+			case 7:
+				chance.shuffleChance(chance.getChanceRandom());
+				break;
+			case 8:
+				//buyOrNot();
+				break;
+			case 9:
+				//buyOrNot();
+				break;
+			case 11:
+				//buyOrNot();
+				break;
+			case 12:
+				//buyOrNot();
+				break;
+			case 13:
+				//buyOrNot();
+				break;
+			case 14:
+				//buyOrNot();
+				break;
+			case 15:
+				//buyOrNot();
+				break;
+			case 16:
+				//buyOrNot();
+				break;
+			case 17:
+				chest.shuffleCommunityChest(chest.getCommunityChestRandom());
+				break;
+			case 18:
+				//buyOrNot();
+				break;
+			case 19:
+				//buyOrNot();
+				break;
+			case 21:
+				//buyOrNot();
+				break;
+			case 22:
+				chance.shuffleChance(chance.getChanceRandom());
+				break;
+			case 23:
+				//buyOrNot();
+				break;
+			case 24:
+				//buyOrNot();
+				break;
+			case 25:
+				//buyOrNot();
+				break;
+			case 26:
+				//buyOrNot();
+				break;
+			case 27:
+				//buyOrNot();
+				break;
+			case 28:
+				//buyOrNot();
+				break;
+			case 29:
+				//buyOrNot();
+				break;
+			case 30:
+				goToJail();
+				break;
+			case 31:
+				//buyOrNot();
+				break;
+			case 32:
+				//buyOrNot();
+				break;
+			case 33:
+				chest.shuffleCommunityChest(chest.getCommunityChestRandom());
+				break;
+			case 34:
+				//buyOrNot();
+				break;
+			case 35:
+				//buyOrNot();
+				break;
+			case 36:
+				chance.shuffleChance(chance.getChanceRandom());
+				break;
+			case 37:
+				//buyOrNot();
+				break;
+			case 38:
+				playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
+				System.out.println("Paid 100 tax!");
+				break;
+			case 39:
+				//buyOrNot();
+				break;
+			case 40:
+				passedGo();
+				break;
+					
+	
+			}
+        }
         public void updateTokenPosition(){
                                 if(playerOrder[x].getToken().getAssignedToken() == 1){
                                         lBapor.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
@@ -607,50 +702,69 @@ private JPanel getDicePanel() {
                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
                         fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
                 }
+                if(playerOrder[x].isJailed() == true){			// if player is jailed
+                	if(playerOrder[x].getTryForDice() < 3){		// while still in jail
+                		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney());	//money does not change
+                		playerOrder[x].getToken().setLocation(23, 462);
+                		playerOrder[x].setPosition(10);
+                	}
+                }
         }
         
-        //@SuppressWarnings("static-access")
+		
+		@SuppressWarnings("deprecation")
 		public void goToJail(){
-        
-        }
-                 /*	if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3 ){
-         	        			playerOrder[x].setPosition(10);
+					//if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3){
+         	        			t.stop();
+								playerOrder[x].setPosition(10);
          		        		playerOrder[x].getToken().setxLocation(23);
-         		        		playerOrder[x].getToken().setyLocation(462);
-                 				
-         		        		if(playerOrder[x].getToken().getAssignedToken() == 1){
-         		        			lBapor.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
-         		        		}
-         		        		if(playerOrder[x].getToken().getAssignedToken() == 2){
-         		        			lAzkal.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
-         		        		}
-         		        		if(playerOrder[x].getToken().getAssignedToken() == 3){
-         		        			lIron.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation() );
-         		        		}
-         		        		if(playerOrder[x].getToken().getAssignedToken() == 4){
-         		        			lShoe.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation() );
-         		        		}
-         		        		if(playerOrder[x].getToken().getAssignedToken() == 5){
-         		        			lCar.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
-         		        		}
-         		        		if(playerOrder[x].getToken().getAssignedToken() == 6){
-         		        			lThimble.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
-         		        		}
-         		        		if(playerOrder[x].getToken().getAssignedToken() == 7){
-         		        			lHat.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
-         		        		}
-         		        		if(playerOrder[x].getToken().getAssignedToken() == 8){
-         		        			lWheelBarrow.setLocation(playerOrder[x].getToken().getxLocation(), playerOrder[x].getToken().getyLocation());
-         		        		}
-         		        	}
+         		        		playerOrder[x].getToken().setyLocation(525);
+         		        		playerOrder[x].setJailed(true);
+         		        		updateTokenPosition();
+         		        		/* pChoosePayOrTryDice.setVisible(true);
+         		        		 * if(pay50 == true){		//method for PAY if chosen
+         		        		 *  	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
+         		        		 *  	playerOrder[x].setJailed(false);
+         		        		 *  	playerOrder[x].setBailOutDice(0);
+         		        		 *  	playerOrder[x].setDoubleDice(0);
+         		        		 *  } else if(tryForDiceTurn == true){		// method for TRY FOR TURN if chosen
+         		        		 *   	bailOutOfJail();
+         		        		 *  }
+         		        		 */
+					//}
+         }
+					
          		        
-        }*/
+		
         public void checkForDoubles(){
                 if(dice[0].getDice1stResult() == dice[1].getDice2ndResult()){
                         playerOrder[x].setDoubleDice(playerOrder[x].getDoubleDice() + 1);
-                        System.out.println("doubleDice of "+ x + " = " + playerOrder[x].getDoubleDice());
+                        System.out.println("doubleDice of player"+ x + " = " + playerOrder[x].getDoubleDice());
+	                if(playerOrder[x].isJailed()== true){
+	                	playerOrder[x].setBailOutDice(playerOrder[x].getBailOutDice()+1);
+	                	System.out.println("Bail Out dice of player " + x + " = "+ playerOrder[x].getBailOutDice());
+	                }
                 }
-                
+        }
+         
+        public void bailOutOfJail(){
+        	if(playerOrder[x].getTryForDice() < 3){
+        		checkForDoubles();
+        		if(playerOrder[x].getBailOutDice() == 1){
+        			playerOrder[x].setJailed(false);
+        			playerOrder[x].setBailOutDice(0);
+        			playerOrder[x].setDoubleDice(0);
+        			playerOrder[x].setTryForDice(0);
+        		}else{
+        			playerOrder[x].setTryForDice(playerOrder[x].getTryForDice()+1);
+        		}
+        	}else if(playerOrder[x].getTryForDice() == 3){
+        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
+        		playerOrder[x].setJailed(false);
+        		playerOrder[x].setBailOutDice(0);
+        		playerOrder[x].setDoubleDice(0);
+        		run();
+        	}       
         }
         
 }
