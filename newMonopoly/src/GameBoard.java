@@ -74,7 +74,9 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent e){
 						bailOutOfJail();
 						pChoosePayOrTryDice.setVisible(false);
-						//pBoard.setVisible(true);
+						pPlayer.setVisible(true);
+						pDice.setVisible(true);
+						pBoard.setVisible(true);
 						//you have chosen to try for dice... you have 3 try to roll for doubleDice... if not, we 
 					}
 				});
@@ -96,6 +98,9 @@ public class GameBoard extends JFrame implements Runnable {
          		        		  	playerOrder[x].setBailOutDice(0);
          		        		  	playerOrder[x].setDoubleDice(0);
          		        		  	pChoosePayOrTryDice.setVisible(false);
+         		        		  	pPlayer.setVisible(true);
+         							pDice.setVisible(true);
+         							pBoard.setVisible(true);
          		        		  	//pBoard.setVisible(true);
 						//show label that says: paid for getting out of jail!
 						
@@ -781,24 +786,17 @@ private JPanel getDicePanel() {
 		
 		@SuppressWarnings("deprecation")
 		public void goToJail(){
-					//if(playerOrder[x].getPosition() == 30 || playerOrder[x].getDoubleDice() == 3){
-         	        			playerOrder[x].setPosition(10);
-         		        		playerOrder[x].getToken().setxLocation(23);
-         		        		playerOrder[x].getToken().setyLocation(525);
-         		        		playerOrder[x].setJailed(true);
-         		        		updateTokenPosition();
-         		        		pChoosePayOrTryDice.setVisible(true);
-         		        		t.stop();
-         		        		
-         		        		//pBoard.setVisible(false);
-         		        		
-         		        		/* 
-         		        		 *  } else if(tryForDiceTurn == true){		// method for TRY FOR TURN if chosen
-         		        		 *   	
-         		        		 *  }
-         		        		 */
-					//}
-         }
+					playerOrder[x].setPosition(10);
+         		    playerOrder[x].getToken().setxLocation(23);
+         		    playerOrder[x].getToken().setyLocation(525);
+         		    playerOrder[x].setJailed(true);
+         		    updateTokenPosition();
+         		    pChoosePayOrTryDice.setVisible(true);
+         		    pPlayer.setVisible(false);
+        			pDice.setVisible(false);
+        			pBoard.setVisible(false);
+         		    t.stop();
+        }
 					
          		        
 		
@@ -816,7 +814,9 @@ private JPanel getDicePanel() {
         public void bailOutOfJail(){
         	if(playerOrder[x].getTryForDice() < 3){
         		checkForDoubles();
-        		if(playerOrder[x].getBailOutDice() == 1){
+        		playerOrder[x].getToken().setxLocation(23);
+     		    playerOrder[x].getToken().setyLocation(525);
+     		    if(playerOrder[x].getBailOutDice() == 1){
         			playerOrder[x].setJailed(false);
         			playerOrder[x].setBailOutDice(0);
         			playerOrder[x].setDoubleDice(0);
