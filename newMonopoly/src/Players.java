@@ -1,12 +1,12 @@
 
 public class Players{
         
-        private int tempOrder, totalSteps;
-        private int order = 1, startMoney = 1500, position = 0, doubleDice = 0, lastStep = 0;
+        private int tempOrder, totalSteps, tryForDice = 0;
+        private int order = 1, startMoney = 1500, position = 0, doubleDice = 0, lastStep = 0, bailOutDice = 0;
         private String playerName;
         private Token token;
         private boolean isJailed = false;
-        
+		
         
         
 /////////////////////Creating a Player/////////////////////////////////////
@@ -111,12 +111,35 @@ public class Players{
 			
 		}
 
-
 		public int getLastStep() {
 			return lastStep;
 		}
 
+		
+		public void setTryForDice(int tryForDice) {
+			this.tryForDice = tryForDice;
+		}
 
+
+		public int getTryForDice() {
+			return tryForDice;
+		}
+
+		public void setBailOutDice(int bailOutDice) {
+			this.bailOutDice = bailOutDice;
+		}
+
+
+		public int getBailOutDice() {
+			return bailOutDice;
+		}
+		///////////////////////////////////////METHODS//////////////////////
+		public void buy(){
+			
+		}
+
+
+		
 
 }
 
