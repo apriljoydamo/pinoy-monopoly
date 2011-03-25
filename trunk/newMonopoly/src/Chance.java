@@ -1,14 +1,10 @@
 
-import java.util.Random;
 
 public class Chance{
 	
 	
 	private int chanceRandom;
 	
-	Random random = new Random();
-	public int randomChance = random.nextInt(16) + 1;
-		
 	public void shuffleChance(int chance){
         switch(chance){
         case 1:
