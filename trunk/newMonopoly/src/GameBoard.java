@@ -39,6 +39,7 @@ public class GameBoard extends JFrame implements Runnable {
 		private JLabel lClicktoPlay;
 		private JLabel lPlayerPanelImage;
 		private JLabel ldicebg;
+		private JLabel lTitleDeedImage;
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 		public GameBoard() {
                 dice[0] = new Dice();
@@ -55,6 +56,14 @@ public class GameBoard extends JFrame implements Runnable {
 			setSize(805, 595);
 		}
 
+		private JLabel getTitleDeedImageLabel() {
+			if (lTitleDeedImage == null) {
+				lTitleDeedImage = new JLabel();
+				lTitleDeedImage.setIcon(new ImageIcon(getClass().getResource("/Designs/TitleDeedImage.png")));
+			}
+			return lTitleDeedImage;
+		}
+
 		private JLabel getDicebgLabel() {
 			if (ldicebg == null) {
 				ldicebg = new JLabel();
@@ -68,6 +77,7 @@ public class GameBoard extends JFrame implements Runnable {
 			if (lPlayerPanelImage == null) {
 				lPlayerPanelImage = new JLabel();
 				lPlayerPanelImage.setIcon(new ImageIcon(getClass().getResource("/Designs/PlayerPanel.jpg")));
+				lPlayerPanelImage.setVisible(true);
 			}
 			return lPlayerPanelImage;
 		}
@@ -152,6 +162,7 @@ public class GameBoard extends JFrame implements Runnable {
 				bRollDice.setOpaque(false);
 				bRollDice.setContentAreaFilled(false);
 				bRollDice.setEnabled(false);
+				bRollDice.setFocusable(false);
 				bRollDice.addActionListener(new ActionListener() {
 		
 					public void actionPerformed(ActionEvent event) {
@@ -356,16 +367,16 @@ private JPanel getClickToPlayPanel() {
 		}
 
 private JPanel getTitleDeedsPanel() {
-                if (pTitleDeeds == null) {
-                        pTitleDeeds = new JPanel();
-                        pTitleDeeds.setVisible(false);
-                        pTitleDeeds.setBackground(new Color(221, 149, 227));
-                        pTitleDeeds.setLayout(new GroupLayout());
-                }
-                return pTitleDeeds;
-        }
+	if (pTitleDeeds == null) {
+		pTitleDeeds = new JPanel();
+		pTitleDeeds.setBackground(Color.white);
+		pTitleDeeds.setLayout(new GroupLayout());
+		pTitleDeeds.add(getTitleDeedImageLabel(), new Constraints(new Leading(9, 10, 10), new Leading(9, 10, 10)));
+	}
+	return pTitleDeeds;
+}
 
-        private JPanel getDicePanel() {
+private JPanel getDicePanel() {
 	if (pDice == null) {
 		pDice = new JPanel();
 		pDice.setBackground(Color.white);
@@ -384,10 +395,10 @@ private JPanel getTitleDeedsPanel() {
 				pPlayer = new JPanel();
 				pPlayer.setBackground(Color.magenta);
 				pPlayer.setLayout(new GroupLayout());
-				pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(3, 199, 10, 10), new Leading(109, 388, 10, 10)));
 				pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(37, 151, 10, 10), new Leading(128, 32, 10, 10)));
 				pPlayer.add(getPlayerNameField(), new Constraints(new Leading(36, 152, 12, 12), new Leading(51, 33, 10, 10)));
 				pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
+				pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(0, 199, 12, 12), new Leading(172, 185, 12, 12)));
 				pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
 				pPlayer.setVisible(false);
 			}
