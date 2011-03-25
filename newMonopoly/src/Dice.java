@@ -18,6 +18,9 @@ public class Dice {
                 return dice2ndResult;
         }
 
+        ///////////////GETTER and SETTER ///////////////
+        
+        
         public void setDice1stResult(int dice1stResult) {
                 this.dice1stResult = dice1stResult;
         }
