@@ -36,6 +36,7 @@ public class GameBoard extends JFrame implements Runnable {
         Chance chance = new Chance();
         
         static int numberOfPlayers;
+        public int randomChance, ccRandom;
         int x = 0;
         Thread t;
 		private JPanel pClicktoPlay;
@@ -45,9 +46,10 @@ public class GameBoard extends JFrame implements Runnable {
 
 		private JLabel lTitleDeedImage;
 
+		private JPanel pChoosePayOrTryDice;
+		private JButton bPay50;
+		private JButton bTryForDice;
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
-		
-		
 		public GameBoard() {
                 dice[0] = new Dice();
                 dice[1] = new Dice();
@@ -56,6 +58,7 @@ public class GameBoard extends JFrame implements Runnable {
 
         private void initComponents() {
 			setLayout(new GroupLayout());
+			add(getpChoosePayOrTryDice(), new Constraints(new Leading(-3, 813, 10, 10), new Leading(-2, 601, 10, 10)));
 			add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
 			add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
 			add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
@@ -63,8 +66,57 @@ public class GameBoard extends JFrame implements Runnable {
 			setSize(805, 595);
 		}
 
-//////////////////////////////////BUTTONS/////////////////////////////////////////////
+		private JButton getbTryForDice() {
+			if (bTryForDice == null) {
+				bTryForDice = new JButton();
+				bTryForDice.setText("Try for Dice");
+				bTryForDice.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						bailOutOfJail();
+						pChoosePayOrTryDice.setVisible(false);
+						//pBoard.setVisible(true);
+						//you have chosen to try for dice... you have 3 try to roll for doubleDice... if not, we 
+					}
+				});
+				
+			}
+			return bTryForDice;
+		}
 
+		private JButton getbPay50() {
+			if (bPay50 == null) {
+				bPay50 = new JButton();
+				bPay50.setText("Pay 50");
+				bPay50.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent event) {
+						playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+						System.out.println("Money: " +playerOrder[x].getStartMoney());
+         		        		  	playerOrder[x].setJailed(false);
+         		        		  	playerOrder[x].setBailOutDice(0);
+         		        		  	playerOrder[x].setDoubleDice(0);
+         		        		  	pChoosePayOrTryDice.setVisible(false);
+         		        		  	//pBoard.setVisible(true);
+						//show label that says: paid for getting out of jail!
+						
+					}
+				});
+			}
+			return bPay50;
+		}
+
+		private JPanel getpChoosePayOrTryDice() {
+			if (pChoosePayOrTryDice == null) {
+				pChoosePayOrTryDice = new JPanel();
+				pChoosePayOrTryDice.setBackground(new Color(64, 0, 128));
+				pChoosePayOrTryDice.setForeground(new Color(64, 0, 128));
+				pChoosePayOrTryDice.setLayout(new GroupLayout());
+				pChoosePayOrTryDice.add(getbPay50(), new Constraints(new Leading(314, 166, 10, 10), new Leading(108, 114, 10, 10)));
+				pChoosePayOrTryDice.add(getbTryForDice(), new Constraints(new Leading(314, 166, 12, 12), new Leading(281, 109, 10, 10)));
+				pChoosePayOrTryDice.setVisible(false);
+			}
+			return pChoosePayOrTryDice;
+		}
 
 		private JLabel getTitleDeedImageLabel() {
 			if (lTitleDeedImage == null) {
@@ -542,12 +594,12 @@ private JPanel getDicePanel() {
                                         }catch(InterruptedException e){}
                                         
                                 }
-                				if(playerOrder[x].getPosition() == 40){		//position goes back to 0 if token passed GO
-    								playerOrder[x].setPosition(0);
-    								passedGo();
-    							}
-                				
-                                checkBoard();
+                				checkBoard();
+                				passedGo();
+    							
+                				if(playerOrder[x].getDoubleDice() == 3){
+                					goToJail();
+                				}
                 }
         }
 
@@ -555,12 +607,16 @@ private JPanel getDicePanel() {
 ///////////////////////////////////////METHODS USED IN BOARD/////////////////////////////////////
         
         public void checkBoard(){
+        	Random random = new Random();
+        	
         	switch(playerOrder[x].getLastStep()){
 			
 			case 1:
 				//buyOrNot();
 				break;
 			case 2:
+				ccRandom = (random.nextInt(16) + 1);
+				chest.setCommunityChestRandom(ccRandom);
 				chest.shuffleCommunityChest(chest.getCommunityChestRandom());
 				break;
 			case 3:
@@ -577,6 +633,8 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 7:
+				randomChance = random.nextInt(16) + 1;
+				chance.setChanceRandom(randomChance);
 				chance.shuffleChance(chance.getChanceRandom());
 				break;
 			case 8:
@@ -604,6 +662,8 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 17:
+				ccRandom = (random.nextInt(16) + 1);
+				chest.setCommunityChestRandom(ccRandom);
 				chest.shuffleCommunityChest(chest.getCommunityChestRandom());
 				break;
 			case 18:
@@ -616,6 +676,8 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 22:
+				randomChance = random.nextInt(16) + 1;
+				chance.setChanceRandom(randomChance);
 				chance.shuffleChance(chance.getChanceRandom());
 				break;
 			case 23:
@@ -649,6 +711,8 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 33:
+				ccRandom = (random.nextInt(16) + 1);
+				chest.setCommunityChestRandom(ccRandom);
 				chest.shuffleCommunityChest(chest.getCommunityChestRandom());
 				break;
 			case 34:
@@ -658,6 +722,8 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 36:
+				randomChance = random.nextInt(16) + 1;
+				chance.setChanceRandom(randomChance);
 				chance.shuffleChance(chance.getChanceRandom());
 				break;
 			case 37:
@@ -694,21 +760,22 @@ private JPanel getDicePanel() {
         }
         
         
+		@SuppressWarnings("deprecation")
 		public void passedGo(){
-                if(playerOrder[x].getPosition() == 40){
-                        playerOrder[x].setPosition(0);
-                        playerOrder[x].setLastStep(playerOrder[x].getLastStep()+playerOrder[x].getPosition());
-                        playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
+			 if(playerOrder[x].getPosition() == 40){		//position goes back to 0 if token passed GO
+             			playerOrder[x].setPosition(0);   
+			            playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
                         fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
-                }
-                if(playerOrder[x].isJailed() == true){			// if player is jailed
-                	if(playerOrder[x].getTryForDice() < 3){		// while still in jail
-                		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney());	//money does not change
-                		playerOrder[x].getToken().setLocation(23, 462);
-                		playerOrder[x].setPosition(10);
-                		//t.stop();
-                	}
-                }
+             	}
+			 
+			 if(playerOrder[x].isJailed() == true){			// if player is jailed
+             	if(playerOrder[x].getTryForDice() < 3){		// while still in jail
+             		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney());	//money does not change
+             		playerOrder[x].getToken().setLocation(23, 525);
+             		playerOrder[x].setPosition(10);
+             		t.stop();
+             	}
+            }
         }
         
 		
@@ -720,15 +787,14 @@ private JPanel getDicePanel() {
          		        		playerOrder[x].getToken().setyLocation(525);
          		        		playerOrder[x].setJailed(true);
          		        		updateTokenPosition();
+         		        		pChoosePayOrTryDice.setVisible(true);
          		        		t.stop();
-         		        		/* pChoosePayOrTryDice.setVisible(true);
-         		        		 * if(pay50 == true){		//method for PAY if chosen
-         		        		 *  	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
-         		        		 *  	playerOrder[x].setJailed(false);
-         		        		 *  	playerOrder[x].setBailOutDice(0);
-         		        		 *  	playerOrder[x].setDoubleDice(0);
+         		        		
+         		        		//pBoard.setVisible(false);
+         		        		
+         		        		/* 
          		        		 *  } else if(tryForDiceTurn == true){		// method for TRY FOR TURN if chosen
-         		        		 *   	bailOutOfJail();
+         		        		 *   	
          		        		 *  }
          		        		 */
 					//}
@@ -763,8 +829,6 @@ private JPanel getDicePanel() {
         		playerOrder[x].setJailed(false);
         		playerOrder[x].setBailOutDice(0);
         		playerOrder[x].setDoubleDice(0);
-        		run();
         	}       
         }
-        
 }
