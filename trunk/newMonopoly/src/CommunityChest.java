@@ -1,12 +1,8 @@
-import java.util.Random;
 
 
 public class CommunityChest{
 	private int communityChestRandom;
 	
-	
-	Random random = new Random();
-	public int ccRandom = (random.nextInt(16) + 1);
 	
 	public void shuffleCommunityChest(int chest){
 		
