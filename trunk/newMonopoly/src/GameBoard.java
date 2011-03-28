@@ -49,6 +49,7 @@ public class GameBoard extends JFrame implements Runnable {
 		private JPanel pChoosePayOrTryDice;
 		private JButton bPay50;
 		private JButton bTryForDice;
+		private JPanel pTryForDice;
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 		public GameBoard() {
                 dice[0] = new Dice();
@@ -58,26 +59,43 @@ public class GameBoard extends JFrame implements Runnable {
 
         private void initComponents() {
 			setLayout(new GroupLayout());
-			add(getpChoosePayOrTryDice(), new Constraints(new Leading(-3, 813, 10, 10), new Leading(-2, 601, 10, 10)));
 			add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
 			add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
 			add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
 			add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
+			add(getpChoosePayOrTryDice(), new Constraints(new Leading(-3, 813, 835, 835), new Leading(-2, 601, 10, 10)));
 			setSize(805, 595);
+		}
+
+
+		private JPanel getpTryForDice() {
+			if (pTryForDice == null) {
+				pTryForDice = new JPanel();
+				pTryForDice.setVisible(false);
+				pTryForDice.setBackground(new Color(0, 132, 132));
+				pTryForDice.setLayout(new GroupLayout());
+			}
+			return pTryForDice;
 		}
 
 		private JButton getbTryForDice() {
 			if (bTryForDice == null) {
 				bTryForDice = new JButton();
 				bTryForDice.setText("Try for Dice");
+				//bTryForDice.setVisible(false);
 				bTryForDice.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
-						bailOutOfJail();
-						pChoosePayOrTryDice.setVisible(false);
+						playerOrder[x].getToken().setxLocation(23);
+	         		    playerOrder[x].getToken().setyLocation(525);
+	         		    
+						bPay50.setVisible(false);
+						bTryForDice.setVisible(false);
+						//pTryForDice.setVisible(true); 
+						
 						pPlayer.setVisible(true);
-						pDice.setVisible(true);
 						pBoard.setVisible(true);
-						//you have chosen to try for dice... you have 3 try to roll for doubleDice... if not, we 
+						pDice.setVisible(true);
+						//you have chosen to try for dice... you have 3 try to roll for doubleDice...
 					}
 				});
 				
@@ -89,20 +107,26 @@ public class GameBoard extends JFrame implements Runnable {
 			if (bPay50 == null) {
 				bPay50 = new JButton();
 				bPay50.setText("Pay 50");
+				//bPay50.setVisible(false);
 				bPay50.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent event) {
+						playerOrder[x].getToken().setxLocation(23);
+						playerOrder[x].getToken().setyLocation(525);
+		         		    
 						playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
 						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 						System.out.println("Money: " +playerOrder[x].getStartMoney());
-         		        		  	playerOrder[x].setJailed(false);
+									
+									playerOrder[x].setJailed(false);
          		        		  	playerOrder[x].setBailOutDice(0);
          		        		  	playerOrder[x].setDoubleDice(0);
+         		        		  	playerOrder[x].setTryForDice(0);
+         		        		  	
          		        		  	pChoosePayOrTryDice.setVisible(false);
          		        		  	pPlayer.setVisible(true);
          							pDice.setVisible(true);
          							pBoard.setVisible(true);
-         		        		  	//pBoard.setVisible(true);
-						//show label that says: paid for getting out of jail!
+						//show label that says: paid for getting out of jail! w
 						
 					}
 				});
@@ -113,12 +137,13 @@ public class GameBoard extends JFrame implements Runnable {
 		private JPanel getpChoosePayOrTryDice() {
 			if (pChoosePayOrTryDice == null) {
 				pChoosePayOrTryDice = new JPanel();
+				pChoosePayOrTryDice.setVisible(false);
 				pChoosePayOrTryDice.setBackground(new Color(64, 0, 128));
 				pChoosePayOrTryDice.setForeground(new Color(64, 0, 128));
 				pChoosePayOrTryDice.setLayout(new GroupLayout());
 				pChoosePayOrTryDice.add(getbPay50(), new Constraints(new Leading(314, 166, 10, 10), new Leading(108, 114, 10, 10)));
 				pChoosePayOrTryDice.add(getbTryForDice(), new Constraints(new Leading(314, 166, 12, 12), new Leading(281, 109, 10, 10)));
-				pChoosePayOrTryDice.setVisible(false);
+				pChoosePayOrTryDice.add(getpTryForDice(), new Constraints(new Bilateral(12, 12, 0), new Bilateral(12, 12, 0)));
 			}
 			return pChoosePayOrTryDice;
 		}
@@ -520,11 +545,15 @@ private JPanel getDicePanel() {
                 t.start();
         }
        
-        @SuppressWarnings("static-access")
+        @SuppressWarnings({ "static-access", "deprecation" })
 		public void run(){      
-        	playerOrder[x].setLastStep(playerOrder[x].getTotalSteps() + playerOrder[x].getPosition());
-            System.out.println("Last Step: " +playerOrder[x].getLastStep());
-                for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
+        	if(playerOrder[x].isJailed() == true && playerOrder[x].getTryForDice() < 3){
+				playerOrder[x].getToken().setLocation(23, 525);
+				t.stop();
+				pChoosePayOrTryDice.setVisible(true);
+				
+			}
+        		for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
                         
                 		if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
                                         try{
@@ -599,13 +628,16 @@ private JPanel getDicePanel() {
                                         }catch(InterruptedException e){}
                                         
                                 }
-                				checkBoard();
+                				
                 				passedGo();
-    							
-                				if(playerOrder[x].getDoubleDice() == 3){
+    							if(playerOrder[x].getDoubleDice() == 3){
                 					goToJail();
                 				}
+                				
                 }
+        		playerOrder[x].setLastStep(playerOrder[x].getPosition());
+                System.out.println("Last Step: " +playerOrder[x].getLastStep());
+                checkBoard();
         }
 
         
@@ -765,7 +797,7 @@ private JPanel getDicePanel() {
         }
         
         
-		@SuppressWarnings("deprecation")
+		//@SuppressWarnings("deprecation")
 		public void passedGo(){
 			 if(playerOrder[x].getPosition() == 40){		//position goes back to 0 if token passed GO
              			playerOrder[x].setPosition(0);   
@@ -773,14 +805,14 @@ private JPanel getDicePanel() {
                         fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
              	}
 			 
-			 if(playerOrder[x].isJailed() == true){			// if player is jailed
+			 /*if(playerOrder[x].isJailed() == true){			// if player is jailed
              	if(playerOrder[x].getTryForDice() < 3){		// while still in jail
              		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney());	//money does not change
              		playerOrder[x].getToken().setLocation(23, 525);
              		playerOrder[x].setPosition(10);
              		t.stop();
              	}
-            }
+            }*/
         }
         
 		
@@ -790,12 +822,13 @@ private JPanel getDicePanel() {
          		    playerOrder[x].getToken().setxLocation(23);
          		    playerOrder[x].getToken().setyLocation(525);
          		    playerOrder[x].setJailed(true);
-         		    updateTokenPosition();
-         		    pChoosePayOrTryDice.setVisible(true);
+         		    updateTokenPosition(); 
+         		    t.stop();
+         		  /*  pChoosePayOrTryDice.setVisible(true);
          		    pPlayer.setVisible(false);
         			pDice.setVisible(false);
-        			pBoard.setVisible(false);
-         		    t.stop();
+        			pBoard.setVisible(false);*/
+         		  
         }
 					
          		        
@@ -804,31 +837,36 @@ private JPanel getDicePanel() {
                 if(dice[0].getDice1stResult() == dice[1].getDice2ndResult()){
                         playerOrder[x].setDoubleDice(playerOrder[x].getDoubleDice() + 1);
                         System.out.println("doubleDice of player"+ x + " = " + playerOrder[x].getDoubleDice());
-	                if(playerOrder[x].isJailed()== true){
+                
+	                if(playerOrder[x].isJailed() == true){
 	                	playerOrder[x].setBailOutDice(playerOrder[x].getBailOutDice()+1);
-	                	System.out.println("Bail Out dice of player " + x + " = "+ playerOrder[x].getBailOutDice());
+	                	playerOrder[x].setTryForDice(playerOrder[x].getTryForDice()+1);
+	                	bailOutOfJail();
 	                }
                 }
         }
          
         public void bailOutOfJail(){
         	if(playerOrder[x].getTryForDice() < 3){
-        		checkForDoubles();
-        		playerOrder[x].getToken().setxLocation(23);
-     		    playerOrder[x].getToken().setyLocation(525);
-     		    if(playerOrder[x].getBailOutDice() == 1){
+        	    if(playerOrder[x].getBailOutDice() == 1){
         			playerOrder[x].setJailed(false);
         			playerOrder[x].setBailOutDice(0);
         			playerOrder[x].setDoubleDice(0);
         			playerOrder[x].setTryForDice(0);
-        		}else{
-        			playerOrder[x].setTryForDice(playerOrder[x].getTryForDice()+1);
+        			//pTryForDice.setVisible(false);
+        			//pBoard.setVisible(true);
+        			//pPlayer.setVisible(true);
+        			//pDice.setVisible(true);
+        			System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice());
         		}
         	}else if(playerOrder[x].getTryForDice() == 3){
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
         		playerOrder[x].setJailed(false);
         		playerOrder[x].setBailOutDice(0);
         		playerOrder[x].setDoubleDice(0);
-        	}       
+        		playerOrder[x].setTryForDice(0);
+        		System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice());
+        		
+        	}  
         }
 }
