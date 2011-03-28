@@ -5,7 +5,7 @@ public class Players{
         private int order = 1, startMoney = 1500, position = 0, doubleDice = 0, lastStep = 0, bailOutDice = 0;
         private String playerName;
         private Token token;
-        private boolean isJailed = false;
+        private boolean isJailed = false, hasJailKey = false;
 		
         
         
@@ -133,12 +133,17 @@ public class Players{
 		public int getBailOutDice() {
 			return bailOutDice;
 		}
-		///////////////////////////////////////METHODS//////////////////////
-		public void buy(){
-			
+		
+		public void setHasJailKey(boolean hasJailKey) {
+			this.hasJailKey = hasJailKey;
 		}
 
 
+		public boolean hasJailKey() {
+			return hasJailKey;
+		}
+
+///////////////////////////////////////METHODS//////////////////////
 		
 
 }
