@@ -1,61 +1,84 @@
-
+import java.util.Random;
 
 public class Chance{
 	
+	//GameBoard gameBoard = new GameBoard();	
+	Players playerOrder[] = new Players[8];
+	private int x = 0;
 	
 	private int chanceRandom;
 	
-	public void shuffleChance(int chance){
-        switch(chance){
-        case 1:
-                System.out.println("Speeding fine P15.");
-                break;
-        case 2:
-        		System.out.println("Bank pays you dividend of P50.");
-                break;
-        case 3:
-        		System.out.println("Advance to Trinoma. If you pass GO collect P200.");
-                break;
-        case 4:
-        		System.out.println("Advance to GO.");
-                break;
-        case 5:
-        		System.out.println("Pay school fees of P150.");
-                break;
-        case 6:
-        		System.out.println("Advance to SM Mall of Asia.");
-        		break;
-        case 7:
-    			System.out.println("Get out of Jail Free Key.");
-    			break;
-        case 8:
-	    		System.out.println("Your are assessed forr street rpairs. P40 per house, P115 per hotel.");
-	    		break;
-        case 9:
-	    		System.out.println("Make general repairs on all of your buildings. For each house pay P25. For each hotel pay P100.");
-	    		break;
-        case 10:
-	    		System.out.println("Advance to Shopwise. If you pass GO collect P200.");
-	    		break;
-        case 11:
-	    		System.out.println("Take a trip to Buendia Station. If you pass GO collect P200.");
-	    		break;
-        case 12:
-	    		System.out.println("Your building loan matures. Receive P150.");
-	    		break;
-        case 13:
-	    		System.out.println("GO TO JAIL.");
-	    		break;
-        case 14:
-	    		System.out.println("Go back three spaces.");
-	    		break;
-        case 15:
-	    		System.out.println("Drunk in Charge. Fine P20.");
-	    		break;
-        case 16:
-	    		System.out.println("You have won a crossword competition. Collect P100.");
-	    		break;
-        }
+	Random random = new Random();
+	
+	public int shuffleChance(){
+		Random random = new Random();
+		setChanceRandom(random.nextInt(16)+ 1);
+		System.out.println("Chance Shuffle Result " + chanceRandom);
+		return getChanceRandom();
+	}
+	
+	public void speedingFine(){
+		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
+	}
+	
+	public void bankDividend(){
+		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
+	}
+	
+	public void advanceToTrinoma(){
+		
+	}
+	
+	public void advanceToGo(){
+		
+	}
+	
+	public void paySchoolFees(){
+		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
+	}
+	
+	public void advanceToMoa(){
+		
+	}
+	
+	public void jailFreeKey(){
+		
+	}
+	
+	public void streetRepairs(){
+		
+	}
+
+	public void generalRepairs(){
+		
+	}
+	
+	public void advanceToShopwise(){
+		
+	}
+	
+	public void tripToBuendiaStation(){
+		
+	}
+	
+	public void buildingMatures(){
+		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
+	}
+	
+	public void goToJail(){
+		
+	}
+	
+	public void goBackThreeSteps(){
+		
+	}
+	
+	public void drunkInCharge(){
+		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
+	}
+	
+	public void wonCrosswordCompetition(){
+		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
 	}
 	
 	
@@ -67,8 +90,8 @@ public class Chance{
 	}
 	
 	
-	public void setChanceRandom(int randomChance) {
-		this.chanceRandom = randomChance;
+	public void setChanceRandom(int chanceRandom) {
+		this.chanceRandom = chanceRandom;
 	}
 
 }
