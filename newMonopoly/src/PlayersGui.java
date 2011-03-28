@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -309,11 +310,11 @@ public class PlayersGui extends JFrame{
 		return bNewGame;
 	}
 
-	///////////////////////////TEXT FIELDS//////////////////////////////////////
 	private JTextField getWheelBarrowNameField() {
 		if (wheelBarrowNameField == null) {
 			wheelBarrowNameField = new JTextField();
-			wheelBarrowNameField.setText(" ");
+			wheelBarrowNameField.setBackground(new Color(255, 193, 193));
+			wheelBarrowNameField.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		}
 		return wheelBarrowNameField;
 	}
@@ -321,7 +322,8 @@ public class PlayersGui extends JFrame{
 	private JTextField getHatNameField() {
 		if (hatNameField == null) {
 			hatNameField = new JTextField();
-			hatNameField.setText(" ");
+			hatNameField.setBackground(new Color(255, 193, 193));
+			hatNameField.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		}
 		return hatNameField;
 	}
@@ -329,7 +331,8 @@ public class PlayersGui extends JFrame{
 	private JTextField getThimbleNameField() {
 		if (thimbleNameField == null) {
 			thimbleNameField = new JTextField();
-			thimbleNameField.setText(" ");
+			thimbleNameField.setBackground(new Color(255, 193, 193));
+			thimbleNameField.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		}
 		return thimbleNameField;
 	}
@@ -337,7 +340,8 @@ public class PlayersGui extends JFrame{
 	private JTextField getCarNameField() {
 		if (carNameField == null) {
 			carNameField = new JTextField();
-			carNameField.setBackground(Color.white);
+			carNameField.setBackground(new Color(255, 193, 193));
+			carNameField.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		}
 		return carNameField;
 	}
@@ -345,7 +349,8 @@ public class PlayersGui extends JFrame{
 	private JTextField getShoeNameField() {
 		if (shoeNameField == null) {
 			shoeNameField = new JTextField();
-			shoeNameField.setText(" ");
+			shoeNameField.setBackground(new Color(255, 193, 193));
+			shoeNameField.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		}
 		return shoeNameField;
 	}
@@ -353,7 +358,8 @@ public class PlayersGui extends JFrame{
 	private JTextField getIronNameField() {
 		if (ironNameField == null) {
 			ironNameField = new JTextField();
-			ironNameField.setText(" ");
+			ironNameField.setBackground(new Color(255, 193, 193));
+			ironNameField.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		}
 		return ironNameField;
 	}
@@ -361,7 +367,8 @@ public class PlayersGui extends JFrame{
 	private JTextField getAzkalNameField() {
 		if (azkalNameField == null) {
 			azkalNameField = new JTextField();
-			azkalNameField.setText(" ");
+			azkalNameField.setBackground(new Color(255, 193, 193));
+			azkalNameField.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		}
 		return azkalNameField;
 	}
@@ -369,12 +376,11 @@ public class PlayersGui extends JFrame{
 	private JTextField getBaporNameField() {
 		if (baporNameField == null) {
 			baporNameField = new JTextField();
-			baporNameField.setText(" ");
+			baporNameField.setBackground(new Color(255, 193, 193));
+			baporNameField.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		}
 		return baporNameField;
 	}
-
-//////////////////////////////////////LABELS///////////////////////////////
 
 	private JLabel getlTypeOfGame() {
 		if (lTypeOfGame == null) {
@@ -431,6 +437,7 @@ public class PlayersGui extends JFrame{
 			pMonopoly.add(getbExit(), new Constraints(new Leading(832, 68, 10, 10), new Leading(-3, 64, 10, 10)));
 			pMonopoly.add(getbNewGame(), new Constraints(new Leading(358, 200, 10, 10), new Leading(399, 93, 10, 10)));
 			pMonopoly.add(getlMonopolyLogo(), new Constraints(new Leading(7, 12, 12), new Leading(0, 563, 12, 12)));
+			pMonopoly.setVisible(true);
 		}
 		return pMonopoly;
 	}
