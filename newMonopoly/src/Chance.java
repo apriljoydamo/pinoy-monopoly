@@ -2,90 +2,46 @@ import java.util.Random;
 
 public class Chance{
 	
-	//GameBoard gameBoard = new GameBoard();	
 	Players playerOrder[] = new Players[8];
-	private int x = 0;
-	
+	Random random = new Random();
 	private int chanceRandom;
 	
-	Random random = new Random();
 	
-	public int shuffleChance(){
+	public void shuffleChance(){
 		Random random = new Random();
 		setChanceRandom(random.nextInt(16)+ 1);
 		System.out.println("Chance Shuffle Result " + chanceRandom);
-		return getChanceRandom();
+		//return getChanceRandom();
 	}
 	
 	public void speedingFine(){
-		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
-	}
+		System.out.println("Speeding fine P15.");
+    }
 	
 	public void bankDividend(){
-		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
-	}
-	
-	public void advanceToTrinoma(){
-		
-	}
-	
-	public void advanceToGo(){
-		
+		System.out.println("Bank pays you dividend of P50.");
 	}
 	
 	public void paySchoolFees(){
-		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
-	}
-	
-	public void advanceToMoa(){
-		
-	}
-	
-	public void jailFreeKey(){
-		
-	}
-	
-	public void streetRepairs(){
-		
-	}
-
-	public void generalRepairs(){
-		
-	}
-	
-	public void advanceToShopwise(){
-		
-	}
-	
-	public void tripToBuendiaStation(){
-		
+		System.out.println("Pay school fees of P150.");
 	}
 	
 	public void buildingMatures(){
-		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
-	}
-	
-	public void goToJail(){
-		
-	}
-	
-	public void goBackThreeSteps(){
-		
+		System.out.println("Your building loan matures. Receive P150.");
 	}
 	
 	public void drunkInCharge(){
-		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
+		System.out.println("Drunk in Charge. Fine P20.");						    		
 	}
 	
 	public void wonCrosswordCompetition(){
-		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
+		System.out.println("You have won a crossword competition. Collect P100.");
 	}
 	
 	
 ///////////////GETTER and SETTER ///////////////
 		
 	public int getChanceRandom() {
-		//setChanceRandom(random.nextInt(6) + 1);
 		return chanceRandom;
 	}
 	
