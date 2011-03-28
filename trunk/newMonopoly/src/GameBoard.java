@@ -43,13 +43,16 @@ public class GameBoard extends JFrame implements Runnable {
 		private JLabel lClicktoPlay;
 		private JLabel lPlayerPanelImage;
 		private JLabel ldicebg;
-
-		private JLabel lTitleDeedImage;
-
+		private JLabel lTitleDeedImageLabel;
 		private JPanel pChoosePayOrTryDice;
 		private JButton bPay50;
 		private JButton bTryForDice;
+		private JButton btdAyalaAve;
+		private JPanel pChance;
+		private JButton bShuffleChance;
+		private JPanel pCchest;
 		private JPanel pTryForDice;
+		private JButton bShuffleCchest;
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 		public GameBoard() {
                 dice[0] = new Dice();
@@ -63,8 +66,224 @@ public class GameBoard extends JFrame implements Runnable {
 			add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
 			add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
 			add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
+			add(getPChance(), new Constraints(new Leading(141, 424, 10, 10), new Leading(143, 316, 623, 623)));
+			add(getPCchest(), new Constraints(new Leading(144, 418, 835, 835), new Leading(143, 330, 10, 10)));
+			setSize(827, 594);
 			add(getpChoosePayOrTryDice(), new Constraints(new Leading(-3, 813, 835, 835), new Leading(-2, 601, 10, 10)));
 			setSize(805, 595);
+		}
+
+		private JButton getShuffleChestButton() {
+			if (bShuffleCchest == null) {
+				bShuffleCchest = new JButton();
+				bShuffleCchest.setText("Shuffle");
+				bShuffleCchest.addActionListener(new ActionListener() {
+		
+					public void actionPerformed(ActionEvent event) {
+						CommunityChest Cchest = new CommunityChest();
+						
+						Cchest.shuffleCchest();
+						
+						switch (Cchest.getcChestRandom()){
+						
+							case 1:
+									Cchest.bankError();
+					          //      System.out.println("Bank error in your favour. Collect P200.");
+					                break;
+					        case 2:
+					        		Cchest.payHospital();
+					        	//	System.out.println("Pay hospital P100.");
+					                break;
+					        case 3:
+					        		Cchest.wonBeautyContest();
+					        	//	System.out.println("You have won second price in beauty contest. Collect P10.");
+					                break;
+					        case 4:
+					    			Cchest.taxRefund();
+					        	//	System.out.println("Income tax refund. Collect P20.");
+					                break;
+					        case 5:
+					    			Cchest.payOrChance();
+					        	//	System.out.println("Pay a P10 fine or take a CHANCE.");
+					                break;
+					        case 6:
+					        		Cchest.payInsurance();
+					        	//	System.out.println("Pay your insurance premium P50.");
+					        		break;
+					        case 7:
+				        			Cchest.saleOfStock();
+					    		//	System.out.println("From sale of stock you get P50.");
+					    			break;
+					        case 8:
+				        			Cchest.recieveInterest();
+						    	//	System.out.println("Recieve interest on 7% preference shares P25.");
+						    		break;
+					        case 9:
+				        			Cchest.advanceToGo();
+						    	//	System.out.println("Advance to GO.");
+						    		break;
+					        case 10:
+				        			Cchest.goBackToOldKentRoad();
+						    	//	System.out.println("Go back to Old Kent Road.");
+						    		break;
+					        case 11:
+					        		Cchest.jailFreeKey();
+					        	//	System.out.println("Get out of Jail Key.");
+							    	break;
+					        case 12:
+				        			Cchest.yourBirthday();
+						    	//	System.out.println("It is your birthday. Collect P10 from each player.");
+						    		break;
+					        case 13:
+				        			Cchest.doctorsFee();
+						    	//	System.out.println("Doctor's fee. Pay P50.");
+						    		break;
+					        case 14:
+				        			Cchest.annuityMatures();
+						    	//	System.out.println("Annuity matures. Collect P100.");
+						    		break;
+					        case 15:
+				        			Cchest.goToJail();
+						    	//	System.out.println("GO TO JAIL.");
+						    		break;
+					        case 16:
+				        			Cchest.inheritMoney();
+						    	//	System.out.println("You inherit P100.");
+						    		break;
+															
+								}
+						
+					}
+				});
+			}
+			return bShuffleCchest;
+		}
+
+		private JPanel getPCchest() {
+			if (pCchest == null) {
+				pCchest = new JPanel();
+				pCchest.setBackground(new Color(0, 128, 255));
+				pCchest.setLayout(new GroupLayout());
+				pCchest.add(getShuffleChestButton(), new Constraints(new Leading(322, 10, 10), new Leading(287, 10, 10)));
+			}
+			return pCchest;
+		}
+
+		private JButton getShuffleChanceButton() {
+			if (bShuffleChance == null) {
+				bShuffleChance = new JButton();
+				bShuffleChance.setText("Shuffle");
+				bShuffleChance.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent event) {
+						Chance chance = new Chance();
+						
+						chance.shuffleChance();
+						
+						switch (chance.getChanceRandom()){
+						
+							case 1:
+									chance.speedingFine();
+					                System.out.println("Speeding fine P15.");
+					                break;				                
+					        case 2:
+					        		chance.bankDividend();
+					        		System.out.println("Bank pays you dividend of P50.");
+					        		break;
+					        case 3:
+					        		chance.advanceToTrinoma();
+					        		System.out.println("Advance to Trinoma. If you pass GO collect P200.");
+					                break;
+					        case 4:
+					        		chance.advanceToGo();
+					        		System.out.println("Advance to GO.");
+					                break;
+					        case 5:
+					        		chance.paySchoolFees();
+					        		System.out.println("Pay school fees of P150.");
+					        		
+					                break;
+					        case 6:
+					        		chance.advanceToMoa();
+					        		System.out.println("Advance to SM Mall of Asia.");
+					        		break;
+					        case 7:
+					        		chance.jailFreeKey();
+					    			System.out.println("Get out of Jail Free Key.");
+					    			break;
+					        case 8:
+					        		chance.streetRepairs();
+						    		System.out.println("Your are assessed forr street rpairs. P40 per house, P115 per hotel.");
+						    		break;
+					        case 9:
+					        		chance.generalRepairs();
+						    		System.out.println("Make general repairs on all of your buildings. For each house pay P25. For each hotel pay P100.");
+						    		break;
+					        case 10:
+					        		chance.advanceToShopwise();
+						    		System.out.println("Advance to Shopwise. If you pass GO collect P200.");
+						    		break;
+					        case 11:
+					        		chance.tripToBuendiaStation();
+						    		System.out.println("Take a trip to Buendia Station. If you pass GO collect P200.");
+						    		break;
+					        case 12:
+					        		chance.buildingMatures();
+						    		System.out.println("Your building loan matures. Receive P150.");
+						    		break;
+					        case 13:
+					        		chance.goToJail();
+						    		System.out.println("GO TO JAIL.");
+						    		break;
+					        case 14:
+					        		chance.goBackThreeSteps();
+						    		System.out.println("Go back three spaces.");
+						    		break;
+					        case 15:
+					        		chance.drunkInCharge();
+						    		System.out.println("Drunk in Charge. Fine P20.");						    		
+						    		break;
+					        case 16:
+					        		chance.wonCrosswordCompetition();
+						    		System.out.println("You have won a crossword competition. Collect P100.");
+						    		break;
+					        }
+					}
+				});
+			}
+			return bShuffleChance;
+		}
+
+		private JPanel getPChance() {
+			if (pChance == null) {
+				pChance = new JPanel();
+				pChance.setBackground(new Color(0, 255, 128));
+				pChance.setLayout(new GroupLayout());
+				pChance.add(getShuffleChanceButton(), new Constraints(new Leading(321, 10, 10), new Leading(259, 10, 10)));
+				pChance.setVisible(false);
+			}
+			return pChance;
+		}
+
+		private JButton gettdAyalaAveButton() {
+			if (btdAyalaAve == null) {
+				btdAyalaAve = new JButton();
+				btdAyalaAve.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_brown.png")));
+				btdAyalaAve.setBorderPainted(false);
+				btdAyalaAve.setOpaque(false);
+				btdAyalaAve.setContentAreaFilled(false);
+				btdAyalaAve.setFocusable(false);
+			}
+			return btdAyalaAve;
+		}
+
+		private JLabel getDicebgLabel() {
+			if (ldicebg == null) {
+				ldicebg = new JLabel();
+				ldicebg.setHorizontalAlignment(SwingConstants.TRAILING);
+				ldicebg.setIcon(new ImageIcon(getClass().getResource("/Designs/rollDice_bg.png")));
+			}
+			return ldicebg;
 		}
 
 
@@ -149,20 +368,12 @@ public class GameBoard extends JFrame implements Runnable {
 		}
 
 		private JLabel getTitleDeedImageLabel() {
-			if (lTitleDeedImage == null) {
-				lTitleDeedImage = new JLabel();
-				lTitleDeedImage.setIcon(new ImageIcon(getClass().getResource("/Designs/TitleDeedImage.png")));
+			if (lTitleDeedImageLabel == null) {
+				lTitleDeedImageLabel = new JLabel();
+				lTitleDeedImageLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+				lTitleDeedImageLabel.setIcon(new ImageIcon(getClass().getResource("/Designs/TitleDeedsImage.png")));
 			}
-			return lTitleDeedImage;
-		}
-
-		private JLabel getDicebgLabel() {
-			if (ldicebg == null) {
-				ldicebg = new JLabel();
-				ldicebg.setHorizontalAlignment(SwingConstants.TRAILING);
-				ldicebg.setIcon(new ImageIcon(getClass().getResource("/Designs/rollDice_bg.png")));
-			}
-			return ldicebg;
+			return lTitleDeedImageLabel;
 		}
 
 		private JLabel getPlayerPanelImageLabel() {
@@ -320,30 +531,29 @@ public class GameBoard extends JFrame implements Runnable {
 		/////////////////////////////TEXT FIELDS////////////////////////////////////
 
         private JTextField getPlayerMoneyField() {
-                if (fPlayerMoney == null) {
-                        fPlayerMoney = new JTextField();
-                        fPlayerMoney.setBackground(new Color(128, 0, 128));
-                        fPlayerMoney.setEditable(false);
-                        fPlayerMoney.setFont(new Font("Broadway", Font.BOLD, 16));
-                        fPlayerMoney.setForeground(new Color(255, 155, 55));
-                        fPlayerMoney.setText("P 0000.00");
-                }
-                return fPlayerMoney;
-        }
+			if (fPlayerMoney == null) {
+				fPlayerMoney = new JTextField();
+				fPlayerMoney.setBackground(new Color(255, 193, 193));
+				fPlayerMoney.setEditable(false);
+				fPlayerMoney.setFont(new Font("Century Gothic", Font.BOLD, 16));
+				fPlayerMoney.setForeground(Color.black);
+				fPlayerMoney.setText("P 0000.00");
+			}
+			return fPlayerMoney;
+		}
 
-        private JTextField getPlayerNameField() {
-                if (fPlayerName == null) {
-                        fPlayerName = new JTextField();
-                        fPlayerName.setBackground(new Color(128, 0, 128));
-                        fPlayerName.setEditable(false);
-                        fPlayerName.setFont(new Font("Ravie", Font.BOLD, 18));
-                        fPlayerName.setForeground(new Color(255, 255, 66));
-                        fPlayerName.setText("Player");
-                }
-                return fPlayerName;
-        }
-
-        
+		private JTextField getPlayerNameField() {
+			if (fPlayerName == null) {
+				fPlayerName = new JTextField();
+				fPlayerName.setBackground(new Color(255, 193, 193));
+				fPlayerName.setEditable(false);
+				fPlayerName.setFont(new Font("Century Gothic", Font.BOLD, 18));
+				fPlayerName.setForeground(Color.black);
+				fPlayerName.setText("Player");
+				fPlayerName.setFocusable(false);
+			}
+			return fPlayerName;
+		}   
         
 ////////////////////////////////////LABELS////////////////////////////////
         
@@ -447,23 +657,22 @@ public class GameBoard extends JFrame implements Runnable {
         }
 
         private JLabel getMonopolyLabel() {
-                if (lMonopoly == null) {
-                        lMonopoly = new JLabel();
-                        lMonopoly.setIcon(new ImageIcon(getClass().getResource("/b&dice/MonopolyBoardFinal.png")));
-                }
-                return lMonopoly;
-        }
-        
-///////////////////////////////////////////PANELS///////////////////////////////////////////
+			if (lMonopoly == null) {
+				lMonopoly = new JLabel();
+				lMonopoly.setHorizontalAlignment(SwingConstants.TRAILING);
+				lMonopoly.setIcon(new ImageIcon(getClass().getResource("/b&dice/MonopolyBoardFinal.png")));
+			}
+			return lMonopoly;
+		}
 
-private JPanel getClickToPlayPanel() {
+		private JPanel getClickToPlayPanel() {
 			if (pClicktoPlay == null) {
 				pClicktoPlay = new JPanel();
 				pClicktoPlay.setBackground(Color.black);
 				pClicktoPlay.setLayout(new GroupLayout());
 				pClicktoPlay.add(getPlayButton(), new Constraints(new Leading(292, 233, 12, 12), new Leading(282, 227, 10, 10)));
 				pClicktoPlay.add(getClicktoPlayLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 12, 12)));
-				pClicktoPlay.setVisible(true);
+				pClicktoPlay.setVisible(false);
 			}
 			return pClicktoPlay;
 		}
@@ -473,7 +682,8 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds = new JPanel();
 		pTitleDeeds.setBackground(Color.white);
 		pTitleDeeds.setLayout(new GroupLayout());
-		pTitleDeeds.add(getTitleDeedImageLabel(), new Constraints(new Leading(9, 10, 10), new Leading(9, 10, 10)));
+		pTitleDeeds.add(gettdAyalaAveButton(), new Constraints(new Leading(12, 17, 10, 10), new Leading(46, 17, 10, 10)));
+		pTitleDeeds.add(getTitleDeedImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 185, 12, 12)));
 	}
 	return pTitleDeeds;
 }
@@ -492,41 +702,41 @@ private JPanel getDicePanel() {
 	return pDice;
 }
 
-		private JPanel getPlayerPanel() {
-			if (pPlayer == null) {
-				pPlayer = new JPanel();
-				pPlayer.setBackground(Color.magenta);
-				pPlayer.setLayout(new GroupLayout());
-				pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(37, 151, 10, 10), new Leading(128, 32, 10, 10)));
-				pPlayer.add(getPlayerNameField(), new Constraints(new Leading(36, 152, 12, 12), new Leading(51, 33, 10, 10)));
-				pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
-				pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(0, 199, 12, 12), new Leading(172, 185, 12, 12)));
-				pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
-				pPlayer.setVisible(false);
-			}
-			return pPlayer;
-		}
+private JPanel getPlayerPanel() {
+	if (pPlayer == null) {
+		pPlayer = new JPanel();
+		pPlayer.setBackground(Color.magenta);
+		pPlayer.setLayout(new GroupLayout());
+		pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(37, 151, 10, 10), new Leading(128, 32, 10, 10)));
+		pPlayer.add(getPlayerNameField(), new Constraints(new Leading(36, 152, 12, 12), new Leading(51, 33, 10, 10)));
+		pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(0, 199, 12, 12), new Leading(172, 185, 12, 12)));
+		pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
+		pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
+		pPlayer.setVisible(false);
+	}
+	return pPlayer;
+}
 
-		private JPanel getBoardPanel() {
-                if (pBoard == null) {
-                        pBoard = new JPanel();
-                        pBoard.setBackground(new Color(64, 0, 64));
-                        pBoard.setLayout(new GroupLayout());
-                        pBoard.add(getBaporLabel(), new Constraints(new Leading(515, 10, 10), new Leading(527, 12, 12)));
-                        pBoard.add(getAzkalLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 10, 10)));
-                        pBoard.add(getIronLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
-                        pBoard.add(getShoeLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
-                        pBoard.add(getCarLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-                        pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
-                        pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-                        pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-                        pBoard.add(getMonopolyLabel(), new Constraints(new Leading(5, 10, 10), new Leading(2, 599, 10, 10)));
-                        pBoard.setVisible(false);
-                        }
-                return pBoard;
-        }
+private JPanel getBoardPanel() {
+	if (pBoard == null) {
+		pBoard = new JPanel();
+		pBoard.setBackground(new Color(64, 0, 64));
+		pBoard.setLayout(new GroupLayout());
+		pBoard.add(getBaporLabel(), new Constraints(new Leading(515, 10, 10), new Leading(527, 12, 12)));
+		pBoard.add(getAzkalLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 10, 10)));
+		pBoard.add(getIronLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+		pBoard.add(getShoeLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+		pBoard.add(getCarLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+		pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+		pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+		pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+		pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
+		pBoard.setVisible(false);
+	}
+	return pBoard;
+}
 
-        @SuppressWarnings("unused")
+@SuppressWarnings("unused")
         private static void installLnF() {
                 try {
                         String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -644,7 +854,7 @@ private JPanel getDicePanel() {
 ///////////////////////////////////////METHODS USED IN BOARD/////////////////////////////////////
         
         public void checkBoard(){
-        	Random random = new Random();
+        	//Random random = new Random();
         	
         	switch(playerOrder[x].getLastStep()){
 			
@@ -652,9 +862,9 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 2:
-				ccRandom = (random.nextInt(16) + 1);
-				chest.setCommunityChestRandom(ccRandom);
-				chest.shuffleCommunityChest(chest.getCommunityChestRandom());
+				//ccRandom = (random.nextInt(16) + 1);
+				//chest.setCommunityChestRandom(ccRandom);
+				//chest.shuffleCommunityChest(chest.getCommunityChestRandom());
 				break;
 			case 3:
 				//buyOrNot();
@@ -670,9 +880,9 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 7:
-				randomChance = random.nextInt(16) + 1;
-				chance.setChanceRandom(randomChance);
-				chance.shuffleChance(chance.getChanceRandom());
+			//	randomChance = random.nextInt(16) + 1;
+			//	chance.setChanceRandom(randomChance);
+			//	chance.shuffleChance(chance.getChanceRandom());
 				break;
 			case 8:
 				//buyOrNot();
@@ -699,9 +909,9 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 17:
-				ccRandom = (random.nextInt(16) + 1);
-				chest.setCommunityChestRandom(ccRandom);
-				chest.shuffleCommunityChest(chest.getCommunityChestRandom());
+				//ccRandom = (random.nextInt(16) + 1);
+				//chest.setCommunityChestRandom(ccRandom);
+				//chest.shuffleCommunityChest(chest.getCommunityChestRandom());
 				break;
 			case 18:
 				//buyOrNot();
@@ -713,9 +923,9 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 22:
-				randomChance = random.nextInt(16) + 1;
-				chance.setChanceRandom(randomChance);
-				chance.shuffleChance(chance.getChanceRandom());
+			//	randomChance = random.nextInt(16) + 1;
+			//	chance.setChanceRandom(randomChance);
+			//	chance.shuffleChance(chance.getChanceRandom());
 				break;
 			case 23:
 				//buyOrNot();
@@ -748,9 +958,9 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 33:
-				ccRandom = (random.nextInt(16) + 1);
-				chest.setCommunityChestRandom(ccRandom);
-				chest.shuffleCommunityChest(chest.getCommunityChestRandom());
+				//ccRandom = (random.nextInt(16) + 1);
+				//chest.setCommunityChestRandom(ccRandom);
+				//chest.shuffleCommunityChest(chest.getCommunityChestRandom());
 				break;
 			case 34:
 				//buyOrNot();
@@ -759,9 +969,9 @@ private JPanel getDicePanel() {
 				//buyOrNot();
 				break;
 			case 36:
-				randomChance = random.nextInt(16) + 1;
-				chance.setChanceRandom(randomChance);
-				chance.shuffleChance(chance.getChanceRandom());
+				//randomChance = random.nextInt(16) + 1;
+				//chance.setChanceRandom(randomChance);
+			//	chance.shuffleChance(chance.getChanceRandom());
 				break;
 			case 37:
 				//buyOrNot();
@@ -869,4 +1079,5 @@ private JPanel getDicePanel() {
         		
         	}  
         }
+
 }
