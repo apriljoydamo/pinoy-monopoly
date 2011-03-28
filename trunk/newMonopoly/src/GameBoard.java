@@ -77,6 +77,7 @@ public class GameBoard extends JFrame implements Runnable {
 			if (bShuffleCchest == null) {
 				bShuffleCchest = new JButton();
 				bShuffleCchest.setText("Shuffle");
+				bShuffleCchest.setEnabled(false);
 				bShuffleCchest.addActionListener(new ActionListener() {
 		
 					public void actionPerformed(ActionEvent event) {
@@ -159,20 +160,13 @@ public class GameBoard extends JFrame implements Runnable {
 			return bShuffleCchest;
 		}
 
-		private JPanel getPCchest() {
-			if (pCchest == null) {
-				pCchest = new JPanel();
-				pCchest.setBackground(new Color(0, 128, 255));
-				pCchest.setLayout(new GroupLayout());
-				pCchest.add(getShuffleChestButton(), new Constraints(new Leading(322, 10, 10), new Leading(287, 10, 10)));
-			}
-			return pCchest;
-		}
+		
 
 		private JButton getShuffleChanceButton() {
 			if (bShuffleChance == null) {
 				bShuffleChance = new JButton();
 				bShuffleChance.setText("Shuffle");
+				bShuffleChance.setEnabled(false);
 				bShuffleChance.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -252,17 +246,6 @@ public class GameBoard extends JFrame implements Runnable {
 				});
 			}
 			return bShuffleChance;
-		}
-
-		private JPanel getPChance() {
-			if (pChance == null) {
-				pChance = new JPanel();
-				pChance.setBackground(new Color(0, 255, 128));
-				pChance.setLayout(new GroupLayout());
-				pChance.add(getShuffleChanceButton(), new Constraints(new Leading(321, 10, 10), new Leading(259, 10, 10)));
-				pChance.setVisible(false);
-			}
-			return pChance;
 		}
 
 		private JButton gettdAyalaAveButton() {
@@ -665,18 +648,43 @@ public class GameBoard extends JFrame implements Runnable {
 			return lMonopoly;
 		}
 
-		private JPanel getClickToPlayPanel() {
-			if (pClicktoPlay == null) {
-				pClicktoPlay = new JPanel();
-				pClicktoPlay.setBackground(Color.black);
-				pClicktoPlay.setLayout(new GroupLayout());
-				pClicktoPlay.add(getPlayButton(), new Constraints(new Leading(292, 233, 12, 12), new Leading(282, 227, 10, 10)));
-				pClicktoPlay.add(getClicktoPlayLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 12, 12)));
-				pClicktoPlay.setVisible(false);
-			}
-			return pClicktoPlay;
-		}
+//////////////////////////////////////////PANELS //////////////////////////////////////////
 
+private JPanel getClickToPlayPanel() {
+	if (pClicktoPlay == null) {
+		pClicktoPlay = new JPanel();
+		pClicktoPlay.setBackground(Color.black);
+		pClicktoPlay.setLayout(new GroupLayout());
+		pClicktoPlay.add(getPlayButton(), new Constraints(new Leading(292, 233, 12, 12), new Leading(282, 227, 10, 10)));
+		pClicktoPlay.add(getClicktoPlayLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 12, 12)));
+		pClicktoPlay.setVisible(true);
+	}
+	return pClicktoPlay;
+}
+		
+private JPanel getPChance() {
+	if (pChance == null) {
+		pChance = new JPanel();
+		pChance.setBackground(new Color(0, 255, 128));
+		pChance.setLayout(new GroupLayout());
+		pChance.add(getShuffleChanceButton(), new Constraints(new Leading(321, 10, 10), new Leading(259, 10, 10)));
+		pChance.setVisible(false);
+	}
+	return pChance;
+}
+
+
+		
+private JPanel getPCchest() {
+	if (pCchest == null) {
+		pCchest = new JPanel();
+		pCchest.setBackground(new Color(0, 128, 255));
+		pCchest.setLayout(new GroupLayout());
+		pCchest.add(getShuffleChestButton(), new Constraints(new Leading(322, 10, 10), new Leading(287, 10, 10)));
+	}
+	return pCchest;
+}
+		
 private JPanel getTitleDeedsPanel() {
 	if (pTitleDeeds == null) {
 		pTitleDeeds = new JPanel();
@@ -863,8 +871,8 @@ private JPanel getBoardPanel() {
 				break;
 			case 2:
 				//ccRandom = (random.nextInt(16) + 1);
-				//chest.setCommunityChestRandom(ccRandom);
-				//chest.shuffleCommunityChest(chest.getCommunityChestRandom());
+				pCchest.setVisible(true);
+				bShuffleCchest.setEnabled(true);
 				break;
 			case 3:
 				//buyOrNot();
@@ -881,8 +889,8 @@ private JPanel getBoardPanel() {
 				break;
 			case 7:
 			//	randomChance = random.nextInt(16) + 1;
-			//	chance.setChanceRandom(randomChance);
-			//	chance.shuffleChance(chance.getChanceRandom());
+				pChance.setVisible(true);
+				bShuffleChance.setEnabled(true);
 				break;
 			case 8:
 				//buyOrNot();
@@ -910,8 +918,8 @@ private JPanel getBoardPanel() {
 				break;
 			case 17:
 				//ccRandom = (random.nextInt(16) + 1);
-				//chest.setCommunityChestRandom(ccRandom);
-				//chest.shuffleCommunityChest(chest.getCommunityChestRandom());
+				pCchest.setVisible(true);
+				bShuffleCchest.setEnabled(true);
 				break;
 			case 18:
 				//buyOrNot();
@@ -924,8 +932,8 @@ private JPanel getBoardPanel() {
 				break;
 			case 22:
 			//	randomChance = random.nextInt(16) + 1;
-			//	chance.setChanceRandom(randomChance);
-			//	chance.shuffleChance(chance.getChanceRandom());
+				pChance.setVisible(true);
+				bShuffleChance.setEnabled(true);
 				break;
 			case 23:
 				//buyOrNot();
@@ -959,8 +967,8 @@ private JPanel getBoardPanel() {
 				break;
 			case 33:
 				//ccRandom = (random.nextInt(16) + 1);
-				//chest.setCommunityChestRandom(ccRandom);
-				//chest.shuffleCommunityChest(chest.getCommunityChestRandom());
+				pCchest.setVisible(true);
+				bShuffleCchest.setEnabled(true);
 				break;
 			case 34:
 				//buyOrNot();
@@ -970,8 +978,8 @@ private JPanel getBoardPanel() {
 				break;
 			case 36:
 				//randomChance = random.nextInt(16) + 1;
-				//chance.setChanceRandom(randomChance);
-			//	chance.shuffleChance(chance.getChanceRandom());
+				pChance.setVisible(true);
+				bShuffleChance.setEnabled(true);
 				break;
 			case 37:
 				//buyOrNot();
