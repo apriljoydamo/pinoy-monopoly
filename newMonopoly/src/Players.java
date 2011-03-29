@@ -143,8 +143,24 @@ public class Players{
 			return hasJailKey;
 		}
 
-///////////////////////////////////////METHODS//////////////////////
+///////////////////////////////////////METHODS//////////////////////////
+		public void buyEstate(Estate estate, Players[] playerOrder, int x){
+			gotOwned(estate, playerOrder, x);
+		}
 		
+		public void buyStation(Station station, Players[] playerOrder, int x){
+			gotOwned(station, playerOrder, x);
+		}
+		
+		public void buyUtility(Utilities utility, Players[] playerOrder, int x){
+			gotOwned(utility, playerOrder, x);
+		}
+		
+		public void gotOwned(Property property, Players[] playerOrder, int x){
+			property.setOwned(true);
+			property.setOwnerName(playerOrder[x].getPlayerName());
+			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - property.getPrice());
+		}
 
 }
 
