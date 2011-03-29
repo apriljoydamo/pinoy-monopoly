@@ -32,8 +32,7 @@ public class GameBoard extends JFrame implements Runnable {
         Dice dice[] = new Dice[2];
         Players playerOrder[] = new Players[8];
         Random random = new Random();
-        //CommunityChest chest = new CommunityChest();
-       // Chance chance = new Chance();
+        BoardBlock bblock = new BoardBlock();
         
         static int numberOfPlayers;
         public int randomChance, ccRandom;
@@ -62,8 +61,8 @@ public class GameBoard extends JFrame implements Runnable {
 			add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
 			add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
 			setSize(805, 595);
-		}
-
+        }
+        
 		private JLabel getlChanceImage() {
 			if (lChanceImage == null) {
 				lChanceImage = new JLabel();
@@ -1049,4 +1048,35 @@ private JPanel getBoardPanel() {
         	}  
         }
 
+        public void buyOrNotEstate(){
+        	/*/if(!(bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().isOwned())){
+	        	//pBuyProperty.setVisible(true);
+	        	//lPropertyName.setText(bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().getName());
+	        	lPrice.setText("Php " + bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().getPrice());
+	        	pPlayer.setVisible(false);
+	        	pDice.setVisible(false); 
+	        	pBoard.setVisible(false);
+	        	
+        	}*/
+        }
+        
+        public void buyOrNotStation(){
+        	/*pBuyProperty.setVisible(true);
+        	lPropertyName.setText(bblock.getBlock()[playerOrder[x].getLastStep()].getStation().getName());
+        	lPrice.setText("Php " + bblock.getBlock()[playerOrder[x].getLastStep()].getStation().getPrice());
+        	pPlayer.setVisible(false);
+        	pDice.setVisible(false);
+        	pBoard.setVisible(false);
+        	*/
+        }
+        
+        public void buyOrNotUtility(){
+        	/*pBuyProperty.setVisible(true);
+        	lPropertyName.setText(bblock.getBlock()[playerOrder[x].getLastStep()].getUtilities().getName());
+        	lPrice.setText("Php " + bblock.getBlock()[playerOrder[x].getLastStep()].getUtilities().getPrice());
+        	pPlayer.setVisible(false);
+        	pDice.setVisible(false);
+        	pBoard.setVisible(false);
+        	*/
+        }
 }
