@@ -102,6 +102,8 @@ public class GameBoard extends JFrame implements Runnable {
 				bTryForDice.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						playerOrder[x].getToken().setLocation(23, 525);
+						
+						bTryForDice.setVisible(false);
 		     		    
 					//	pChoosePayOrTryDice.setVisible(false);
 					//	pBoard.setVisible(true);
@@ -132,6 +134,8 @@ public class GameBoard extends JFrame implements Runnable {
          		        		  	playerOrder[x].setBailOutDice(0);
          		        		  	playerOrder[x].setDoubleDice(0);
          		        		  	playerOrder[x].setTryForDice(0);
+         		        		  	
+         		        bPay50.setVisible(false);
          		        		  	
          		        		//  	pChoosePayOrTryDice.setVisible(false);
          		        	//	  	pPlayer.setVisible(true);
