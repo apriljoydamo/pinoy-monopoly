@@ -103,6 +103,7 @@ public class GameBoard extends JFrame implements Runnable {
 						playerOrder[x].getToken().setLocation(23, 525);
 						
 						bTryForDice.setVisible(false);
+						bPay50.setVisible(false);
 		     		    
 					//	pChoosePayOrTryDice.setVisible(false);
 					//	pBoard.setVisible(true);
@@ -135,6 +136,7 @@ public class GameBoard extends JFrame implements Runnable {
          		        		  	playerOrder[x].setTryForDice(0);
          		        		  	
          		        bPay50.setVisible(false);
+         		        bTryForDice.setVisible(false);
          		        		  	
          		        		//  	pChoosePayOrTryDice.setVisible(false);
          		        	//	  	pPlayer.setVisible(true);
@@ -251,6 +253,7 @@ public class GameBoard extends JFrame implements Runnable {
 				bRollDice.addActionListener(new ActionListener() {
 		
 					public void actionPerformed(ActionEvent event) {
+						lChanceImage.setVisible(false);
 						dice[0].rollDiceResult1();
 						dice[1].rollDiceResult2();
 						
@@ -669,7 +672,7 @@ private JPanel getBoardPanel() {
 		        		System.out.println("Advance to Trinoma. If you pass GO collect P200.");
 		                break;
 		        case 4:
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to GO.png")));
 			        	playerOrder[x].getToken().setLocation(525, 525);
 		        		playerOrder[x].setPosition(40);
 		        		passedGo();
@@ -677,68 +680,68 @@ private JPanel getBoardPanel() {
 	        			break;
 		        case 5:
 		        		//chance.paySchoolFees();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Pay school fees of P150.png")));
 		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
 		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 		        		break;
 		        case 6:
 		        		//chance.advanceToMoa();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to SM Mall of Asia.png")));
 		        		System.out.println("Advance to SM Mall of Asia.");
 		        		break;
 		        case 7:
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Get out of Jail Free Key.png")));
 			        	playerOrder[x].setHasJailKey(true);
-		        		System.out.println("Get out of Jail Free Key.");
+		        		//System.out.println("Get out of Jail Free Key.");
 		        		System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
 		        		
 			    		break;
 		        case 8:
 		        		//chance.streetRepairs();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/street repairs.png")));
 			    		System.out.println("Your are assessed for street rpairs. P40 per house, P115 per hotel.");
 			    		break;
 		        case 9:
 		        		//chance.generalRepairs();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/General repairs for buildings.png")));
 			    		System.out.println("Make general repairs on all of your buildings. For each house pay P25. For each hotel pay P100.");
 			    		break;
 		        case 10:
 		        		//chance.advanceToShopwise();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Shopwise.png")));
 			    		System.out.println("Advance to Shopwise. If you pass GO collect P200.");
 			    		break;
 		        case 11:
 		        		//chance.tripToBuendiaStation();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/take_a_trip_to_beundia_station.png")));
 			    		System.out.println("Take a trip to Buendia Station. If you pass GO collect P200.");
 			    		break;
 		        case 12:
 		        		//chance.buildingMatures();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/building_laon_matures.png")));
 		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
 		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 			    		break;
 		        case 13:
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/go_to_jail.png")));
 		        		goToJail();
 			    		System.out.println("GO TO JAIL.");
 			    		break;
 		        case 14:
 		        		//chance.goBackThreeSteps();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Go back three spaces.png")));
 		        		//playerOrder[x].getToken().setLocation();
 		        		System.out.println("Go back three spaces.");
 			    		break;
 		        case 15:
 		        		//chance.drunkInCharge();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Drunk in Charge.png")));
 		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
 		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 			    		break;
 		        case 16:
 		        		//chance.wonCrosswordCompetition();
-		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/crossword_competition.png")));
 		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
 		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 			    		break;
@@ -848,6 +851,7 @@ private JPanel getBoardPanel() {
 				break;
 			case 2:
 				//ccRandom = (random.nextInt(16) + 1);
+				cChestRandom();
 				break;
 			case 3:
 				//buyOrNot();
@@ -893,6 +897,7 @@ private JPanel getBoardPanel() {
 				break;
 			case 17:
 				//ccRandom = (random.nextInt(16) + 1);
+				cChestRandom();
 				break;
 			case 18:
 				//buyOrNot();
@@ -939,6 +944,7 @@ private JPanel getBoardPanel() {
 				break;
 			case 33:
 				//ccRandom = (random.nextInt(16) + 1);
+				cChestRandom();
 				break;
 			case 34:
 				//buyOrNot();
