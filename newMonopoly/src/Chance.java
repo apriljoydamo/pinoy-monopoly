@@ -14,30 +14,6 @@ public class Chance{
 		//return getChanceRandom();
 	}
 	
-	public void speedingFine(){
-		System.out.println("Speeding fine P15.");
-    }
-	
-	public void bankDividend(){
-		System.out.println("Bank pays you dividend of P50.");
-	}
-	
-	public void paySchoolFees(){
-		System.out.println("Pay school fees of P150.");
-	}
-	
-	public void buildingMatures(){
-		System.out.println("Your building loan matures. Receive P150.");
-	}
-	
-	public void drunkInCharge(){
-		System.out.println("Drunk in Charge. Fine P20.");						    		
-	}
-	
-	public void wonCrosswordCompetition(){
-		System.out.println("You have won a crossword competition. Collect P100.");
-	}
-	
 	
 ///////////////GETTER and SETTER ///////////////
 		
