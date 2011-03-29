@@ -6,6 +6,7 @@ public class Players{
         private String playerName;
         private Token token;
         private boolean isJailed = false, hasJailKey = false;
+        BoardBlock bblock = new BoardBlock();
 		
         
         
@@ -145,21 +146,22 @@ public class Players{
 
 ///////////////////////////////////////METHODS//////////////////////////
 		public void buyEstate(Estate estate, Players[] playerOrder, int x){
-			gotOwned(estate, playerOrder, x);
+			estate.setOwned(true);
+			estate.setOwnerName(playerOrder[x].getPlayerName());
+			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
 		}
 		
 		public void buyStation(Station station, Players[] playerOrder, int x){
-			gotOwned(station, playerOrder, x);
+			station.setOwned(true);
+			station.setOwnerName(playerOrder[x].getPlayerName());
+			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
 		}
 		
 		public void buyUtility(Utilities utility, Players[] playerOrder, int x){
-			gotOwned(utility, playerOrder, x);
-		}
-		
-		public void gotOwned(Property property, Players[] playerOrder, int x){
-			property.setOwned(true);
-			property.setOwnerName(playerOrder[x].getPlayerName());
-			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - property.getPrice());
+			utility.setOwned(true);
+			utility.setOwnerName(playerOrder[x].getPlayerName());
+			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
+			
 		}
 
 }
