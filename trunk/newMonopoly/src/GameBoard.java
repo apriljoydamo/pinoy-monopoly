@@ -557,6 +557,9 @@ private JPanel getBoardPanel() {
 		pBoard = new JPanel();
 		pBoard.setBackground(new Color(64, 0, 64));
 		pBoard.setLayout(new GroupLayout());
+		pBoard.add(getbPay50(), new Constraints(new Leading(314, 166, 10, 10), new Leading(108, 114, 10, 10)));
+		pBoard.add(getbTryForDice(), new Constraints(new Leading(314, 166, 12, 12), new Leading(281, 109, 10, 10)));
+		pBoard.add(getlChanceImage(), new Constraints(new Leading(104, 12, 12), new Leading(184, 12, 12)));
 		pBoard.add(getbBuy(), new Constraints(new Leading(243, 115, 12, 12), new Leading(263, 73, 12, 12)));
 		pBoard.add(getBaporLabel(), new Constraints(new Leading(515, 10, 10), new Leading(527, 12, 12)));
 		pBoard.add(getAzkalLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 10, 10)));
@@ -566,9 +569,6 @@ private JPanel getBoardPanel() {
 		pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
 		pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
 		pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-		pBoard.add(getbPay50(), new Constraints(new Leading(314, 166, 10, 10), new Leading(108, 114, 10, 10)));
-		pBoard.add(getbTryForDice(), new Constraints(new Leading(314, 166, 12, 12), new Leading(281, 109, 10, 10)));
-		pBoard.add(getlChanceImage(), new Constraints(new Leading(104, 12, 12), new Leading(184, 12, 12)));
 		pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
 		pBoard.setVisible(false);
 		}
@@ -731,6 +731,8 @@ private JPanel getBoardPanel() {
 		        case 6:
 		        		//chance.advanceToMoa();
 		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to SM Mall of Asia.png")));
+		        		playerOrder[x].getToken().setLocation(525, 462);
+		        		playerOrder[x].setPosition(39);
 		        		System.out.println("Advance to SM Mall of Asia.");
 		        		break;
 		        case 7:
@@ -852,7 +854,7 @@ private JPanel getBoardPanel() {
 	        			break;
 		        case 10:
 	        			//Cchest.goBackToOldKentRoad();
-			    		//System.out.println("Go back to Old Kent Road.");
+			    		System.out.println("Go back to Old Kent Road.");
 			    		break;
 		        case 11:
 		        		playerOrder[x].setHasJailKey(true);
@@ -891,210 +893,330 @@ private JPanel getBoardPanel() {
         	switch(playerOrder[x].getLastStep()){
 			
 			case 1:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
-				//lAyala
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
+				//lAyala.setIcon
 				break;
 			case 2:
 				//ccRandom = (random.nextInt(16) + 1);
 				cChestRandom();
 				break;
 			case 3:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 4:
-				playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
-				fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-				System.out.println("Paid 200 tax!");
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+					System.out.println("Paid 200 tax!");
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 5:
-				isStation = true;
-				isEstate = false;
-				isUtility = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isStation = true;
+					isEstate = false;
+					isUtility = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 6:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 7:
 				//randomChance = random.nextInt(16) + 1;
 				chanceRandom();
 				break;
 			case 8:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 9:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 11:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 12:
-				isUtility = true;
-				isEstate = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isUtility = true;
+					isEstate = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 13:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 14:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 15:
-				isStation = true;
-				isEstate = false;
-				isUtility = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isStation = true;
+					isEstate = false;
+					isUtility = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 16:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 17:
 				//ccRandom = (random.nextInt(16) + 1);
 				cChestRandom();
 				break;
 			case 18:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 19:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 21:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 22:
 				//randomChance = random.nextInt(16) + 1;
 				chanceRandom();
 				break;
 			case 23:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 24:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 25:
-				isStation = true;
-				isEstate = false;
-				isUtility = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isStation = true;
+					isEstate = false;
+					isUtility = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 26:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 27:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 28:
-				isUtility = true;
-				isEstate = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isUtility = true;
+					isEstate = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 29:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 30:
 				goToJail();
 				break;
 			case 31:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 32:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 33:
 				//ccRandom = (random.nextInt(16) + 1);
 				cChestRandom();
 				break;
 			case 34:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 35:
-				isStation = true;
-				isEstate = false;
-				isUtility = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isStation = true;
+					isEstate = false;
+					isUtility = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 36:
 				//randomChance = random.nextInt(16) + 1;
 				chanceRandom();
 				break;
 			case 37:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 38:
-				playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
-				fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-				System.out.println("Paid 100 tax!");
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+					System.out.println("Paid 100 tax!");
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 			case 39:
-				isEstate = true;
-				isUtility = false;
-				isStation = false;
-				bBuy.setEnabled(true);
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+					isEstate = true;
+					isUtility = false;
+					isStation = false;
+					bBuy.setEnabled(true);
+				}else{
+					playerOrder[x].payRent();
+				}
 				break;
 
 			}
@@ -1183,123 +1305,4 @@ private JPanel getBoardPanel() {
         		                                      
         	}  
         }
-
-       /* public void buyOrNotEstate(int a){
-        	switch(a){
-        	case 1:
-        		break;
-        	case 2:
-        		//lMakatiAve.setIcon
-        		break;
-        	case 3:
-        		//lPureGold.setIcon
-        		break;
-        	case 4:
-        		//lRizal
-        		break;
-        	case 5:
-        		//lDelaRosa
-        		break;
-        	case 6:
-        		//lShopwise
-        		break;
-        	case 7:
-        		//lSLEX
-        		break;
-        	case 8:
-        		//lWalterMart
-        		break;
-        	case 9:
-        		//lIntramuros
-        		break;
-        	case 10:
-        		//lC5
-        		break;
-        	case 11:
-        		//lChinaTown
-        		break;
-        	case 12:
-        		//lNLEX
-        		break;
-        	case 13:
-        		//lNationalBookstore
-        		break;
-        	case 14:
-        		//lTrinoma
-        		break;
-        	case 15:
-        		//lEDSA
-        		break;
-        	case 16:
-        		//lMagsaysayBrdg
-        		break;
-        	case 17:
-        		//lStarCity
-        		break;
-        	case 18:
-        		//lLandmark
-        		break;
-        	case 19:
-        		//lGlorietta
-        		break;
-        	case 20:
-        		//lGreenbelt
-        		break;
-        	case 21:
-        		//lBoracay
-        		break;
-        	case 22:
-        		//lMOA
-        		break;
-        	}
-        	if(!(bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().isOwned())){
-	        	//pBuyProperty.setVisible(true);
-	        	//lPropertyName.setText(bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().getName());
-	        	lPrice.setText("Php " + bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().getPrice());
-	        	pPlayer.setVisible(false);
-	        	pDice.setVisible(false); 
-	        	pBoard.setVisible(false);
-	        	
-        	}
-        }
-        
-        public void buyOrNotStation(int b){
-        	switch(b){
-        	case 1:
-        		//lAyalaAveStation
-        		break;
-        	case 2:
-        		//lBuendiaStation
-        		break;
-        	case 3:
-        		//lNorthEdsa
-        		break;
-        	}
-        	pBuyProperty.setVisible(true);
-        	lPropertyName.setText(bblock.getBlock()[playerOrder[x].getLastStep()].getStation().getName());
-        	lPrice.setText("Php " + bblock.getBlock()[playerOrder[x].getLastStep()].getStation().getPrice());
-        	pPlayer.setVisible(false);
-        	pDice.setVisible(false);
-        	pBoard.setVisible(false);
-        	
-        }
-        
-        public void buyOrNotUtility(int c){
-        	switch(c){
-        	case 1:
-        		//lMeralco
-        		break;
-        	case 2:
-        		//lMaynila
-        		break;
-        	}
-        	pBuyProperty.setVisible(true);
-        	lPropertyName.setText(bblock.getBlock()[playerOrder[x].getLastStep()].getUtilities().getName());
-        	lPrice.setText("Php " + bblock.getBlock()[playerOrder[x].getLastStep()].getUtilities().getPrice());
-        	pPlayer.setVisible(false);
-        	pDice.setVisible(false);
-        	pBoard.setVisible(false);
-        	
-        }*/
-
 }
