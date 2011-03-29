@@ -6,11 +6,11 @@ public class Block {
 	private Station station;
 	private Utilities utilities;
 	private Estate estate;
-	private Tax tax;
-	private Chance chance;
-	private CommunityChest cChest;
+	private Property property;
+	public Block(){
+		
+	}
 	
-
 	public Block(String name, int location){
 		this.setName(name);
 		this.setLocation(location);
@@ -28,16 +28,8 @@ public class Block {
 		this.setEstate(estate);
 	}
 	
-	public Block(Tax tax) {
-		this.setTax(tax);
-	}
-	
-	public Block(Chance chance) {
-		this.setChance(chance);
-	}
-	
-	public Block(CommunityChest cChest) {
-		this.setCommunityChest(cChest);
+	public Block(Property property){
+		this.setProperty(property);
 	}
 	
 ////////////////////////GETTERS AND SETTERS/////////////////////////////
@@ -76,26 +68,13 @@ public class Block {
 	public Estate getEstate() {
 		return estate;
 	}
-	
-	public void setTax(Tax tax){
-		this.tax = tax;
+
+	public void setProperty(Property property){
+		this.property = property;
 	}
-	public Tax getTax() {
-		return tax;
-	}
-	
-	public void setChance(Chance chance){
-		this.chance = chance;
-	}
-	public Chance getChance() {
-		return chance;
-	}
-	
-	public void setCommunityChest(CommunityChest cChest){
-		this.cChest = cChest;
-	}
-	public CommunityChest getcChest() {
-		return cChest;
+	public Property getProperty() {
+		// TODO Auto-generated method stub
+		return property;
 	}
 	
 }
