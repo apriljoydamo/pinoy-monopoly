@@ -33,7 +33,7 @@ public class GameBoard extends JFrame implements Runnable {
         Players playerOrder[] = new Players[8];
         Random random = new Random();
         BoardBlock bblock = new BoardBlock();
-        
+        //Block block = new Block();
         static int numberOfPlayers;
         public int randomChance, ccRandom;
         int x = 0;
@@ -47,6 +47,8 @@ public class GameBoard extends JFrame implements Runnable {
 		private JButton bTryForDice;
 		private JButton btdAyalaAve;
 		private JLabel lChanceImage;
+		private JButton bBuy;
+		boolean isEstate, isUtility, isStation;
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 		public GameBoard() {
                 dice[0] = new Dice();
@@ -63,6 +65,46 @@ public class GameBoard extends JFrame implements Runnable {
 			setSize(805, 595);
         }
         
+		private JButton getbBuy() {
+			if (bBuy == null) {
+				bBuy = new JButton();
+				bBuy.setText("bBuy");
+				bBuy.setEnabled(false);
+				bBuy.addActionListener(new ActionListener() {
+		
+					public void actionPerformed(ActionEvent event) {
+						if (isEstate == true) {
+							playerOrder[x].buyEstate(bblock.getBlock()[playerOrder[x].getPosition()].getEstate(), playerOrder, x);
+							fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+							System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
+							System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
+							System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned());
+							System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
+						} 
+						if (isUtility == true) {
+							playerOrder[x].buyUtility(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities(), playerOrder, x);
+							fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+							System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getName());
+							System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
+							System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned());
+							System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
+							
+						}
+						if (isStation == true) {
+							playerOrder[x].buyStation(bblock.getBlock()[playerOrder[x].getPosition()].getStation(), playerOrder, x);
+							fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+							System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getName());
+							System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
+							System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned());
+							System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getOwnerName());
+							
+						}
+					}
+				});
+			}
+			return bBuy;
+		}
+
 		private JLabel getlChanceImage() {
 			if (lChanceImage == null) {
 				lChanceImage = new JLabel();
@@ -253,6 +295,7 @@ public class GameBoard extends JFrame implements Runnable {
 				bRollDice.addActionListener(new ActionListener() {
 		
 					public void actionPerformed(ActionEvent event) {
+						bBuy.setEnabled(false);
 						lChanceImage.setVisible(false);
 						dice[0].rollDiceResult1();
 						dice[1].rollDiceResult2();
@@ -514,6 +557,7 @@ private JPanel getBoardPanel() {
 		pBoard = new JPanel();
 		pBoard.setBackground(new Color(64, 0, 64));
 		pBoard.setLayout(new GroupLayout());
+		pBoard.add(getbBuy(), new Constraints(new Leading(243, 115, 12, 12), new Leading(263, 73, 12, 12)));
 		pBoard.add(getBaporLabel(), new Constraints(new Leading(515, 10, 10), new Leading(527, 12, 12)));
 		pBoard.add(getAzkalLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 10, 10)));
 		pBoard.add(getIronLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
@@ -527,7 +571,7 @@ private JPanel getBoardPanel() {
 		pBoard.add(getlChanceImage(), new Constraints(new Leading(104, 12, 12), new Leading(184, 12, 12)));
 		pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
 		pBoard.setVisible(false);
-	}
+		}
 	return pBoard;
 }
 
@@ -847,14 +891,21 @@ private JPanel getBoardPanel() {
         	switch(playerOrder[x].getLastStep()){
 			
 			case 1:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
+				//lAyala
 				break;
 			case 2:
 				//ccRandom = (random.nextInt(16) + 1);
 				cChestRandom();
 				break;
 			case 3:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 4:
 				playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
@@ -862,102 +913,177 @@ private JPanel getBoardPanel() {
 				System.out.println("Paid 200 tax!");
 				break;
 			case 5:
-				//buyOrNot();
+				isStation = true;
+				isEstate = false;
+				isUtility = false;
+				bBuy.setEnabled(true);
 				break;
 			case 6:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 7:
-			//	randomChance = random.nextInt(16) + 1;
+				//randomChance = random.nextInt(16) + 1;
 				chanceRandom();
 				break;
 			case 8:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 9:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 11:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 12:
-				//buyOrNot();
+				isUtility = true;
+				isEstate = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 13:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 14:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 15:
-				//buyOrNot();
+				isStation = true;
+				isEstate = false;
+				isUtility = false;
+				bBuy.setEnabled(true);
 				break;
 			case 16:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 17:
 				//ccRandom = (random.nextInt(16) + 1);
 				cChestRandom();
 				break;
 			case 18:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 19:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 21:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 22:
-			//	randomChance = random.nextInt(16) + 1;
+				//randomChance = random.nextInt(16) + 1;
 				chanceRandom();
 				break;
 			case 23:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 24:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 25:
-				//buyOrNot();
+				isStation = true;
+				isEstate = false;
+				isUtility = false;
+				bBuy.setEnabled(true);
 				break;
 			case 26:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 27:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 28:
-				//buyOrNot();
+				isUtility = true;
+				isEstate = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 29:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 30:
 				goToJail();
 				break;
 			case 31:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 32:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 33:
 				//ccRandom = (random.nextInt(16) + 1);
 				cChestRandom();
 				break;
 			case 34:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 35:
-				//buyOrNot();
+				isStation = true;
+				isEstate = false;
+				isUtility = false;
+				bBuy.setEnabled(true);
 				break;
 			case 36:
 				//randomChance = random.nextInt(16) + 1;
 				chanceRandom();
 				break;
 			case 37:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
 			case 38:
 				playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
@@ -965,8 +1091,12 @@ private JPanel getBoardPanel() {
 				System.out.println("Paid 100 tax!");
 				break;
 			case 39:
-				//buyOrNot();
+				isEstate = true;
+				isUtility = false;
+				isStation = false;
+				bBuy.setEnabled(true);
 				break;
+
 			}
         }
         
@@ -1054,8 +1184,75 @@ private JPanel getBoardPanel() {
         	}  
         }
 
-        public void buyOrNotEstate(){
-        	/*/if(!(bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().isOwned())){
+       /* public void buyOrNotEstate(int a){
+        	switch(a){
+        	case 1:
+        		break;
+        	case 2:
+        		//lMakatiAve.setIcon
+        		break;
+        	case 3:
+        		//lPureGold.setIcon
+        		break;
+        	case 4:
+        		//lRizal
+        		break;
+        	case 5:
+        		//lDelaRosa
+        		break;
+        	case 6:
+        		//lShopwise
+        		break;
+        	case 7:
+        		//lSLEX
+        		break;
+        	case 8:
+        		//lWalterMart
+        		break;
+        	case 9:
+        		//lIntramuros
+        		break;
+        	case 10:
+        		//lC5
+        		break;
+        	case 11:
+        		//lChinaTown
+        		break;
+        	case 12:
+        		//lNLEX
+        		break;
+        	case 13:
+        		//lNationalBookstore
+        		break;
+        	case 14:
+        		//lTrinoma
+        		break;
+        	case 15:
+        		//lEDSA
+        		break;
+        	case 16:
+        		//lMagsaysayBrdg
+        		break;
+        	case 17:
+        		//lStarCity
+        		break;
+        	case 18:
+        		//lLandmark
+        		break;
+        	case 19:
+        		//lGlorietta
+        		break;
+        	case 20:
+        		//lGreenbelt
+        		break;
+        	case 21:
+        		//lBoracay
+        		break;
+        	case 22:
+        		//lMOA
+        		break;
+        	}
+        	if(!(bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().isOwned())){
 	        	//pBuyProperty.setVisible(true);
 	        	//lPropertyName.setText(bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().getName());
 	        	lPrice.setText("Php " + bblock.getBlock()[playerOrder[x].getLastStep()].getEstate().getPrice());
@@ -1063,26 +1260,46 @@ private JPanel getBoardPanel() {
 	        	pDice.setVisible(false); 
 	        	pBoard.setVisible(false);
 	        	
-        	}*/
+        	}
         }
         
-        public void buyOrNotStation(){
-        	/*pBuyProperty.setVisible(true);
+        public void buyOrNotStation(int b){
+        	switch(b){
+        	case 1:
+        		//lAyalaAveStation
+        		break;
+        	case 2:
+        		//lBuendiaStation
+        		break;
+        	case 3:
+        		//lNorthEdsa
+        		break;
+        	}
+        	pBuyProperty.setVisible(true);
         	lPropertyName.setText(bblock.getBlock()[playerOrder[x].getLastStep()].getStation().getName());
         	lPrice.setText("Php " + bblock.getBlock()[playerOrder[x].getLastStep()].getStation().getPrice());
         	pPlayer.setVisible(false);
         	pDice.setVisible(false);
         	pBoard.setVisible(false);
-        	*/
+        	
         }
         
-        public void buyOrNotUtility(){
-        	/*pBuyProperty.setVisible(true);
+        public void buyOrNotUtility(int c){
+        	switch(c){
+        	case 1:
+        		//lMeralco
+        		break;
+        	case 2:
+        		//lMaynila
+        		break;
+        	}
+        	pBuyProperty.setVisible(true);
         	lPropertyName.setText(bblock.getBlock()[playerOrder[x].getLastStep()].getUtilities().getName());
         	lPrice.setText("Php " + bblock.getBlock()[playerOrder[x].getLastStep()].getUtilities().getPrice());
         	pPlayer.setVisible(false);
         	pDice.setVisible(false);
         	pBoard.setVisible(false);
-        	*/
-        }
+        	
+        }*/
+
 }
