@@ -163,6 +163,10 @@ public class Players{
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
 			
 		}
+		
+		public void payRent(){
+			
+		}
 
 }
 
