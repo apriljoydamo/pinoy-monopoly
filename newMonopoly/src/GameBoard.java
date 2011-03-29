@@ -48,13 +48,6 @@ public class GameBoard extends JFrame implements Runnable {
 		private JButton bPay50;
 		private JButton bTryForDice;
 		private JButton btdAyalaAve;
-		private JPanel pChance;
-		private JButton bShuffleChance;
-		private JPanel pCchest;
-		private JButton bShuffleCchest;
-		private JPanel pCchestPayOrChance;
-		private JButton bPay10;
-		private JButton bTakeaChance;
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 		public GameBoard() {
                 dice[0] = new Dice();
@@ -68,256 +61,7 @@ public class GameBoard extends JFrame implements Runnable {
 			add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
 			add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
 			add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
-			add(getpChoosePayOrTryDice(), new Constraints(new Leading(-3, 813, 835, 835), new Leading(-2, 601, 10, 10)));
-			add(getPChance(), new Constraints(new Leading(0, 806, 835, 835), new Bilateral(0, -20, 295)));
-			add(getPCchest(), new Constraints(new Leading(-3, 812, 835, 835), new Leading(0, 596, 623, 623)));
-			add(getpCchestPayOrChance(), new Constraints(new Leading(126, 473, 835, 835), new Leading(63, 261, 10, 10)));
 			setSize(805, 595);
-		}
-
-		private JButton getbTakeAChance() {
-			if (bTakeaChance == null) {
-				bTakeaChance = new JButton();
-				bTakeaChance.setText("Take a Chance");
-			}
-			return bTakeaChance;
-		}
-
-		private JButton getbPay10() {
-			if (bPay10 == null) {
-				bPay10 = new JButton();
-				bPay10.setText("Pay 10");
-				bPay10.addActionListener(new ActionListener() {
-		
-					public void actionPerformed(ActionEvent event) {
-						
-						playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 10);
-		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					}
-				});
-			}
-			return bPay10;
-		}
-
-		private JPanel getpCchestPayOrChance() {
-			if (pCchestPayOrChance == null) {
-				pCchestPayOrChance = new JPanel();
-				pCchestPayOrChance.setBackground(new Color(255, 128, 0));
-				pCchestPayOrChance.setLayout(new GroupLayout());
-				pCchestPayOrChance.add(getbPay10(), new Constraints(new Leading(75, 10, 10), new Leading(202, 10, 10)));
-				pCchestPayOrChance.add(getbTakeAChance(), new Constraints(new Leading(324, 10, 10), new Leading(200, 10, 10)));
-				pCchestPayOrChance.setVisible(false);
-			}
-			return pCchestPayOrChance;
-		}
-
-		private JButton getShuffleChestButton() {
-			if (bShuffleCchest == null) {
-				bShuffleCchest = new JButton();
-				bShuffleCchest.setText("Shuffle");
-				bShuffleCchest.setEnabled(false);
-				bShuffleCchest.addActionListener(new ActionListener() {
-		
-					public void actionPerformed(ActionEvent event) {
-						CommunityChest Cchest = new CommunityChest();
-						
-						Cchest.shuffleCchest();
-						
-						switch (Cchest.getcChestRandom()){
-						
-							case 1:
-									Cchest.bankError();
-									playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
-									fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-									break;
-					        case 2:
-					        		Cchest.payHospital();
-					        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-							        break;
-					        case 3:
-					        		Cchest.wonBeautyContest();
-					        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 10);
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-							        break;
-					        case 4:
-					    			Cchest.taxRefund();
-					    			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 20);
-					    			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-							        break;
-					        case 5:
-					    			//pPayOrChance.setVisible(true);
-					        		Cchest.payOrChance();
-					        		pCchestPayOrChance.setVisible(true);
-					    			//there should be a PANEL...with a PAY 10 or TAKE CHANCE here...
-					    			//System.out.println("Pay a P10 fine or take a CHANCE.");
-					                break;
-					        case 6:
-					        		Cchest.payInsurance();
-					        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					        		break;
-					        case 7:
-				        			Cchest.saleOfStock();
-				        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
-				        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-				        			break;
-					        case 8:
-				        			Cchest.recieveInterest();
-				        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 25);
-				        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-				        			break;
-					        case 9:
-					        		playerOrder[x].getToken().setLocation(525, 525);
-					        		playerOrder[x].setPosition(40);
-					        		passedGo();
-					        		System.out.println("Pass Go.");
-				        			break;
-					        case 10:
-				        			//Cchest.goBackToOldKentRoad();
-						    		//System.out.println("Go back to Old Kent Road.");
-						    		break;
-					        case 11:
-					        		playerOrder[x].setHasJailKey(true);
-					        		System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
-					        		break;
-					        case 12:
-				        			Cchest.yourBirthday();
-						    	//	System.out.println("It is your birthday. Collect P10 from each player.");
-						    		break;
-					        case 13:
-				        			Cchest.doctorsFee();
-				        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
-				        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-				        			break;
-					        case 14:
-				        			Cchest.annuityMatures();
-				        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
-				        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-				        			break;
-					        case 15:
-				        			goToJail();
-				        			break;
-					        case 16:
-				        			Cchest.inheritMoney();
-				        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
-				        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-				        			break;
-															
-								}
-						pCchest.setVisible(false);
-						pBoard.setVisible(true);
-						pPlayer.setVisible(true);
-						pDice.setVisible(true);
-					}
-				});
-			}
-			return bShuffleCchest;
-		}
-
-		
-
-		private JButton getShuffleChanceButton() {
-			if (bShuffleChance == null) {
-				bShuffleChance = new JButton();
-				bShuffleChance.setText("Shuffle");
-				bShuffleChance.setEnabled(false);
-				//bShuffleChance.setVisible(false);
-				bShuffleChance.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent event) {
-						Chance chance = new Chance();
-						
-						chance.shuffleChance();
-						
-						switch (chance.getChanceRandom()){
-						
-							case 1:
-									chance.speedingFine();
-									playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
-									fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					                break;				                
-					        case 2:
-					        		chance.bankDividend();
-					        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					        		break;
-					        case 3:
-					        		//chance.advanceToTrinoma();
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					        		System.out.println("Advance to Trinoma. If you pass GO collect P200.");
-					                break;
-					        case 4:
-						        	playerOrder[x].getToken().setLocation(525, 525);
-					        		playerOrder[x].setPosition(40);
-					        		passedGo();
-					        		System.out.println("Pass Go.");
-				        			break;
-					        case 5:
-					        		chance.paySchoolFees();
-					        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					        		break;
-					        case 6:
-					        		//chance.advanceToMoa();
-					        		System.out.println("Advance to SM Mall of Asia.");
-					        		break;
-					        case 7:
-						        	playerOrder[x].setHasJailKey(true);
-					        		System.out.println("Get out of Jail Free Key.");
-					        		System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
-					        		
-						    		break;
-					        case 8:
-					        		//chance.streetRepairs();
-						    		System.out.println("Your are assessed for street rpairs. P40 per house, P115 per hotel.");
-						    		break;
-					        case 9:
-					        		//chance.generalRepairs();
-						    		System.out.println("Make general repairs on all of your buildings. For each house pay P25. For each hotel pay P100.");
-						    		break;
-					        case 10:
-					        		//chance.advanceToShopwise();
-						    		System.out.println("Advance to Shopwise. If you pass GO collect P200.");
-						    		break;
-					        case 11:
-					        		//chance.tripToBuendiaStation();
-						    		System.out.println("Take a trip to Buendia Station. If you pass GO collect P200.");
-						    		break;
-					        case 12:
-					        		chance.buildingMatures();
-					        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						    		break;
-					        case 13:
-					        		goToJail();
-						    		System.out.println("GO TO JAIL.");
-						    		break;
-					        case 14:
-					        		//chance.goBackThreeSteps();
-					        		//playerOrder[x].getToken().setLocation();
-					        		System.out.println("Go back three spaces.");
-						    		break;
-					        case 15:
-					        		chance.drunkInCharge();
-					        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						    		break;
-					        case 16:
-					        		chance.wonCrosswordCompetition();
-					        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						    		break;
-					        }
-						pChance.setVisible(false);
-						pBoard.setVisible(true);
-						pPlayer.setVisible(true);
-						pDice.setVisible(true);
-						
-					}
-				});
-			}
-			return bShuffleChance;
 		}
 
 		private JButton gettdAyalaAveButton() {
@@ -345,14 +89,15 @@ public class GameBoard extends JFrame implements Runnable {
 			if (bTryForDice == null) {
 				bTryForDice = new JButton();
 				bTryForDice.setText("Try for Dice");
+				bTryForDice.setVisible(false);
 				bTryForDice.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						playerOrder[x].getToken().setLocation(23, 525);
 		     		    
-						pChoosePayOrTryDice.setVisible(false);
-						pBoard.setVisible(true);
-						pPlayer.setVisible(true);
-						pDice.setVisible(true);
+					//	pChoosePayOrTryDice.setVisible(false);
+					//	pBoard.setVisible(true);
+					//	pPlayer.setVisible(true);
+					//	pDice.setVisible(true);
 						//you have chosen to try for dice... you have 3 try to roll for doubleDice...
 					}
 				});
@@ -365,6 +110,7 @@ public class GameBoard extends JFrame implements Runnable {
 			if (bPay50 == null) {
 				bPay50 = new JButton();
 				bPay50.setText("Pay 50");
+				bPay50.setVisible(false);
 				bPay50.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent event) {
 						playerOrder[x].getToken().setLocation(23, 525);
@@ -378,29 +124,16 @@ public class GameBoard extends JFrame implements Runnable {
          		        		  	playerOrder[x].setDoubleDice(0);
          		        		  	playerOrder[x].setTryForDice(0);
          		        		  	
-         		        		  	pChoosePayOrTryDice.setVisible(false);
-         		        		  	pPlayer.setVisible(true);
-         							pDice.setVisible(true);
-         							pBoard.setVisible(true);
+         		        		//  	pChoosePayOrTryDice.setVisible(false);
+         		        	//	  	pPlayer.setVisible(true);
+         						//	pDice.setVisible(true);
+         							//pBoard.setVisible(true);
 						//show label that says: paid for getting out of jail! 
 						
 					}
 				});
 			}
 			return bPay50;
-		}
-
-		private JPanel getpChoosePayOrTryDice() {
-			if (pChoosePayOrTryDice == null) {
-				pChoosePayOrTryDice = new JPanel();
-				pChoosePayOrTryDice.setVisible(false);
-				pChoosePayOrTryDice.setBackground(new Color(64, 0, 128));
-				pChoosePayOrTryDice.setForeground(new Color(64, 0, 128));
-				pChoosePayOrTryDice.setLayout(new GroupLayout());
-				pChoosePayOrTryDice.add(getbPay50(), new Constraints(new Leading(314, 166, 10, 10), new Leading(108, 114, 10, 10)));
-				pChoosePayOrTryDice.add(getbTryForDice(), new Constraints(new Leading(314, 166, 12, 12), new Leading(281, 109, 10, 10)));
-			}
-			return pChoosePayOrTryDice;
 		}
 
 		private JLabel getTitleDeedImageLabel() {
@@ -720,27 +453,6 @@ private JPanel getClickToPlayPanel() {
 	return pClicktoPlay;
 }
 		
-private JPanel getPChance() {
-	if (pChance == null) {
-		pChance = new JPanel();
-		pChance.setBackground(new Color(0, 255, 128));
-		pChance.setLayout(new GroupLayout());
-		pChance.add(getShuffleChanceButton(), new Constraints(new Leading(333, 116, 10, 10), new Leading(388, 60, 10, 10)));
-		pChance.setVisible(false);	
-	}
-	return pChance;
-}
-
-private JPanel getPCchest() {
-	if (pCchest == null) {
-		pCchest = new JPanel();
-		pCchest.setBackground(new Color(0, 128, 255));
-		pCchest.setLayout(new GroupLayout());
-		pCchest.add(getShuffleChestButton(), new Constraints(new Leading(351, 120, 10, 10), new Leading(443, 52, 10, 10)));
-		pCchest.setVisible(false);
-	}
-	return pCchest;
-}
 
 private JPanel getTitleDeedsPanel() {
 	if (pTitleDeeds == null) {
@@ -796,6 +508,8 @@ private JPanel getBoardPanel() {
 		pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
 		pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
 		pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
+		pBoard.add(getbPay50(), new Constraints(new Leading(314, 166, 10, 10), new Leading(108, 114, 10, 10)));
+		pBoard.add(getbTryForDice(), new Constraints(new Leading(314, 166, 12, 12), new Leading(281, 109, 10, 10)));
 		pBoard.setVisible(false);
 	}
 	return pBoard;
@@ -916,6 +630,184 @@ private JPanel getBoardPanel() {
         
 ///////////////////////////////////////METHODS USED IN BOARD/////////////////////////////////////
         
+        public void chanceRandom(){
+        	Chance chance = new Chance();
+			chance.shuffleChance();
+			
+			switch (chance.getChanceRandom()){
+			
+				case 1:
+						chance.speedingFine();
+						playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		                break;				                
+		        case 2:
+		        		chance.bankDividend();
+		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		        		break;
+		        case 3:
+		        		//chance.advanceToTrinoma();
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		        		System.out.println("Advance to Trinoma. If you pass GO collect P200.");
+		                break;
+		        case 4:
+			        	playerOrder[x].getToken().setLocation(525, 525);
+		        		playerOrder[x].setPosition(40);
+		        		passedGo();
+		        		System.out.println("Pass Go.");
+	        			break;
+		        case 5:
+		        		chance.paySchoolFees();
+		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		        		break;
+		        case 6:
+		        		//chance.advanceToMoa();
+		        		System.out.println("Advance to SM Mall of Asia.");
+		        		break;
+		        case 7:
+			        	playerOrder[x].setHasJailKey(true);
+		        		System.out.println("Get out of Jail Free Key.");
+		        		System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
+		        		
+			    		break;
+		        case 8:
+		        		//chance.streetRepairs();
+			    		System.out.println("Your are assessed for street rpairs. P40 per house, P115 per hotel.");
+			    		break;
+		        case 9:
+		        		//chance.generalRepairs();
+			    		System.out.println("Make general repairs on all of your buildings. For each house pay P25. For each hotel pay P100.");
+			    		break;
+		        case 10:
+		        		//chance.advanceToShopwise();
+			    		System.out.println("Advance to Shopwise. If you pass GO collect P200.");
+			    		break;
+		        case 11:
+		        		//chance.tripToBuendiaStation();
+			    		System.out.println("Take a trip to Buendia Station. If you pass GO collect P200.");
+			    		break;
+		        case 12:
+		        		chance.buildingMatures();
+		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+			    		break;
+		        case 13:
+		        		goToJail();
+			    		System.out.println("GO TO JAIL.");
+			    		break;
+		        case 14:
+		        		//chance.goBackThreeSteps();
+		        		//playerOrder[x].getToken().setLocation();
+		        		System.out.println("Go back three spaces.");
+			    		break;
+		        case 15:
+		        		chance.drunkInCharge();
+		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+			    		break;
+		        case 16:
+		        		chance.wonCrosswordCompetition();
+		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+			    		break;
+		        }
+        	
+        }
+        
+        
+        
+        public void cChestRandom(){
+        	
+        	CommunityChest Cchest = new CommunityChest();
+			Cchest.shuffleCchest();
+			
+			switch (Cchest.getcChestRandom()){
+			
+				case 1:
+						//Cchest.bankError();
+						playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+						break;
+		        case 2:
+		        		//Cchest.payHospital();
+		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				        break;
+		        case 3:
+		        		//Cchest.wonBeautyContest();
+		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 10);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				        break;
+		        case 4:
+		    			//Cchest.taxRefund();
+		    			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 20);
+		    			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				        break;
+		        case 5:
+		    			//pPayOrChance.setVisible(true);
+		        		//Cchest.payOrChance();
+		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 10);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		    			//there should be a PANEL...with a PAY 10 or TAKE CHANCE here...
+		                break;
+		        case 6:
+		        		//Cchest.payInsurance();
+		        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		        		break;
+		        case 7:
+	        			//Cchest.saleOfStock();
+	        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
+	        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+	        			break;
+		        case 8:
+	        			//Cchest.recieveInterest();
+	        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 25);
+	        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+	        			break;
+		        case 9:
+		        		playerOrder[x].getToken().setLocation(525, 525);
+		        		playerOrder[x].setPosition(40);
+		        		passedGo();
+		        		System.out.println("Pass Go.");
+	        			break;
+		        case 10:
+	        			//Cchest.goBackToOldKentRoad();
+			    		//System.out.println("Go back to Old Kent Road.");
+			    		break;
+		        case 11:
+		        		playerOrder[x].setHasJailKey(true);
+		        		System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
+		        		break;
+		        case 12:
+	        			//Cchest.yourBirthday();
+			    	//	System.out.println("It is your birthday. Collect P10 from each player.");
+			    		break;
+		        case 13:
+	        			//Cchest.doctorsFee();
+	        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
+	        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+	        			break;
+		        case 14:
+	        			//Cchest.annuityMatures();
+	        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
+	        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+	        			break;
+		        case 15:
+	        			goToJail();
+	        			break;
+		        case 16:
+	        			//Cchest.inheritMoney();
+	        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
+	        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+	        			break;
+												
+					}
+        	
+        }
+        
         public void checkBoard(){
         	//Random random = new Random();
         	
@@ -926,11 +818,6 @@ private JPanel getBoardPanel() {
 				break;
 			case 2:
 				//ccRandom = (random.nextInt(16) + 1);
-				pCchest.setVisible(true);
-				bShuffleCchest.setEnabled(true);
-				pBoard.setVisible(false);
-				pPlayer.setVisible(false);
-				pDice.setVisible(false);
 				break;
 			case 3:
 				//buyOrNot();
@@ -948,11 +835,6 @@ private JPanel getBoardPanel() {
 				break;
 			case 7:
 			//	randomChance = random.nextInt(16) + 1;
-				pChance.setVisible(true);
-				bShuffleChance.setEnabled(true);
-				pBoard.setVisible(false);
-				pPlayer.setVisible(false);
-				pDice.setVisible(false);
 				break;
 			case 8:
 				//buyOrNot();
@@ -980,11 +862,6 @@ private JPanel getBoardPanel() {
 				break;
 			case 17:
 				//ccRandom = (random.nextInt(16) + 1);
-				pCchest.setVisible(true);
-				bShuffleCchest.setEnabled(true);
-				pBoard.setVisible(false);
-				pPlayer.setVisible(false);
-				pDice.setVisible(false);
 				break;
 			case 18:
 				//buyOrNot();
@@ -997,11 +874,6 @@ private JPanel getBoardPanel() {
 				break;
 			case 22:
 			//	randomChance = random.nextInt(16) + 1;
-				pChance.setVisible(true);
-				bShuffleChance.setEnabled(true);
-				pBoard.setVisible(false);
-				pPlayer.setVisible(false);
-				pDice.setVisible(false);
 				break;
 			case 23:
 				//buyOrNot();
@@ -1035,11 +907,6 @@ private JPanel getBoardPanel() {
 				break;
 			case 33:
 				//ccRandom = (random.nextInt(16) + 1);
-				pCchest.setVisible(true);
-				bShuffleCchest.setEnabled(true);
-				pBoard.setVisible(false);
-				pPlayer.setVisible(false);
-				pDice.setVisible(false);
 				break;
 			case 34:
 				//buyOrNot();
@@ -1049,11 +916,6 @@ private JPanel getBoardPanel() {
 				break;
 			case 36:
 				//randomChance = random.nextInt(16) + 1;
-				pChance.setVisible(true);
-				bShuffleChance.setEnabled(true);
-				pBoard.setVisible(false);
-				pPlayer.setVisible(false);
-				pDice.setVisible(false);
 				break;
 			case 37:
 				//buyOrNot();
@@ -1107,11 +969,12 @@ private JPanel getBoardPanel() {
          		    playerOrder[x].getToken().setyLocation(525);
          		    playerOrder[x].setJailed(true);
          		    System.out.println("Jailed: "+playerOrder[x].isJailed());
-         		    updateTokenPosition(); 
-         		    pChoosePayOrTryDice.setVisible(true);
-         		    pBoard.setVisible(false);
-         		    pPlayer.setVisible(false);
-         		    pDice.setVisible(false);
+         		    updateTokenPosition();
+       				bPay50.setVisible(true);
+       				bTryForDice.setVisible(true);
+         		   // pBoard.setVisible(false);
+         		   // pPlayer.setVisible(false);
+         		   // pDice.setVisible(false);
          		    t.stop();
          		   
        }
