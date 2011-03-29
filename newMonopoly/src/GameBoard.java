@@ -52,6 +52,9 @@ public class GameBoard extends JFrame implements Runnable {
 		private JButton bShuffleChance;
 		private JPanel pCchest;
 		private JButton bShuffleCchest;
+		private JPanel pCchestPayOrChance;
+		private JButton bPay10;
+		private JButton bTakeaChance;
 		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 		public GameBoard() {
                 dice[0] = new Dice();
@@ -68,7 +71,44 @@ public class GameBoard extends JFrame implements Runnable {
 			add(getpChoosePayOrTryDice(), new Constraints(new Leading(-3, 813, 835, 835), new Leading(-2, 601, 10, 10)));
 			add(getPChance(), new Constraints(new Leading(0, 806, 835, 835), new Bilateral(0, -20, 295)));
 			add(getPCchest(), new Constraints(new Leading(-3, 812, 835, 835), new Leading(0, 596, 623, 623)));
+			add(getpCchestPayOrChance(), new Constraints(new Leading(126, 473, 835, 835), new Leading(63, 261, 10, 10)));
 			setSize(805, 595);
+		}
+
+		private JButton getbTakeAChance() {
+			if (bTakeaChance == null) {
+				bTakeaChance = new JButton();
+				bTakeaChance.setText("Take a Chance");
+			}
+			return bTakeaChance;
+		}
+
+		private JButton getbPay10() {
+			if (bPay10 == null) {
+				bPay10 = new JButton();
+				bPay10.setText("Pay 10");
+				bPay10.addActionListener(new ActionListener() {
+		
+					public void actionPerformed(ActionEvent event) {
+						
+						playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 10);
+		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+					}
+				});
+			}
+			return bPay10;
+		}
+
+		private JPanel getpCchestPayOrChance() {
+			if (pCchestPayOrChance == null) {
+				pCchestPayOrChance = new JPanel();
+				pCchestPayOrChance.setBackground(new Color(255, 128, 0));
+				pCchestPayOrChance.setLayout(new GroupLayout());
+				pCchestPayOrChance.add(getbPay10(), new Constraints(new Leading(75, 10, 10), new Leading(202, 10, 10)));
+				pCchestPayOrChance.add(getbTakeAChance(), new Constraints(new Leading(324, 10, 10), new Leading(200, 10, 10)));
+				pCchestPayOrChance.setVisible(false);
+			}
+			return pCchestPayOrChance;
 		}
 
 		private JButton getShuffleChestButton() {
@@ -108,8 +148,7 @@ public class GameBoard extends JFrame implements Runnable {
 					        case 5:
 					    			//pPayOrChance.setVisible(true);
 					        		Cchest.payOrChance();
-					        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 10);
-					        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+					        		pCchestPayOrChance.setVisible(true);
 					    			//there should be a PANEL...with a PAY 10 or TAKE CHANCE here...
 					    			//System.out.println("Pay a P10 fine or take a CHANCE.");
 					                break;
