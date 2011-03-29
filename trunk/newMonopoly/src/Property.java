@@ -6,10 +6,6 @@ public class Property extends Block{
 	private boolean isOwned = false;
 	//private String name;// = super.getBlockName();
 	
-	public Property(String name, int location) {
-		super(name, location);
-		this.setPrice(price);
-	}
 	
 	////////////////////////////GETTERS AND SETTERS/////////////////////
 	public void setPrice(int price) {
