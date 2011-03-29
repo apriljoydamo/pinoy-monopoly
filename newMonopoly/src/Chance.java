@@ -15,6 +15,7 @@ public class Chance{
 	}
 	
 	
+	
 ///////////////GETTER and SETTER ///////////////
 		
 	public int getChanceRandom() {
