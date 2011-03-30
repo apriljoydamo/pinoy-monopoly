@@ -563,6 +563,7 @@ private JPanel getBoardPanel() {
 		pBoard.add(getbPay50(), new Constraints(new Leading(104, 198, 12, 12), new Leading(195, 302, 10, 10)));
 		pBoard.add(getbTryForDice(), new Constraints(new Leading(314, 183, 12, 12), new Leading(101, 287, 10, 10)));
 		pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
+		pBoard.setVisible(false);
 		}
 	return pBoard;
 }
@@ -593,7 +594,7 @@ private JPanel getBoardPanel() {
      		    t.stop();
      		}
         		for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
-                        
+        		//for(int a = 0; a < 36; a++){      
                 		if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
                                         try{
                                                         if(playerOrder[x].getPosition() == 0 || playerOrder[x].getPosition() == 9){
@@ -688,7 +689,7 @@ private JPanel getBoardPanel() {
 			lChanceImage.setVisible(true);
 			
 			switch (chance.getChanceRandom()){
-			
+			//switch (3){
 				case 1:
 						//chance.speedingFine();
 						lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Speeding fine P15.png")));
@@ -704,13 +705,24 @@ private JPanel getBoardPanel() {
 		        case 3:
 		        		//chance.advanceToTrinoma();
 		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
-		        		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-		        		System.out.println("Advance to Trinoma. If you pass GO collect P200.");
+		        		playerOrder[x].getToken().setxLocation(227);
+		        		playerOrder[x].getToken().setyLocation(23);
+		        		playerOrder[x].setPosition(24);
+	        			updateTokenPosition();
+	        			
+		        		if(playerOrder[x].getPosition() == 36){
+		        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()+200);
+		        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		        		}	
+		        		
+		        		System.out.println("Advance to Trinoma. If you pass GO collect P200. " +playerOrder[x].getStartMoney());
 		                break;
 		        case 4:
 		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to GO.png")));
-			        	playerOrder[x].getToken().setLocation(525, 525);
+			        	playerOrder[x].getToken().setxLocation(525);
+		        		playerOrder[x].getToken().setyLocation(525);
 		        		playerOrder[x].setPosition(40);
+		        		updateTokenPosition();
 		        		passedGo();
 		        		System.out.println("Pass Go.");
 	        			break;
@@ -723,8 +735,10 @@ private JPanel getBoardPanel() {
 		        case 6:
 		        		//chance.advanceToMoa();
 		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to SM Mall of Asia.png")));
-		        		playerOrder[x].getToken().setLocation(525, 462);
+		        		playerOrder[x].getToken().setxLocation(525);
+		        		playerOrder[x].getToken().setyLocation(462);
 		        		playerOrder[x].setPosition(39);
+		        		updateTokenPosition();
 		        		System.out.println("Advance to SM Mall of Asia.");
 		        		break;
 		        case 7:
@@ -747,12 +761,30 @@ private JPanel getBoardPanel() {
 		        case 10:
 		        		//chance.advanceToShopwise();
 		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Shopwise.png")));
-			    		System.out.println("Advance to Shopwise. If you pass GO collect P200.");
+		        		playerOrder[x].getToken().setxLocation(23);
+		        		playerOrder[x].getToken().setyLocation(462);
+		        		playerOrder[x].setPosition(11);
+	        			updateTokenPosition();
+	        			
+		        		if(playerOrder[x].getPosition() == 22 || playerOrder[x].getPosition() == 36){
+		        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()+200);
+		        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		        		}	
+			    		System.out.println("Advance to Shopwise. If you pass GO collect P200. " + playerOrder[x].getStartMoney());
 			    		break;
 		        case 11:
 		        		//chance.tripToBuendiaStation();
 		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/take_a_trip_to_beundia_station.png")));
-			    		System.out.println("Take a trip to Buendia Station. If you pass GO collect P200.");
+		        		playerOrder[x].getToken().setxLocation(23);
+		        		playerOrder[x].getToken().setyLocation(274);
+		        		playerOrder[x].setPosition(15);
+	        			updateTokenPosition();
+	        			
+		        		if(playerOrder[x].getPosition() == 22 || playerOrder[x].getPosition() == 36){
+		        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()+200);
+		        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		        		}	
+		        		System.out.println("Take a trip to Buendia Station. If you pass GO collect P200. " +playerOrder[x].getStartMoney());
 			    		break;
 		        case 12:
 		        		//chance.buildingMatures();
@@ -768,7 +800,26 @@ private JPanel getBoardPanel() {
 		        case 14:
 		        		//chance.goBackThreeSteps();
 		        		lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Go back three spaces.png")));
-		        		//playerOrder[x].getToken().setLocation();
+		        			if(playerOrder[x].getPosition()==7){
+		        				playerOrder[x].getToken().setxLocation(321);
+				        		playerOrder[x].getToken().setyLocation(525);
+				        		updateTokenPosition();
+				        		playerOrder[x].setPosition(4);
+				        		
+		        			}else if(playerOrder[x].getPosition()==22){
+		        				playerOrder[x].getToken().setxLocation(23);
+				        		playerOrder[x].getToken().setyLocation(86);
+				        		updateTokenPosition();
+				        		playerOrder[x].setPosition(19);
+				        		
+		        			}else if(playerOrder[x].getPosition()==36){
+		        				playerOrder[x].getToken().setxLocation(525);
+				        		playerOrder[x].getToken().setyLocation(274);
+				        		updateTokenPosition();
+				        		playerOrder[x].setPosition(33);
+				        		
+		        			}
+		        			//playerOrder[x].getToken().setLocation();
 		        		System.out.println("Go back three spaces.");
 			    		break;
 		        case 15:
@@ -839,14 +890,20 @@ private JPanel getBoardPanel() {
 	        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 	        			break;
 		        case 9:
-		        		playerOrder[x].getToken().setLocation(525, 525);
+		        		playerOrder[x].getToken().setxLocation(525);
+		        		playerOrder[x].getToken().setyLocation(525);
 		        		playerOrder[x].setPosition(40);
+		        		updateTokenPosition();
 		        		passedGo();
 		        		System.out.println("Pass Go.");
 	        			break;
 		        case 10:
-	        			//Cchest.goBackToOldKentRoad();
-			    		System.out.println("Go back to Old Kent Road.");
+			        	playerOrder[x].getToken().setxLocation(462);
+		        		playerOrder[x].getToken().setyLocation(525);
+		        		playerOrder[x].setPosition(1);
+	        			updateTokenPosition();
+	        			
+	        			System.out.println("Go back to Ayala Ave.");
 			    		break;
 		        case 11:
 		        		playerOrder[x].setHasJailKey(true);
@@ -854,7 +911,16 @@ private JPanel getBoardPanel() {
 		        		break;
 		        case 12:
 	        			//Cchest.yourBirthday();
-			    	//	System.out.println("It is your birthday. Collect P10 from each player.");
+		        		for(int a = 0; a <= numberOfPlayers; a++){
+		        			playerOrder[a].setStartMoney(playerOrder[a].getStartMoney()-10);
+		        			//fPlayerMoney.setText("P "+playerOrder[a].getStartMoney());
+		        			
+		        			if(playerOrder[a] == playerOrder[x]){
+		        				playerOrder[a].setStartMoney(playerOrder[x].getStartMoney()+(numberOfPlayers*10));
+		        				fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+		        			}
+		        		}
+			    		System.out.println("It is your birthday. Collect P10 from each player.");
 			    		break;
 		        case 13:
 	        			//Cchest.doctorsFee();
@@ -919,7 +985,7 @@ private JPanel getBoardPanel() {
 				}
 				break;
 			case 5:
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
 					isStation = true;
 					isEstate = false;
 					isUtility = false;
@@ -973,7 +1039,7 @@ private JPanel getBoardPanel() {
 				}
 				break;
 			case 12:
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned() != true){
 					isUtility = true;
 					isEstate = false;
 					isStation = false;
@@ -1003,7 +1069,7 @@ private JPanel getBoardPanel() {
 				}
 				break;
 			case 15:
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
 					isStation = true;
 					isEstate = false;
 					isUtility = false;
@@ -1081,7 +1147,7 @@ private JPanel getBoardPanel() {
 				}
 				break;
 			case 25:
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
 					isStation = true;
 					isEstate = false;
 					isUtility = false;
@@ -1111,7 +1177,7 @@ private JPanel getBoardPanel() {
 				}
 				break;
 			case 28:
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned() != true){
 					isUtility = true;
 					isEstate = false;
 					isStation = false;
@@ -1168,7 +1234,7 @@ private JPanel getBoardPanel() {
 				}
 				break;
 			case 35:
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
 					isStation = true;
 					isEstate = false;
 					isUtility = false;
@@ -1192,13 +1258,9 @@ private JPanel getBoardPanel() {
 				}
 				break;
 			case 38:
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
-					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					System.out.println("Paid 100 tax!");
-				}else{
-					playerOrder[x].payRent();
-				}
+				playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
+				fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				System.out.println("Paid 100 tax!");
 				break;
 			case 39:
 				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
@@ -1250,9 +1312,10 @@ private JPanel getBoardPanel() {
          		    playerOrder[x].setPosition(10);
          		    playerOrder[x].getToken().setxLocation(23);
          		    playerOrder[x].getToken().setyLocation(525);
+         		    updateTokenPosition();
          		    playerOrder[x].setJailed(true);
          		    System.out.println("Jailed: "+playerOrder[x].isJailed());
-         		    updateTokenPosition();
+         		    
          		    bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/pay50.png")));
          		    bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/tryForDoubles.png")));
          		   // pBoard.setVisible(false);
