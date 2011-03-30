@@ -165,7 +165,7 @@ public class Players{
 		}
 		
 		public void payRent(){
-			
+			System.out.println("You should pay rent.");
 		}
 
 }
