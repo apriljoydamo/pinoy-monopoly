@@ -303,7 +303,6 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					pMonopoly.setVisible(false);
 					pSolo.setVisible(true);
-					pPlay.setVisible(true);
 				}
 			});
 		}
