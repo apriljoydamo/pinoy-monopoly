@@ -108,8 +108,8 @@ public class GameBoard extends JFrame implements Runnable {
 		private JLabel getlChanceImage() {
 			if (lChanceImage == null) {
 				lChanceImage = new JLabel();
-				lChanceImage.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to GO.png")));
-				lChanceImage.setVisible(false);
+				lChanceImage.setIcon(new ImageIcon(getClass().getResource("/Designs/transparent.png")));
+				lChanceImage.setFocusable(false);
 			}
 			return lChanceImage;
 		}
@@ -138,23 +138,18 @@ public class GameBoard extends JFrame implements Runnable {
 		private JButton getbTryForDice() {
 			if (bTryForDice == null) {
 				bTryForDice = new JButton();
-				bTryForDice.setText("Try for Dice");
-				bTryForDice.setVisible(false);
-				bTryForDice.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
+				bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
+				bTryForDice.setBorderPainted(false);
+				bTryForDice.setOpaque(false);
+				bTryForDice.setContentAreaFilled(false);
+				bTryForDice.addActionListener(new ActionListener() {
+		
+					public void actionPerformed(ActionEvent event) {
 						playerOrder[x].getToken().setLocation(23, 525);
-						
-						bTryForDice.setVisible(false);
-						bPay50.setVisible(false);
-		     		    
-					//	pChoosePayOrTryDice.setVisible(false);
-					//	pBoard.setVisible(true);
-					//	pPlayer.setVisible(true);
-					//	pDice.setVisible(true);
-						//you have chosen to try for dice... you have 3 try to roll for doubleDice...
+						bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
+						bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
 					}
 				});
-				
 			}
 			return bTryForDice;
 		}
@@ -162,30 +157,23 @@ public class GameBoard extends JFrame implements Runnable {
 		private JButton getbPay50() {
 			if (bPay50 == null) {
 				bPay50 = new JButton();
-				bPay50.setText("Pay 50");
-				bPay50.setVisible(false);
+				bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
+				bPay50.setBorderPainted(false);
+				bPay50.setOpaque(false);
+				bPay50.setContentAreaFilled(false);
 				bPay50.addActionListener(new ActionListener() {
+		
 					public void actionPerformed(ActionEvent event) {
 						playerOrder[x].getToken().setLocation(23, 525);
-		     		        
-						playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("Money: " +playerOrder[x].getStartMoney());
-									
-									playerOrder[x].setJailed(false);
-         		        		  	playerOrder[x].setBailOutDice(0);
-         		        		  	playerOrder[x].setDoubleDice(0);
-         		        		  	playerOrder[x].setTryForDice(0);
-         		        		  	
-         		        bPay50.setVisible(false);
-         		        bTryForDice.setVisible(false);
-         		        		  	
-         		        		//  	pChoosePayOrTryDice.setVisible(false);
-         		        	//	  	pPlayer.setVisible(true);
-         						//	pDice.setVisible(true);
-         							//pBoard.setVisible(true);
-						//show label that says: paid for getting out of jail! 
-						
+						playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
+						fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
+						System.out.println("Money: " + playerOrder[x].getStartMoney());
+						playerOrder[x].setJailed(false);
+						playerOrder[x].setBailOutDice(0);
+						playerOrder[x].setDoubleDice(0);
+						playerOrder[x].setTryForDice(0);
+						bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
+						bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
 					}
 				});
 			}
@@ -295,8 +283,10 @@ public class GameBoard extends JFrame implements Runnable {
 				bRollDice.addActionListener(new ActionListener() {
 		
 					public void actionPerformed(ActionEvent event) {
+						lChanceImage.setIcon(new ImageIcon(getClass().getResource("/Designs/transparent.png")));
 						bBuy.setEnabled(false);
 						lChanceImage.setVisible(false);
+
 						dice[0].rollDiceResult1();
 						dice[1].rollDiceResult2();
 						
@@ -569,8 +559,10 @@ private JPanel getBoardPanel() {
 		pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
 		pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
 		pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+		pBoard.add(getlChanceImage(), new Constraints(new Leading(104, 12, 12), new Leading(184, 12, 12)));
+		pBoard.add(getbPay50(), new Constraints(new Leading(104, 198, 12, 12), new Leading(195, 302, 10, 10)));
+		pBoard.add(getbTryForDice(), new Constraints(new Leading(314, 183, 12, 12), new Leading(101, 287, 10, 10)));
 		pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
-		pBoard.setVisible(false);
 		}
 	return pBoard;
 }
@@ -1261,8 +1253,8 @@ private JPanel getBoardPanel() {
          		    playerOrder[x].setJailed(true);
          		    System.out.println("Jailed: "+playerOrder[x].isJailed());
          		    updateTokenPosition();
-       				bPay50.setVisible(true);
-       				bTryForDice.setVisible(true);
+         		    bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/pay50.png")));
+         		    bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/tryForDoubles.png")));
          		   // pBoard.setVisible(false);
          		   // pPlayer.setVisible(false);
          		   // pDice.setVisible(false);
