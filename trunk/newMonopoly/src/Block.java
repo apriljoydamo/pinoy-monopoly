@@ -1,12 +1,13 @@
 
 
 public class Block {
-	private int location;
+	private int location, type;
 	private String name;
 	private Station station;
 	private Utilities utilities;
 	private Estate estate;
 	private Property property;
+	
 	public Block(){
 		
 	}
@@ -16,17 +17,21 @@ public class Block {
 		this.setLocation(location);
 	}
 	
+	public Block(Estate estate) {
+		this.setEstate(estate);
+		this.setType(1);
+	}
 	public Block(Station station) {
 		this.setStation(station);
+		this.setType(2);
 	}
 	
 	public Block(Utilities utilities) {
 		this.setUtilities(utilities);
+		this.setType(3);
 	}
 	
-	public Block(Estate estate) {
-		this.setEstate(estate);
-	}
+	
 	
 	public Block(Property property){
 		this.setProperty(property);
@@ -75,6 +80,14 @@ public class Block {
 	public Property getProperty() {
 		// TODO Auto-generated method stub
 		return property;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public int getType() {
+		return type;
 	}
 	
 }
