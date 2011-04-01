@@ -237,7 +237,7 @@ public class Players{
     
 			System.out.println("Rent: " + rent);
 			System.out.println("PaidBy: " + playerOrder[x].getPlayerName()+" Money: "+playerOrder[x].getStartMoney());
-			System.out.println("Paid to: " + playerOrder[owner].getPlayerName()+" Money: "+playerOrder[x].getStartMoney());
+			System.out.println("Paid to: " + playerOrder[owner].getPlayerName()+" Money: "+playerOrder[owner].getStartMoney());
 			
 		}
 		
