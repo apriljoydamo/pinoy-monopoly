@@ -1,7 +1,7 @@
 
 public class Property extends Block{
 	
-	private int price = 0;
+	private int price = 0, intOwner;
 	private String propertyName = null, ownerName = null;
 	private boolean isOwned = false;
 	private TitleDeed titledeed;
@@ -38,5 +38,11 @@ public class Property extends Block{
 	}
 	public TitleDeed getTitledeed() {
 		return titledeed;
+	}
+	public void setIntOwner(int intOwner) {
+		this.intOwner = intOwner;
+	}
+	public int getIntOwner() {
+		return intOwner;
 	}
 }
