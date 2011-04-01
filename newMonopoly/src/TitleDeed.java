@@ -12,12 +12,12 @@ public class TitleDeed {
 	private int housePrice;
 	
 	public TitleDeed(int rentEstate0, int rentEstate1, int rentEstate2, int rentEstate3, int rentEstate4, int rentEstate5, int estateMortgageValue, int housePrice){
-		this.rentEstate[0] = rentEstate0;
-		this.rentEstate[1] = rentEstate1;
-		this.rentEstate[2] = rentEstate2;
-		this.rentEstate[3] = rentEstate3;
-		this.rentEstate[4] = rentEstate4;
-		this.rentEstate[5] = rentEstate5;
+		this.rentEstate[0] = rentEstate0; //rent
+		this.rentEstate[1] = rentEstate1; //1house
+		this.rentEstate[2] = rentEstate2; //2house
+		this.rentEstate[3] = rentEstate3; //3house
+		this.rentEstate[4] = rentEstate4; //4house
+		this.rentEstate[5] = rentEstate5; //hotel
 		this.estateMortgageValue = estateMortgageValue;
 		this.estateRedeemValue = (int) (estateMortgageValue*1.1);
 		this.housePrice = housePrice;
