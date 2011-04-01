@@ -151,13 +151,18 @@ public class GameBoard extends JFrame implements Runnable {
 				bTryForDice.setBorderPainted(false);
 				bTryForDice.setOpaque(false);
 				bTryForDice.setFocusable(false);
+				bTryForDice.setEnabled(false);
 				bTryForDice.setContentAreaFilled(false);
 				bTryForDice.addActionListener(new ActionListener() {
 		
 					public void actionPerformed(ActionEvent event) {
 						playerOrder[x].getToken().setLocation(23, 525);
+						
 						bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
 						bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
+						ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Designs/transparent.png")));
+						bTryForDice.setEnabled(false);
+						bPay50.setEnabled(false);
 					}
 				});
 			}
@@ -172,6 +177,7 @@ public class GameBoard extends JFrame implements Runnable {
 				bPay50.setOpaque(false);
 				bPay50.setContentAreaFilled(false);
 				bPay50.setFocusable(false);
+				bPay50.setEnabled(false);
 				bPay50.addActionListener(new ActionListener() {
 		
 					public void actionPerformed(ActionEvent event) {
@@ -183,8 +189,13 @@ public class GameBoard extends JFrame implements Runnable {
 						playerOrder[x].setBailOutDice(0);
 						playerOrder[x].setDoubleDice(0);
 						playerOrder[x].setTryForDice(0);
+						
 						bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
 						bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
+						ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Designs/transparent.png")));
+						bTryForDice.setEnabled(false);
+						bPay50.setEnabled(false);
+					
 					}
 				});
 			}
@@ -571,10 +582,10 @@ private JPanel getBoardPanel() {
 		pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
 		pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
 		pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-		pBoard.add(getltransparentImage(), new Constraints(new Leading(123, 12, 12), new Leading(101, 396, 12, 12)));
 		pBoard.add(getltaranparenthl(), new Constraints(new Leading(104, 12, 12), new Leading(184, 12, 12)));
 		pBoard.add(getbTryForDice(), new Constraints(new Leading(303, 160, 10, 10), new Leading(319, 106, 10, 10)));
 		pBoard.add(getbPay50(), new Constraints(new Leading(314, 138, 12, 12), new Leading(238, 10, 10)));
+		pBoard.add(getltransparentImage(), new Constraints(new Leading(123, 12, 12), new Leading(101, 396, 12, 12)));
 		pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
 	}
 	return pBoard;
@@ -1365,6 +1376,13 @@ private JPanel getBoardPanel() {
 		
 		@SuppressWarnings("deprecation")
 		public void goToJail(){
+			
+					ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/designs/jail_panel.png")));
+		  		    bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/pay50_btn.png")));
+		  		    bPay50.setEnabled(true);
+		  		    bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/try4doubles_btn.png")));
+		  		    bTryForDice.setEnabled(true);
+				
          		    playerOrder[x].setPosition(10);
          		    playerOrder[x].getToken().setxLocation(23);
          		    playerOrder[x].getToken().setyLocation(525);
@@ -1372,10 +1390,7 @@ private JPanel getBoardPanel() {
          		    playerOrder[x].setJailed(true);
          		    System.out.println("Jailed: "+playerOrder[x].isJailed());
          		    
-         		   ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/designs/jail_panel.png")));
-         		    
-         		    bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/pay10_btn.png")));
-         		    bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/try4doubles_btn.png")));
+         		   
          		   // pBoard.setVisible(false);
          		   // pPlayer.setVisible(false);
          		   // pDice.setVisible(false);
