@@ -722,7 +722,7 @@ private JPanel getBoardPanel() {
                         //switch (3){
                         case 1:
                                         //chance.speedingFine();
-                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Speeding-fine-P15.gif")));
+                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Speeding-fine-P15.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;                                          
