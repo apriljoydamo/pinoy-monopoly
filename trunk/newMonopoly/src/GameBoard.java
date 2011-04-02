@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -50,7 +51,7 @@ public class GameBoard extends JFrame implements Runnable {
                 private JButton bBuy;
                 boolean isEstate, isUtility, isStation;
                 private JLabel ltaranparenth;
-				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
+                                private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
                 public GameBoard() {
                 dice[0] = new Dice();
                 dice[1] = new Dice();
@@ -72,59 +73,58 @@ public class GameBoard extends JFrame implements Runnable {
                                 ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Designs/transparenth.png")));
                         }
                         return ltaranparenth;
+                } 
+
+
+                private JButton getbBuy() {
+        if (bBuy == null) {
+                bBuy = new JButton();
+                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
+                bBuy.setBorderPainted(false);
+                bBuy.setOpaque(false);
+                bBuy.setContentAreaFilled(false);
+               // bBuy.setEnabled(false);
+                bBuy.setFocusable(false);
+                //bBuy.setVisible(false);
+                bBuy.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e){
+                                                if (isEstate == true) {
+                                                        playerOrder[x].buyEstate(bblock.getBlock()[playerOrder[x].getPosition()].getEstate(), playerOrder, x);
+                                                        fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                        System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
+                                                        System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
+                                                        System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned());
+                                                        System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
+                                                        System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                                } 
+                                                if (isUtility == true) {
+                                                        playerOrder[x].buyUtility(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities(), playerOrder, x);
+                                                        fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                        System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getName());
+                                                        System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
+                                                        System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned());
+                                                        System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
+                                                        System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
+                                                }
+                                                if (isStation == true) {
+                                                        playerOrder[x].buyStation(bblock.getBlock()[playerOrder[x].getPosition()].getStation(), playerOrder, x);
+                                                        fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                        System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getName());
+                                                        System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
+                                                        System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned());
+                                                        System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getOwnerName());
+                                                        System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
+                                                }
+                                }
+                        });
                 }
+                return bBuy;
+        }
 
-
-		private JButton getbBuy() {
-	if (bBuy == null) {
-		bBuy = new JButton();
-		bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
-		bBuy.setBorderPainted(false);
-		bBuy.setOpaque(false);
-		bBuy.setContentAreaFilled(false);
-		bBuy.setEnabled(false);
-		bBuy.setFocusable(false);
-		//bBuy.setVisible(false);
-		bBuy.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-						if (isEstate == true) {
-							playerOrder[x].buyEstate(bblock.getBlock()[playerOrder[x].getPosition()].getEstate(), playerOrder, x);
-							fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-							System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
-							System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
-							System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned());
-							System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-							System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-						} 
-						if (isUtility == true) {
-							playerOrder[x].buyUtility(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities(), playerOrder, x);
-							fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-							System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getName());
-							System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
-							System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned());
-							System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
-							System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
-						}
-						if (isStation == true) {
-							playerOrder[x].buyStation(bblock.getBlock()[playerOrder[x].getPosition()].getStation(), playerOrder, x);
-							fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-							System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getName());
-							System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
-							System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned());
-							System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getOwnerName());
-							System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
-						}
-				}
-			});
-		}
-		return bBuy;
-	}
-
-				private JLabel getltransparentImage() {
+                        private JLabel getltransparentImage() {
                         if (ltransparentImage == null) {
                                 ltransparentImage = new JLabel();
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Designs/transparent.png")));
-                                ltransparentImage.setFocusable(false);
                         }
                         return ltransparentImage;
                 }
@@ -168,7 +168,7 @@ public class GameBoard extends JFrame implements Runnable {
                                                 bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
                                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Designs/transparent.png")));
                                                 bTryForDice.setEnabled(false);
-                                                bPay50.setEnabled(false);
+                                               // bPay50.setEnabled(false);
                                         }
                                 });
                         }
@@ -183,7 +183,7 @@ public class GameBoard extends JFrame implements Runnable {
                                 bPay50.setOpaque(false);
                                 bPay50.setContentAreaFilled(false);
                                 bPay50.setFocusable(false);
-                                bPay50.setEnabled(false);
+                              //  bPay50.setEnabled(false);
                                 bPay50.addActionListener(new ActionListener() {
                 
                                         public void actionPerformed(ActionEvent event) {
@@ -199,8 +199,8 @@ public class GameBoard extends JFrame implements Runnable {
                                                 bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
                                                 bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
                                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Designs/transparent.png")));
-                                                bTryForDice.setEnabled(false);
-                                                bPay50.setEnabled(false);
+                                               // bTryForDice.setEnabled(false);
+                                               // bPay50.setEnabled(false);
                                         
                                         }
                                 });
@@ -317,7 +317,7 @@ public class GameBoard extends JFrame implements Runnable {
                                                 bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
                                                       
                                                 bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
-                                                bBuy.setEnabled(false);
+                                               // bBuy.setEnabled(false);
                         
                                                 dice[0].rollDiceResult1();
                                                 dice[1].rollDiceResult2();
@@ -576,27 +576,27 @@ private JPanel getPlayerPanel() {
 }
 
 private JPanel getBoardPanel() {
-	if (pBoard == null) {
-		pBoard = new JPanel();
-		pBoard.setBackground(new Color(64, 0, 64));
-		pBoard.setLayout(new GroupLayout());
-		pBoard.add(getBaporLabel(), new Constraints(new Leading(515, 10, 10), new Leading(527, 12, 12)));
-		pBoard.add(getAzkalLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 10, 10)));
-		pBoard.add(getIronLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
-		pBoard.add(getShoeLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
-		pBoard.add(getCarLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-		pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
-		pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-		pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-		pBoard.add(getltaranparenthl(), new Constraints(new Leading(104, 12, 12), new Leading(184, 12, 12)));
-		pBoard.add(getbTryForDice(), new Constraints(new Leading(303, 160, 10, 10), new Leading(319, 106, 10, 10)));
-		pBoard.add(getbPay50(), new Constraints(new Leading(314, 138, 12, 12), new Leading(238, 10, 10)));
-		pBoard.add(getbBuy(), new Constraints(new Leading(190, 220, 12, 12), new Leading(426, 46, 12, 12)));
-		pBoard.add(getltransparentImage(), new Constraints(new Leading(121, 10, 10), new Leading(101, 396, 12, 12)));
-		pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
-		pBoard.setVisible(false);
-	}
-	return pBoard;
+        if (pBoard == null) {
+                pBoard = new JPanel();
+                pBoard.setBackground(new Color(64, 0, 64));
+                pBoard.setLayout(new GroupLayout());
+                pBoard.add(getBaporLabel(), new Constraints(new Leading(515, 10, 10), new Leading(527, 12, 12)));
+                pBoard.add(getAzkalLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 10, 10)));
+                pBoard.add(getIronLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+                pBoard.add(getShoeLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+                pBoard.add(getCarLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+                pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+                pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+                pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+                pBoard.add(getltaranparenthl(), new Constraints(new Leading(104, 12, 12), new Leading(184, 12, 12)));
+                pBoard.add(getbTryForDice(), new Constraints(new Leading(303, 160, 10, 10), new Leading(319, 106, 10, 10)));
+                pBoard.add(getbPay50(), new Constraints(new Leading(314, 138, 12, 12), new Leading(238, 10, 10)));
+                pBoard.add(getbBuy(), new Constraints(new Leading(190, 220, 12, 12), new Leading(426, 46, 12, 12)));
+                pBoard.add(getltransparentImage(), new Constraints(new Leading(121, 10, 10), new Leading(101, 396, 12, 12)));
+                pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
+                pBoard.setVisible(false);
+        }
+        return pBoard;
 }
 
 @SuppressWarnings("unused")
@@ -721,19 +721,19 @@ private JPanel getBoardPanel() {
                         //switch (3){
                         case 1:
                                         //chance.speedingFine();
-                        				ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Speeding fine P15.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Speeding-fine-P15.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;                                          
                         case 2:
                                         //chance.bankDividend();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Bank pays you dividend of P50.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Bank-pays-you-dividend-of-P50.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 3:
                                         //chance.advanceToTrinoma();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Trinoma..png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-Trinoma..gif")));
                                         playerOrder[x].getToken().setxLocation(227);
                                         playerOrder[x].getToken().setyLocation(23);
                                         playerOrder[x].setPosition(24);
@@ -747,7 +747,7 @@ private JPanel getBoardPanel() {
                                         System.out.println("Advance to Trinoma. If you pass GO collect P200. " +playerOrder[x].getStartMoney());
                                         break;
                         case 4:
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to GO.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-GO.gif")));
                                         playerOrder[x].getToken().setxLocation(525);
                                         playerOrder[x].getToken().setyLocation(525);
                                         playerOrder[x].setPosition(40);
@@ -757,13 +757,13 @@ private JPanel getBoardPanel() {
                                         break;
                         case 5:
                                         //chance.paySchoolFees();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Pay school fees of P150.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Pay-school-fees-of-P150.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 6:
                                         //chance.advanceToMoa();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to SM Mall of Asia.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-SM-Mall-of-Asia.gif")));
                                         playerOrder[x].getToken().setxLocation(525);
                                         playerOrder[x].getToken().setyLocation(462);
                                         playerOrder[x].setPosition(39);
@@ -771,7 +771,7 @@ private JPanel getBoardPanel() {
                                         System.out.println("Advance to SM Mall of Asia.");
                                         break;
                         case 7:
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Get out of Jail Free Key.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Get-out-of-Jail-Free-Key.gif")));
                                         playerOrder[x].setHasJailKey(true);
                                         //System.out.println("Get out of Jail Free Key.");
                                         System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
@@ -779,17 +779,17 @@ private JPanel getBoardPanel() {
                                         break;
                         case 8:
                                         //chance.streetRepairs();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/street repairs.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/street-repairs.gif")));
                                         System.out.println("Your are assessed for street rpairs. P40 per house, P115 per hotel.");
                                         break;
                         case 9:
                                         //chance.generalRepairs();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/General repairs for buildings.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/General-repairs-for-buildings.gif")));
                                         System.out.println("Make general repairs on all of your buildings. For each house pay P25. For each hotel pay P100.");
                                         break;
                         case 10:
                                         //chance.advanceToShopwise();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Advance to Shopwise.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-Shopwise.gif")));
                                         playerOrder[x].getToken().setxLocation(23);
                                         playerOrder[x].getToken().setyLocation(462);
                                         playerOrder[x].setPosition(11);
@@ -803,7 +803,7 @@ private JPanel getBoardPanel() {
                                         break;
                         case 11:
                                         //chance.tripToBuendiaStation();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/take_a_trip_to_beundia_station.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/take_a_trip_to_beundia_station.gif")));
                                         playerOrder[x].getToken().setxLocation(23);
                                         playerOrder[x].getToken().setyLocation(274);
                                         playerOrder[x].setPosition(15);
@@ -817,18 +817,18 @@ private JPanel getBoardPanel() {
                                         break;
                         case 12:
                                         //chance.buildingMatures();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/building_laon_matures.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/building_laon_matures.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 13:
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/go_to_jail.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/go_to_jail.gif")));
                                         goToJail();
                                         System.out.println("GO TO JAIL.");
                                         break;
                         case 14:
                                         //chance.goBackThreeSteps();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Go back three spaces.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Go-back-three-spaces.gif")));
                                                 if(playerOrder[x].getPosition()==7){
                                                         playerOrder[x].getToken().setxLocation(321);
                                                         playerOrder[x].getToken().setyLocation(525);
@@ -853,13 +853,13 @@ private JPanel getBoardPanel() {
                                         break;
                         case 15:
                                         //chance.drunkInCharge();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/Drunk in Charge.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Drunk-in-Charge.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 16:
                                         //chance.wonCrosswordCompetition();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/chances/crossword_competition.png")));
+                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/crossword_competition.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
@@ -991,512 +991,512 @@ private JPanel getBoardPanel() {
         }
         
         public void checkBoard(){
-        	//Random random = new Random();
-        	
-        	switch(playerOrder[x].getLastStep()){
-			
-			case 1:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/ayalaAvenue.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				                     
-			case 2:
-				cChestRandom();
-				break;
-				
-			case 3:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/makatiAvenue.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 4:
-					//ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/inherit.png")));
-					playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
-					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					System.out.println("Paid 200 tax!");
-				break;
-				
-			case 5:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Ayala).gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
-					isStation = true;
-					isEstate = false;
-					isUtility = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
-					}
-				}
-				break;
-				
-			case 6:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/puregold.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 7:
-				chanceRandom();
-				break;
-				
-			case 8:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/rizalPark.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 9:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/delarosaStreet.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 11:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/shopwise.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 12:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/meralco.gif")));
-					isUtility = true;
-					isEstate = false;
-					isStation = false;
-					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					bBuy.setEnabled(true);
-				break;
-				
-			case 13:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/SLEX.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 14:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/walterMart.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 15:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Buendia).gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
-					isStation = true;
-					isEstate = false;
-					isUtility = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
-					}
-				}
-				break;
-				
-			case 16:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/intramuros.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 17:
-				//ccRandom = (random.nextInt(16) + 1);
-				cChestRandom();
-				break;
-				
-			case 18:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/C5road.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 19:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/chinaTown.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 21:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/NLEX.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 22:
-				chanceRandom();
-				break;
-				
-			case 23:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/nationalBookstore.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 24:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/trinoma.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 25:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Taft).gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
-					isStation = true;
-					isEstate = false;
-					isUtility = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
-					}
-				}
-				break;
-				
-			case 26:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/EDSA.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 27:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/magsaysayBridge.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 28:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/maynilad.gif")));
-					isUtility = true;
-					isEstate = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				break;
-				
-			case 29:
-				
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/starCity.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-			case 30:
-				goToJail();
-				break;
-				
-			case 31:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/landmark.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 32:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/glorietta.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 33:
-				cChestRandom();
-				break;
-				
-			case 34:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/greenbelt.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 35:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(North).gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
-					isStation = true;
-					isEstate = false;
-					isUtility = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
-					}
-				}
-				break;
-				
-			case 36:
-				chanceRandom();
-				break;
-				
-			case 37:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/boracayIsland.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-				
-			case 38:
-				//ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/inherit.png")));
-				playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
-				fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-				System.out.println("Paid 100 tax!");
-				break;
-				
-			case 39:
-				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MOA.gif")));
-				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-					isEstate = true;
-					isUtility = false;
-					isStation = false;
-					bBuy.setEnabled(true);
-				}else{
-					if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-						rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-						playerOrder[x].payRent(playerOrder, x, rent);
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-						System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-					}
-				}
-				break;
-        	}
+                //Random random = new Random();
+                
+                switch(playerOrder[x].getLastStep()){
+                        
+                        case 1:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/ayalaAvenue.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                                     
+                        case 2:
+                                cChestRandom();
+                                break;
+                                
+                        case 3:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/makatiAvenue.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 4:
+                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/tax/paid200.gif")));
+                                        playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
+                                        fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        System.out.println("Paid 200 tax!");
+                                break;
+                                
+                        case 5:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Ayala).gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
+                                        isStation = true;
+                                        isEstate = false;
+                                        isUtility = false;
+                                        //bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 6:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/puregold.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                        //bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 7:
+                                chanceRandom();
+                                break;
+                                
+                        case 8:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/rizalPark.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                        //bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 9:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/delarosaStreet.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                        //bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 11:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/shopwise.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 12:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/meralco.gif")));
+                                        isUtility = true;
+                                        isEstate = false;
+                                        isStation = false;
+                                        fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                       // bBuy.setEnabled(true);
+                                break;
+                                
+                        case 13:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/SLEX.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 14:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/walterMart.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                        //bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 15:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Buendia).gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
+                                        isStation = true;
+                                        isEstate = false;
+                                        isUtility = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 16:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/intramuros.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 17:
+                                //ccRandom = (random.nextInt(16) + 1);
+                                cChestRandom();
+                                break;
+                                
+                        case 18:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/C5road.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 19:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/chinaTown.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 21:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/NLEX.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 22:
+                                chanceRandom();
+                                break;
+                                
+                        case 23:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/nationalBookstore.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 24:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/trinoma.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 25:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Taft).gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
+                                        isStation = true;
+                                        isEstate = false;
+                                        isUtility = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 26:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/EDSA.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                      //  bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 27:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/magsaysayBridge.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                        //bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 28:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/maynilad.gif")));
+                                        isUtility = true;
+                                        isEstate = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                break;
+                                
+                        case 29:
+                                
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/starCity.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                        case 30:
+                                goToJail();
+                                break;
+                                
+                        case 31:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/landmark.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 32:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/glorietta.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                      //  bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 33:
+                                cChestRandom();
+                                break;
+                                
+                        case 34:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/greenbelt.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 35:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(North).gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
+                                        isStation = true;
+                                        isEstate = false;
+                                        isUtility = false;
+                                      //  bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 36:
+                                chanceRandom();
+                                break;
+                                
+                        case 37:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/boracayIsland.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                                
+                        case 38:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/tax/paid100.gif")));
+                                playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
+                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                System.out.println("Paid 100 tax!");
+                                break;
+                                
+                        case 39:
+                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MOA.gif")));
+                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                        isEstate = true;
+                                        isUtility = false;
+                                        isStation = false;
+                                       // bBuy.setEnabled(true);
+                                }else{
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
+                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                                playerOrder[x].payRent(playerOrder, x, rent);
+                                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                        }
+                                }
+                                break;
+                }
         }
         
         public void updateTokenPosition(){
@@ -1533,10 +1533,10 @@ private JPanel getBoardPanel() {
                 @SuppressWarnings("deprecation")
                 public void goToJail(){
                         
-                				
+                                                
                                     ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/designs/jail_panel.png")));
                                     bPay50.setIcon(new ImageIcon(getClass().getResource("/Designs/pay50_btn.png")));
-                                    bPay50.setEnabled(true);
+                                   // bPay50.setEnabled(true);
                                     bTryForDice.setIcon(new ImageIcon(getClass().getResource("/Designs/try4doubles_btn.png")));
                                     bTryForDice.setEnabled(true);
                                 
