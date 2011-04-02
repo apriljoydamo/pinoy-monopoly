@@ -1,6 +1,7 @@
 
 public class BoardBlock {
 	private Block[] block = new Block[40];
+	private int[] colorGroupSize = new int[8];
 	
 	public BoardBlock(){												/////RETURNS THE FF:
 		block[0] = new Block("Go", 0);									//go
@@ -49,6 +50,18 @@ public class BoardBlock {
 		block[37] = new Block(new Estate("Boracay Island", 37, 350, 7, false, new TitleDeed(35, 175, 500, 1100, 1300, 1500, 200, 200)));	//dark blue
 		block[38] = new Block("Super Tax", 38);				//tax
 		block[39] = new Block(new Estate("SM Mall of Asia", 39, 400, 7, false, new TitleDeed(50, 200, 600, 1400, 1700, 2000, 200, 200)));	//dark blue
+	
+		/////////////////////////////colorGroupSize/////////////////////////////
+		 colorGroupSize[0] = 2;
+	     colorGroupSize[1] = 3;
+	     colorGroupSize[2] = 3;
+	     colorGroupSize[3] = 3;
+	     colorGroupSize[4] = 3;
+	     colorGroupSize[5] = 3;
+	     colorGroupSize[6] = 3;
+	     colorGroupSize[7] = 2;
+
+	
 	}
 
 ///////////////////////////////////GETTERS AND SETTERS///////////////////////////////
@@ -60,4 +73,13 @@ public class BoardBlock {
 		return block;
 	}
 
+	public void setColorGroupSize(int colorGroupSize[]) {
+		this.colorGroupSize = colorGroupSize;
+	}
+
+	public int[] getColorGroupSize() {
+		return colorGroupSize;
+	}
+	
+	
 }
