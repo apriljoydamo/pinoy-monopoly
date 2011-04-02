@@ -188,6 +188,8 @@ public class Players{
 
 		///////////////////////////////////////METHODS//////////////////////////
 	
+		
+		
 		public void buyEstate(Estate estate, Players[] playerOrder, int x){
 			for(int i=0;i<colorGroupList.length;i++){ 
 				colorGroupList[i] = new ArrayList<Estate>();
@@ -196,6 +198,8 @@ public class Players{
 			estate.setIntOwner(x);
 			estate.setOwnerName(playerOrder[x].getPlayerName());
 			colorGroupList[bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getColorGroup()].add(bblock.getBlock()[playerOrder[x].getPosition()].getEstate());
+			updateProperty();
+			
 			System.out.println("colorGroup: "+ bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getColorGroup());
 			System.out.println("ToBeAddedInColorGroup: "+ bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
 			
@@ -207,6 +211,7 @@ public class Players{
 			station.setIntOwner(x);
 			station.setOwnerName(playerOrder[x].getPlayerName());
 			getStationList().add(block.getStation());
+			updateProperty();
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
 		}
 		
@@ -215,6 +220,7 @@ public class Players{
 			utility.setIntOwner(x);
 			utility.setOwnerName(playerOrder[x].getPlayerName());
 			getUtilityList().add(block.getUtilities());
+			updateProperty();
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
 			
 		}
@@ -275,5 +281,16 @@ public class Players{
 			
 		}
 
+		public void updateProperty(){
+			for(int f=0; f<=7; f++){
+                if(getColorGroupList()[f].size() == bblock.getColorGroupSize()[f]){
+                        hasCompletedColorGroup = true;
+                        f=7;
+                }
+                else{
+                        hasCompletedColorGroup = false;
+                }
+        }
+		}
 }
 
