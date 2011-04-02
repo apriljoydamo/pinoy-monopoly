@@ -1,4 +1,5 @@
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -721,19 +722,19 @@ private JPanel getBoardPanel() {
                         //switch (3){
                         case 1:
                                         //chance.speedingFine();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Speeding-fine-P15.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Speeding-fine-P15.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;                                          
                         case 2:
                                         //chance.bankDividend();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Bank-pays-you-dividend-of-P50.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Bank-pays-you-dividend-of-P50.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 3:
                                         //chance.advanceToTrinoma();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-Trinoma..gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-Trinoma..gif")));
                                         playerOrder[x].getToken().setxLocation(227);
                                         playerOrder[x].getToken().setyLocation(23);
                                         playerOrder[x].setPosition(24);
@@ -747,7 +748,7 @@ private JPanel getBoardPanel() {
                                         System.out.println("Advance to Trinoma. If you pass GO collect P200. " +playerOrder[x].getStartMoney());
                                         break;
                         case 4:
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-GO.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-GO.gif")));
                                         playerOrder[x].getToken().setxLocation(525);
                                         playerOrder[x].getToken().setyLocation(525);
                                         playerOrder[x].setPosition(40);
@@ -757,13 +758,13 @@ private JPanel getBoardPanel() {
                                         break;
                         case 5:
                                         //chance.paySchoolFees();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Pay-school-fees-of-P150.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Pay-school-fees-of-P150.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 6:
                                         //chance.advanceToMoa();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-SM-Mall-of-Asia.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-SM-Mall-of-Asia.gif")));
                                         playerOrder[x].getToken().setxLocation(525);
                                         playerOrder[x].getToken().setyLocation(462);
                                         playerOrder[x].setPosition(39);
@@ -771,7 +772,7 @@ private JPanel getBoardPanel() {
                                         System.out.println("Advance to SM Mall of Asia.");
                                         break;
                         case 7:
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Get-out-of-Jail-Free-Key.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Get-out-of-Jail-Free-Key.gif")));
                                         playerOrder[x].setHasJailKey(true);
                                         //System.out.println("Get out of Jail Free Key.");
                                         System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
@@ -779,17 +780,17 @@ private JPanel getBoardPanel() {
                                         break;
                         case 8:
                                         //chance.streetRepairs();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/street-repairs.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/street-repairs.gif")));
                                         System.out.println("Your are assessed for street rpairs. P40 per house, P115 per hotel.");
                                         break;
                         case 9:
                                         //chance.generalRepairs();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/General-repairs-for-buildings.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/General-repairs-for-buildings.gif")));
                                         System.out.println("Make general repairs on all of your buildings. For each house pay P25. For each hotel pay P100.");
                                         break;
                         case 10:
                                         //chance.advanceToShopwise();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-Shopwise.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Advance-to-Shopwise.gif")));
                                         playerOrder[x].getToken().setxLocation(23);
                                         playerOrder[x].getToken().setyLocation(462);
                                         playerOrder[x].setPosition(11);
@@ -803,7 +804,7 @@ private JPanel getBoardPanel() {
                                         break;
                         case 11:
                                         //chance.tripToBuendiaStation();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/take_a_trip_to_beundia_station.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/take_a_trip_to_beundia_station.gif")));
                                         playerOrder[x].getToken().setxLocation(23);
                                         playerOrder[x].getToken().setyLocation(274);
                                         playerOrder[x].setPosition(15);
@@ -817,18 +818,18 @@ private JPanel getBoardPanel() {
                                         break;
                         case 12:
                                         //chance.buildingMatures();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/building_laon_matures.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/building_laon_matures.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 13:
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/go_to_jail.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/go_to_jail.gif")));
                                         goToJail();
                                         System.out.println("GO TO JAIL.");
                                         break;
                         case 14:
                                         //chance.goBackThreeSteps();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Go-back-three-spaces.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Go-back-three-spaces.gif")));
                                                 if(playerOrder[x].getPosition()==7){
                                                         playerOrder[x].getToken().setxLocation(321);
                                                         playerOrder[x].getToken().setyLocation(525);
@@ -853,13 +854,13 @@ private JPanel getBoardPanel() {
                                         break;
                         case 15:
                                         //chance.drunkInCharge();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Drunk-in-Charge.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/Drunk-in-Charge.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 16:
                                         //chance.wonCrosswordCompetition();
-                        				ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/crossword_competition.gif")));
+                                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/newChances/crossword_competition.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
@@ -879,25 +880,25 @@ private JPanel getBoardPanel() {
                         
                                 case 1:
                                                 //Cchest.bankError();
-                                                ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/BankError.png")));
+                                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/BankError.gif")));
                                                 playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
                                                 fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                                 break;
                         case 2:
                                         //Cchest.payHospital();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/payHospital.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/payHospital.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 3:
                                         //Cchest.wonBeautyContest();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/beautyContest.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/beautyContest.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 10);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 4:
                                         //Cchest.taxRefund();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/incomeTax.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/incomeTax.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 20);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
@@ -911,24 +912,24 @@ private JPanel getBoardPanel() {
                                 break;
                         case 6:
                                         //Cchest.payInsurance();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/payInsurance.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/payInsurance.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 7:
                                         //Cchest.saleOfStock();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/saleOfStock.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/saleOfStock.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 8:
                                         //Cchest.recieveInterest();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/interestReceive.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/interestReceive.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 25);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 9:
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/advanceToGo.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/advanceToGo.gif")));
                                         playerOrder[x].getToken().setxLocation(525);
                                         playerOrder[x].getToken().setyLocation(525);
                                         playerOrder[x].setPosition(40);
@@ -937,7 +938,7 @@ private JPanel getBoardPanel() {
                                         System.out.println("Pass Go.");
                                         break;
                         case 10:
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/ayalaAve.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/ayalaAve.gif")));
                                         playerOrder[x].getToken().setxLocation(462);
                                         playerOrder[x].getToken().setyLocation(525);
                                         playerOrder[x].setPosition(1);
@@ -946,12 +947,12 @@ private JPanel getBoardPanel() {
                                         System.out.println("Go back to Ayala Ave.");
                                         break;
                         case 11:
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/getOutofJailKey.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/getOutofJailKey.gif")));
                                         playerOrder[x].setHasJailKey(true);
                                         System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
                                         break;
                         case 12:
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/birthday.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/birthday.gif")));
                                         //Cchest.yourBirthday();
                                         for(int a = 0; a <= numberOfPlayers; a++){
                                                 playerOrder[a].setStartMoney(playerOrder[a].getStartMoney()-10);
@@ -966,23 +967,23 @@ private JPanel getBoardPanel() {
                                         break;
                         case 13:
                                         //Cchest.doctorsFee();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/Doctorsfee.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/Doctorsfee.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 14:
                                         //Cchest.annuityMatures();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/annuityMatures.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/annuityMatures.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
                         case 15:
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/goToJail.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/goToJail.gif")));
                                         goToJail();
                                         break;
                         case 16:
                                         //Cchest.inheritMoney();
-                                        ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Cchest/inherit.png")));
+                        	ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/inherit.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         break;
