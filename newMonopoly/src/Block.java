@@ -31,8 +31,6 @@ public class Block {
 		this.setType(3);
 	}
 	
-	
-	
 	public Block(Property property){
 		this.setProperty(property);
 	}
