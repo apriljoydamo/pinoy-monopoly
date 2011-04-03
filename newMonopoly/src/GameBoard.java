@@ -52,8 +52,8 @@ public class GameBoard extends JFrame implements Runnable {
                 private JButton bBuy;
                 boolean isEstate, isUtility, isStation;
                 private JLabel ltaranparenth;
-                                private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
-                public GameBoard() {
+				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
+                                public GameBoard() {
                 dice[0] = new Dice();
                 dice[1] = new Dice();
                 initComponents();
@@ -577,27 +577,26 @@ private JPanel getPlayerPanel() {
 }
 
 private JPanel getBoardPanel() {
-        if (pBoard == null) {
-                pBoard = new JPanel();
-                pBoard.setBackground(new Color(64, 0, 64));
-                pBoard.setLayout(new GroupLayout());
-                pBoard.add(getBaporLabel(), new Constraints(new Leading(515, 10, 10), new Leading(527, 12, 12)));
-                pBoard.add(getAzkalLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 10, 10)));
-                pBoard.add(getIronLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
-                pBoard.add(getShoeLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
-                pBoard.add(getCarLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-                pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
-                pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-                pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
-                pBoard.add(getltaranparenthl(), new Constraints(new Leading(104, 12, 12), new Leading(184, 12, 12)));
-                pBoard.add(getbTryForDice(), new Constraints(new Leading(303, 160, 10, 10), new Leading(319, 106, 10, 10)));
-                pBoard.add(getbPay50(), new Constraints(new Leading(314, 138, 12, 12), new Leading(238, 10, 10)));
-                pBoard.add(getbBuy(), new Constraints(new Leading(190, 220, 12, 12), new Leading(426, 46, 12, 12)));
-                pBoard.add(getltransparentImage(), new Constraints(new Leading(121, 10, 10), new Leading(101, 396, 12, 12)));
-                pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
-                pBoard.setVisible(false);
-        }
-        return pBoard;
+	if (pBoard == null) {
+		pBoard = new JPanel();
+		pBoard.setBackground(new Color(64, 0, 64));
+		pBoard.setLayout(new GroupLayout());
+		pBoard.add(getBaporLabel(), new Constraints(new Leading(515, 10, 10), new Leading(527, 12, 12)));
+		pBoard.add(getAzkalLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 10, 10)));
+		pBoard.add(getIronLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+		pBoard.add(getShoeLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+		pBoard.add(getCarLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+		pBoard.add(getThimbleLabel(), new Constraints(new Leading(515, 12, 12), new Leading(525, 12, 12)));
+		pBoard.add(getHatLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+		pBoard.add(getWheelBarrowLabel(), new Constraints(new Leading(515, 12, 12), new Leading(527, 12, 12)));
+		pBoard.add(getltaranparenthl(), new Constraints(new Leading(104, 12, 12), new Leading(184, 12, 12)));
+		pBoard.add(getbTryForDice(), new Constraints(new Leading(303, 160, 10, 10), new Leading(319, 106, 10, 10)));
+		pBoard.add(getbPay50(), new Constraints(new Leading(314, 138, 12, 12), new Leading(238, 10, 10)));
+		pBoard.add(getbBuy(), new Constraints(new Leading(190, 220, 12, 12), new Leading(426, 46, 12, 12)));
+		pBoard.add(getltransparentImage(), new Constraints(new Leading(121, 10, 10), new Leading(101, 396, 12, 12)));
+		pBoard.add(getMonopolyLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 599, 12, 12)));
+	}
+	return pBoard;
 }
 
 @SuppressWarnings("unused")
@@ -998,6 +997,7 @@ private JPanel getBoardPanel() {
                         
                         case 1:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/ayalaAvenue.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1022,6 +1022,7 @@ private JPanel getBoardPanel() {
                                 
                         case 3:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/makatiAvenue.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1049,6 +1050,7 @@ private JPanel getBoardPanel() {
                                 
                         case 5:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Ayala).gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyStation_btn.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                                         isStation = true;
                                         isEstate = false;
@@ -1069,6 +1071,7 @@ private JPanel getBoardPanel() {
                                 
                         case 6:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/puregold.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1093,6 +1096,7 @@ private JPanel getBoardPanel() {
                                 
                         case 8:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/rizalPark.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1113,6 +1117,7 @@ private JPanel getBoardPanel() {
                                 
                         case 9:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/delarosaStreet.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1133,6 +1138,7 @@ private JPanel getBoardPanel() {
                                 
                         case 11:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/shopwise.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1153,7 +1159,8 @@ private JPanel getBoardPanel() {
                                 
                         case 12:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/meralco.gif")));
-                                        isUtility = true;
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyUtility_btn.png")));        
+                                		isUtility = true;
                                         isEstate = false;
                                         isStation = false;
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
@@ -1162,6 +1169,7 @@ private JPanel getBoardPanel() {
                                 
                         case 13:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/SLEX.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1182,6 +1190,7 @@ private JPanel getBoardPanel() {
                                 
                         case 14:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/walterMart.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1202,6 +1211,7 @@ private JPanel getBoardPanel() {
                                 
                         case 15:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Buendia).gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyStation_btn.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                                         isStation = true;
                                         isEstate = false;
@@ -1222,6 +1232,7 @@ private JPanel getBoardPanel() {
                                 
                         case 16:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/intramuros.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1247,6 +1258,7 @@ private JPanel getBoardPanel() {
                                 
                         case 18:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/C5road.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1267,6 +1279,7 @@ private JPanel getBoardPanel() {
                                 
                         case 19:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/chinaTown.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1287,6 +1300,7 @@ private JPanel getBoardPanel() {
                                 
                         case 21:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/NLEX.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1311,6 +1325,7 @@ private JPanel getBoardPanel() {
                                 
                         case 23:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/nationalBookstore.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1331,6 +1346,7 @@ private JPanel getBoardPanel() {
                                 
                         case 24:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/trinoma.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1351,6 +1367,7 @@ private JPanel getBoardPanel() {
                                 
                         case 25:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Taft).gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyStation_btn.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                                         isStation = true;
                                         isEstate = false;
@@ -1371,6 +1388,7 @@ private JPanel getBoardPanel() {
                                 
                         case 26:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/EDSA.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1391,6 +1409,7 @@ private JPanel getBoardPanel() {
                                 
                         case 27:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/magsaysayBridge.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1411,7 +1430,8 @@ private JPanel getBoardPanel() {
                                 
                         case 28:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/maynilad.gif")));
-                                        isUtility = true;
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyUtility_btn.png")));
+                                		isUtility = true;
                                         isEstate = false;
                                         isStation = false;
                                        // bBuy.setEnabled(true);
@@ -1420,6 +1440,7 @@ private JPanel getBoardPanel() {
                         case 29:
                                 
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/starCity.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1443,6 +1464,7 @@ private JPanel getBoardPanel() {
                                 
                         case 31:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/landmark.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1463,6 +1485,7 @@ private JPanel getBoardPanel() {
                                 
                         case 32:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/glorietta.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1487,6 +1510,7 @@ private JPanel getBoardPanel() {
                                 
                         case 34:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/greenbelt.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1507,6 +1531,7 @@ private JPanel getBoardPanel() {
                                 
                         case 35:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MRT(North).gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyStation_btn.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                                         isStation = true;
                                         isEstate = false;
@@ -1531,6 +1556,7 @@ private JPanel getBoardPanel() {
                                 
                         case 37:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/boracayIsland.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
@@ -1558,6 +1584,7 @@ private JPanel getBoardPanel() {
                                 
                         case 39:
                                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/MOA.gif")));
+                                bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
