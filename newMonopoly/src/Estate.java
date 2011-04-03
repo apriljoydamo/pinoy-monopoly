@@ -1,6 +1,6 @@
 
 public class Estate extends Property{
-	private int numberOfHouse, colorGroup;
+	private int numberOfHouse, numberOfHotels, colorGroup;
     //0 brown
     //1 blue
     //2 pink
@@ -33,6 +33,14 @@ public class Estate extends Property{
 
 	public int getColorGroup() {
 		return colorGroup;
+	}
+
+	public void setNumberOfHotels(int numberOfHotels) {
+		this.numberOfHotels = numberOfHotels;
+	}
+
+	public int getNumberOfHotels() {
+		return numberOfHotels;
 	}
 
 }
