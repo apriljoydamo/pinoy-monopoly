@@ -211,7 +211,6 @@ public class Players{
 			station.setIntOwner(x);
 			station.setOwnerName(playerOrder[x].getPlayerName());
 			getStationList().add(block.getStation());
-			updateProperty();
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
 		}
 		
@@ -220,7 +219,6 @@ public class Players{
 			utility.setIntOwner(x);
 			utility.setOwnerName(playerOrder[x].getPlayerName());
 			getUtilityList().add(block.getUtilities());
-			updateProperty();
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
 			
 		}
