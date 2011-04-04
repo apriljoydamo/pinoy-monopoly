@@ -64,6 +64,7 @@ public class GameBoard extends JFrame implements Runnable {
 				private JButton bTDC5;
 				private JButton bTDChinaTown;
 				private JButton bTDNlex;
+				private JButton bTDNationalbs;
 				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 				public GameBoard() {
                 dice[0] = new Dice();
@@ -80,7 +81,18 @@ public class GameBoard extends JFrame implements Runnable {
                         setSize(805, 595);
         }
         
-                private JButton getBTDNlex() {
+                private JButton getBTDNationalbs() {
+			if (bTDNationalbs == null) {
+				bTDNationalbs = new JButton();
+				bTDNationalbs.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_red.png")));
+				bTDNationalbs.setBorderPainted(false);
+				bTDNationalbs.setOpaque(false);
+				bTDNationalbs.setContentAreaFilled(false);
+			}
+			return bTDNationalbs;
+		}
+
+				private JButton getBTDNlex() {
 			if (bTDNlex == null) {
 				bTDNlex = new JButton();
 				bTDNlex.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_red.png")));
@@ -706,6 +718,7 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds.add(getBTDC5(), new Constraints(new Leading(35, 20, 12, 12), new Leading(118, 19, 12, 12)));
 		pTitleDeeds.add(getBTDChinaTown(), new Constraints(new Leading(58, 20, 12, 12), new Leading(118, 19, 12, 12)));
 		pTitleDeeds.add(getBTDNlex(), new Constraints(new Leading(12, 20, 12, 12), new Leading(143, 17, 10, 10)));
+		pTitleDeeds.add(getBTDNationalbs(), new Constraints(new Leading(35, 20, 12, 12), new Leading(143, 17, 12, 12)));
 	}
 	return pTitleDeeds;
 }
