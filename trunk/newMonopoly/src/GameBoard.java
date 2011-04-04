@@ -54,6 +54,7 @@ public class GameBoard extends JFrame implements Runnable {
                 boolean isEstate, isUtility, isStation;
                 private JLabel ltaranparenth;
 				private JButton bTDMakatiAve;
+				private JButton bTDPuregold;
 				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 				public GameBoard() {
                 dice[0] = new Dice();
@@ -70,7 +71,18 @@ public class GameBoard extends JFrame implements Runnable {
                         setSize(805, 595);
         }
         
-                private JButton getBTDMakatiAve() {
+                private JButton getBTDPuregold() {
+			if (bTDPuregold == null) {
+				bTDPuregold = new JButton();
+				bTDPuregold.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_skyblue.png")));
+				bTDPuregold.setBorderPainted(false);
+				bTDPuregold.setOpaque(false);
+				bTDPuregold.setContentAreaFilled(false);
+			}
+			return bTDPuregold;
+		}
+
+				private JButton getBTDMakatiAve() {
 			if (bTDMakatiAve == null) {
 				bTDMakatiAve = new JButton();
 				bTDMakatiAve.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_brown.png")));
@@ -576,6 +588,7 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds.add(gettdAyalaAveButton(), new Constraints(new Leading(12, 17, 10, 10), new Leading(46, 17, 10, 10)));
 		pTitleDeeds.add(getBTDMakatiAve(), new Constraints(new Leading(35, 17, 10, 10), new Leading(46, 17, 12, 12)));
 		pTitleDeeds.add(getTitleDeedImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 185, 12, 12)));
+		pTitleDeeds.add(getBTDPuregold(), new Constraints(new Leading(11, 18, 12, 12), new Leading(71, 16, 10, 10)));
 	}
 	return pTitleDeeds;
 }
@@ -595,18 +608,17 @@ private JPanel getDicePanel() {
 }
 
 private JPanel getPlayerPanel() {
-        if (pPlayer == null) {
-                pPlayer = new JPanel();
-                pPlayer.setBackground(Color.magenta);
-                pPlayer.setLayout(new GroupLayout());
-                pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(37, 151, 10, 10), new Leading(128, 32, 10, 10)));
-                pPlayer.add(getPlayerNameField(), new Constraints(new Leading(36, 152, 12, 12), new Leading(51, 33, 10, 10)));
-                pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(0, 199, 12, 12), new Leading(172, 185, 12, 12)));
-                pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
-                pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
-                pPlayer.setVisible(true);
-        }
-        return pPlayer;
+	if (pPlayer == null) {
+		pPlayer = new JPanel();
+		pPlayer.setBackground(Color.magenta);
+		pPlayer.setLayout(new GroupLayout());
+		pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(37, 151, 10, 10), new Leading(128, 32, 10, 10)));
+		pPlayer.add(getPlayerNameField(), new Constraints(new Leading(36, 152, 12, 12), new Leading(51, 33, 10, 10)));
+		pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(0, 12, 12), new Leading(172, 185, 12, 12)));
+		pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
+		pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
+	}
+	return pPlayer;
 }
 
 private JPanel getBoardPanel() {
