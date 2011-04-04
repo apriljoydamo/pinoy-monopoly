@@ -39,7 +39,7 @@ public class GameBoard extends JFrame implements Runnable {
         //Block block = new Block();
         static int numberOfPlayers;
         public int randomChance, ccRandom;
-        int x = 0, rent;
+        int x = 0, rent, intTD;
         Thread t;
                 private JPanel pClicktoPlay;
                 private JLabel lClicktoPlay;
@@ -81,7 +81,8 @@ public class GameBoard extends JFrame implements Runnable {
 								private JButton bDTNorthStation;
 								private JButton bDTTaftStation;
 								private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
-                                public GameBoard() {
+		
+		public GameBoard() {
                 dice[0] = new Dice();
                 dice[1] = new Dice();
                 initComponents();
@@ -93,7 +94,7 @@ public class GameBoard extends JFrame implements Runnable {
 									add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
 									add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
 									add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
-									setSize(827, 595);
+									setSize(820, 595);
 								}
 
 		private JButton getBDTTaftStation() {
@@ -103,6 +104,13 @@ public class GameBoard extends JFrame implements Runnable {
 				bDTTaftStation.setBorderPainted(false);
 				bDTTaftStation.setOpaque(false);
 				bDTTaftStation.setContentAreaFilled(false);
+				bDTTaftStation.addActionListener(new ActionListener() {
+                  	
+                    public void actionPerformed(ActionEvent event) {
+                    		intTD = 25;
+                            runTitleDeedImage(x, intTD);
+                    }
+            });
 			}
 			return bDTTaftStation;
 		}
@@ -114,6 +122,13 @@ public class GameBoard extends JFrame implements Runnable {
 				bDTNorthStation.setBorderPainted(false);
 				bDTNorthStation.setOpaque(false);
 				bDTNorthStation.setContentAreaFilled(false);
+				bDTNorthStation.addActionListener(new ActionListener() {
+                  	
+                    public void actionPerformed(ActionEvent event) {
+                    		intTD = 35;
+                            runTitleDeedImage(x, intTD);
+                    }
+            });
 			}
 			return bDTNorthStation;
 		}
@@ -125,6 +140,13 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDBuendiaStation.setBorderPainted(false);
 				bTDBuendiaStation.setOpaque(false);
 				bTDBuendiaStation.setContentAreaFilled(false);
+				bTDBuendiaStation.addActionListener(new ActionListener() {
+                  	
+                    public void actionPerformed(ActionEvent event) {
+                    		intTD = 15;
+                            runTitleDeedImage(x, intTD);
+                    }
+            });
 			}
 			return bTDBuendiaStation;
 		}
@@ -136,6 +158,13 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDAyalaStation.setBorderPainted(false);
 				bTDAyalaStation.setOpaque(false);
 				bTDAyalaStation.setContentAreaFilled(false);
+				bTDAyalaStation.addActionListener(new ActionListener() {
+                  	
+                    public void actionPerformed(ActionEvent event) {
+                    		intTD = 5;
+                            runTitleDeedImage(x, intTD);
+                    }
+            });
 			}
 			return bTDAyalaStation;
 		}
@@ -147,6 +176,13 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDMaynilad.setBorderPainted(false);
 				bTDMaynilad.setOpaque(false);
 				bTDMaynilad.setContentAreaFilled(false);
+				bTDMaynilad.addActionListener(new ActionListener() {
+                  	
+                    public void actionPerformed(ActionEvent event) {
+                    		intTD = 28;
+                            runTitleDeedImage(x, intTD);
+                    }
+            });
 			}
 			return bTDMaynilad;
 		}
@@ -158,6 +194,13 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDMeralco.setBorderPainted(false);
 				bTDMeralco.setOpaque(false);
 				bTDMeralco.setContentAreaFilled(false);
+				bTDMeralco.addActionListener(new ActionListener() {
+                  	
+                      public void actionPerformed(ActionEvent event) {
+                      		intTD = 12;
+                              runTitleDeedImage(x, intTD);
+                      }
+              });
 			}
 			return bTDMeralco;
 		}
@@ -169,6 +212,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDMoa.setBorderPainted(false);
                                 bTDMoa.setOpaque(false);
                                 bTDMoa.setContentAreaFilled(false);
+                                bTDMoa.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 39;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDMoa;
                 }
@@ -180,6 +230,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDBoracay.setBorderPainted(false);
                                 bTDBoracay.setOpaque(false);
                                 bTDBoracay.setContentAreaFilled(false);
+                                bTDBoracay.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 37;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDBoracay;
                 }
@@ -191,6 +248,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bDTGreenbelt.setBorderPainted(false);
                                 bDTGreenbelt.setOpaque(false);
                                 bDTGreenbelt.setContentAreaFilled(false);
+                                bDTGreenbelt.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 34;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bDTGreenbelt;
                 }
@@ -202,6 +266,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDGlorietta.setBorderPainted(false);
                                 bTDGlorietta.setOpaque(false);
                                 bTDGlorietta.setContentAreaFilled(false);
+                                bTDGlorietta.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 32;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDGlorietta;
                 }
@@ -213,6 +284,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bDTLandmark.setBorderPainted(false);
                                 bDTLandmark.setOpaque(false);
                                 bDTLandmark.setContentAreaFilled(false);
+                                bDTLandmark.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 31;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bDTLandmark;
                 }
@@ -224,6 +302,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDStarCity.setBorderPainted(false);
                                 bTDStarCity.setOpaque(false);
                                 bTDStarCity.setContentAreaFilled(false);
+                                bTDStarCity.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 29;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDStarCity;
                 }
@@ -235,6 +320,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDMagsaysayBrdge.setBorderPainted(false);
                                 bTDMagsaysayBrdge.setOpaque(false);
                                 bTDMagsaysayBrdge.setContentAreaFilled(false);
+                                bTDMagsaysayBrdge.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 27;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDMagsaysayBrdge;
                 }
@@ -246,6 +338,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDEdsa.setBorderPainted(false);
                                 bTDEdsa.setOpaque(false);
                                 bTDEdsa.setContentAreaFilled(false);
+                                bTDEdsa.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 26;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDEdsa;
                 }
@@ -257,6 +356,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDTrinoma.setBorderPainted(false);
                                 bTDTrinoma.setOpaque(false);
                                 bTDTrinoma.setContentAreaFilled(false);
+                                bTDTrinoma.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 24;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDTrinoma;
                 }
@@ -268,6 +374,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDNationalbs.setBorderPainted(false);
                                 bTDNationalbs.setOpaque(false);
                                 bTDNationalbs.setContentAreaFilled(false);
+                                bTDNationalbs.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 23;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDNationalbs;
                 }
@@ -279,6 +392,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDNlex.setBorderPainted(false);
                                 bTDNlex.setOpaque(false);
                                 bTDNlex.setContentAreaFilled(false);
+                                bTDNlex.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 21;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDNlex;
                 }
@@ -290,6 +410,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDChinaTown.setBorderPainted(false);
                                 bTDChinaTown.setOpaque(false);
                                 bTDChinaTown.setContentAreaFilled(false);
+                                bTDChinaTown.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 19;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDChinaTown;
                 }
@@ -301,6 +428,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDC5.setBorderPainted(false);
                                 bTDC5.setOpaque(false);
                                 bTDC5.setContentAreaFilled(false);
+                                bTDC5.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 18;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDC5;
                 }
@@ -312,6 +446,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDIntramuros.setBorderPainted(false);
                                 bTDIntramuros.setOpaque(false);
                                 bTDIntramuros.setContentAreaFilled(false);
+                                bTDIntramuros.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 16;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDIntramuros;
                 }
@@ -323,6 +464,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDWalterMart.setBorderPainted(false);
                                 bTDWalterMart.setOpaque(false);
                                 bTDWalterMart.setContentAreaFilled(false);
+                                bTDWalterMart.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 14;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDWalterMart;
                 }
@@ -334,6 +482,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDSlex.setBorderPainted(false);
                                 bTDSlex.setOpaque(false);
                                 bTDSlex.setContentAreaFilled(false);
+                                bTDSlex.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 13;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDSlex;
                 }
@@ -345,6 +500,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDShopwise.setBorderPainted(false);
                                 bTDShopwise.setOpaque(false);
                                 bTDShopwise.setContentAreaFilled(false);
+                                btdAyalaAve.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 11;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDShopwise;
                 }
@@ -356,6 +518,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDdlaRsaSt.setBorderPainted(false);
                                 bTDdlaRsaSt.setOpaque(false);
                                 bTDdlaRsaSt.setContentAreaFilled(false);
+                                bTDdlaRsaSt.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 9;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDdlaRsaSt;
                 }
@@ -367,6 +536,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDRizalPark.setBorderPainted(false);
                                 bTDRizalPark.setOpaque(false);
                                 bTDRizalPark.setContentAreaFilled(false);
+                                bTDRizalPark.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 8;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDRizalPark;
                 }
@@ -378,6 +554,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDPuregold.setBorderPainted(false);
                                 bTDPuregold.setOpaque(false);
                                 bTDPuregold.setContentAreaFilled(false);
+                                bTDPuregold.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 6;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDPuregold;
                 }
@@ -387,6 +570,13 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDMakatiAve = new JButton();
                                 bTDMakatiAve.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_brown.png")));
                                 bTDMakatiAve.setBorderPainted(false);
+                                bTDMakatiAve.addActionListener(new ActionListener() {
+                                	
+                                    public void actionPerformed(ActionEvent event) {
+                                    		intTD = 3;
+                                            runTitleDeedImage(x, intTD);
+                                    }
+                            });
                         }
                         return bTDMakatiAve;
                 }
@@ -475,9 +665,10 @@ public class GameBoard extends JFrame implements Runnable {
                                                                 btdAyalaAve.setContentAreaFilled(false);
                                                                 btdAyalaAve.setFocusable(false);
                                                                 btdAyalaAve.addActionListener(new ActionListener() {
-                                                
+                                                                	
                                                                         public void actionPerformed(ActionEvent event) {
-                                                                                runTitleDeedImage();
+                                                                        		intTD = 1;
+                                                                                runTitleDeedImage(x, intTD);
                                                                         }
                                                                 });
                                                         }
@@ -942,6 +1133,7 @@ private JPanel getPlayerPanel() {
                 pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(0, 12, 12), new Leading(172, 185, 12, 12)));
                 pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
                 pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
+                pPlayer.setVisible(true);
         }
         return pPlayer;
 }
@@ -1375,7 +1567,7 @@ private JPanel getBoardPanel() {
                                         break;
                                 case 16:
                                         //Cchest.inheritMoney();
-                                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/inherit.gif")));
+                                        ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/Cchest/inherit.gif")));
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
@@ -2171,7 +2363,7 @@ private JPanel getBoardPanel() {
        
         }
 
-        public void runTitleDeedImage() {
+      public void runTitleDeedImage(final int x, final int intTD) {
                 installLnF();
                 SwingUtilities.invokeLater(new Runnable() {
                         @Override
@@ -2182,8 +2374,11 @@ private JPanel getBoardPanel() {
                                 frame.getContentPane().setPreferredSize(frame.getSize());
                                 frame.pack();
                                 frame.setLocationRelativeTo(null);
+                                frame.setResizable(false);
                                 frame.setVisible(true);
                                 TitleDeedImage.x = x;
+                                TitleDeedImage.intTD = intTD;
+                                
                         }
                 });
         }
