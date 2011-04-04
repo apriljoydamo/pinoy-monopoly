@@ -53,6 +53,7 @@ public class GameBoard extends JFrame implements Runnable {
                 private JButton bBuy;
                 boolean isEstate, isUtility, isStation;
                 private JLabel ltaranparenth;
+				private JButton bTDMakatiAve;
 				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 				public GameBoard() {
                 dice[0] = new Dice();
@@ -69,7 +70,17 @@ public class GameBoard extends JFrame implements Runnable {
                         setSize(805, 595);
         }
         
-                private JLabel getltaranparenthl() {
+                private JButton getBTDMakatiAve() {
+			if (bTDMakatiAve == null) {
+				bTDMakatiAve = new JButton();
+				bTDMakatiAve.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_brown.png")));
+				bTDMakatiAve.setBorderPainted(false);
+			}
+			return bTDMakatiAve;
+		}
+
+
+				private JLabel getltaranparenthl() {
                         if (ltaranparenth == null) {
                                 ltaranparenth = new JLabel();
                                 ltaranparenth.setIcon(new ImageIcon(getClass().getResource("/Designs/transparenth.png")));
@@ -551,21 +562,22 @@ private JPanel getClickToPlayPanel() {
                 pClicktoPlay.setLayout(new GroupLayout());
                 pClicktoPlay.add(getPlayButton(), new Constraints(new Leading(292, 233, 12, 12), new Leading(282, 227, 10, 10)));
                 pClicktoPlay.add(getClicktoPlayLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 12, 12)));
-                pClicktoPlay.setVisible(true);
+                pClicktoPlay.setVisible(false);
         }
         return pClicktoPlay;
 }
                 
 
 private JPanel getTitleDeedsPanel() {
-        if (pTitleDeeds == null) {
-                pTitleDeeds = new JPanel();
-                pTitleDeeds.setBackground(Color.white);
-                pTitleDeeds.setLayout(new GroupLayout());
-                pTitleDeeds.add(gettdAyalaAveButton(), new Constraints(new Leading(12, 17, 10, 10), new Leading(46, 17, 10, 10)));
-                pTitleDeeds.add(getTitleDeedImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 185, 12, 12)));
-        }
-        return pTitleDeeds;
+	if (pTitleDeeds == null) {
+		pTitleDeeds = new JPanel();
+		pTitleDeeds.setBackground(Color.white);
+		pTitleDeeds.setLayout(new GroupLayout());
+		pTitleDeeds.add(gettdAyalaAveButton(), new Constraints(new Leading(12, 17, 10, 10), new Leading(46, 17, 10, 10)));
+		pTitleDeeds.add(getBTDMakatiAve(), new Constraints(new Leading(35, 17, 10, 10), new Leading(46, 17, 12, 12)));
+		pTitleDeeds.add(getTitleDeedImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 185, 12, 12)));
+	}
+	return pTitleDeeds;
 }
 
 private JPanel getDicePanel() {
@@ -592,7 +604,7 @@ private JPanel getPlayerPanel() {
                 pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(0, 199, 12, 12), new Leading(172, 185, 12, 12)));
                 pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
                 pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
-                pPlayer.setVisible(false);
+                pPlayer.setVisible(true);
         }
         return pPlayer;
 }
