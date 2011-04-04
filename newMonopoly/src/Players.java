@@ -250,6 +250,7 @@ public class Players{
 			int owner = 0;
 			int rent = 0;
 			int rentType = 0;
+			 
 			
 			switch(bblock.getBlock()[playerOrder[x].getPosition()].getType()){
 			case 1:
@@ -259,6 +260,7 @@ public class Players{
 				
 				 if(playerOrder[owner].hasCompletedColorGroup && bblock.getBlock()[position].getEstate().getNumberOfHouse()==0){
                    rent = rent*2;
+                   System.out.println("your rent is doubled! " +rent);
                      }
 				 break;
 				
