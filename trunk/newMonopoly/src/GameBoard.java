@@ -69,6 +69,7 @@ public class GameBoard extends JFrame implements Runnable {
 				private JButton bTDEdsa;
 				private JButton bTDMagsaysayBrdge;
 				private JButton bTDStarCity;
+				private JButton bDTLandmark;
 				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 				public GameBoard() {
                 dice[0] = new Dice();
@@ -85,7 +86,18 @@ public class GameBoard extends JFrame implements Runnable {
                         setSize(805, 595);
         }
         
-                private JButton getBTDStarCity() {
+                private JButton getBDTLandmark() {
+			if (bDTLandmark == null) {
+				bDTLandmark = new JButton();
+				bDTLandmark.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
+				bDTLandmark.setBorderPainted(false);
+				bDTLandmark.setOpaque(false);
+				bDTLandmark.setContentAreaFilled(false);
+			}
+			return bDTLandmark;
+		}
+
+				private JButton getBTDStarCity() {
 			if (bTDStarCity == null) {
 				bTDStarCity = new JButton();
 				bTDStarCity.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_yellow.png")));
@@ -771,6 +783,7 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds.add(getBTDEdsa(), new Constraints(new Leading(90, 18, 10, 10), new Leading(46, 19, 12, 12)));
 		pTitleDeeds.add(getBTDMagsaysayBrdge(), new Constraints(new Leading(112, 19, 10, 10), new Leading(46, 19, 12, 12)));
 		pTitleDeeds.add(getBTDStarCity(), new Constraints(new Leading(135, 19, 10, 10), new Leading(46, 19, 12, 12)));
+		pTitleDeeds.add(getBDTLandmark(), new Constraints(new Leading(90, 18, 12, 12), new Leading(69, 18, 12, 12)));
 	}
 	return pTitleDeeds;
 }
