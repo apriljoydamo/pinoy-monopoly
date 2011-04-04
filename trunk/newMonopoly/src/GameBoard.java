@@ -72,6 +72,8 @@ public class GameBoard extends JFrame implements Runnable {
 				private JButton bDTLandmark;
 				private JButton bTDGlorietta;
 				private JButton bDTGreenbelt;
+				private JButton bTDBoracay;
+				private JButton bTDMoa;
 				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 				public GameBoard() {
                 dice[0] = new Dice();
@@ -88,7 +90,29 @@ public class GameBoard extends JFrame implements Runnable {
                         setSize(805, 595);
         }
         
-                private JButton getBDTGreenbelt() {
+                private JButton getBTDMoa() {
+			if (bTDMoa == null) {
+				bTDMoa = new JButton();
+				bTDMoa.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_darkblue.png")));
+				bTDMoa.setBorderPainted(false);
+				bTDMoa.setOpaque(false);
+				bTDMoa.setContentAreaFilled(false);
+			}
+			return bTDMoa;
+		}
+
+				private JButton getBTDBoracay() {
+			if (bTDBoracay == null) {
+				bTDBoracay = new JButton();
+				bTDBoracay.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_darkblue.png")));
+				bTDBoracay.setBorderPainted(false);
+				bTDBoracay.setOpaque(false);
+				bTDBoracay.setContentAreaFilled(false);
+			}
+			return bTDBoracay;
+		}
+
+				private JButton getBDTGreenbelt() {
 			if (bDTGreenbelt == null) {
 				bDTGreenbelt = new JButton();
 				bDTGreenbelt.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
@@ -810,6 +834,8 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds.add(getBDTLandmark(), new Constraints(new Leading(90, 18, 12, 12), new Leading(69, 18, 12, 12)));
 		pTitleDeeds.add(getBTDGlorietta(), new Constraints(new Leading(112, 18, 12, 12), new Leading(69, 18, 12, 12)));
 		pTitleDeeds.add(getBDTGreenbelt(), new Constraints(new Leading(135, 18, 12, 12), new Leading(69, 18, 12, 12)));
+		pTitleDeeds.add(getBTDBoracay(), new Constraints(new Leading(90, 18, 12, 12), new Leading(93, 19, 12, 12)));
+		pTitleDeeds.add(getBTDMoa(), new Constraints(new Leading(112, 18, 12, 12), new Leading(93, 19, 12, 12)));
 	}
 	return pTitleDeeds;
 }
