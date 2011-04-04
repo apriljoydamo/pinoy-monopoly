@@ -55,6 +55,7 @@ public class GameBoard extends JFrame implements Runnable {
                 private JLabel ltaranparenth;
 				private JButton bTDMakatiAve;
 				private JButton bTDPuregold;
+				private JButton bTDRizalPark;
 				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 				public GameBoard() {
                 dice[0] = new Dice();
@@ -71,7 +72,18 @@ public class GameBoard extends JFrame implements Runnable {
                         setSize(805, 595);
         }
         
-                private JButton getBTDPuregold() {
+                private JButton getBTDRizalPark() {
+			if (bTDRizalPark == null) {
+				bTDRizalPark = new JButton();
+				bTDRizalPark.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_skyblue.png")));
+				bTDRizalPark.setBorderPainted(false);
+				bTDRizalPark.setOpaque(false);
+				bTDRizalPark.setContentAreaFilled(false);
+			}
+			return bTDRizalPark;
+		}
+
+				private JButton getBTDPuregold() {
 			if (bTDPuregold == null) {
 				bTDPuregold = new JButton();
 				bTDPuregold.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_skyblue.png")));
@@ -587,8 +599,9 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds.setLayout(new GroupLayout());
 		pTitleDeeds.add(gettdAyalaAveButton(), new Constraints(new Leading(12, 17, 10, 10), new Leading(46, 17, 10, 10)));
 		pTitleDeeds.add(getBTDMakatiAve(), new Constraints(new Leading(35, 17, 10, 10), new Leading(46, 17, 12, 12)));
-		pTitleDeeds.add(getTitleDeedImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 185, 12, 12)));
 		pTitleDeeds.add(getBTDPuregold(), new Constraints(new Leading(11, 18, 12, 12), new Leading(71, 16, 10, 10)));
+		pTitleDeeds.add(getBTDRizalPark(), new Constraints(new Leading(34, 18, 12, 12), new Leading(71, 16, 12, 12)));
+		pTitleDeeds.add(getTitleDeedImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 185, 12, 12)));
 	}
 	return pTitleDeeds;
 }
