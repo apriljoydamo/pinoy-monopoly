@@ -60,6 +60,7 @@ public class GameBoard extends JFrame implements Runnable {
 				private JButton bTDShopwise;
 				private JButton bTDSlex;
 				private JButton bTDWalterMart;
+				private JButton bTDIntramuros;
 				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 				public GameBoard() {
                 dice[0] = new Dice();
@@ -76,7 +77,18 @@ public class GameBoard extends JFrame implements Runnable {
                         setSize(805, 595);
         }
         
-                private JButton getBTDWalterMart() {
+                private JButton getBTDIntramuros() {
+			if (bTDIntramuros == null) {
+				bTDIntramuros = new JButton();
+				bTDIntramuros.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_orange.png")));
+				bTDIntramuros.setBorderPainted(false);
+				bTDIntramuros.setOpaque(false);
+				bTDIntramuros.setContentAreaFilled(false);
+			}
+			return bTDIntramuros;
+		}
+
+				private JButton getBTDWalterMart() {
 			if (bTDWalterMart == null) {
 				bTDWalterMart = new JButton();
 				bTDWalterMart.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_pink.png")));
@@ -654,6 +666,7 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds.add(getBTDShopwise(), new Constraints(new Leading(12, 20, 10, 10), new Leading(93, 19, 10, 10)));
 		pTitleDeeds.add(getBTDSlex(), new Constraints(new Leading(35, 20, 10, 10), new Leading(93, 19, 12, 12)));
 		pTitleDeeds.add(getBTDWalterMart(), new Constraints(new Leading(58, 20, 10, 10), new Leading(93, 19, 12, 12)));
+		pTitleDeeds.add(getBTDIntramuros(), new Constraints(new Leading(12, 20, 12, 12), new Leading(118, 19, 10, 10)));
 	}
 	return pTitleDeeds;
 }
