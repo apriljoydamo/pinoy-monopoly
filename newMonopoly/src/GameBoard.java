@@ -62,6 +62,7 @@ public class GameBoard extends JFrame implements Runnable {
 				private JButton bTDWalterMart;
 				private JButton bTDIntramuros;
 				private JButton bTDC5;
+				private JButton bTDChinaTown;
 				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 				public GameBoard() {
                 dice[0] = new Dice();
@@ -78,7 +79,18 @@ public class GameBoard extends JFrame implements Runnable {
                         setSize(805, 595);
         }
         
-                private JButton getBTDC5() {
+                private JButton getBTDChinaTown() {
+			if (bTDChinaTown == null) {
+				bTDChinaTown = new JButton();
+				bTDChinaTown.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_orange.png")));
+				bTDChinaTown.setBorderPainted(false);
+				bTDChinaTown.setOpaque(false);
+				bTDChinaTown.setContentAreaFilled(false);
+			}
+			return bTDChinaTown;
+		}
+
+				private JButton getBTDC5() {
 			if (bTDC5 == null) {
 				bTDC5 = new JButton();
 				bTDC5.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_orange.png")));
@@ -680,6 +692,7 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds.add(getBTDWalterMart(), new Constraints(new Leading(58, 20, 10, 10), new Leading(93, 19, 12, 12)));
 		pTitleDeeds.add(getBTDIntramuros(), new Constraints(new Leading(12, 20, 12, 12), new Leading(118, 19, 10, 10)));
 		pTitleDeeds.add(getBTDC5(), new Constraints(new Leading(35, 20, 12, 12), new Leading(118, 19, 12, 12)));
+		pTitleDeeds.add(getBTDChinaTown(), new Constraints(new Leading(58, 20, 12, 12), new Leading(118, 19, 12, 12)));
 	}
 	return pTitleDeeds;
 }
@@ -1156,7 +1169,7 @@ private JPanel getBoardPanel() {
                 switch(playerOrder[x].getLastStep()){
                         
                         case 1:
-                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/ayalaAvenue.gif")));
+                               ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/ayalaAvenue.gif")));
                                 bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                 		
@@ -1268,7 +1281,7 @@ private JPanel getBoardPanel() {
                                 break;
                                 
                         case 8:
-                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/rizalPark.gif")));
+                               ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/rizalPark.gif")));
                                 bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                 		
@@ -1292,7 +1305,8 @@ private JPanel getBoardPanel() {
                                 break;
                                 
                         case 9:
-                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/delarosaStreet.gif")));
+                               ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/delarosaStreet.gif")));
+
                                 bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                 		
@@ -1307,6 +1321,7 @@ private JPanel getBoardPanel() {
 	                                	} 
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                                         		ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/pay_rent/delarosaStreet.gif")));
+
                                                 rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                                                 playerOrder[x].payRent(playerOrder, x, rent);
                                                 fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
@@ -1316,7 +1331,7 @@ private JPanel getBoardPanel() {
                                 break;
                                 
                         case 11:
-                                ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/shopwise.gif")));
+                               ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/buyProperty_images/shopwise.gif")));
                                 bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                 		
