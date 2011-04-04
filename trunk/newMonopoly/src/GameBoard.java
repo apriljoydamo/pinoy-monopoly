@@ -70,6 +70,8 @@ public class GameBoard extends JFrame implements Runnable {
 				private JButton bTDMagsaysayBrdge;
 				private JButton bTDStarCity;
 				private JButton bDTLandmark;
+				private JButton bTDGlorietta;
+				private JButton bDTGreenbelt;
 				private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 				public GameBoard() {
                 dice[0] = new Dice();
@@ -86,7 +88,29 @@ public class GameBoard extends JFrame implements Runnable {
                         setSize(805, 595);
         }
         
-                private JButton getBDTLandmark() {
+                private JButton getBDTGreenbelt() {
+			if (bDTGreenbelt == null) {
+				bDTGreenbelt = new JButton();
+				bDTGreenbelt.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
+				bDTGreenbelt.setBorderPainted(false);
+				bDTGreenbelt.setOpaque(false);
+				bDTGreenbelt.setContentAreaFilled(false);
+			}
+			return bDTGreenbelt;
+		}
+
+				private JButton getBTDGlorietta() {
+			if (bTDGlorietta == null) {
+				bTDGlorietta = new JButton();
+				bTDGlorietta.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
+				bTDGlorietta.setBorderPainted(false);
+				bTDGlorietta.setOpaque(false);
+				bTDGlorietta.setContentAreaFilled(false);
+			}
+			return bTDGlorietta;
+		}
+
+				private JButton getBDTLandmark() {
 			if (bDTLandmark == null) {
 				bDTLandmark = new JButton();
 				bDTLandmark.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
@@ -784,6 +808,8 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds.add(getBTDMagsaysayBrdge(), new Constraints(new Leading(112, 19, 10, 10), new Leading(46, 19, 12, 12)));
 		pTitleDeeds.add(getBTDStarCity(), new Constraints(new Leading(135, 19, 10, 10), new Leading(46, 19, 12, 12)));
 		pTitleDeeds.add(getBDTLandmark(), new Constraints(new Leading(90, 18, 12, 12), new Leading(69, 18, 12, 12)));
+		pTitleDeeds.add(getBTDGlorietta(), new Constraints(new Leading(112, 18, 12, 12), new Leading(69, 18, 12, 12)));
+		pTitleDeeds.add(getBDTGreenbelt(), new Constraints(new Leading(135, 18, 12, 12), new Leading(69, 18, 12, 12)));
 	}
 	return pTitleDeeds;
 }
