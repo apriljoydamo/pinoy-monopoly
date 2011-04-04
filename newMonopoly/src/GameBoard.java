@@ -76,6 +76,10 @@ public class GameBoard extends JFrame implements Runnable {
                                 private JButton bTDMoa;
                                 private JButton bTDMeralco;
 								private JButton bTDMaynilad;
+								private JButton bTDAyalaStation;
+								private JButton bTDBuendiaStation;
+								private JButton bDTNorthStation;
+								private JButton bDTTaftStation;
 								private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
                                 public GameBoard() {
                 dice[0] = new Dice();
@@ -84,15 +88,59 @@ public class GameBoard extends JFrame implements Runnable {
         }
 
         private void initComponents() {
-                        setLayout(new GroupLayout());
-                        add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
-                        add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
-                        add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
-                        add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
-                        setSize(805, 595);
-        }
-        
-                private JButton getBTDMaynilad() {
+									setLayout(new GroupLayout());
+									add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
+									add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
+									add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
+									add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
+									setSize(827, 595);
+								}
+
+		private JButton getBDTTaftStation() {
+			if (bDTTaftStation == null) {
+				bDTTaftStation = new JButton();
+				bDTTaftStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
+				bDTTaftStation.setBorderPainted(false);
+				bDTTaftStation.setOpaque(false);
+				bDTTaftStation.setContentAreaFilled(false);
+			}
+			return bDTTaftStation;
+		}
+
+		private JButton getBDTNorthStation() {
+			if (bDTNorthStation == null) {
+				bDTNorthStation = new JButton();
+				bDTNorthStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
+				bDTNorthStation.setBorderPainted(false);
+				bDTNorthStation.setOpaque(false);
+				bDTNorthStation.setContentAreaFilled(false);
+			}
+			return bDTNorthStation;
+		}
+
+		private JButton getBTDBuendiaStation() {
+			if (bTDBuendiaStation == null) {
+				bTDBuendiaStation = new JButton();
+				bTDBuendiaStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
+				bTDBuendiaStation.setBorderPainted(false);
+				bTDBuendiaStation.setOpaque(false);
+				bTDBuendiaStation.setContentAreaFilled(false);
+			}
+			return bTDBuendiaStation;
+		}
+
+				private JButton getBTDAyalaStation() {
+			if (bTDAyalaStation == null) {
+				bTDAyalaStation = new JButton();
+				bTDAyalaStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
+				bTDAyalaStation.setBorderPainted(false);
+				bTDAyalaStation.setOpaque(false);
+				bTDAyalaStation.setContentAreaFilled(false);
+			}
+			return bTDAyalaStation;
+		}
+
+				private JButton getBTDMaynilad() {
 			if (bTDMaynilad == null) {
 				bTDMaynilad = new JButton();
 				bTDMaynilad.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_maynilad.png")));
@@ -862,6 +910,10 @@ private JPanel getTitleDeedsPanel() {
 		pTitleDeeds.add(getBTDMoa(), new Constraints(new Leading(112, 18, 12, 12), new Leading(93, 19, 12, 12)));
 		pTitleDeeds.add(getBTDMeralco(), new Constraints(new Leading(90, 18, 12, 12), new Leading(118, 19, 12, 12)));
 		pTitleDeeds.add(getBTDMaynilad(), new Constraints(new Leading(112, 18, 12, 12), new Leading(118, 19, 12, 12)));
+		pTitleDeeds.add(getBTDAyalaStation(), new Constraints(new Leading(90, 18, 12, 12), new Leading(143, 17, 12, 12)));
+		pTitleDeeds.add(getBTDBuendiaStation(), new Constraints(new Leading(114, 17, 12, 12), new Leading(143, 17, 12, 12)));
+		pTitleDeeds.add(getBDTTaftStation(), new Constraints(new Leading(135, 18, 12, 12), new Leading(143, 17, 12, 12)));
+		pTitleDeeds.add(getBDTNorthStation(), new Constraints(new Leading(161, 16, 10, 10), new Leading(143, 17, 12, 12)));
 	}
 	return pTitleDeeds;
 }
