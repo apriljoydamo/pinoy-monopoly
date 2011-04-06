@@ -2370,7 +2370,9 @@ private JPanel getBoardPanel() {
                 SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                                TitleDeedImage frame = new TitleDeedImage();
+                                TitleDeedImage frame = new TitleDeedImage(x, intTD);
+                                 TitleDeedImage.x = x;
+                                TitleDeedImage.intTD = intTD;
                                 frame.setDefaultCloseOperation(TitleDeedImage.HIDE_ON_CLOSE);
                                 frame.setTitle("TitleDeedImage");
                                 frame.getContentPane().setPreferredSize(frame.getSize());
@@ -2378,8 +2380,7 @@ private JPanel getBoardPanel() {
                                 frame.setLocationRelativeTo(null);
                                 frame.setResizable(false);
                                 frame.setVisible(true);
-                                TitleDeedImage.x = x;
-                                TitleDeedImage.intTD = intTD;
+                               
                                 
                         }
                 });
