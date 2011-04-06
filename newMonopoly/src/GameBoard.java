@@ -769,12 +769,14 @@ public class GameBoard extends JFrame implements Runnable {
                                 bEndTurn.addActionListener(new ActionListener() {
                 
                                         public void actionPerformed(ActionEvent event) {                //next player
-                                                x++;
+                                                
+                                        		x++;
                                                 if (x == numberOfPlayers) {
                                                         x = 0;
                                                 }
                                                 fPlayerName.setText(playerOrder[x].getPlayerName());
                                                 fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
+                                                bRollDice.setEnabled(true);
                                         }
                                 });
                         }
@@ -854,7 +856,7 @@ public class GameBoard extends JFrame implements Runnable {
                                                       
                                                 bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/transparentv.png")));
                                                 bBuy.setEnabled(false);
-                        
+                                                bRollDice.setEnabled(false);
                                                 dice[0].rollDiceResult1();
                                                 dice[1].rollDiceResult2();
                                                 
@@ -1065,7 +1067,7 @@ private JPanel getClickToPlayPanel() {
                 pClicktoPlay.setLayout(new GroupLayout());
                 pClicktoPlay.add(getPlayButton(), new Constraints(new Leading(292, 233, 12, 12), new Leading(282, 227, 10, 10)));
                 pClicktoPlay.add(getClicktoPlayLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 12, 12)));
-                pClicktoPlay.setVisible(false);
+                pClicktoPlay.setVisible(true);
         }
         return pClicktoPlay;
 }

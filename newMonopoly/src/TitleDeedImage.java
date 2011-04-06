@@ -93,7 +93,7 @@ public class TitleDeedImage extends JFrame {
 	private JLabel getlTitleDeed() {
 		if (lTitleDeed == null) {
 			lTitleDeed = new JLabel();
-			lTitleDeed.setIcon(new ImageIcon(getClass().getResource("/Cards (Resized)/Ayala Avenue.jpg")));
+			//lTitleDeed.setIcon(new ImageIcon(getClass().getResource("/Cards (Resized)/Ayala Avenue.jpg")));
 			switch(intTD){
 			case 1:
 				lTitleDeed.setIcon(new ImageIcon(getClass().getResource("/Cards (Resized)/Ayala Avenue.jpg")));
