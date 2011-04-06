@@ -35,11 +35,12 @@ public class GameBoard extends JFrame implements Runnable {
         Dice dice[] = new Dice[2];
         Players playerOrder[] = new Players[8];
         Random random = new Random();
+        Chance chance = new Chance();
+        CommunityChest Cchest = new CommunityChest();
         BoardBlock bblock = new BoardBlock();
-        //Block block = new Block();
         static int numberOfPlayers;
         public int randomChance, ccRandom;
-        int x = 0, rent, intTD;
+        int x = 0, rent, intTD, b=0, c=0;
         Thread t;
                 private JPanel pClicktoPlay;
                 private JLabel lClicktoPlay;
@@ -75,8 +76,11 @@ public class GameBoard extends JFrame implements Runnable {
 								private JButton bTDBuendiaStation;
 								private JButton bDTNorthStation;
 								private JButton bDTTaftStation;
-								private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
-								public GameBoard() {
+
+		
+		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
+		
+		public GameBoard() {
                 dice[0] = new Dice();
                 dice[1] = new Dice();
                 initComponents();
@@ -90,8 +94,11 @@ public class GameBoard extends JFrame implements Runnable {
 									add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
 									setSize(820, 595);
 								}
-
-		private JButton getBDTTaftStation() {
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////THIS IS FOR TITLEDEED//////////////////////////////////////////       
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       
+        private JButton getBDTTaftStation() {
 			if (bDTTaftStation == null) {
 				bDTTaftStation = new JButton();
 				bDTTaftStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
@@ -494,7 +501,7 @@ public class GameBoard extends JFrame implements Runnable {
                                 bTDShopwise.setBorderPainted(false);
                                 bTDShopwise.setOpaque(false);
                                 bTDShopwise.setContentAreaFilled(false);
-                                btdAyalaAve.addActionListener(new ActionListener() {
+                                bTDShopwise.addActionListener(new ActionListener() {
                                 	
                                     public void actionPerformed(ActionEvent event) {
                                     		intTD = 11;
@@ -575,27 +582,31 @@ public class GameBoard extends JFrame implements Runnable {
                         return bTDMakatiAve;
                 }
 
+                private JButton gettdAyalaAveButton() {
+                	if (btdAyalaAve == null) {
+                		btdAyalaAve = new JButton();
+                        btdAyalaAve.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_brown.png")));
+                        btdAyalaAve.setBorderPainted(false);
+                        btdAyalaAve.setOpaque(false);
+                        btdAyalaAve.setContentAreaFilled(false);
+                        btdAyalaAve.setFocusable(false);
+                        btdAyalaAve.addActionListener(new ActionListener() {
+                                            	
+                        	public void actionPerformed(ActionEvent event) {
+                        		intTD = 1;
+                                runTitleDeedImage(x, intTD);
+                            }
+                        });
+                	}
+                    return btdAyalaAve;
+                 }
+                                
+           
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////THIS IS FOR OTHER BUTTONS////////////////////////////////////////       
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                private JLabel getDicebgLabel() {
 
-                                private JButton gettdAyalaAveButton() {
-                                                        if (btdAyalaAve == null) {
-                                                                btdAyalaAve = new JButton();
-                                                                btdAyalaAve.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_brown.png")));
-                                                                btdAyalaAve.setBorderPainted(false);
-                                                                btdAyalaAve.setOpaque(false);
-                                                                btdAyalaAve.setContentAreaFilled(false);
-                                                                btdAyalaAve.setFocusable(false);
-                                                                btdAyalaAve.addActionListener(new ActionListener() {
-                                                                	
-                                                                        public void actionPerformed(ActionEvent event) {
-                                                                        		intTD = 1;
-                                                                                runTitleDeedImage(x, intTD);
-                                                                        }
-                                                                });
-                                                        }
-                                                        return btdAyalaAve;
-                                                }
-
-                                private JLabel getDicebgLabel() {
                         if (ldicebg == null) {
                                 ldicebg = new JLabel();
                                 ldicebg.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -774,10 +785,61 @@ public class GameBoard extends JFrame implements Runnable {
                         }
                         return bRollDice;
                 }
+     
+           /*     private JButton getbBuy() {
+            		if (bBuy == null) {
+            			bBuy = new JButton();
+                        bBuy.setBorderPainted(false);
+                        bBuy.setOpaque(false);
+                        bBuy.setContentAreaFilled(false);
+                        bBuy.setFocusable(false);
+            			bBuy.setBackground(Color.white);
+            			bBuy.addActionListener(new ActionListener() {
+                             public void actionPerformed(ActionEvent e){
+                            	 System.out.println("Name: "+x);
+                                 System.out.println("isESTATE: "+isEstate);
+                                                     if (isEstate == true) {
+                                                             bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
+                                                             playerOrder[x].buyEstate(bblock.getBlock()[playerOrder[x].getPosition()].getEstate(), playerOrder, x);
+                                                             //fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                             System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
+                                                             System.out.println("Price: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
+                                                             System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned());
+                                                             System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
+                                                             System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                                     } 
+                                                     if (isUtility == true) {
+                                                             bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyUtility.png")));
+                                                             playerOrder[x].buyUtility(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities(), playerOrder, x);
+                                                             //fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                             System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getName());
+                                                             System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
+                                                             System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned());
+                                                             System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
+                                                             System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
+                                                         
+                                                     }
+                                                     if (isStation == true) {
+                                                             bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyStation.png")));
+                                                             playerOrder[x].buyStation(bblock.getBlock()[playerOrder[x].getPosition()].getStation(), playerOrder, x);
+                                                             //fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                                             System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getName());
+                                                             System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
+                                                             System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned());
+                                                             System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getOwnerName());
+                                                             System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
 
-                /////////////////////////////TEXT FIELDS////////////////////////////////////
+                                                     }
+                                                    
+                                     }
+                             });
+            		}
+            		return bBuy;
+            	}*/
 
-        private JTextField getPlayerMoneyField() {
+//////////////////////////////////////////TEXT FIELDS//////////////////////////////////////////
+
+                private JTextField getPlayerMoneyField() {
                         if (fPlayerMoney == null) {
                                 fPlayerMoney = new JTextField();
                                 fPlayerMoney.setBackground(new Color(255, 193, 193));
@@ -789,7 +851,7 @@ public class GameBoard extends JFrame implements Runnable {
                         return fPlayerMoney;
                 }
 
-                private JTextField getPlayerNameField() {
+              	private JTextField getPlayerNameField() {
                         if (fPlayerName == null) {
                                 fPlayerName = new JTextField();
                                 fPlayerName.setBackground(new Color(255, 193, 193));
@@ -802,7 +864,7 @@ public class GameBoard extends JFrame implements Runnable {
                         return fPlayerName;
                 }   
         
-////////////////////////////////////LABELS////////////////////////////////
+//////////////////////////////////////////////LABELS////////////////////////////////////////////////
         
       
         private JLabel getClicktoPlayLabel() {
@@ -913,7 +975,7 @@ public class GameBoard extends JFrame implements Runnable {
                         return lMonopoly;
                 }
 
-//////////////////////////////////////////PANELS //////////////////////////////////////////
+//////////////////////////////////////////////////////PANELS ////////////////////////////////////////////////
 
 private JPanel getClickToPlayPanel() {
         if (pClicktoPlay == null) {
@@ -1034,12 +1096,7 @@ private static void installLnF() {
        
         @SuppressWarnings({ "static-access"})
                 public void run(){      
-                /*if(playerOrder[x].isJailed() == true && playerOrder[x].getTryForDice()<3){
-                        playerOrder[x].getToken().setLocation(23, 525);
-                    t.stop();
-                }*/
                         for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
-                        //for(int a = 0; a < 36; a++){      
                                 if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
                                         try{
                                                         if(playerOrder[x].getPosition() == 0 || playerOrder[x].getPosition() == 9){
@@ -1129,7 +1186,6 @@ private static void installLnF() {
 ///////////////////////////////////////METHODS USED IN BOARD/////////////////////////////////////
         
         public void chanceRandom(){
-                Chance chance = new Chance();
                         chance.shuffleChance();
                         switch (chance.getChanceRandom()){
                         //switch (3){
@@ -1137,12 +1193,14 @@ private static void installLnF() {
                                         //chance.speedingFine();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
                                         break;                                          
                         case 2:
                                         //chance.bankDividend();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
                                         break;
                         case 3:
@@ -1173,6 +1231,7 @@ private static void installLnF() {
                                         //chance.paySchoolFees();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
                                         break;
                         case 6:
@@ -1187,15 +1246,17 @@ private static void installLnF() {
                         case 7:
                                         playerOrder[x].setHasJailKey(true);
                                         //System.out.println("Get out of Jail Free Key.");
+                                        updateTokenPosition();
                                         System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
                                         break;
                         case 8:
                                         //chance.streetRepairs();
-                                        
+                                        updateTokenPosition();
                                         System.out.println("Your are assessed for street rpairs. P40 per house, P115 per hotel.");
                                         break;
                         case 9:
                                         //chance.generalRepairs();
+                                        updateTokenPosition();
                                         System.out.println("Make general repairs on all of your buildings. For each house pay P25. For each hotel pay P100.");
                                         break;
                         case 10:
@@ -1230,6 +1291,7 @@ private static void installLnF() {
                                         //chance.buildingMatures();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
                                         break;
                         case 13:
@@ -1263,12 +1325,14 @@ private static void installLnF() {
                                         //chance.drunkInCharge();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
                                         break;
                         case 16:
                                         //chance.wonCrosswordCompetition();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
                                         break;
                         }
@@ -1278,10 +1342,7 @@ private static void installLnF() {
         
         
         public void cChestRandom(){
-
-                
-                CommunityChest Cchest = new CommunityChest();
-                        Cchest.shuffleCchest();
+        			Cchest.shuffleCchest();
                         
                         switch (Cchest.getcChestRandom()){
                         
@@ -1289,24 +1350,28 @@ private static void installLnF() {
                                         //Cchest.bankError();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                 case 2:
                                         //Cchest.payHospital();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                 case 3:
                                         //Cchest.wonBeautyContest();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 10);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                 case 4:
                                         //Cchest.taxRefund();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 20);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                 case 5:
@@ -1314,6 +1379,7 @@ private static void installLnF() {
                                         //Cchest.payOrChance();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 10);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         //there should be a PANEL...with a PAY 10 or TAKE CHANCE here...
                                         break;
@@ -1321,18 +1387,21 @@ private static void installLnF() {
                                         //Cchest.payInsurance();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                 case 7:
                                         //Cchest.saleOfStock();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                 case 8:
                                         //Cchest.recieveInterest();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 25);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                 case 9:
@@ -1341,6 +1410,7 @@ private static void installLnF() {
                                         playerOrder[x].setPosition(40);
                                         updateTokenPosition();
                                         passedGo();
+                                        updateTokenPosition();
                                         System.out.println("Pass Go.");
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
@@ -1354,6 +1424,7 @@ private static void installLnF() {
                                         break;
                                 case 11:
                                         playerOrder[x].setHasJailKey(true);
+                                        updateTokenPosition();
                                         System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
                                         break;
                                 case 12:
@@ -1369,18 +1440,21 @@ private static void installLnF() {
                                                         System.out.println("YourMoney: "+playerOrder[a].getStartMoney());
                                                 }
                                         }
+                                        updateTokenPosition();
                                         System.out.println("It is your birthday. Collect P10 from each player.");
                                         break;
                                 case 13:
                                         //Cchest.doctorsFee();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                 case 14:
                                         //Cchest.annuityMatures();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                 case 15:
@@ -1390,6 +1464,7 @@ private static void installLnF() {
                                         //Cchest.inheritMoney();
                                         playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                        updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                                         break;
                                                                                                 
@@ -1402,17 +1477,17 @@ private static void installLnF() {
                 switch(playerOrder[x].getLastStep()){
                         
                         case 1:
-                             
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                                
+                        		updateTokenPosition();
+                        		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(1);
                                 }else{
-                                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
                                              System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-                                                } 
+                                        } 
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                                                 rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                                                 playerOrder[x].payRent(playerOrder, x, rent);
@@ -1424,20 +1499,25 @@ private static void installLnF() {
                                 break;
                                                      
                         case 2:
-                                cChestRandom();
+	                        	updateTokenPosition();
+	                            cChestRandom();
+	                            b = chance.getChanceRandom();
+	                            showCCT(b,0,0);
                                 break;
                                 
                         case 3:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                                
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(3);
+                                        
                                 }else{
-                                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
                                              System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-                                                } 
+                                        } 
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                                                 rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                                                 playerOrder[x].payRent(playerOrder, x, rent);
@@ -1448,22 +1528,26 @@ private static void installLnF() {
                                 break;
                                 
                         case 4:
-                                        playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
-                                        fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                                        System.out.println("Paid 200 tax!");
+                        		updateTokenPosition();
+                                playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
+                                fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                System.out.println("Paid 200 tax!");
+                                showCCT(0,0,2);
                                 break;
                                 
                         case 5:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
-                                                
+                        		updateTokenPosition();
+	                          	if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                                         isStation = true;
                                         isEstate = false;
                                         isUtility = false;
+                                        buySomething(5);
+                                        
                                 }else{
-                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
+                                    if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
                                              System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-                                                } 
+                                    } 
                                     if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
                                                 rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                                                 playerOrder[x].payRent(playerOrder, x, rent);
@@ -1474,11 +1558,13 @@ private static void installLnF() {
                                 break;
                                 
                         case 6:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                                
+	                        	updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(6);
+                                        
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1495,23 +1581,27 @@ private static void installLnF() {
                                 break;
                                 
                         case 7:
-                                chanceRandom();
+	                        	updateTokenPosition();
+	                            chanceRandom();
+	                            c = chance.getChanceRandom();
+	                            showCCT(0,c,0);
                                 break;
                                 
                         case 8:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                                
-                                        isEstate = true;
+                        		updateTokenPosition();
+                        		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                                       	isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(8);
+                                        
                                 }else{
-                                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
                                              System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-                                                } 
+                                        } 
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-                                        	//      ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/pay_rent/rizalPark.gif")));
-                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                        		rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                                                 playerOrder[x].payRent(playerOrder, x, rent);
                                                 fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                                 System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
@@ -1520,11 +1610,13 @@ private static void installLnF() {
                                 break;
                                 
                         case 9:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                                
+                        		updateTokenPosition();
+                        		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(9);
+                                        
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1542,16 +1634,18 @@ private static void installLnF() {
                                 break;
                                 
                         case 11:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                                
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(11);
+                                        
                                 }else{
-                                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
+                                        if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
                                              System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-                                                } 
+                                        } 
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                                                 rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                                                 playerOrder[x].payRent(playerOrder, x, rent);
@@ -1562,18 +1656,35 @@ private static void installLnF() {
                                 break;
                                 
                         case 12:
-                                        isUtility = true;
-                                        isEstate = false;
-                                        isStation = false;
-                                        fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                                break;
+                        	updateTokenPosition();
+                            if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned() != true){
+                                    isUtility = true;        
+                                    isEstate = false;
+                                    isStation = false;
+                                    buySomething(12);
+                            }else{
+                                    if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() == x){
+                                         System.out.println("This is your land!!! ");
+                                         System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
+                                    } 
+                                    if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() != x){
+                                    	//                 ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/pay_rent/SLEX.gif")));
+                                            rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                            playerOrder[x].payRent(playerOrder, x, rent);
+                                            fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                            System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
+                                    }
+                            }
+                            break;
                                 
                         case 13:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                                 
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(13);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1590,10 +1701,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 14:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+                        		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(14);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1610,10 +1723,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 15:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                                         isStation = true;
                                         isEstate = false;
                                         isUtility = false;
+                                        buySomething(15);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1629,10 +1744,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 16:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(16);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1648,14 +1765,19 @@ private static void installLnF() {
                                 break;
                                 
                         case 17:
-                                cChestRandom();
-                                break;
+                        		updateTokenPosition();
+	                            cChestRandom();
+	                            b = Cchest.getcChestRandom();
+	                            showCCT(b,0,0);
+	                            break;
                                 
                         case 18:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(18);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1671,10 +1793,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 19:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(19);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1690,10 +1814,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 21:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(21);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1709,14 +1835,19 @@ private static void installLnF() {
                                 break;
                                 
                         case 22:
-                                chanceRandom();
+	                        	updateTokenPosition();
+	                            chanceRandom();
+	                            c = chance.getChanceRandom();
+	                            showCCT(0,c,0);
                                 break;
                                 
                         case 23:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+                        		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(23);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1732,10 +1863,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 24:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(24);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1751,10 +1884,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 25:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                                         isStation = true;
                                         isEstate = false;
                                         isUtility = false;
+                                        buySomething(25);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1770,10 +1905,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 26:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+                        		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(26);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1789,10 +1926,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 27:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+                        		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(27);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1808,17 +1947,33 @@ private static void installLnF() {
                                 break;
                                 
                         case 28:
-                                        isUtility = true;
-                                        isEstate = false;
-                                        isStation = false;
-                                break;
+                        	updateTokenPosition();
+                            if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned() != true){
+                                    isUtility = true;        
+                                    isEstate = false;
+                                    isStation = false;
+                                    buySomething(12);
+                            }else{
+                                    if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() == x){
+                                         System.out.println("This is your land!!! ");
+                                         System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
+                                    } 
+                                    if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() != x){
+                                    		rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                            playerOrder[x].payRent(playerOrder, x, rent);
+                                            fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                            System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
+                                    }
+                            }
+                            break;
                                 
                         case 29:
-                                
+                        		updateTokenPosition();
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(29);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1833,22 +1988,25 @@ private static void installLnF() {
                                 }
                                 break;
                         case 30:
-                                goToJail();
+	                        	updateTokenPosition();
+	                            goToJail();
+	                            showCCT(0,13, 0);
                                 break;
                                 
                         case 31:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+                        		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(31);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
                                              System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                                                 } 
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
-                                        	//                    ltransparentImage.setIcon(new ImageIcon(getClass().getResource("/pay_rent/starCity.gif")));
-                                                rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
+                                        		rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                                                 playerOrder[x].payRent(playerOrder, x, rent);
                                                 fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                                 System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
@@ -1857,10 +2015,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 32:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(32);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1876,14 +2036,19 @@ private static void installLnF() {
                                 break;
                                 
                         case 33:
-                                cChestRandom();
+	                        	updateTokenPosition();
+	                            cChestRandom();
+	                            b = Cchest.getcChestRandom();
+	                            showCCT(b,0,0);
                                 break;
                                 
                         case 34:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(34);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1899,10 +2064,12 @@ private static void installLnF() {
                                 break;
                                 
                         case 35:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                                         isStation = true;
                                         isEstate = false;
                                         isUtility = false;
+                                        buySomething(35);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1918,14 +2085,19 @@ private static void installLnF() {
                                 break;
                                 
                         case 36:
+                        		updateTokenPosition();
                                 chanceRandom();
+                                c = chance.getChanceRandom();
+                                showCCT(0,c,0);
                                 break;
                                 
                         case 37:
-                                if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+                        		updateTokenPosition();
+	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(37);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1941,16 +2113,20 @@ private static void installLnF() {
                                 break;
                                 
                         case 38:
-                                playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
+                        		updateTokenPosition();
+                        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
                                 fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                 System.out.println("Paid 100 tax!");
+                                showCCT(0,0,1);
                                 break;
                                 
                         case 39:
+                        		updateTokenPosition();
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
+                                        buySomething(39);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -2048,8 +2224,8 @@ private static void installLnF() {
         }
         
         public void useJailKey(){
-                playerOrder[x].setHasJailKey(false);
-                playerOrder[x].setJailed(false);
+            playerOrder[x].setHasJailKey(false);
+            playerOrder[x].setJailed(false);
             playerOrder[x].setBailOutDice(0);
             playerOrder[x].setDoubleDice(0);
             playerOrder[x].setTryForDice(0);
@@ -2062,8 +2238,8 @@ private static void installLnF() {
                 SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                                TitleDeedImage frame = new TitleDeedImage();
-                                 TitleDeedImage.x = x;
+                                TitleDeedImage frame = new TitleDeedImage(x, intTD);
+                                TitleDeedImage.x = x;
                                 TitleDeedImage.intTD = intTD;
                                 frame.setDefaultCloseOperation(TitleDeedImage.HIDE_ON_CLOSE);
                                 frame.setTitle("TitleDeedImage");
@@ -2077,5 +2253,40 @@ private static void installLnF() {
                         }
                 });
         }
-                
+      
+      public void buySomething(final int a) {
+  		installLnF();
+  		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+  			public void run() {
+  				PropertyImages frame = new PropertyImages(a);
+  				PropertyImages.a = a;
+  				frame.setDefaultCloseOperation(PropertyImages.DISPOSE_ON_CLOSE);
+  				frame.setTitle("PropertyImages");
+  				frame.getContentPane().setPreferredSize(frame.getSize());
+  				frame.pack();
+  				frame.setLocationRelativeTo(null);
+  				frame.setVisible(true);
+  			}
+  		});
+  	}
+      
+      public void showCCT(final int b, final int c, final int d) {
+  		installLnF();
+  		SwingUtilities.invokeLater(new Runnable() {
+  			@Override
+  			public void run() {
+  				CCTImages frame = new CCTImages(b,c,d);
+  				CCTImages.b = b;
+  				CCTImages.c = c;
+  				CCTImages.d = d;
+  				frame.setDefaultCloseOperation(CCTImages.DISPOSE_ON_CLOSE);
+  				frame.setTitle("CCTImages");
+  				frame.getContentPane().setPreferredSize(frame.getSize());
+  				frame.pack();
+  				frame.setLocationRelativeTo(null);
+  				frame.setVisible(true);
+  			}
+  		});
+  	}
 }
