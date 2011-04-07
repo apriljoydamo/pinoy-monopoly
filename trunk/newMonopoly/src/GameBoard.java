@@ -86,6 +86,12 @@ public class GameBoard extends JFrame implements Runnable {
                 initComponents();
         }
 
+		@SuppressWarnings("static-access")
+		public GameBoard(int numberOfPlayers){
+			this.numberOfPlayers = numberOfPlayers;
+			initComponents();
+			
+		}
         private void initComponents() {
 									setLayout(new GroupLayout());
 									add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
@@ -2266,6 +2272,7 @@ private static void installLnF() {
   				frame.getContentPane().setPreferredSize(frame.getSize());
   				frame.pack();
   				frame.setLocationRelativeTo(null);
+  				frame.setResizable(false);
   				frame.setVisible(true);
   			}
   		});
@@ -2285,6 +2292,7 @@ private static void installLnF() {
   				frame.getContentPane().setPreferredSize(frame.getSize());
   				frame.pack();
   				frame.setLocationRelativeTo(null);
+  				frame.setResizable(false);
   				frame.setVisible(true);
   			}
   		});
