@@ -18,7 +18,9 @@ public class CCTImages extends JFrame {
 	static int b, c, d;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	
-	
+	public CCTImages(){
+		initComponents();
+	}
 	@SuppressWarnings("static-access")
 	public CCTImages(int b, int c, int d) {
 		this.b = b;
