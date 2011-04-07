@@ -31,6 +31,11 @@ public class TitleDeedImage extends JFrame {
 	static int intTD;
 	private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 	
+	
+	public TitleDeedImage(){
+		initComponents();
+	}
+	
 	@SuppressWarnings("static-access")
 	public TitleDeedImage(int x,int intTD) {
 		this.x = x;
