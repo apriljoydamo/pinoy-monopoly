@@ -265,7 +265,7 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					insertOrder(initialNumPlayer);
 					rearrangeArray(initialNumPlayer);
-					runBoard();
+					runBoard(numberOfPlayers);
 				}
 			});
 		}
@@ -530,13 +530,15 @@ public class PlayersGui extends JFrame{
         }
 }
 	
-	public void runBoard(){
+	public void runBoard(final int numberOfPlayers){
 		this.setVisible(false);
 		installLnF();
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				GameBoard frame = new GameBoard();
+				GameBoard frame = new GameBoard(numberOfPlayers);
+				frame.playerOrder = playerOrder;
+				GameBoard.numberOfPlayers = numberOfPlayers;
 				frame.setDefaultCloseOperation(GameBoard.EXIT_ON_CLOSE);
 				frame.setTitle("GameBoard");
 				frame.getContentPane().setPreferredSize(frame.getSize());
@@ -544,8 +546,7 @@ public class PlayersGui extends JFrame{
 				frame.setLocationRelativeTo(null);
 				frame.setResizable(false);
 				frame.setVisible(true);
-				frame.playerOrder = playerOrder;
-				GameBoard.numberOfPlayers = numberOfPlayers;
+				
 			}
 		});
 	}
