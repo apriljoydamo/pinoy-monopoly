@@ -536,7 +536,7 @@ public class PlayersGui extends JFrame{
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				GameBoard frame = new GameBoard(numberOfPlayers);
+				GameBoard frame = new GameBoard();
 				frame.playerOrder = playerOrder;
 				GameBoard.numberOfPlayers = numberOfPlayers;
 				frame.setDefaultCloseOperation(GameBoard.EXIT_ON_CLOSE);
