@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -31,6 +32,7 @@ public class GameBoard extends JFrame implements Runnable {
         private JLabel lBapor, lAzkal, lIron, lShoe, lCar, lThimble, lHat,lWheelBarrow;
         private JButton bRollDice, bPlay, bEndTurn;
         private JTextField fPlayerName, fPlayerMoney;
+        ImageIcon icon;
         
         Dice dice[] = new Dice[2];
         Players playerOrder[] = new Players[8];
@@ -41,6 +43,8 @@ public class GameBoard extends JFrame implements Runnable {
         static int numberOfPlayers;
         public int randomChance, ccRandom;
         int x = 0, rent, intTD, b=0, c=0;
+        int optionType = JOptionPane.YES_NO_OPTION;
+        int messageType = JOptionPane.PLAIN_MESSAGE;
         Thread t;
                 private JPanel pClicktoPlay;
                 private JLabel lClicktoPlay;
@@ -86,12 +90,7 @@ public class GameBoard extends JFrame implements Runnable {
                 initComponents();
         }
 
-		@SuppressWarnings("static-access")
-		public GameBoard(int numberOfPlayers){
-			this.numberOfPlayers = numberOfPlayers;
-			initComponents();
-			
-		}
+		
         private void initComponents() {
 									setLayout(new GroupLayout());
 									add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
@@ -792,56 +791,7 @@ public class GameBoard extends JFrame implements Runnable {
                         return bRollDice;
                 }
      
-           /*     private JButton getbBuy() {
-            		if (bBuy == null) {
-            			bBuy = new JButton();
-                        bBuy.setBorderPainted(false);
-                        bBuy.setOpaque(false);
-                        bBuy.setContentAreaFilled(false);
-                        bBuy.setFocusable(false);
-            			bBuy.setBackground(Color.white);
-            			bBuy.addActionListener(new ActionListener() {
-                             public void actionPerformed(ActionEvent e){
-                            	 System.out.println("Name: "+x);
-                                 System.out.println("isESTATE: "+isEstate);
-                                                     if (isEstate == true) {
-                                                             bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
-                                                             playerOrder[x].buyEstate(bblock.getBlock()[playerOrder[x].getPosition()].getEstate(), playerOrder, x);
-                                                             //fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                                                             System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
-                                                             System.out.println("Price: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
-                                                             System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned());
-                                                             System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-                                                             System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
-                                                     } 
-                                                     if (isUtility == true) {
-                                                             bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyUtility.png")));
-                                                             playerOrder[x].buyUtility(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities(), playerOrder, x);
-                                                             //fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                                                             System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getName());
-                                                             System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
-                                                             System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned());
-                                                             System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
-                                                             System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
-                                                         
-                                                     }
-                                                     if (isStation == true) {
-                                                             bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyStation.png")));
-                                                             playerOrder[x].buyStation(bblock.getBlock()[playerOrder[x].getPosition()].getStation(), playerOrder, x);
-                                                             //fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                                                             System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getName());
-                                                             System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
-                                                             System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned());
-                                                             System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getOwnerName());
-                                                             System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
-
-                                                     }
-                                                    
-                                     }
-                             });
-            		}
-            		return bBuy;
-            	}*/
+           
 
 //////////////////////////////////////////TEXT FIELDS//////////////////////////////////////////
 
@@ -1485,10 +1435,15 @@ private static void installLnF() {
                         case 1:
                         		updateTokenPosition();
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
-                                        isStation = false;
-                                        buySomething(1);
+                        				icon = new ImageIcon(getClass().getResource("/buyProperty_images/ayalaAvenue.gif"));
+                        				int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                                        if(res == JOptionPane.YES_OPTION){
+                                        	isEstate = true;
+                                        	isUtility = false;
+                                        	isStation = false;
+                                        	buy();
+                                        }
+                                        //buySomething(1);
                                 }else{
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1505,19 +1460,24 @@ private static void installLnF() {
                                 break;
                                                      
                         case 2:
-	                        	updateTokenPosition();
+                        		updateTokenPosition();
 	                            cChestRandom();
 	                            b = chance.getChanceRandom();
 	                            showCCT(b,0,0);
                                 break;
                                 
                         case 3:
-                        		updateTokenPosition();
+	                        	updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/makatiAvenue.gif"));
+	                            	int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                                    if(res == JOptionPane.YES_OPTION){
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
-                                        buySomething(3);
+                                        buy();
+                                    }
+                                       // buySomething(3);
                                         
                                 }else{
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
@@ -1534,6 +1494,7 @@ private static void installLnF() {
                                 break;
                                 
                         case 4:
+	                        	
                         		updateTokenPosition();
                                 playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
                                 fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
@@ -1542,12 +1503,17 @@ private static void installLnF() {
                                 break;
                                 
                         case 5:
-                        		updateTokenPosition();
+	                        	updateTokenPosition();
 	                          	if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
-                                        isStation = true;
-                                        isEstate = false;
-                                        isUtility = false;
-                                        buySomething(5);
+		                          		icon = new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Ayala).gif"));
+		                          		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                    if(res == JOptionPane.YES_OPTION){
+	                                    	isStation = true;
+		                                    isEstate = false;
+	                                        isUtility = false;
+	                                        buy();
+	                                    }
+	                                        //buySomething(5);
                                         
                                 }else{
                                     if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
@@ -1566,10 +1532,15 @@ private static void installLnF() {
                         case 6:
 	                        	updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/puregold.gif"));
+	                            	int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                                    if(res == JOptionPane.YES_OPTION){
+                                    	isEstate = true;
+                                    	isUtility = false;
                                         isStation = false;
-                                        buySomething(6);
+                                        buy();
+                                    }
+                                        //buySomething(6);
                                         
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
@@ -1594,12 +1565,17 @@ private static void installLnF() {
                                 break;
                                 
                         case 8:
-                        		updateTokenPosition();
+	                        	updateTokenPosition();
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                       	isEstate = true;
-                                        isUtility = false;
+                        			icon = new ImageIcon(getClass().getResource("/buyProperty_images/rizalPark.gif"));
+                        			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                                    if(res == JOptionPane.YES_OPTION){
+                                    	isEstate = true;
+                                    	isUtility = false;
                                         isStation = false;
-                                        buySomething(8);
+                                        buy();
+                                    }
+                                        //buySomething(8);
                                         
                                 }else{
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
@@ -1618,10 +1594,15 @@ private static void installLnF() {
                         case 9:
                         		updateTokenPosition();
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+                        			icon = new ImageIcon(getClass().getResource("/buyProperty_images/delarosaStreet.gif"));
+                        			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                                    if(res == JOptionPane.YES_OPTION){
+                                    	isEstate = true;
+                                    	isUtility = false;
                                         isStation = false;
-                                        buySomething(9);
+                                        buy();
+                                    }
+                                        // buySomething(9);
                                         
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
@@ -1642,10 +1623,16 @@ private static void installLnF() {
                         case 11:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/shopwise.gif"));
+                        			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                                    if(res == JOptionPane.YES_OPTION){
+                                    	isEstate = true;
+                                    	isUtility = false;
                                         isStation = false;
-                                        buySomething(11);
+                                        buy();
+                                    }
+                                        
+                                        //buySomething(11);
                                         
                                 }else{
                                         if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
@@ -1664,10 +1651,16 @@ private static void installLnF() {
                         case 12:
                         	updateTokenPosition();
                             if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned() != true){
-                                    isUtility = true;        
-                                    isEstate = false;
-                                    isStation = false;
-                                    buySomething(12);
+                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/meralco.gif"));
+                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                                if(res == JOptionPane.YES_OPTION){
+                                	isUtility = true; 
+                                	isEstate = false;
+                                    isStation = false;     
+                                    buy();
+                                }
+                                    
+                                    //buySomething(12);
                             }else{
                                     if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() == x){
                                          System.out.println("This is your land!!! ");
@@ -1686,11 +1679,15 @@ private static void installLnF() {
                         case 13:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                                
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/SLEX.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){        
                                         isEstate = true;
                                         isUtility = false;
                                         isStation = false;
-                                        buySomething(13);
+                                        buy();
+	                                }
+                                        //buySomething(13);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1709,10 +1706,16 @@ private static void installLnF() {
                         case 14:
                         		updateTokenPosition();
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+                        			icon = new ImageIcon(getClass().getResource("/buyProperty_images/walterMart.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){       
+	                                	isEstate = true;
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(14);
+                                        buy();
+	                                }
+                                        
+                                        //buySomething(14);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1731,10 +1734,16 @@ private static void installLnF() {
                         case 15:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
-                                        isStation = true;
-                                        isEstate = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Buendia).gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){   
+	                                	isStation = true;
+	                                	isEstate = false;
                                         isUtility = false;
-                                        buySomething(15);
+                                        buy();
+	                                }
+                                        
+                                        //buySomething(15);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1752,10 +1761,16 @@ private static void installLnF() {
                         case 16:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/intramuros.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true;
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(16);
+                                        buy();
+	                                }
+                                        
+                                       // buySomething(16);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1780,10 +1795,16 @@ private static void installLnF() {
                         case 18:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/C5road.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true; 
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(18);
+                                        buy();
+	                                }
+                                       
+                                       // buySomething(18);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1801,10 +1822,16 @@ private static void installLnF() {
                         case 19:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/chinaTown.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true; 
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(19);
+                                        buy();
+	                                }
+                                       
+                                        //buySomething(19);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1822,10 +1849,16 @@ private static void installLnF() {
                         case 21:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/NLEX.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true;
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(21);
+                                        buy();
+	                                }
+                                       
+                                       // buySomething(21);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1850,10 +1883,16 @@ private static void installLnF() {
                         case 23:
                         		updateTokenPosition();
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+                        			icon = new ImageIcon(getClass().getResource("/buyProperty_images/nationalBookstore.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true; 
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(23);
+                                        buy();
+	                                }
+                                       
+                                       // buySomething(23);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1871,10 +1910,16 @@ private static void installLnF() {
                         case 24:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/trinoma.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true;   
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(24);
+                                        buy();
+	                                }
+                                     
+                                       // buySomething(24);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1892,10 +1937,16 @@ private static void installLnF() {
                         case 25:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
-                                        isStation = true;
-                                        isEstate = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Taft).gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isStation = true; 
+	                                	isEstate = false;
                                         isUtility = false;
-                                        buySomething(25);
+                                        buy();
+	                                }
+                                      
+                                     //   buySomething(25);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1913,10 +1964,16 @@ private static void installLnF() {
                         case 26:
                         		updateTokenPosition();
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+                        			icon = new ImageIcon(getClass().getResource("/buyProperty_images/EDSA.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true;
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(26);
+                                        buy();
+	                                }
+                                        
+                                       // buySomething(26);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1934,10 +1991,16 @@ private static void installLnF() {
                         case 27:
                         		updateTokenPosition();
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+                        			icon = new ImageIcon(getClass().getResource("/buyProperty_images/magsaysayBridge.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true;
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(27);
+                                        buy();
+	                                }
+                                        
+                                       // buySomething(27);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -1955,10 +2018,16 @@ private static void installLnF() {
                         case 28:
                         	updateTokenPosition();
                             if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned() != true){
-                                    isUtility = true;        
-                                    isEstate = false;
-                                    isStation = false;
-                                    buySomething(12);
+                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/maynilad.gif"));
+                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                                if(res == JOptionPane.YES_OPTION){  
+                                	isUtility = true; 
+                                	isEstate = false;
+                                    isStation = false;    
+                                    buy();
+                                }
+                                    
+                                   // buySomething(12);
                             }else{
                                     if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() == x){
                                          System.out.println("This is your land!!! ");
@@ -1976,10 +2045,16 @@ private static void installLnF() {
                         case 29:
                         		updateTokenPosition();
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+                                	icon = new ImageIcon(getClass().getResource("/buyProperty_images/starCity.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true; 
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(29);
+                                        buy();
+	                                }
+                                       
+                                       // buySomething(29);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -2002,10 +2077,16 @@ private static void installLnF() {
                         case 31:
                         		updateTokenPosition();
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+                        			icon = new ImageIcon(getClass().getResource("/buyProperty_images/landmark.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true; 
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(31);
+                                        buy();
+	                                }
+                                       
+                                        //buySomething(31);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -2023,10 +2104,16 @@ private static void installLnF() {
                         case 32:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/glorietta.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true;
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(32);
+                                        buy();
+	                                }
+                                        
+                                        //buySomething(32);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -2051,10 +2138,16 @@ private static void installLnF() {
                         case 34:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/greenbelt.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true;
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(34);
+                                        buy();
+	                                }
+                                        
+                                       // buySomething(34);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -2072,10 +2165,16 @@ private static void installLnF() {
                         case 35:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
-                                        isStation = true;
-                                        isEstate = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/MRT(North).gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isStation = true; 
+	                                	isEstate = false;
                                         isUtility = false;
-                                        buySomething(35);
+                                        buy();
+	                                }
+                                       
+                                        //buySomething(35);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -2100,10 +2199,16 @@ private static void installLnF() {
                         case 37:
                         		updateTokenPosition();
 	                            if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+	                            	icon = new ImageIcon(getClass().getResource("/buyProperty_images/boracayIsland.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true;
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(37);
+                                        buy();
+	                                }
+                                        
+                                        //buySomething(37);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -2129,10 +2234,16 @@ private static void installLnF() {
                         case 39:
                         		updateTokenPosition();
                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
-                                        isEstate = true;
-                                        isUtility = false;
+                                	icon = new ImageIcon(getClass().getResource("/buyProperty_images/MOA.gif"));
+	                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+	                                if(res == JOptionPane.YES_OPTION){  
+	                                	isEstate = true; 
+	                                	isUtility = false;
                                         isStation = false;
-                                        buySomething(39);
+                                        buy();
+	                                }
+                                       
+                                       // buySomething(39);
                                 }else{
                                                 if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                                              System.out.println("This is your land!!! ");
@@ -2294,7 +2405,46 @@ private static void installLnF() {
   				frame.setLocationRelativeTo(null);
   				frame.setResizable(false);
   				frame.setVisible(true);
+  				
+  				
   			}
   		});
   	}
+    public void buy() {
+                                       if (isEstate == true) {
+                                               //bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyEstate.png")));
+                                               playerOrder[x].buyEstate(bblock.getBlock()[playerOrder[x].getPosition()].getEstate(), playerOrder, x);
+                                               //fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                               System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
+                                               System.out.println("Price: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
+                                               System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned());
+                                               System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
+                                               System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+                                       } 
+                                       if (isUtility == true) {
+                                              // bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyUtility.png")));
+                                               playerOrder[x].buyUtility(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities(), playerOrder, x);
+                                               //fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                               System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getName());
+                                               System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
+                                               System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned());
+                                               System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
+                                               System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
+                                           
+                                       }
+                                       if (isStation == true) {
+                                              // bBuy.setIcon(new ImageIcon(getClass().getResource("/Designs/buyStation.png")));
+                                               playerOrder[x].buyStation(bblock.getBlock()[playerOrder[x].getPosition()].getStation(), playerOrder, x);
+                                               //fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+                                               System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getName());
+                                               System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
+                                               System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned());
+                                               System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getOwnerName());
+                                               System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
+
+                                       }
+                                      
+                       }
+              
+
 }
