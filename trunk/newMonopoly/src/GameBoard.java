@@ -1208,12 +1208,18 @@ private static void installLnF() {
                         case 8:
                                         //chance.streetRepairs();
                                         updateTokenPosition();
-                                        System.out.println("Your are assessed for street rpairs. P40 per house, P115 per hotel.");
+                                        System.out.println("Your are assessed for street repairs. Pay 50 to the bank.");
+                                        playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
+                                        fPlayerMoney.setText("P" + playerOrder[x].getStartMoney());
+                                        System.out.println("Money: " + playerOrder[x].getStartMoney());
                                         break;
                         case 9:
                                         //chance.generalRepairs();
                                         updateTokenPosition();
-                                        System.out.println("Make general repairs on all of your buildings. For each house pay P25. For each hotel pay P100.");
+                                        System.out.println("Make general repairs on all of your buildings. Pay 50 to the bank.");
+                                        playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
+                                        fPlayerMoney.setText("P" + playerOrder[x].getStartMoney());
+                                        System.out.println("Money: " + playerOrder[x].getStartMoney());
                                         break;
                         case 10:
                                         //chance.advanceToShopwise();
@@ -1337,7 +1343,6 @@ private static void installLnF() {
                                         fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                         updateTokenPosition();
                                         System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
-                                        //there should be a PANEL...with a PAY 10 or TAKE CHANCE here...
                                         break;
                                 case 6:
                                         //Cchest.payInsurance();
