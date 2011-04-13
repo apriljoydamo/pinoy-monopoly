@@ -2309,7 +2309,10 @@ public class GameBoard extends JFrame implements Runnable {
 		   			
 		   			if(playerOrder[x].hasJailKey() == false){
 		   				JOptionPane.showMessageDialog(null, "weee? wala ka ngang Jail Key eh. :P", "Warning!", JOptionPane.WARNING_MESSAGE);
+		   				
 		   			}
+		   			
+		   			return;
 		   		}
        	
     	   t.stop();                   
