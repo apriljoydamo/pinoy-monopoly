@@ -1401,7 +1401,8 @@ public class GameBoard extends JFrame implements Runnable {
         		case 1:
         			if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
         				icon = new ImageIcon(getClass().getResource("/buyProperty_images/ayalaAvenue.gif"));
-        				int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+        				Object[] options = {"Buy Estate" , "Nevermind"};
+        				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
         				if(res == JOptionPane.YES_OPTION){
         					isEstate = true;
         					isUtility = false;
@@ -1433,7 +1434,8 @@ public class GameBoard extends JFrame implements Runnable {
         		case 3:
         			if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
         				icon = new ImageIcon(getClass().getResource("/buyProperty_images/makatiAvenue.gif"));
-        				int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+        				Object[] options = {"Buy Estate" , "Nevermind"};
+        				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
         				if(res == JOptionPane.YES_OPTION){
         					isEstate = true;
         					isUtility = false;
@@ -1468,7 +1470,8 @@ public class GameBoard extends JFrame implements Runnable {
         			updateTokenPosition();
         			if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
         				icon = new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Ayala).gif"));
-        				int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+        				Object[] options = {"Buy Estate" , "Nevermind"};
+        				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
         				if(res == JOptionPane.YES_OPTION){
         					isStation = true;
         					isEstate = false;
@@ -1496,7 +1499,8 @@ public class GameBoard extends JFrame implements Runnable {
         			updateTokenPosition();
         			if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
         				icon = new ImageIcon(getClass().getResource("/buyProperty_images/puregold.gif"));
-        				int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+        				Object[] options = {"Buy Estate" , "Nevermind"};
+        				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
         				if(res == JOptionPane.YES_OPTION){
         					isEstate = true;
         					isUtility = false;
@@ -1531,7 +1535,8 @@ public class GameBoard extends JFrame implements Runnable {
         			updateTokenPosition();
         			if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
         				icon = new ImageIcon(getClass().getResource("/buyProperty_images/rizalPark.gif"));
-        				int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+        				Object[] options = {"Buy Estate" , "Nevermind"};
+        				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
         				if(res == JOptionPane.YES_OPTION){
         					isEstate = true;
         					isUtility = false;
@@ -1559,7 +1564,8 @@ public class GameBoard extends JFrame implements Runnable {
         			updateTokenPosition();
         			if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
         				icon = new ImageIcon(getClass().getResource("/buyProperty_images/delarosaStreet.gif"));
-        				int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+        				Object[] options = {"Buy Estate" , "Nevermind"};
+        				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
         				if(res == JOptionPane.YES_OPTION){
         					isEstate = true;
         					isUtility = false;
@@ -1587,7 +1593,8 @@ public class GameBoard extends JFrame implements Runnable {
         			updateTokenPosition();
         			if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
         				icon = new ImageIcon(getClass().getResource("/buyProperty_images/shopwise.gif"));
-        				int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+        				Object[] options = {"Buy Estate" , "Nevermind"};
+        				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
         				if(res == JOptionPane.YES_OPTION){
         					isEstate = true;
         					isUtility = false;
@@ -1615,7 +1622,8 @@ public class GameBoard extends JFrame implements Runnable {
         			updateTokenPosition();
                             if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned() != true){
                             	icon = new ImageIcon(getClass().getResource("/buyProperty_images/meralco.gif"));
-                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                            	Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);;
                                 if(res == JOptionPane.YES_OPTION){
                                 	isUtility = true; 
                                 	isEstate = false;
@@ -1642,7 +1650,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 13:	
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/SLEX.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){        
                         			isEstate = true;
                         			isUtility = false;
@@ -1669,7 +1678,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 14:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/walterMart.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){       
                         			isEstate = true;
                         			isUtility = false;
@@ -1697,7 +1707,8 @@ public class GameBoard extends JFrame implements Runnable {
                         	updateTokenPosition();
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Buendia).gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){   
                         			isStation = true;
                         			isEstate = false;
@@ -1724,7 +1735,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 16:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/intramuros.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true;
                         			isUtility = false;
@@ -1757,7 +1769,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 18:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/C5road.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true; 
                         			isUtility = false;
@@ -1784,7 +1797,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 19:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/chinaTown.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true; 
                         			isUtility = false;
@@ -1811,7 +1825,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 21:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/NLEX.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true;
                         			isUtility = false;
@@ -1843,7 +1858,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 23:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/nationalBookstore.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true; 
                         			isUtility = false;
@@ -1870,7 +1886,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 24:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/trinoma.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true;   
                         			isUtility = false;
@@ -1897,7 +1914,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 25:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/MRT(Taft).gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isStation = true; 
                         			isEstate = false;
@@ -1924,7 +1942,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 26:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/EDSA.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true;
                         			isUtility = false;
@@ -1951,7 +1970,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 27:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/magsaysayBridge.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true;
                         			isUtility = false;
@@ -1978,7 +1998,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 28:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/maynilad.gif"));
-                    			int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                                 if(res == JOptionPane.YES_OPTION){  
                                 	isUtility = true; 
                                 	isEstate = false;
@@ -2005,7 +2026,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 29:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/starCity.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true; 
                         			isUtility = false;
@@ -2033,11 +2055,12 @@ public class GameBoard extends JFrame implements Runnable {
                         	goToJail();
                         	checkChance(13);
                         	break;
-                                
+          
                         case 31:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/landmark.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true; 
                         			isUtility = false;
@@ -2064,7 +2087,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 32:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/glorietta.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true;
                         			isUtility = false;
@@ -2097,7 +2121,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 34:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/greenbelt.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true;
                         			isUtility = false;
@@ -2124,7 +2149,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 35:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/MRT(North).gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isStation = true; 
                         			isEstate = false;
@@ -2157,7 +2183,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 37:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/boracayIsland.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true;
                         			isUtility = false;
@@ -2191,7 +2218,8 @@ public class GameBoard extends JFrame implements Runnable {
                         case 39:
                         	if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
                         		icon = new ImageIcon(getClass().getResource("/buyProperty_images/MOA.gif"));
-                        		int res = JOptionPane.showConfirmDialog(null, "", "Do you want to Buy this Property?", optionType, messageType, icon);
+                        		Object[] options = {"Buy Estate" , "Nevermind"};
+                				int res = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
                         		if(res == JOptionPane.YES_OPTION){  
                         			isEstate = true; 
                         			isUtility = false;
@@ -2253,6 +2281,37 @@ public class GameBoard extends JFrame implements Runnable {
     	   updateTokenPosition();
     	   playerOrder[x].setJailed(true);
     	   System.out.println("Jailed: "+playerOrder[x].isJailed());
+    	   		icon = new ImageIcon(getClass().getResource("/Designs/jail_panel.png"));
+		   		Object[] optionsJail = {"Pay 50" , "Try for Doubles", "Use Jail Key"};
+				int jail = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, icon, optionsJail, optionsJail[2]);
+		   		if(jail == JOptionPane.YES_OPTION){  
+		   			playerOrder[x].getToken().setLocation(23, 525);
+                    playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
+                    fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
+                    System.out.println("Money: " + playerOrder[x].getStartMoney());
+                    playerOrder[x].setJailed(false);
+                    playerOrder[x].setBailOutDice(0);
+                    playerOrder[x].setDoubleDice(0);
+                    playerOrder[x].setTryForDice(0);
+		   		}
+		   		
+		   		if(jail == JOptionPane.NO_OPTION){
+		   			playerOrder[x].getToken().setLocation(23, 525);
+		   			bailOutOfJail();
+		   			bRollDice.setEnabled(true);
+		   		}
+		   		
+		   		if(jail == JOptionPane.CANCEL_OPTION){
+		   			playerOrder[x].getToken().setLocation(23, 525);
+		   			if(playerOrder[x].hasJailKey() == true){
+		   				useJailKey();
+		   			}
+		   			
+		   			if(playerOrder[x].hasJailKey() == false){
+		   				JOptionPane.showMessageDialog(null, "weee? wala ka ngang Jail Key eh. :P", "Warning!", JOptionPane.WARNING_MESSAGE);
+		   			}
+		   		}
+       	
     	   t.stop();                   
        }
         
@@ -2296,6 +2355,7 @@ public class GameBoard extends JFrame implements Runnable {
             playerOrder[x].setDoubleDice(0);
             playerOrder[x].setTryForDice(0);
             System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice()+playerOrder[x].hasJailKey());
+            
         }
 
       public void runTitleDeedImage(final int x, final int intTD) {
