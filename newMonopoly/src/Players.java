@@ -290,7 +290,49 @@ public class Players{
                 else{
                         hasCompletedColorGroup = false;
                 }
-        }
+			}
+		}
+		
+		public void mortgageProperty(Players[] playerOrder, int x){
+			int mortgagePrice = 0;
+            
+            switch(bblock.getBlock()[playerOrder[x].getPosition()].getType()){
+                    case 1:
+                    	bblock.getBlock()[playerOrder[x].getPosition()].getEstate().setMortgaged(true);
+                            mortgagePrice = bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getTitledeed().getEstateMortgageValue();
+                            break;
+                    case 2:
+                    		bblock.getBlock()[playerOrder[x].getPosition()].getStation().setMortgaged(true);
+                            mortgagePrice = bblock.getBlock()[playerOrder[x].getPosition()].getStation().getTitledeed().getStationMortgageValue();
+                            break;
+                    case 3:
+                    	bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().setMortgaged(true);
+                            mortgagePrice = bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getTitledeed().getUtilityMortgageValue();
+                            break;
+            }
+            
+            playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + mortgagePrice);
+		}
+		
+		public void redeemProperty(Players[] playerOrder, int x){
+			int redeemPrice = 0;
+            
+            switch(bblock.getBlock()[playerOrder[x].getPosition()].getType()){
+                    case 1:
+                            bblock.getBlock()[playerOrder[x].getPosition()].getEstate().setMortgaged(false);
+                            redeemPrice = bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getTitledeed().getEstateRedeemValue();
+                            break;
+                    case 2:
+                    		bblock.getBlock()[playerOrder[x].getPosition()].getStation().setMortgaged(false);
+                            redeemPrice = bblock.getBlock()[playerOrder[x].getPosition()].getStation().getTitledeed().getStationRedeemValue();
+                            break;
+                    case 3:
+                    	bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().setMortgaged(false);
+                            redeemPrice = bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getTitledeed().getUtilityRedeemValue();
+                            break;
+            }
+            
+            playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - redeemPrice);
 		}
 }
 
