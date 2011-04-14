@@ -1,6 +1,7 @@
 
 public class Estate extends Property{
 	private int numberOfHouse, numberOfHotels, colorGroup;
+	private boolean isMortgaged;
     //0 brown
     //1 blue
     //2 pink
@@ -41,6 +42,14 @@ public class Estate extends Property{
 
 	public int getNumberOfHotels() {
 		return numberOfHotels;
+	}
+
+	public void setMortgaged(boolean isMortgaged) {
+		this.isMortgaged = isMortgaged;
+	}
+
+	public boolean isMortgaged() {
+		return isMortgaged;
 	}
 
 }
