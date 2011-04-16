@@ -14,8 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import org.dyno.visual.swing.layouts.Bilateral;
 import org.dyno.visual.swing.layouts.Constraints;
@@ -55,7 +53,6 @@ public class GameBoard extends JFrame implements Runnable {
         private JButton bTDC5, bTDChinaTown, bTDNlex, bTDNationalbs, bTDTrinoma, bTDEdsa, bTDMagsaysayBrdge, bTDStarCity, bDTLandmark;
         private JButton bTDGlorietta, bDTGreenbelt, bTDBoracay, bTDMoa, bTDMeralco, bTDMaynilad, bTDAyalaStation, bTDBuendiaStation, bDTNorthStation, bDTTaftStation;
        
-		private static final String PREFERRED_LOOK_AND_FEEL = "javax.swing.plaf.metal.MetalLookAndFeel";
 		
 		public GameBoard() {
                 dice[0] = new Dice();
@@ -82,12 +79,31 @@ public class GameBoard extends JFrame implements Runnable {
 				bDTTaftStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
 				bDTTaftStation.setBorderPainted(false);
 				bDTTaftStation.setOpaque(false);
+				//bDTTaftStation.setVisible(false);
 				bDTTaftStation.setContentAreaFilled(false);
+				
 				bDTTaftStation.addActionListener(new ActionListener() {
                   	
 					public void actionPerformed(ActionEvent event) {
-                    		intTD = 25;
-                            runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Taft Avenue Station.jpg"));
+  						if(bblock.getBlock()[25].getStation().isOwned() && bblock.getBlock()[25].getStation().getIntOwner() == x){	
+  							if(bblock.getBlock()[25].getStation().isMortgaged() == false){
+  								Object[] options = {"Mortgage" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].mortgageProperty(playerOrder, x, 25);
+  			                	}
+  							}else if(bblock.getBlock()[25].getStation().isMortgaged() == true){
+  								Object[] options = {"Redeem" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].redeemProperty(playerOrder, x, 25);
+  			                	}
+  							}
+  						}else{
+  							JOptionPane.showMessageDialog(null, null, "Taft Station", JOptionPane.PLAIN_MESSAGE, icon);
+  						}
+  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                     }
             });
 			}
@@ -101,11 +117,29 @@ public class GameBoard extends JFrame implements Runnable {
 				bDTNorthStation.setBorderPainted(false);
 				bDTNorthStation.setOpaque(false);
 				bDTNorthStation.setContentAreaFilled(false);
+				//bDTNorthStation.setVisible(false);
 				bDTNorthStation.addActionListener(new ActionListener() {
                   	
                     public void actionPerformed(ActionEvent event) {
-                    		intTD = 35;
-                            runTitleDeedImage(x, intTD);
+                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/North Edsa Station.jpg"));
+  						if(bblock.getBlock()[35].getStation().isOwned() && bblock.getBlock()[35].getStation().getIntOwner() == x){	
+  							if(bblock.getBlock()[35].getStation().isMortgaged() == false){
+  								Object[] options = {"Mortgage" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].mortgageProperty(playerOrder, x, 35);
+  			                	}
+  							} if(bblock.getBlock()[35].getStation().isMortgaged() == true){
+  								Object[] options = {"Redeem" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].redeemProperty(playerOrder, x, 35);
+  			                	}
+  							}
+  						}else{
+  							JOptionPane.showMessageDialog(null, null, "North Avenue Station", JOptionPane.PLAIN_MESSAGE, icon);
+  						}
+  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                     }
             });
 			}
@@ -119,11 +153,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDBuendiaStation.setBorderPainted(false);
 				bTDBuendiaStation.setOpaque(false);
 				bTDBuendiaStation.setContentAreaFilled(false);
+				//bTDBuendiaStation.setVisible(false);
 				bTDBuendiaStation.addActionListener(new ActionListener() {
                   	
                     public void actionPerformed(ActionEvent event) {
-                    		intTD = 15;
-                            runTitleDeedImage(x, intTD);
+                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Buendia Station.jpg"));
+  						if(bblock.getBlock()[15].getStation().isOwned() && bblock.getBlock()[15].getStation().getIntOwner() == x){	
+  							if(bblock.getBlock()[15].getStation().isMortgaged() == false){
+  								Object[] options = {"Mortgage" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].mortgageProperty(playerOrder, x, 15);
+  			                	}
+  							}
+  							if(bblock.getBlock()[15].getStation().isMortgaged() == true){ 
+  								Object[] options = {"Redeem" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].redeemProperty(playerOrder, x, 15);
+  			                	}
+  							}
+  						}else{
+  							JOptionPane.showMessageDialog(null, null, "Buendia Station", JOptionPane.PLAIN_MESSAGE, icon);
+  						}
+  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                     }
             });
 			}
@@ -137,11 +190,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDAyalaStation.setBorderPainted(false);
 				bTDAyalaStation.setOpaque(false);
 				bTDAyalaStation.setContentAreaFilled(false);
+				//bTDAyalaStation.setVisible(false);
 				bTDAyalaStation.addActionListener(new ActionListener() {
                   	
                     public void actionPerformed(ActionEvent event) {
-                    		intTD = 5;
-                            runTitleDeedImage(x, intTD);
+                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Ayala Avenue Station.jpg"));
+  						if(bblock.getBlock()[5].getStation().isOwned() && bblock.getBlock()[5].getStation().getIntOwner() == x){	
+  							if(bblock.getBlock()[5].getStation().isMortgaged() == false){
+  								Object[] options = {"Mortgage" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].mortgageProperty(playerOrder, x, 5);
+  			                	}
+  							}
+  							if(bblock.getBlock()[5].getStation().isMortgaged() == true){
+  								Object[] options = {"Redeem" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].redeemProperty(playerOrder, x, 5);
+  			                	}
+  							}
+  						}else{
+  							JOptionPane.showMessageDialog(null, null, "Ayala Station", JOptionPane.PLAIN_MESSAGE, icon);
+  						}
+  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                     }
             });
 			}
@@ -155,11 +227,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDMaynilad.setBorderPainted(false);
 				bTDMaynilad.setOpaque(false);
 				bTDMaynilad.setContentAreaFilled(false);
+				//bTDMaynilad.setVisible(false);
 				bTDMaynilad.addActionListener(new ActionListener() {
                   	
                     public void actionPerformed(ActionEvent event) {
-                    		intTD = 28;
-                            runTitleDeedImage(x, intTD);
+                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Maynilad.jpg"));
+  						if(bblock.getBlock()[28].getUtilities().isOwned() && bblock.getBlock()[28].getUtilities().getIntOwner() == x){	
+  							if(bblock.getBlock()[28].getUtilities().isMortgaged() == false){
+  								Object[] options = {"Mortgage" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].mortgageProperty(playerOrder, x, 28);
+  			                	}
+  							}
+  							if(bblock.getBlock()[28].getUtilities().isMortgaged() == true){
+  								Object[] options = {"Redeem" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].redeemProperty(playerOrder, x, 28);
+  			                	}
+  							}
+  						}else{
+  							JOptionPane.showMessageDialog(null, null, "Maynilad", JOptionPane.PLAIN_MESSAGE, icon);
+  						}
+  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                     }
             });
 			}
@@ -173,11 +264,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDMeralco.setBorderPainted(false);
 				bTDMeralco.setOpaque(false);
 				bTDMeralco.setContentAreaFilled(false);
+				//bTDMeralco.setVisible(false);
 				bTDMeralco.addActionListener(new ActionListener() {
                   	
                       public void actionPerformed(ActionEvent event) {
-                      		intTD = 12;
-                              runTitleDeedImage(x, intTD);
+                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Meralco corp.jpg"));
+  						if(bblock.getBlock()[12].getUtilities().isOwned() && bblock.getBlock()[12].getUtilities().getIntOwner() == x){	
+  							if(bblock.getBlock()[12].getUtilities().isMortgaged() == false){
+  								Object[] options = {"Mortgage" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].mortgageProperty(playerOrder, x, 12);
+  			                	}
+  							}
+  							if(bblock.getBlock()[12].getUtilities().isMortgaged() == true){
+  								Object[] options = {"Redeem" , "No"};
+  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+  								if(res == JOptionPane.YES_OPTION){  
+  									playerOrder[x].redeemProperty(playerOrder, x, 12);
+  			                	}
+  							}
+  						}else{
+  							JOptionPane.showMessageDialog(null, null, "Meralco Corporation", JOptionPane.PLAIN_MESSAGE, icon);
+  						}
+  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                       }
               });
 			}
@@ -191,10 +301,29 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDMoa.setBorderPainted(false);
 				bTDMoa.setOpaque(false);
 				bTDMoa.setContentAreaFilled(false);
+				//bTDMoa.setVisible(false);
 				bTDMoa.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent event) {
-						intTD = 39;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/MOA.jpg"));
+						if(bblock.getBlock()[39].getEstate().isOwned() && bblock.getBlock()[39].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[39].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 39);
+			                	}
+							}
+							if(bblock.getBlock()[39].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 39);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Mall of Asia", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -208,11 +337,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDBoracay.setBorderPainted(false);
 				bTDBoracay.setOpaque(false);
 				bTDBoracay.setContentAreaFilled(false);
+				//bTDBoracay.setVisible(false);
 				bTDBoracay.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 37;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Boracay Island.jpg"));
+						if(bblock.getBlock()[37].getEstate().isOwned() && bblock.getBlock()[37].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[37].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 37);
+			                	}
+							}
+							if(bblock.getBlock()[37].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 37);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Boracay Island", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -226,11 +374,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bDTGreenbelt.setBorderPainted(false);
 				bDTGreenbelt.setOpaque(false);
 				bDTGreenbelt.setContentAreaFilled(false);
+				//bDTGreenbelt.setVisible(false);
 				bDTGreenbelt.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 34;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Greenbelt.jpg"));
+						if(bblock.getBlock()[34].getEstate().isOwned() && bblock.getBlock()[34].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[34].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 34);
+			                	}
+							}
+							if(bblock.getBlock()[34].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 34);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Greenbelt", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -244,11 +411,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDGlorietta.setBorderPainted(false);
 				bTDGlorietta.setOpaque(false);
 				bTDGlorietta.setContentAreaFilled(false);
+				//bTDGlorietta.setVisible(false);
 				bTDGlorietta.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 32;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Glorietta.jpg"));
+						if(bblock.getBlock()[32].getEstate().isOwned() && bblock.getBlock()[32].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[32].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 32);
+			                	}
+							}
+							if(bblock.getBlock()[32].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 32);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Glorietta", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -262,11 +448,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bDTLandmark.setBorderPainted(false);
 				bDTLandmark.setOpaque(false);
 				bDTLandmark.setContentAreaFilled(false);
+				//bDTLandmark.setVisible(false);
 				bDTLandmark.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 31;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Landmark.jpg"));
+						if(bblock.getBlock()[31].getEstate().isOwned() && bblock.getBlock()[31].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[31].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 31);
+			                	}
+							}
+							if(bblock.getBlock()[31].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 31);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Landmark", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -280,11 +485,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDStarCity.setBorderPainted(false);
 				bTDStarCity.setOpaque(false);
 				bTDStarCity.setContentAreaFilled(false);
+				//bTDStarCity.setVisible(false);
 				bTDStarCity.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 29;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Star city.jpg"));
+						if(bblock.getBlock()[29].getEstate().isOwned() && bblock.getBlock()[29].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[29].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 29);
+			                	}
+							}
+							if(bblock.getBlock()[29].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 29);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Star City", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -298,11 +522,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDMagsaysayBrdge.setBorderPainted(false);
 				bTDMagsaysayBrdge.setOpaque(false);
 				bTDMagsaysayBrdge.setContentAreaFilled(false);
+				//bTDMagsaysayBrdge.setVisible(false);
 				bTDMagsaysayBrdge.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 27;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Magsaysay Bridge.jpg"));
+						if(bblock.getBlock()[27].getEstate().isOwned() && bblock.getBlock()[27].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[27].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 27);
+			                	}
+							}
+							if(bblock.getBlock()[27].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 27);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Magsaysay Bridge", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -316,11 +559,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDEdsa.setBorderPainted(false);
 				bTDEdsa.setOpaque(false);
 				bTDEdsa.setContentAreaFilled(false);
+				//bTDEdsa.setVisible(false);
 				bTDEdsa.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 26;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/EDSA.jpg"));
+						if(bblock.getBlock()[26].getEstate().isOwned() && bblock.getBlock()[26].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[26].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 26);
+			                	}
+							}
+							if(bblock.getBlock()[26].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 26);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "EDSA", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -334,11 +596,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDTrinoma.setBorderPainted(false);
 				bTDTrinoma.setOpaque(false);
 				bTDTrinoma.setContentAreaFilled(false);
+				//bTDTrinoma.setVisible(false);
 				bTDTrinoma.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 24;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Trinoma.jpg"));
+						if(bblock.getBlock()[24].getEstate().isOwned() && bblock.getBlock()[24].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[24].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 24);
+			                	}
+							}
+							if(bblock.getBlock()[24].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 24);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Trinoma", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -352,11 +633,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDNationalbs.setBorderPainted(false);
 				bTDNationalbs.setOpaque(false);
 				bTDNationalbs.setContentAreaFilled(false);
+				//bTDNationalbs.setVisible(false);
 				bTDNationalbs.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 23;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/National Bookstore.jpg"));
+						if(bblock.getBlock()[23].getEstate().isOwned() && bblock.getBlock()[23].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[23].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 23);
+			                	}
+							}
+							if(bblock.getBlock()[23].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 23);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "National Bookstore", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -370,11 +670,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDNlex.setBorderPainted(false);
 				bTDNlex.setOpaque(false);
 				bTDNlex.setContentAreaFilled(false);
+				//bTDNlex.setVisible(false);
 				bTDNlex.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 21;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/NLEX.jpg"));
+						if(bblock.getBlock()[21].getEstate().isOwned() && bblock.getBlock()[21].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[21].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 21);
+			                	}
+							}
+							if(bblock.getBlock()[21].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 21);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "NLEX", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -388,11 +707,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDChinaTown.setBorderPainted(false);
 				bTDChinaTown.setOpaque(false);
 				bTDChinaTown.setContentAreaFilled(false);
+				//bTDChinaTown.setVisible(false);
 				bTDChinaTown.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 19;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/China town.jpg"));
+						if(bblock.getBlock()[19].getEstate().isOwned() && bblock.getBlock()[19].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[19].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 19);
+			                	}
+							}
+							if(bblock.getBlock()[19].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 19);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "China Town", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -406,11 +744,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDC5.setBorderPainted(false);
 				bTDC5.setOpaque(false);
 				bTDC5.setContentAreaFilled(false);
+				//bTDC5.setVisible(false);
 				bTDC5.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 18;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/C5 Road.jpg"));
+						if(bblock.getBlock()[18].getEstate().isOwned() && bblock.getBlock()[18].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[18].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 18);
+			                	}
+							}
+							if(bblock.getBlock()[18].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 18);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "C5", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -424,11 +781,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDIntramuros.setBorderPainted(false);
 				bTDIntramuros.setOpaque(false);
 				bTDIntramuros.setContentAreaFilled(false);
+				//bTDIntramuros.setVisible(false);
 				bTDIntramuros.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 16;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Intramuros.jpg"));
+						if(bblock.getBlock()[16].getEstate().isOwned() && bblock.getBlock()[16].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[16].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 16);
+			                	}
+							} 
+							if(bblock.getBlock()[16].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 16);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Intramuros", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -442,11 +818,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDWalterMart.setBorderPainted(false);
 				bTDWalterMart.setOpaque(false);
 				bTDWalterMart.setContentAreaFilled(false);
+				//bTDWalterMart.setVisible(false);
 				bTDWalterMart.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 14;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Walter Mart.jpg"));
+						if(bblock.getBlock()[14].getEstate().isOwned() && bblock.getBlock()[14].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[14].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 14);
+			                	}
+							}
+							if(bblock.getBlock()[14].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 14);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Walter Mart", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -460,11 +855,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDSlex.setBorderPainted(false);
 				bTDSlex.setOpaque(false);
 				bTDSlex.setContentAreaFilled(false);
+				//bTDSlex.setVisible(false);
 				bTDSlex.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 13;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/SLEX.jpg"));
+						if(bblock.getBlock()[12].getEstate().isOwned() && bblock.getBlock()[12].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[12].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 12);
+			                	}
+							}
+							if(bblock.getBlock()[12].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 12);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "SLEX", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -478,11 +892,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDShopwise.setBorderPainted(false);
 				bTDShopwise.setOpaque(false);
 				bTDShopwise.setContentAreaFilled(false);
+				//bTDShopwise.setVisible(false);
 				bTDShopwise.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 11;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Shopwise.jpg"));
+						if(bblock.getBlock()[11].getEstate().isOwned() && bblock.getBlock()[11].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[11].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 11);
+			                	}
+							}
+							if(bblock.getBlock()[11].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 11);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Shopwise", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -496,11 +929,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDdlaRsaSt.setBorderPainted(false);
 				bTDdlaRsaSt.setOpaque(false);
 				bTDdlaRsaSt.setContentAreaFilled(false);
+				//bTDdlaRsaSt.setVisible(false);
 				bTDdlaRsaSt.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 9;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Dela Rosa Street.jpg"));
+						if(bblock.getBlock()[9].getEstate().isOwned() && bblock.getBlock()[9].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[9].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 9);
+			                	}
+							}
+							if(bblock.getBlock()[9].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 9);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Dela Rosa St.", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -514,11 +966,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDRizalPark.setBorderPainted(false);
 				bTDRizalPark.setOpaque(false);
 				bTDRizalPark.setContentAreaFilled(false);
+				//bTDRizalPark.setVisible(false);
 				bTDRizalPark.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 8;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Rizal Park.jpg"));
+						if(bblock.getBlock()[8].getEstate().isOwned() && bblock.getBlock()[8].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[8].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 8);
+			                	}
+							}
+							if(bblock.getBlock()[8].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 8);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Rizal Park", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -532,14 +1003,33 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDPuregold.setBorderPainted(false);
 				bTDPuregold.setOpaque(false);
 				bTDPuregold.setContentAreaFilled(false);
+				//bTDPuregold.setVisible(false);
 				bTDPuregold.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 6;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Puregold.jpg"));
+						if(bblock.getBlock()[6].getEstate().isOwned() && bblock.getBlock()[6].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[6].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 6);
+			                	}
+							}
+							if(bblock.getBlock()[6].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 6);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Puregold", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
-                        }
+            }
 			return bTDPuregold;
 		}
 		
@@ -548,11 +1038,30 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDMakatiAve = new JButton();
 				bTDMakatiAve.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_brown.png")));
 				bTDMakatiAve.setBorderPainted(false);
+				//bTDMakatiAve.setVisible(false);
 				bTDMakatiAve.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 3;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Makati Avenue.jpg"));
+						if(bblock.getBlock()[3].getEstate().isOwned() && bblock.getBlock()[3].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[3].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 3);
+			                	}
+							}
+							if(bblock.getBlock()[3].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 3);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Makati Avenue", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -567,11 +1076,30 @@ public class GameBoard extends JFrame implements Runnable {
 				btdAyalaAve.setOpaque(false);
 				btdAyalaAve.setContentAreaFilled(false);
 				btdAyalaAve.setFocusable(false);
+				//btdAyalaAve.setVisible(false);
 				btdAyalaAve.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
-						intTD = 1;
-						runTitleDeedImage(x, intTD);
+						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Ayala Avenue.jpg"));
+						if(bblock.getBlock()[1].getEstate().isOwned() && bblock.getBlock()[1].getEstate().getIntOwner() == x){	
+							if(bblock.getBlock()[1].getEstate().isMortgaged() == false){
+								Object[] options = {"Mortgage" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageProperty(playerOrder, x, 1);
+			                	}
+							}
+							if(bblock.getBlock()[1].getEstate().isMortgaged() == true){
+								Object[] options = {"Redeem" , "No"};
+								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].redeemProperty(playerOrder, x, 1);
+			                	}
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, null, "Ayala Avenue", JOptionPane.PLAIN_MESSAGE, icon);
+						}
+						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
 					}
 				});
 			}
@@ -1001,18 +1529,7 @@ public class GameBoard extends JFrame implements Runnable {
         	return pBoard;
         }
 
-        private static void installLnF() {
-        	try {
-        		String lnfClassname = PREFERRED_LOOK_AND_FEEL;
-        		if (lnfClassname == null)
-        			lnfClassname = UIManager.getCrossPlatformLookAndFeelClassName();
-        		UIManager.setLookAndFeel(lnfClassname);
-                	} catch (Exception e) {
-                		System.err.println("Cannot install " + PREFERRED_LOOK_AND_FEEL
-                				+ " on this platform:" + e.getMessage());
-                }
-        }
-
+     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////THIS IS WHERE THREAD STARTS///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1394,6 +1911,7 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
+        					//btdAyalaAve.setVisible(true);
         				}
         				
         			}else{
@@ -1427,6 +1945,7 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
+        					//bTDMakatiAve.setVisible(true);
         				}
                                         
         			}else{
@@ -1462,10 +1981,11 @@ public class GameBoard extends JFrame implements Runnable {
         					isEstate = false;
         					isUtility = false;
         					buy();
+        					//bTDAyalaStation.setVisible(true);
         				}
         				
         			}else{
-        				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
+        				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
         					System.out.println("This is your land!!! ");
         					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
@@ -1490,6 +2010,7 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
+        					//bTDPuregold.setVisible(true);
         				}
         				
         			}else{
@@ -1525,6 +2046,7 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
+        					//bTDRizalPark.setVisible(true);
         				}
         				
         			}else{
@@ -1553,6 +2075,7 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
+        					//bTDdlaRsaSt.setVisible(true);
         				}
         				
         			}else{
@@ -1581,6 +2104,7 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
+        					//bTDShopwise.setVisible(true);
         				}
         				
         			}else{
@@ -1609,6 +2133,7 @@ public class GameBoard extends JFrame implements Runnable {
         					isEstate = false;
         					isStation = false;     
         					buy();
+        					//bTDMeralco.setVisible(true);
         				}
         				
         			}else{
@@ -1637,6 +2162,7 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
+        					//bTDSlex.setVisible(true);
         				}
         				
         			}else{
@@ -1665,6 +2191,7 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
+        					//bTDWalterMart.setVisible(true);
         				}
         				
         			}else{
@@ -1694,6 +2221,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isEstate = false;
                         			isUtility = false;
                         			buy();
+                        			//bTDBuendiaStation.setVisible(true);
                         		}
                                         
                         	}else{
@@ -1722,6 +2250,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDIntramuros.setVisible(true);
 	                            }
                                         	
                         	}else{
@@ -1756,6 +2285,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDC5.setVisible(true);
                         		}
                                        
                         	}else{
@@ -1784,6 +2314,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDChinaTown.setVisible(true);
                         		}
                                        	
                         	}else{	
@@ -1812,6 +2343,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDNlex.setVisible(true);
                         		}
                         		
                         	}else{
@@ -1845,6 +2377,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDNationalbs.setVisible(true);
                         		}
                         		
                         	}else{
@@ -1873,6 +2406,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDTrinoma.setVisible(true);
                         		}
                         		
                         	}else{
@@ -1901,6 +2435,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isEstate = false;
                         			isUtility = false;
                         			buy();
+                        			//bDTTaftStation.setVisible(true);
                         		}
                         		
                         	}else{
@@ -1929,6 +2464,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDEdsa.setVisible(true);
                         		}
                         		
                         	}else{
@@ -1957,6 +2493,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDMagsaysayBrdge.setVisible(true);
                         		}
                                         
                         	}else{
@@ -1985,6 +2522,7 @@ public class GameBoard extends JFrame implements Runnable {
                                 	isEstate = false;
                                     isStation = false;    
                                     buy();
+                                   // bTDMaynilad.setVisible(true);
                                 }
                                     
                             }else{
@@ -2013,6 +2551,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDStarCity.setVisible(true);
                         		}
                         		
                         	}else{
@@ -2046,6 +2585,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bDTLandmark.setVisible(true);
                         		}
                                        
                         	}else{
@@ -2074,6 +2614,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDGlorietta.setVisible(true);
                         		}
                                         	
                         	}else{
@@ -2108,6 +2649,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bDTGreenbelt.setVisible(true);
                         		}
                                         
                         	}else{
@@ -2136,6 +2678,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isEstate = false;
                         			isUtility = false;
                         			buy();
+                        			//bDTNorthStation.setVisible(true);
                         		}
                                        
                         	}else{
@@ -2170,6 +2713,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDBoracay.setVisible(true);
                         		}
                                         
                         	}else{
@@ -2205,6 +2749,7 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
+                        			//bTDMoa.setVisible(true);
                         		}
                                        
                         	}else{
@@ -2341,25 +2886,6 @@ public class GameBoard extends JFrame implements Runnable {
             
         }
 
-      public void runTitleDeedImage(final int x, final int intTD) {
-    	  installLnF();
-    	  SwingUtilities.invokeLater(new Runnable() {
-    		  @Override
-    		  public void run() {
-    			  TitleDeedImage frame = new TitleDeedImage(x, intTD);
-    			  TitleDeedImage.x = x;
-    			  TitleDeedImage.intTD = intTD;
-    			  frame.setDefaultCloseOperation(TitleDeedImage.HIDE_ON_CLOSE);
-    			  frame.setTitle("TitleDeedImage");
-    			  frame.getContentPane().setPreferredSize(frame.getSize());
-    			  frame.pack();
-    			  frame.setLocationRelativeTo(null);
-    			  frame.setResizable(false);
-    			  frame.setVisible(true);
-    		  }
-    	  });
-        }	
-      
     public void buy() {
     	if (isEstate == true) {
     		playerOrder[x].buyEstate(bblock.getBlock()[playerOrder[x].getPosition()].getEstate(), playerOrder, x);
