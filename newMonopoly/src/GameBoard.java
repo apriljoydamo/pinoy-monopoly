@@ -24,549 +24,522 @@ import org.dyno.visual.swing.layouts.Leading;
 //VS4E -- DO NOT REMOVE THIS LINE!
 public class GameBoard extends JFrame implements Runnable {
 
-        private static final long serialVersionUID = 1L;
-        private JPanel pBoard, pPlayer, pDice, pTitleDeeds, pClicktoPlay;
-        private JLabel lMonopoly, lDice2, lDice1, lClicktoPlay, lPlayerPanelImage, ldicebg, lTitleDeedImageLabel;
-        private JLabel lBapor, lAzkal, lIron, lShoe, lCar, lThimble, lHat,lWheelBarrow;
-        private JButton bRollDice, bPlay, bEndTurn;
-        private JTextField fPlayerName, fPlayerMoney;
-        ImageIcon icon, lcChest, lChance, lTax;
-        
-        Dice dice[] = new Dice[2];
-        Players playerOrder[] = new Players[8];
-        Random random = new Random();
-        Chance chance = new Chance();
-        CommunityChest Cchest = new CommunityChest();
-        BoardBlock bblock = new BoardBlock();
-        
-        static int numberOfPlayers;
-        public int randomChance, ccRandom;
-        int x = 0, rent, intTD, b=0, c=0;
-        
-        int optionType = JOptionPane.YES_NO_OPTION;
-        int messageType = JOptionPane.PLAIN_MESSAGE;
-        Thread t;
+	private static final long serialVersionUID = 1L;
+	private JPanel pBoard, pPlayer, pDice, pTitleDeeds, pClicktoPlay;
+	private JLabel lMonopoly, lDice2, lDice1, lClicktoPlay, lPlayerPanelImage, ldicebg, lTitleDeedImageLabel;
+	private JLabel lBapor, lAzkal, lIron, lShoe, lCar, lThimble, lHat,lWheelBarrow;
+	private JButton bRollDice, bPlay, bEndTurn;
+	private JTextField fPlayerName, fPlayerMoney;
+	ImageIcon icon, lcChest, lChance, lTax;
+	
+	Dice dice[] = new Dice[2];
+	Players playerOrder[] = new Players[8];
+	Random random = new Random();
+	Chance chance = new Chance();
+	CommunityChest Cchest = new CommunityChest();
+	BoardBlock bblock = new BoardBlock();
+	
+	static int numberOfPlayers;
+	public int randomChance, ccRandom;
+	int x = 0, rent, intTD, b=0, c=0;
+	
+	int optionType = JOptionPane.YES_NO_OPTION;
+	int messageType = JOptionPane.PLAIN_MESSAGE;
+	Thread t;
                
-        private JButton btdAyalaAve;
-        boolean isEstate, isUtility, isStation;
-        private JButton bTDMakatiAve, bTDPuregold, bTDRizalPark, bTDdlaRsaSt, bTDShopwise, bTDSlex, bTDWalterMart, bTDIntramuros;
-        private JButton bTDC5, bTDChinaTown, bTDNlex, bTDNationalbs, bTDTrinoma, bTDEdsa, bTDMagsaysayBrdge, bTDStarCity, bDTLandmark;
-        private JButton bTDGlorietta, bDTGreenbelt, bTDBoracay, bTDMoa, bTDMeralco, bTDMaynilad, bTDAyalaStation, bTDBuendiaStation, bDTNorthStation, bDTTaftStation;
-       
-		
-		public GameBoard() {
-                dice[0] = new Dice();
-                dice[1] = new Dice();
-                initComponents();
-        }
-
-        private void initComponents() {
-        	setLayout(new GroupLayout());
-			add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
-			add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
-			add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
-			add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
-			setSize(820, 595);
-		
-        }
+	private JButton btdAyalaAve;
+	boolean isEstate, isUtility, isStation;
+	private JButton bTDMakatiAve, bTDPuregold, bTDRizalPark, bTDdlaRsaSt, bTDShopwise, bTDSlex, bTDWalterMart, bTDIntramuros;
+	private JButton bTDC5, bTDChinaTown, bTDNlex, bTDNationalbs, bTDTrinoma, bTDEdsa, bTDMagsaysayBrdge, bTDStarCity, bDTLandmark;
+	private JButton bTDGlorietta, bDTGreenbelt, bTDBoracay, bTDMoa, bTDMeralco, bTDMaynilad, bTDAyalaStation, bTDBuendiaStation, bDTNorthStation, bDTTaftStation;
+	
+	
+	public GameBoard() {
+		dice[0] = new Dice();
+		dice[1] = new Dice();
+		initComponents();
+	}
+	
+	private void initComponents() {
+		setLayout(new GroupLayout());
+		add(getBoardPanel(), new Constraints(new Leading(-3, 609, 10, 10), new Leading(0, 603, 12, 12)));
+		add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
+		add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
+		add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
+		setSize(820, 595);
+			
+	}	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////THIS IS FOR TITLEDEED//////////////////////////////////////////       
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
        
-        private JButton getBDTTaftStation() {
-			if (bDTTaftStation == null) {
-				bDTTaftStation = new JButton();
-				bDTTaftStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
-				bDTTaftStation.setBorderPainted(false);
-				bDTTaftStation.setOpaque(false);
-				//bDTTaftStation.setVisible(false);
-				bDTTaftStation.setContentAreaFilled(false);
+	private JButton getBDTTaftStation() {
+		if (bDTTaftStation == null) {
+			bDTTaftStation = new JButton();
+			bDTTaftStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
+			bDTTaftStation.setBorderPainted(false);
+			bDTTaftStation.setOpaque(false);
+			bDTTaftStation.setContentAreaFilled(false);
 				
-				bDTTaftStation.addActionListener(new ActionListener() {
-                  	
-					public void actionPerformed(ActionEvent event) {
-						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Taft Avenue Station.jpg"));
-  						if(bblock.getBlock()[25].getStation().isOwned() && bblock.getBlock()[25].getStation().getIntOwner() == x){	
-  								Object[] options = {"Mortgage" , "Redeem"};
-  								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageStation(bblock.getBlock()[25].getStation(), playerOrder, x);
-  									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[25].getStation().isMortgaged());
-  			                	}
-								if(res == JOptionPane.NO_OPTION){
-									System.out.println("REDEEM!"+bblock.getBlock()[25].getStation().isMortgaged());
-									if(bblock.getBlock()[25].getStation().isMortgaged() == true){
-										playerOrder[x].redeemStation(bblock.getBlock()[25].getStation(), playerOrder, x);
-									}else{
-										JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-									}
-								}
-  						}else{
-  							JOptionPane.showMessageDialog(null, null, "Taft Station", JOptionPane.PLAIN_MESSAGE, icon);
-  						}
+			bDTTaftStation.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Taft Avenue Station.jpg"));
+					if(bblock.getBlock()[25].getStation().isOwned() && bblock.getBlock()[25].getStation().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageStation(bblock.getBlock()[25].getStation(), playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+						}
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[25].getStation().isMortgaged() == true){
+								playerOrder[x].redeemStation(bblock.getBlock()[25].getStation(), playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+							}
+						}
+  							}else{
+  								JOptionPane.showMessageDialog(null, null, "Taft Station", JOptionPane.PLAIN_MESSAGE, icon);
+  						}	
   						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                     }
             });
-			}
-			return bDTTaftStation;
 		}
+		return bDTTaftStation;
+	}
 
-		private JButton getBDTNorthStation() {
-			if (bDTNorthStation == null) {
-				bDTNorthStation = new JButton();
-				bDTNorthStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
-				bDTNorthStation.setBorderPainted(false);
-				bDTNorthStation.setOpaque(false);
-				bDTNorthStation.setContentAreaFilled(false);
-				//bDTNorthStation.setVisible(false);
-				bDTNorthStation.addActionListener(new ActionListener() {
-                  	
-                    public void actionPerformed(ActionEvent event) {
-                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/North Edsa Station.jpg"));
-  						if(bblock.getBlock()[35].getStation().isOwned() && bblock.getBlock()[35].getStation().getIntOwner() == x){	
-  							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageStation(bblock.getBlock()[35].getStation(), playerOrder, x);
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[35].getStation().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[35].getStation().isMortgaged());
-								if(bblock.getBlock()[35].getStation().isMortgaged() == true){
-									playerOrder[x].redeemStation(bblock.getBlock()[35].getStation(), playerOrder, x);
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
+	private JButton getBDTNorthStation() {
+		if (bDTNorthStation == null) {
+			bDTNorthStation = new JButton();
+			bDTNorthStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
+			bDTNorthStation.setBorderPainted(false);
+			bDTNorthStation.setOpaque(false);
+			bDTNorthStation.setContentAreaFilled(false);
+			bDTNorthStation.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/North Edsa Station.jpg"));
+					if(bblock.getBlock()[35].getStation().isOwned() && bblock.getBlock()[35].getStation().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageStation(bblock.getBlock()[35].getStation(), playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+						}
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[35].getStation().isMortgaged() == true){
+								playerOrder[x].redeemStation(bblock.getBlock()[35].getStation(), playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+							JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 							}
-  						}else{
-  							JOptionPane.showMessageDialog(null, null, "North Avenue Station", JOptionPane.PLAIN_MESSAGE, icon);
-  						}
-  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                    }
+						}
+  					}else{
+  						JOptionPane.showMessageDialog(null, null, "North Avenue Station", JOptionPane.PLAIN_MESSAGE, icon);
+  					}
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
             });
-			}
-			return bDTNorthStation;
 		}
+		return bDTNorthStation;
+	}
 
-		private JButton getBTDBuendiaStation() {
-			if (bTDBuendiaStation == null) {
-				bTDBuendiaStation = new JButton();
-				bTDBuendiaStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
-				bTDBuendiaStation.setBorderPainted(false);
-				bTDBuendiaStation.setOpaque(false);
-				bTDBuendiaStation.setContentAreaFilled(false);
-				//bTDBuendiaStation.setVisible(false);
-				bTDBuendiaStation.addActionListener(new ActionListener() {
+	private JButton getBTDBuendiaStation() {
+		if (bTDBuendiaStation == null) {
+			bTDBuendiaStation = new JButton();
+			bTDBuendiaStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
+			bTDBuendiaStation.setBorderPainted(false);
+			bTDBuendiaStation.setOpaque(false);
+			bTDBuendiaStation.setContentAreaFilled(false);
+			bTDBuendiaStation.addActionListener(new ActionListener() {
                   	
-                    public void actionPerformed(ActionEvent event) {
-                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Buendia Station.jpg"));
-  						if(bblock.getBlock()[15].getStation().isOwned() && bblock.getBlock()[15].getStation().getIntOwner() == x){	
-  							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageStation(bblock.getBlock()[15].getStation(), playerOrder, x);
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[15].getStation().isMortgaged());
-			                	}
-								if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[15].getStation().isMortgaged());
-								if(bblock.getBlock()[15].getStation().isMortgaged() == true){
-									playerOrder[x].redeemStation(bblock.getBlock()[15].getStation(), playerOrder, x);
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
-							}
-  						}else{
-  							JOptionPane.showMessageDialog(null, null, "Buendia Station", JOptionPane.PLAIN_MESSAGE, icon);
-  						}
-  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                    }
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Buendia Station.jpg"));
+					if(bblock.getBlock()[15].getStation().isOwned() && bblock.getBlock()[15].getStation().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageStation(bblock.getBlock()[15].getStation(), playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+						}
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[15].getStation().isMortgaged() == true){
+								playerOrder[x].redeemStation(bblock.getBlock()[15].getStation(), playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+							}	
+						}
+  					}else{
+  						JOptionPane.showMessageDialog(null, null, "Buendia Station", JOptionPane.PLAIN_MESSAGE, icon);
+  					}
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
             });
-			}
-			return bTDBuendiaStation;
 		}
+		return bTDBuendiaStation;
+	}
 
-		private JButton getBTDAyalaStation() {
-			if (bTDAyalaStation == null) {
-				bTDAyalaStation = new JButton();
-				bTDAyalaStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
-				bTDAyalaStation.setBorderPainted(false);
-				bTDAyalaStation.setOpaque(false);
-				bTDAyalaStation.setContentAreaFilled(false);
-				//bTDAyalaStation.setVisible(false);
-				bTDAyalaStation.addActionListener(new ActionListener() {
-                  	
-                    public void actionPerformed(ActionEvent event) {
-                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Ayala Avenue Station.jpg"));
-  						if(bblock.getBlock()[5].getStation().isOwned() && bblock.getBlock()[5].getStation().getIntOwner() == x){	
-  							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageStation(bblock.getBlock()[5].getStation(), playerOrder, x);
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[5].getStation().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[5].getStation().isMortgaged());
-								if(bblock.getBlock()[5].getStation().isMortgaged() == true){
-									playerOrder[x].redeemStation(bblock.getBlock()[5].getStation(), playerOrder, x);
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
+	private JButton getBTDAyalaStation() {
+		if (bTDAyalaStation == null) {
+			bTDAyalaStation = new JButton();
+			bTDAyalaStation.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_train.png")));
+			bTDAyalaStation.setBorderPainted(false);
+			bTDAyalaStation.setOpaque(false);
+			bTDAyalaStation.setContentAreaFilled(false);
+			bTDAyalaStation.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Ayala Avenue Station.jpg"));
+					if(bblock.getBlock()[5].getStation().isOwned() && bblock.getBlock()[5].getStation().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageStation(bblock.getBlock()[5].getStation(), playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+						}
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[5].getStation().isMortgaged() == true){
+								playerOrder[x].redeemStation(bblock.getBlock()[5].getStation(), playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 							}
-  						}else{
-  							JOptionPane.showMessageDialog(null, null, "Ayala Station", JOptionPane.PLAIN_MESSAGE, icon);
-  						}
-  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                    }
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, null, "Ayala Station", JOptionPane.PLAIN_MESSAGE, icon);
+  					}
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
             });
-			}
-			return bTDAyalaStation;
 		}
+		return bTDAyalaStation;
+	}
 
-		private JButton getBTDMaynilad() {
-			if (bTDMaynilad == null) {
-				bTDMaynilad = new JButton();
-				bTDMaynilad.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_maynilad.png")));
-				bTDMaynilad.setBorderPainted(false);
-				bTDMaynilad.setOpaque(false);
-				bTDMaynilad.setContentAreaFilled(false);
-				//bTDMaynilad.setVisible(false);
-				bTDMaynilad.addActionListener(new ActionListener() {
-                  	
-                    public void actionPerformed(ActionEvent event) {
-                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Maynilad.jpg"));
-  						if(bblock.getBlock()[28].getUtilities().isOwned() && bblock.getBlock()[28].getUtilities().getIntOwner() == x){	
-  							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageUtility(bblock.getBlock()[28].getUtilities(), playerOrder, x);
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[28].getUtilities().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[28].getUtilities().isMortgaged());
-								if(bblock.getBlock()[28].getUtilities().isMortgaged() == true){
-									playerOrder[x].redeemUtility(bblock.getBlock()[28].getUtilities(), playerOrder, x);;
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
+	private JButton getBTDMaynilad() {
+		if (bTDMaynilad == null) {
+			bTDMaynilad = new JButton();
+			bTDMaynilad.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_maynilad.png")));
+			bTDMaynilad.setBorderPainted(false);
+			bTDMaynilad.setOpaque(false);
+			bTDMaynilad.setContentAreaFilled(false);
+			bTDMaynilad.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Maynilad.jpg"));
+					if(bblock.getBlock()[28].getUtilities().isOwned() && bblock.getBlock()[28].getUtilities().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageUtility(bblock.getBlock()[28].getUtilities(), playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+						}
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[28].getUtilities().isMortgaged() == true){
+								playerOrder[x].redeemUtility(bblock.getBlock()[28].getUtilities(), playerOrder, x);;
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 							}
-  						}else{
-  							JOptionPane.showMessageDialog(null, null, "Maynilad", JOptionPane.PLAIN_MESSAGE, icon);
-  						}
-  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                    }
+						}
+  					}else{
+  						JOptionPane.showMessageDialog(null, null, "Maynilad", JOptionPane.PLAIN_MESSAGE, icon);
+  					}
+  					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
             });
-			}
-			return bTDMaynilad;
 		}
+		return bTDMaynilad;
+	}
 
-		private JButton getBTDMeralco() {
-			if (bTDMeralco == null) {
-				bTDMeralco = new JButton();
-				bTDMeralco.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_meralco.png")));
-				bTDMeralco.setBorderPainted(false);
-				bTDMeralco.setOpaque(false);
-				bTDMeralco.setContentAreaFilled(false);
-				//bTDMeralco.setVisible(false);
-				bTDMeralco.addActionListener(new ActionListener() {
-                  	
-                      public void actionPerformed(ActionEvent event) {
-                    	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Meralco corp.jpg"));
-  						if(bblock.getBlock()[12].getUtilities().isOwned() && bblock.getBlock()[12].getUtilities().getIntOwner() == x){	
-  							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageUtility(bblock.getBlock()[12].getUtilities(), playerOrder, x);
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[12].getUtilities().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[12].getUtilities().isMortgaged());
-								if(bblock.getBlock()[12].getUtilities().isMortgaged() == true){
-									playerOrder[x].redeemUtility(bblock.getBlock()[12].getUtilities(), playerOrder, x);
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
+	private JButton getBTDMeralco() {
+		if (bTDMeralco == null) {
+			bTDMeralco = new JButton();
+			bTDMeralco.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_meralco.png")));
+			bTDMeralco.setBorderPainted(false);
+			bTDMeralco.setOpaque(false);
+			bTDMeralco.setContentAreaFilled(false);
+			bTDMeralco.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Meralco corp.jpg"));
+					if(bblock.getBlock()[12].getUtilities().isOwned() && bblock.getBlock()[12].getUtilities().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageUtility(bblock.getBlock()[12].getUtilities(), playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+						}
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[12].getUtilities().isMortgaged() == true){
+								playerOrder[x].redeemUtility(bblock.getBlock()[12].getUtilities(), playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 							}
-  						}else{
-  							JOptionPane.showMessageDialog(null, null, "Meralco Corporation", JOptionPane.PLAIN_MESSAGE, icon);
-  						}
-  						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                      }
-              });
-			}
-			return bTDMeralco;
+						}
+  					}else{
+  						JOptionPane.showMessageDialog(null, null, "Meralco Corporation", JOptionPane.PLAIN_MESSAGE, icon);
+  					}
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());	
+				}
+			});
 		}
+		return bTDMeralco;
+	}
 
-		private JButton getBTDMoa() {
-			if (bTDMoa == null) {
-				bTDMoa = new JButton();
-				bTDMoa.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_darkblue.png")));
-				bTDMoa.setBorderPainted(false);
-				bTDMoa.setOpaque(false);
-				bTDMoa.setContentAreaFilled(false);
-				//bTDMoa.setVisible(false);
-				bTDMoa.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent event) {
-						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/MOA.jpg"));
-						if(bblock.getBlock()[39].getEstate().isOwned() && bblock.getBlock()[39].getEstate().getIntOwner() == x){	
-							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageEstate(bblock.getBlock()[39].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[39].getEstate().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[39].getEstate().isMortgaged());
-								if(bblock.getBlock()[39].getEstate().isMortgaged() == true){
-									playerOrder[x].redeemEstate(bblock.getBlock()[39].getEstate(),playerOrder, x);
-									
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, null, "Mall of Asia", JOptionPane.PLAIN_MESSAGE, icon);
+	private JButton getBTDMoa() {
+		if (bTDMoa == null) {
+			bTDMoa = new JButton();
+			bTDMoa.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_darkblue.png")));
+			bTDMoa.setBorderPainted(false);
+			bTDMoa.setOpaque(false);
+			bTDMoa.setContentAreaFilled(false);
+			bTDMoa.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/MOA.jpg"));
+					if(bblock.getBlock()[39].getEstate().isOwned() && bblock.getBlock()[39].getEstate().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageEstate(bblock.getBlock()[39].getEstate(),playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
 						}
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[39].getEstate().isMortgaged() == true){
+								playerOrder[x].redeemEstate(bblock.getBlock()[39].getEstate(),playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, null, "Mall of Asia", JOptionPane.PLAIN_MESSAGE, icon);
 					}
-				});
-			}
-			return bTDMoa;
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
+			});
 		}
+		return bTDMoa;
+	}
 
-		private JButton getBTDBoracay() {
-			if (bTDBoracay == null) {
-				bTDBoracay = new JButton();
-				bTDBoracay.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_darkblue.png")));
-				bTDBoracay.setBorderPainted(false);
-				bTDBoracay.setOpaque(false);
-				bTDBoracay.setContentAreaFilled(false);
-				//bTDBoracay.setVisible(false);
-				bTDBoracay.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent event) {
-						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Boracay Island.jpg"));
-						if(bblock.getBlock()[37].getEstate().isOwned() && bblock.getBlock()[37].getEstate().getIntOwner() == x){	
-							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageEstate(bblock.getBlock()[37].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[37].getEstate().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[37].getEstate().isMortgaged());
-								if(bblock.getBlock()[37].getEstate().isMortgaged() == true){
-									playerOrder[x].redeemEstate(bblock.getBlock()[37].getEstate(),playerOrder, x);
-									
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, null, "Boracay Island", JOptionPane.PLAIN_MESSAGE, icon);
+	private JButton getBTDBoracay() {
+		if (bTDBoracay == null) {
+			bTDBoracay = new JButton();
+			bTDBoracay.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_darkblue.png")));
+			bTDBoracay.setBorderPainted(false);
+			bTDBoracay.setOpaque(false);
+			bTDBoracay.setContentAreaFilled(false);
+			bTDBoracay.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Boracay Island.jpg"));
+					if(bblock.getBlock()[37].getEstate().isOwned() && bblock.getBlock()[37].getEstate().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageEstate(bblock.getBlock()[37].getEstate(),playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
 						}
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[37].getEstate().isMortgaged() == true){
+								playerOrder[x].redeemEstate(bblock.getBlock()[37].getEstate(),playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, null, "Boracay Island", JOptionPane.PLAIN_MESSAGE, icon);
 					}
-				});
-			}
-			return bTDBoracay;
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
+			});
 		}
+		return bTDBoracay;
+	}
 		
-		private JButton getBDTGreenbelt() {
-			if (bDTGreenbelt == null) {
-				bDTGreenbelt = new JButton();
-				bDTGreenbelt.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
-				bDTGreenbelt.setBorderPainted(false);
-				bDTGreenbelt.setOpaque(false);
-				bDTGreenbelt.setContentAreaFilled(false);
-				//bDTGreenbelt.setVisible(false);
-				bDTGreenbelt.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent event) {
-						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Greenbelt.jpg"));
-						if(bblock.getBlock()[34].getEstate().isOwned() && bblock.getBlock()[34].getEstate().getIntOwner() == x){	
-							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageEstate(bblock.getBlock()[34].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[34].getEstate().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[34].getEstate().isMortgaged());
-								if(bblock.getBlock()[34].getEstate().isMortgaged() == true){
-									playerOrder[x].redeemEstate(bblock.getBlock()[34].getEstate(),playerOrder, x);
-									
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, null, "Greenbelt", JOptionPane.PLAIN_MESSAGE, icon);
+	private JButton getBDTGreenbelt() {
+		if (bDTGreenbelt == null) {
+			bDTGreenbelt = new JButton();
+			bDTGreenbelt.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
+			bDTGreenbelt.setBorderPainted(false);
+			bDTGreenbelt.setOpaque(false);
+			bDTGreenbelt.setContentAreaFilled(false);
+			bDTGreenbelt.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Greenbelt.jpg"));
+					if(bblock.getBlock()[34].getEstate().isOwned() && bblock.getBlock()[34].getEstate().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageEstate(bblock.getBlock()[34].getEstate(),playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
 						}
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[34].getEstate().isMortgaged() == true){
+								playerOrder[x].redeemEstate(bblock.getBlock()[34].getEstate(),playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, null, "Greenbelt", JOptionPane.PLAIN_MESSAGE, icon);
 					}
-				});
-			}
-			return bDTGreenbelt;
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
+			});
 		}
+		return bDTGreenbelt;
+	}
 		
-		private JButton getBTDGlorietta() {
-			if (bTDGlorietta == null) {
-				bTDGlorietta = new JButton();
-				bTDGlorietta.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
-				bTDGlorietta.setBorderPainted(false);
-				bTDGlorietta.setOpaque(false);
-				bTDGlorietta.setContentAreaFilled(false);
-				//bTDGlorietta.setVisible(false);
-				bTDGlorietta.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent event) {
-						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Glorietta.jpg"));
-						if(bblock.getBlock()[32].getEstate().isOwned() && bblock.getBlock()[32].getEstate().getIntOwner() == x){	
-							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageEstate(bblock.getBlock()[32].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[32].getEstate().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[32].getEstate().isMortgaged());
-								if(bblock.getBlock()[32].getEstate().isMortgaged() == true){
-									playerOrder[x].redeemEstate(bblock.getBlock()[32].getEstate(),playerOrder, x);
-									
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, null, "Glorietta", JOptionPane.PLAIN_MESSAGE, icon);
+	private JButton getBTDGlorietta() {
+		if (bTDGlorietta == null) {
+			bTDGlorietta = new JButton();
+			bTDGlorietta.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
+			bTDGlorietta.setBorderPainted(false);
+			bTDGlorietta.setOpaque(false);
+			bTDGlorietta.setContentAreaFilled(false);
+			bTDGlorietta.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Glorietta.jpg"));
+					if(bblock.getBlock()[32].getEstate().isOwned() && bblock.getBlock()[32].getEstate().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageEstate(bblock.getBlock()[32].getEstate(),playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
 						}
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[32].getEstate().isMortgaged() == true){
+								playerOrder[x].redeemEstate(bblock.getBlock()[32].getEstate(),playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+							JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					}else{
+					JOptionPane.showMessageDialog(null, null, "Glorietta", JOptionPane.PLAIN_MESSAGE, icon);
 					}
-				});
-			}
-			return bTDGlorietta;
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
+			});
 		}
+		return bTDGlorietta;
+	}
 		
-		private JButton getBDTLandmark() {
-			if (bDTLandmark == null) {
-				bDTLandmark = new JButton();
-				bDTLandmark.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
-				bDTLandmark.setBorderPainted(false);
-				bDTLandmark.setOpaque(false);
-				bDTLandmark.setContentAreaFilled(false);
-				//bDTLandmark.setVisible(false);
-				bDTLandmark.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent event) {
-						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Landmark.jpg"));
-						if(bblock.getBlock()[31].getEstate().isOwned() && bblock.getBlock()[31].getEstate().getIntOwner() == x){	
-							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageEstate(bblock.getBlock()[31].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[31].getEstate().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[31].getEstate().isMortgaged());
-								if(bblock.getBlock()[31].getEstate().isMortgaged() == true){
-									playerOrder[x].redeemEstate(bblock.getBlock()[31].getEstate(),playerOrder, x);
-									
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, null, "Landmark", JOptionPane.PLAIN_MESSAGE, icon);
+	private JButton getBDTLandmark() {
+		if (bDTLandmark == null) {
+			bDTLandmark = new JButton();
+			bDTLandmark.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_green.png")));
+			bDTLandmark.setBorderPainted(false);
+			bDTLandmark.setOpaque(false);
+			bDTLandmark.setContentAreaFilled(false);
+			bDTLandmark.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Landmark.jpg"));
+					if(bblock.getBlock()[31].getEstate().isOwned() && bblock.getBlock()[31].getEstate().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageEstate(bblock.getBlock()[31].getEstate(),playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
 						}
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[31].getEstate().isMortgaged() == true){
+								playerOrder[x].redeemEstate(bblock.getBlock()[31].getEstate(),playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, null, "Landmark", JOptionPane.PLAIN_MESSAGE, icon);
 					}
-				});
-			}
-			return bDTLandmark;
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
+			});
 		}
+		return bDTLandmark;
+	}
 		
-		private JButton getBTDStarCity() {
-			if (bTDStarCity == null) {
-				bTDStarCity = new JButton();
-				bTDStarCity.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_yellow.png")));
-				bTDStarCity.setBorderPainted(false);
-				bTDStarCity.setOpaque(false);
-				bTDStarCity.setContentAreaFilled(false);
-				//bTDStarCity.setVisible(false);
-				bTDStarCity.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent event) {
-						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Star city.jpg"));
-						if(bblock.getBlock()[29].getEstate().isOwned() && bblock.getBlock()[29].getEstate().getIntOwner() == x){	
-							Object[] options = {"Mortgage" , "Redeem"};
-							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageEstate(bblock.getBlock()[29].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[29].getEstate().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[29].getEstate().isMortgaged());
-								if(bblock.getBlock()[29].getEstate().isMortgaged() == true){
-									playerOrder[x].redeemEstate(bblock.getBlock()[29].getEstate(),playerOrder, x);
-									
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, null, "Star City", JOptionPane.PLAIN_MESSAGE, icon);
+	private JButton getBTDStarCity() {
+		if (bTDStarCity == null) {
+			bTDStarCity = new JButton();
+			bTDStarCity.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_yellow.png")));
+			bTDStarCity.setBorderPainted(false);
+			bTDStarCity.setOpaque(false);
+			bTDStarCity.setContentAreaFilled(false);
+			bTDStarCity.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Star city.jpg"));
+					if(bblock.getBlock()[29].getEstate().isOwned() && bblock.getBlock()[29].getEstate().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageEstate(bblock.getBlock()[29].getEstate(),playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
 						}
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-					}
-				});
-			}
-			return bTDStarCity;
-		}
-		
-		private JButton getBTDMagsaysayBrdge() {
-			if (bTDMagsaysayBrdge == null) {
-				bTDMagsaysayBrdge = new JButton();
-				bTDMagsaysayBrdge.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_yellow.png")));
-				bTDMagsaysayBrdge.setBorderPainted(false);
-				bTDMagsaysayBrdge.setOpaque(false);
-				bTDMagsaysayBrdge.setContentAreaFilled(false);
-				//bTDMagsaysayBrdge.setVisible(false);
-				bTDMagsaysayBrdge.addActionListener(new ActionListener() {
-					
-					public void actionPerformed(ActionEvent event) {
-						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Magsaysay Bridge.jpg"));
-						if(bblock.getBlock()[27].getEstate().isOwned() && bblock.getBlock()[27].getEstate().getIntOwner() == x){	
-							Object[] options = {"Mortgage" , "Redeem"};
-								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-							if(res == JOptionPane.YES_OPTION){  
-								playerOrder[x].mortgageEstate(bblock.getBlock()[27].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[27].getEstate().isMortgaged());
-			                	}
-							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[27].getEstate().isMortgaged());
-								if(bblock.getBlock()[27].getEstate().isMortgaged() == true){
-									playerOrder[x].redeemEstate(bblock.getBlock()[27].getEstate(),playerOrder, x);
-									
-								}else{
-									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
-								}
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[29].getEstate().isMortgaged() == true){
+								playerOrder[x].redeemEstate(bblock.getBlock()[29].getEstate(),playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 							}
-						}else{
-							JOptionPane.showMessageDialog(null, null, "Magsaysay Bridge", JOptionPane.PLAIN_MESSAGE, icon);
 						}
-						fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+					}else{
+						JOptionPane.showMessageDialog(null, null, "Star City", JOptionPane.PLAIN_MESSAGE, icon);
 					}
-				});
-			}
-			return bTDMagsaysayBrdge;
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+				}
+			});
 		}
+		return bTDStarCity;
+	}
+	
+	private JButton getBTDMagsaysayBrdge() {
+		if (bTDMagsaysayBrdge == null) {
+			bTDMagsaysayBrdge = new JButton();
+			bTDMagsaysayBrdge.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_yellow.png")));
+			bTDMagsaysayBrdge.setBorderPainted(false);
+			bTDMagsaysayBrdge.setOpaque(false);
+			bTDMagsaysayBrdge.setContentAreaFilled(false);
+			bTDMagsaysayBrdge.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent event) {
+					icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Magsaysay Bridge.jpg"));
+					if(bblock.getBlock()[27].getEstate().isOwned() && bblock.getBlock()[27].getEstate().getIntOwner() == x){	
+						Object[] options = {"Mortgage" , "Redeem"};
+						int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+						if(res == JOptionPane.YES_OPTION){  
+							playerOrder[x].mortgageEstate(bblock.getBlock()[27].getEstate(),playerOrder, x);
+							JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+						}
+						if(res == JOptionPane.NO_OPTION){
+							if(bblock.getBlock()[27].getEstate().isMortgaged() == true){
+								playerOrder[x].redeemEstate(bblock.getBlock()[27].getEstate(),playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					}else{
+						JOptionPane.showMessageDialog(null, null, "Magsaysay Bridge", JOptionPane.PLAIN_MESSAGE, icon);
+					}
+					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+					}
+			});
+		}
+		return bTDMagsaysayBrdge;
+	}
 		
 		private JButton getBTDEdsa() {
 			if (bTDEdsa == null) {
@@ -575,7 +548,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDEdsa.setBorderPainted(false);
 				bTDEdsa.setOpaque(false);
 				bTDEdsa.setContentAreaFilled(false);
-				//bTDEdsa.setVisible(false);
 				bTDEdsa.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -585,14 +557,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[26].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[26].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[26].getEstate().isMortgaged());
 								if(bblock.getBlock()[26].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[26].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -614,7 +584,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDTrinoma.setBorderPainted(false);
 				bTDTrinoma.setOpaque(false);
 				bTDTrinoma.setContentAreaFilled(false);
-				//bTDTrinoma.setVisible(false);
 				bTDTrinoma.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -624,14 +593,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[24].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[24].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[24].getEstate().isMortgaged());
 								if(bblock.getBlock()[24].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[24].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -653,7 +620,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDNationalbs.setBorderPainted(false);
 				bTDNationalbs.setOpaque(false);
 				bTDNationalbs.setContentAreaFilled(false);
-				//bTDNationalbs.setVisible(false);
 				bTDNationalbs.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -663,14 +629,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[23].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[23].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[23].getEstate().isMortgaged());
 								if(bblock.getBlock()[23].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[23].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -692,7 +656,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDNlex.setBorderPainted(false);
 				bTDNlex.setOpaque(false);
 				bTDNlex.setContentAreaFilled(false);
-				//bTDNlex.setVisible(false);
 				bTDNlex.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -702,14 +665,12 @@ public class GameBoard extends JFrame implements Runnable {
 								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[21].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[21].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[21].getEstate().isMortgaged());
 								if(bblock.getBlock()[21].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[21].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -731,7 +692,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDChinaTown.setBorderPainted(false);
 				bTDChinaTown.setOpaque(false);
 				bTDChinaTown.setContentAreaFilled(false);
-				//bTDChinaTown.setVisible(false);
 				bTDChinaTown.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -741,14 +701,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[19].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[19].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[19].getEstate().isMortgaged());
 								if(bblock.getBlock()[19].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[19].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -770,7 +728,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDC5.setBorderPainted(false);
 				bTDC5.setOpaque(false);
 				bTDC5.setContentAreaFilled(false);
-				//bTDC5.setVisible(false);
 				bTDC5.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -780,14 +737,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[18].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[18].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[18].getEstate().isMortgaged());
 								if(bblock.getBlock()[18].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[18].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -809,7 +764,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDIntramuros.setBorderPainted(false);
 				bTDIntramuros.setOpaque(false);
 				bTDIntramuros.setContentAreaFilled(false);
-				//bTDIntramuros.setVisible(false);
 				bTDIntramuros.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -819,14 +773,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[16].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[16].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[16].getEstate().isMortgaged());
 								if(bblock.getBlock()[16].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[16].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -848,7 +800,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDWalterMart.setBorderPainted(false);
 				bTDWalterMart.setOpaque(false);
 				bTDWalterMart.setContentAreaFilled(false);
-				//bTDWalterMart.setVisible(false);
 				bTDWalterMart.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -858,14 +809,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[14].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[14].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[14].getEstate().isMortgaged());
 								if(bblock.getBlock()[14].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[14].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -887,7 +836,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDSlex.setBorderPainted(false);
 				bTDSlex.setOpaque(false);
 				bTDSlex.setContentAreaFilled(false);
-				//bTDSlex.setVisible(false);
 				bTDSlex.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -897,14 +845,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[12].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[12].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[12].getEstate().isMortgaged());
 								if(bblock.getBlock()[12].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[12].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -926,7 +872,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDShopwise.setBorderPainted(false);
 				bTDShopwise.setOpaque(false);
 				bTDShopwise.setContentAreaFilled(false);
-				//bTDShopwise.setVisible(false);
 				bTDShopwise.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -936,14 +881,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[11].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[11].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[11].getEstate().isMortgaged());
 								if(bblock.getBlock()[11].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[11].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -965,7 +908,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDdlaRsaSt.setBorderPainted(false);
 				bTDdlaRsaSt.setOpaque(false);
 				bTDdlaRsaSt.setContentAreaFilled(false);
-				//bTDdlaRsaSt.setVisible(false);
 				bTDdlaRsaSt.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -975,14 +917,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[91].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[9].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[9].getEstate().isMortgaged());
 								if(bblock.getBlock()[9].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[9].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -1004,7 +944,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDRizalPark.setBorderPainted(false);
 				bTDRizalPark.setOpaque(false);
 				bTDRizalPark.setContentAreaFilled(false);
-				//bTDRizalPark.setVisible(false);
 				bTDRizalPark.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -1014,14 +953,12 @@ public class GameBoard extends JFrame implements Runnable {
 							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[8].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[8].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[8].getEstate().isMortgaged());
 								if(bblock.getBlock()[8].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[8].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -1043,7 +980,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDPuregold.setBorderPainted(false);
 				bTDPuregold.setOpaque(false);
 				bTDPuregold.setContentAreaFilled(false);
-				//bTDPuregold.setVisible(false);
 				bTDPuregold.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -1053,14 +989,12 @@ public class GameBoard extends JFrame implements Runnable {
 								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[6].getEstate(),playerOrder, x);
-								
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[6].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[6].getEstate().isMortgaged());
 								if(bblock.getBlock()[6].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[6].getEstate(),playerOrder, x);
-									
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -1080,7 +1014,6 @@ public class GameBoard extends JFrame implements Runnable {
 				bTDMakatiAve = new JButton();
 				bTDMakatiAve.setIcon(new ImageIcon(getClass().getResource("/Designs/btn_brown.png")));
 				bTDMakatiAve.setBorderPainted(false);
-				//bTDMakatiAve.setVisible(false);
 				bTDMakatiAve.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -1090,13 +1023,13 @@ public class GameBoard extends JFrame implements Runnable {
 								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
 								playerOrder[x].mortgageEstate(bblock.getBlock()[3].getEstate(),playerOrder, x);
-								System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[3].getEstate().isMortgaged());
-			                	}
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+								}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[3].getEstate().isMortgaged());
 								if(bblock.getBlock()[3].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[3].getEstate(),playerOrder, x);
-							}else{
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
+								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
 							}
@@ -1118,7 +1051,6 @@ public class GameBoard extends JFrame implements Runnable {
 				btdAyalaAve.setOpaque(false);
 				btdAyalaAve.setContentAreaFilled(false);
 				btdAyalaAve.setFocusable(false);
-				//btdAyalaAve.setVisible(false);
 				btdAyalaAve.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent event) {
@@ -1127,13 +1059,13 @@ public class GameBoard extends JFrame implements Runnable {
 							Object[] options = {"Mortgage" , "Redeem"};
 								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
 							if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageEstate(bblock.getBlock()[1].getEstate(),playerOrder, x);
-									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[1].getEstate().isMortgaged());
-			                	}
+								playerOrder[x].mortgageEstate(bblock.getBlock()[1].getEstate(),playerOrder, x);
+								JOptionPane.showMessageDialog(null, "You have mortgaged this property.", null, JOptionPane.PLAIN_MESSAGE);
+							}
 							if(res == JOptionPane.NO_OPTION){
-								System.out.println("REDEEM!"+bblock.getBlock()[1].getEstate().isMortgaged());
 								if(bblock.getBlock()[1].getEstate().isMortgaged() == true){
 									playerOrder[x].redeemEstate(bblock.getBlock()[1].getEstate(),playerOrder, x);
+									JOptionPane.showMessageDialog(null, "You have redeemed this property.", null, JOptionPane.PLAIN_MESSAGE);
 								}else{
 									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
 								}
@@ -1186,7 +1118,7 @@ public class GameBoard extends JFrame implements Runnable {
 				bPlay.setContentAreaFilled(false);
 				bPlay.addActionListener(new ActionListener() {
 					
-					public void actionPerformed(ActionEvent event) {                        //hides what is not needed and shows all tokens used by the players
+					public void actionPerformed(ActionEvent event) { //hides what is not needed and shows all tokens used by the players
 						bPlay.setVisible(false);
 						pClicktoPlay.setVisible(false);
 						bRollDice.setEnabled(true);
@@ -1249,12 +1181,12 @@ public class GameBoard extends JFrame implements Runnable {
 						bEndTurn.setEnabled(true);
 						
 						playerOrder[x].setTotalSteps(dice[0].getDice1stResult() + dice[1].getDice2ndResult());
-						System.out.println("Total Steps: "+playerOrder[x].getTotalSteps());
+						//System.out.println("Total Steps: "+playerOrder[x].getTotalSteps());
 						
 						checkForDoubles();
                         	if(playerOrder[x].isJailed() == true){
                         		playerOrder[x].setTryForDice(playerOrder[x].getTryForDice()+1);
-                                System.out.println("TryForDice: "+playerOrder[x].getTryForDice());
+                               // System.out.println("TryForDice: "+playerOrder[x].getTryForDice());
                                 bailOutOfJail();
                         }
                         startThread();
@@ -1588,17 +1520,17 @@ public class GameBoard extends JFrame implements Runnable {
         			try{
         				if(playerOrder[x].getPosition() == 0 || playerOrder[x].getPosition() == 9){
         					playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-63);
-        					System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
+        					//System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}else{
         					playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-47);
-        					System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
+        					//System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}
         				playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-        				System.out.println("updatedPosition "+playerOrder[x].getPosition());
+        				//System.out.println("updatedPosition "+playerOrder[x].getPosition());
         			}
         			catch(InterruptedException e){}
         			
@@ -1606,51 +1538,51 @@ public class GameBoard extends JFrame implements Runnable {
         			try{
         				if(playerOrder[x].getPosition() == 10 || playerOrder[x].getPosition() == 19){
         					playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-63);
-        					System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
+        					//System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}else{
         					playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-47);
-        					System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
+        					//System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}
         				playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-        				System.out.println("updatedPosition "+playerOrder[x].getPosition());
+        				//System.out.println("updatedPosition "+playerOrder[x].getPosition());
         			}catch(InterruptedException e){}
         			
         		}else if(playerOrder[x].getPosition() >= 20 && playerOrder[x].getPosition() < 30){ //  from free parking to go to jail
         			try{
         				if(playerOrder[x].getPosition() == 20 || playerOrder[x].getPosition() == 29){
         					playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+63);
-        					System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
+        					//System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}else{
         					playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+47);
-        					System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
+        					//System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}
         				playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-        				System.out.println("updatedPosition "+playerOrder[x].getPosition());
+        				//System.out.println("updatedPosition "+playerOrder[x].getPosition());
         			}catch(InterruptedException e){}
         			
         		}else if(playerOrder[x].getPosition() >= 30 && playerOrder[x].getPosition() < 40){ // from  go to jail to go
         			try{
         				if(playerOrder[x].getPosition() == 30 || playerOrder[x].getPosition() == 39){
         					playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+63);
-        					System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
+        					//System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}else{
         					playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+47);
-        					System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
+        					//System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}
         				playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-        				System.out.println("updatedPosition "+playerOrder[x].getPosition());
+        				//System.out.println("updatedPosition "+playerOrder[x].getPosition());
         			}catch(InterruptedException e){}
         		}
         		passedGo();
@@ -1660,7 +1592,7 @@ public class GameBoard extends JFrame implements Runnable {
         		
         	}
         		playerOrder[x].setLastStep(playerOrder[x].getPosition());
-                System.out.println("Last Step: " +playerOrder[x].getLastStep());
+                //System.out.println("Last Step: " +playerOrder[x].getLastStep());
                 checkBoard();
         }
 
@@ -1675,15 +1607,11 @@ public class GameBoard extends JFrame implements Runnable {
         		//chance.speedingFine();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        		updateTokenPosition();
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;                                          
         	case 2:
         		//chance.bankDividend();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        		updateTokenPosition();
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;
         	case 3:
         		//chance.advanceToTrinoma();
@@ -1696,9 +1624,6 @@ public class GameBoard extends JFrame implements Runnable {
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()+200);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		}       
-        		
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
-        		System.out.println("Advance to Trinoma. If you pass GO collect P200. " +playerOrder[x].getStartMoney());
         		break;
         	case 4:
         		//Go to GO!
@@ -1707,15 +1632,12 @@ public class GameBoard extends JFrame implements Runnable {
         		playerOrder[x].setPosition(40);
         		updateTokenPosition();
         		passedGo();
-        		System.out.println("Pass Go.");
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;
         	case 5:
         		//chance.paySchoolFees();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		updateTokenPosition();
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;
         	case 6:
         		//chance.advanceToMoa();
@@ -1723,27 +1645,17 @@ public class GameBoard extends JFrame implements Runnable {
         		playerOrder[x].getToken().setyLocation(462);
         		playerOrder[x].setPosition(39);
         		updateTokenPosition();
-        		System.out.println("Advance to SM Mall of Asia.");
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;
         	case 7:
         		playerOrder[x].setHasJailKey(true);
-        		//System.out.println("Get out of Jail Free Key.");
-        		updateTokenPosition();
-        		System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
         		break;
         	case 8:
                 //chance.streetRepairs();
-                updateTokenPosition();
-                System.out.println("Your are assessed for street repairs. Pay 50 to the bank.");
-                playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
+        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
                 fPlayerMoney.setText("P" + playerOrder[x].getStartMoney());
-                System.out.println("Money: " + playerOrder[x].getStartMoney());
                 break;
         	case 9:
                 //chance.generalRepairs();
-                updateTokenPosition();
-                System.out.println("Make general repairs on all of your buildings. Pay 50 to the bank.");
                 playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
                 fPlayerMoney.setText("P" + playerOrder[x].getStartMoney());
                 System.out.println("Money: " + playerOrder[x].getStartMoney());
@@ -1759,8 +1671,6 @@ public class GameBoard extends JFrame implements Runnable {
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()+200);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		}       
-        		System.out.println("Advance to Shopwise. If you pass GO collect P200. ");
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;
         	case 11:
         		//chance.tripToBuendiaStation();
@@ -1773,19 +1683,15 @@ public class GameBoard extends JFrame implements Runnable {
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()+200);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		}       
-        		System.out.println("Take a trip to Buendia Station. If you pass GO collect P200. " +playerOrder[x].getStartMoney());
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;
         	case 12:
         		//chance.buildingMatures();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		updateTokenPosition();
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;
         	case 13:
         		goToJail();
-        		System.out.println("GO TO JAIL.");
         		break;
         	case 14:
         		//chance.goBackThreeSteps();
@@ -1808,21 +1714,16 @@ public class GameBoard extends JFrame implements Runnable {
         			playerOrder[x].setPosition(33);
         			
         		}
-        		System.out.println("Go back three spaces.");
         		break;
         	case 15:
         		//chance.drunkInCharge();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        		updateTokenPosition();
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;
         	case 16:
         		//chance.wonCrosswordCompetition();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        		updateTokenPosition();
-        		System.out.println("ChanceMoney: "+playerOrder[x].getStartMoney());
         		break;
         	}
         	
@@ -1837,49 +1738,41 @@ public class GameBoard extends JFrame implements Runnable {
         			//Cchest.bankError();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         		case 2:
         			//Cchest.payHospital();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         		case 3:
         			//Cchest.wonBeautyContest();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 10);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         		case 4:
         			//Cchest.taxRefund();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 20);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         		case 5:
                     //Cchest.pay;
                     playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 10);
                     fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                    System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
                     break;
         		case 6:
         			//Cchest.payInsurance();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         		case 7:
         			//Cchest.saleOfStock();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         		case 8:
         			//Cchest.recieveInterest();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 25);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         		case 9:
         			playerOrder[x].getToken().setxLocation(525);
@@ -1887,46 +1780,34 @@ public class GameBoard extends JFrame implements Runnable {
         			playerOrder[x].setPosition(40);
         			updateTokenPosition();
         			passedGo();
-        			System.out.println("Pass Go.");
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         		case 10:
         			playerOrder[x].getToken().setxLocation(462);
         			playerOrder[x].getToken().setyLocation(525);
         			playerOrder[x].setPosition(1);
-        			
-        			System.out.println("Go back to Ayala Ave.");
         			break;
         		case 11:
         			playerOrder[x].setHasJailKey(true);
-        			System.out.println("HasJailKey: "+playerOrder[x].hasJailKey());
         			break;
         		case 12:
         			//Cchest.yourBirthday();
         			for(int a = 0; a <= numberOfPlayers; a++){
         				playerOrder[a].setStartMoney(playerOrder[a].getStartMoney()-10);
-        				//fPlayerMoney.setText("P "+playerOrder[a].getStartMoney());
-        				System.out.println("OtherPlayerMoney: "+playerOrder[a].getStartMoney());
-        				
         				if(playerOrder[a] == playerOrder[x]){
-        					playerOrder[a].setStartMoney(playerOrder[x].getStartMoney()+(numberOfPlayers*10));
+        					playerOrder[a].setStartMoney(playerOrder[a].getStartMoney()+(numberOfPlayers*10));
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("YourMoney: "+playerOrder[a].getStartMoney());
         				}
         			}
-        			System.out.println("It is your birthday. Collect P10 from each player.");
         			break;
         		case 13:
-        				//Cchest.doctorsFee();
-        				playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
-        				fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        				System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
-        				break;
+        			//Cchest.doctorsFee();
+        			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
+        			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
+        			break;
         		case 14:
         			//Cchest.annuityMatures();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         		case 15:
         			goToJail();
@@ -1935,7 +1816,6 @@ public class GameBoard extends JFrame implements Runnable {
         			//Cchest.inheritMoney();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("ChestMoney: "+playerOrder[x].getStartMoney());
         			break;
         	}
 
@@ -1953,14 +1833,11 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
-        					//btdAyalaAve.setVisible(true);
         				}
         				
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
         				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
@@ -1987,21 +1864,17 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
-        					//bTDMakatiAve.setVisible(true);
         				}
                                         
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
         				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
         					rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
         					playerOrder[x].payRent(playerOrder, x, rent);
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
         				}
         			}
         			break;
@@ -2009,7 +1882,6 @@ public class GameBoard extends JFrame implements Runnable {
         		case 4:
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 200);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        			System.out.println("Paid 200 tax!");
         			checkTax(2);
         			break;
                                 
@@ -2023,21 +1895,17 @@ public class GameBoard extends JFrame implements Runnable {
         					isEstate = false;
         					isUtility = false;
         					buy();
-        					//bTDAyalaStation.setVisible(true);
         				}
         				
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-        					} 
+        				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
         					rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
         					playerOrder[x].payRent(playerOrder, x, rent);
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
         				}
         			}
         			break;
@@ -2052,21 +1920,17 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
-        					//bTDPuregold.setVisible(true);
         				}
         				
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
         				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
         					rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
         					playerOrder[x].payRent(playerOrder, x, rent);
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
         				}
         			}
         			break;
@@ -2078,7 +1942,6 @@ public class GameBoard extends JFrame implements Runnable {
         			break;
         			
         		case 8:
-        			updateTokenPosition();
         			if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned() != true){
         				icon = new ImageIcon(getClass().getResource("/buyProperty_images/rizalPark.gif"));
         				Object[] options = {"Buy Estate" , "Nevermind"};
@@ -2088,21 +1951,17 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
-        					//bTDRizalPark.setVisible(true);
         				}
         				
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
         				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
         					rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
         					playerOrder[x].payRent(playerOrder, x, rent);
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
         				}
         			}
         			break;
@@ -2117,21 +1976,17 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
-        					//bTDdlaRsaSt.setVisible(true);
         				}
         				
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
         				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
         					rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
         					playerOrder[x].payRent(playerOrder, x, rent);
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
         				}
         			}
         			break;
@@ -2146,21 +2001,17 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
-        					//bTDShopwise.setVisible(true);
         				}
         				
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
         				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
         					rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
         					playerOrder[x].payRent(playerOrder, x, rent);
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
         				}
         			}
         			break;
@@ -2175,21 +2026,17 @@ public class GameBoard extends JFrame implements Runnable {
         					isEstate = false;
         					isStation = false;     
         					buy();
-        					//bTDMeralco.setVisible(true);
         				}
         				
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
         				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
         					rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
         					playerOrder[x].payRent(playerOrder, x, rent);
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
         				}
         			}	
         			break;
@@ -2204,21 +2051,17 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
-        					//bTDSlex.setVisible(true);
         				}
         				
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
         				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
         					rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
         					playerOrder[x].payRent(playerOrder, x, rent);
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
         				}
         			}
         			break;
@@ -2233,21 +2076,17 @@ public class GameBoard extends JFrame implements Runnable {
         					isUtility = false;
         					isStation = false;
         					buy();
-        					//bTDWalterMart.setVisible(true);
         				}
         				
         			}else{
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
         					JOptionPane.showMessageDialog(null, "This is your land!");
-        					System.out.println("This is your land!!! ");
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
         				} 
         				if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
         					JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
         					rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
         					playerOrder[x].payRent(playerOrder, x, rent);
         					fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-        					System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
         				}
         			}
         			break;
@@ -2263,21 +2102,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isEstate = false;
                         			isUtility = false;
                         			buy();
-                        			//bTDBuendiaStation.setVisible(true);
                         		}
                                         
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2292,21 +2127,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDIntramuros.setVisible(true);
-	                            }
+                        		}
                                         	
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}	
                         	break;
@@ -2327,21 +2158,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDC5.setVisible(true);
                         		}
                                        
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2356,21 +2183,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDChinaTown.setVisible(true);
                         		}
                                        	
                         	}else{	
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2385,20 +2208,16 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDNlex.setVisible(true);
                         		}
                         		
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2419,21 +2238,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDNationalbs.setVisible(true);
                         		}
                         		
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2448,21 +2263,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDTrinoma.setVisible(true);
                         		}
                         		
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2477,21 +2288,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isEstate = false;
                         			isUtility = false;
                         			buy();
-                        			//bDTTaftStation.setVisible(true);
                         		}
                         		
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2506,21 +2313,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDEdsa.setVisible(true);
                         		}
                         		
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2535,21 +2338,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDMagsaysayBrdge.setVisible(true);
                         		}
                                         
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2564,21 +2363,17 @@ public class GameBoard extends JFrame implements Runnable {
                                 	isEstate = false;
                                     isStation = false;    
                                     buy();
-                                   // bTDMaynilad.setVisible(true);
                                 }
                                     
                             }else{
                                     if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() == x){
                                     	JOptionPane.showMessageDialog(null, "This is your land!");
-                                        System.out.println("This is your land!!! ");
-                                         System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
                                     } 
                                     if(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner() != x){
                                     	JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                                     	rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
-                                            playerOrder[x].payRent(playerOrder, x, rent);
-                                            fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                                            System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
+                                    	playerOrder[x].payRent(playerOrder, x, rent);
+                                    	fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                                     }
                             }
                             break;
@@ -2593,21 +2388,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDStarCity.setVisible(true);
                         		}
                         		
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2627,21 +2418,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bDTLandmark.setVisible(true);
                         		}
                                        
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2656,21 +2443,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDGlorietta.setVisible(true);
                         		}
                                         	
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2691,21 +2474,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bDTGreenbelt.setVisible(true);
                         		}
                                         
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-                        		} 
+                        			} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2720,21 +2499,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isEstate = false;
                         			isUtility = false;
                         			buy();
-                        			//bDTNorthStation.setVisible(true);
                         		}
                                        
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2755,21 +2530,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDBoracay.setVisible(true);
                         		}
                                         
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2777,7 +2548,6 @@ public class GameBoard extends JFrame implements Runnable {
                         case 38:
                         	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
                         	fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        	System.out.println("Paid 100 tax!");
                         	checkTax(1);
                         	break;
                         	
@@ -2791,21 +2561,17 @@ public class GameBoard extends JFrame implements Runnable {
                         			isUtility = false;
                         			isStation = false;
                         			buy();
-                        			//bTDMoa.setVisible(true);
                         		}
                                        
                         	}else{
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() == x){
                         			JOptionPane.showMessageDialog(null, "This is your land!");
-                        			System.out.println("This is your land!!! ");
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
                         		} 
                         		if(bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner() != x){
                         			JOptionPane.showMessageDialog(null, "Pay Rent whether you like it or not!");
                         			rent = playerOrder[x].computeRent(playerOrder, playerOrder[x].getPosition(), x, playerOrder[x].getTotalSteps());
                         			playerOrder[x].payRent(playerOrder, x, rent);
                         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                        			System.out.println("OwnedByPlayer: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
                         		}
                         	}
                         	break;
@@ -2833,7 +2599,7 @@ public class GameBoard extends JFrame implements Runnable {
         }	
                
        public void passedGo(){
-    	   if(playerOrder[x].getPosition() == 40){                //position goes back to 0 if token passed GO
+    	   if(playerOrder[x].getPosition() == 40){ //position goes back to 0 if token passed GO
     		   playerOrder[x].setPosition(0);   
     		   playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
     		   fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
@@ -2847,7 +2613,6 @@ public class GameBoard extends JFrame implements Runnable {
     	   playerOrder[x].getToken().setyLocation(525);
     	   updateTokenPosition();
     	   playerOrder[x].setJailed(true);
-    	   System.out.println("Jailed: "+playerOrder[x].isJailed());
     	   		icon = new ImageIcon(getClass().getResource("/Designs/jail_panel.png"));
 		   		Object[] optionsJail = {"Pay 50" , "Try for Doubles", "Use Jail Key"};
 				int jail = JOptionPane.showOptionDialog(null, null, "Buy this Property" , JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, icon, optionsJail, optionsJail[2]);
@@ -2855,7 +2620,6 @@ public class GameBoard extends JFrame implements Runnable {
 		   			playerOrder[x].getToken().setLocation(23, 525);
                     playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
                     fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
-                    System.out.println("Money: " + playerOrder[x].getStartMoney());
                     playerOrder[x].setJailed(false);
                     playerOrder[x].setBailOutDice(0);
                     playerOrder[x].setDoubleDice(0);
@@ -2863,36 +2627,36 @@ public class GameBoard extends JFrame implements Runnable {
 		   		}
 		   		
 		   		if(jail == JOptionPane.NO_OPTION){
-		   			playerOrder[x].getToken().setLocation(23, 525);
+		   			playerOrder[x].getToken().setxLocation(23);
+		   			playerOrder[x].getToken().setyLocation(525);
+		   			updateTokenPosition();
 		   			bailOutOfJail();
 		   			bRollDice.setEnabled(true);
 		   		}
 		   		
 		   		if(jail == JOptionPane.CANCEL_OPTION){
-		   			playerOrder[x].getToken().setLocation(23, 525);
+		   			playerOrder[x].getToken().setxLocation(23);
+		   			playerOrder[x].getToken().setyLocation(525);
+		   			updateTokenPosition();
 		   			if(playerOrder[x].hasJailKey() == true){
 		   				useJailKey();
 		   			}
-		   			
 		   			if(playerOrder[x].hasJailKey() == false){
-		   				JOptionPane.showMessageDialog(null, "weee? wala ka ngang Jail Key eh. :P", "Warning!", JOptionPane.WARNING_MESSAGE);
-		   				
+		   				JOptionPane.showMessageDialog(null, "weeeh? wala ka ngang Jail Key eh. :P", "Warning!", JOptionPane.WARNING_MESSAGE);
 		   			}
-		   			
 		   			return;
 		   		}
-       	
-    	   t.stop();                   
+       	   t.stop();                   
        }
         
        public void checkForDoubles(){
     	   if(dice[0].getDice1stResult() == dice[1].getDice2ndResult()){
     		   playerOrder[x].setDoubleDice(playerOrder[x].getDoubleDice() + 1);
-    		   System.out.println("doubleDice of player"+ x + " = " + playerOrder[x].getDoubleDice());
+    		   //System.out.println("doubleDice of player"+ x + " = " + playerOrder[x].getDoubleDice());
     		   
     		   if(playerOrder[x].isJailed() == true){
     			   playerOrder[x].setBailOutDice(playerOrder[x].getBailOutDice()+1);
-    			   System.out.println("BailOutDice: "+playerOrder[x].getBailOutDice());
+    			   //System.out.println("BailOutDice: "+playerOrder[x].getBailOutDice());
     		   }
     	   }
         }	
@@ -2904,17 +2668,16 @@ public class GameBoard extends JFrame implements Runnable {
         			playerOrder[x].setBailOutDice(0);
         			playerOrder[x].setDoubleDice(0);
         			playerOrder[x].setTryForDice(0);
-        			System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice());
+        			//System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice());
         		}
                	}else if(playerOrder[x].getTryForDice() == 3 && playerOrder[x].getBailOutDice() == 0){
                		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
-               		System.out.println("Money: "+playerOrder[x].getStartMoney());
                		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
                		playerOrder[x].setJailed(false);
                		playerOrder[x].setBailOutDice(0);
                		playerOrder[x].setDoubleDice(0);
                		playerOrder[x].setTryForDice(0);
-               		System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice());
+               		//System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice());
                	}  
         }
         
@@ -2924,39 +2687,30 @@ public class GameBoard extends JFrame implements Runnable {
             playerOrder[x].setBailOutDice(0);
             playerOrder[x].setDoubleDice(0);
             playerOrder[x].setTryForDice(0);
-            System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice()+playerOrder[x].hasJailKey());
+            //System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice()+playerOrder[x].hasJailKey());
             
         }
 
     public void buy() {
     	if (isEstate == true) {
     		playerOrder[x].buyEstate(bblock.getBlock()[playerOrder[x].getPosition()].getEstate(), playerOrder, x);
-    		//fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-    		System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
-    		System.out.println("Price: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
-    		System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().isOwned());
-    		System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
-    		System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getIntOwner());
+    		//System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
+    		//System.out.println("Price: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
+    		//System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
     	} 
     	if (isUtility == true) {
     		playerOrder[x].buyUtility(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities(), playerOrder, x);
-    		//fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-    		System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getName());
-    		System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
-    		System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().isOwned());
-    		System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
-    		System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getIntOwner());
+    		//System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getName());
+    		//System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
+    		//System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
     	}
     	if (isStation == true) {
     		playerOrder[x].buyStation(bblock.getBlock()[playerOrder[x].getPosition()].getStation(), playerOrder, x);
-    		//fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-    		System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getName());
-    		System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
-    		System.out.println("Owned: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().isOwned());
-    		System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getOwnerName());
-    		System.out.println("intOwner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getIntOwner());
-    		
+    		//System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getName());
+    		//System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
+    		//System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getOwnerName());
     	}
+    	fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
     }
 
     public void checkChest(int b){
