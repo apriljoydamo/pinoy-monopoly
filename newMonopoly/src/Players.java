@@ -18,19 +18,21 @@ public class Players{
 		
         
 
-        
-/////////////////////Creating a Player/////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
+////////////////////////////////////////////////////Creating a Player///////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public Players createPlayer(String Name){
                 Players players = new Players();
                 players.token = new Token();
                 players.setPlayerName(Name);
                 players.setStartMoney(startMoney);
-                //System.out.println(startMoney + " labeltoken " + labelToken);
                 return players;
         }
         
         
-/////////////////////GETTER AND SETTER//////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////GETTER AND SETTER/////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void setStartMoney(int startMoney) {
                 this.startMoney = startMoney;
         }
@@ -186,10 +188,9 @@ public class Players{
 			return colorGroupList;
 		}
 
-
-		///////////////////////////////////////METHODS//////////////////////////
-	
-		
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////METHODS//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		public void buyEstate(Estate estate, Players[] playerOrder, int x){
 			for(int i=0;i<colorGroupList.length;i++){ 
@@ -201,8 +202,8 @@ public class Players{
 			colorGroupList[bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getColorGroup()].add(bblock.getBlock()[playerOrder[x].getPosition()].getEstate());
 			updateProperty();
 			
-			System.out.println("colorGroup: "+ bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getColorGroup());
-			System.out.println("ToBeAddedInColorGroup: "+ bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
+			//System.out.println("colorGroup: "+ bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getColorGroup());
+			//System.out.println("ToBeAddedInColorGroup: "+ bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
 			
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
 		}
@@ -241,9 +242,9 @@ public class Players{
             playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - rent);      
             playerOrder[owner].setStartMoney(playerOrder[owner].getStartMoney() + rent);  
     
-			System.out.println("Rent: " + rent);
-			System.out.println("PaidBy: " + playerOrder[x].getPlayerName()+" Money: "+playerOrder[x].getStartMoney());
-			System.out.println("Paid to: " + playerOrder[owner].getPlayerName()+" Money: "+playerOrder[owner].getStartMoney());
+			//System.out.println("Rent: " + rent);
+			//System.out.println("PaidBy: " + playerOrder[x].getPlayerName()+" Money: "+playerOrder[x].getStartMoney());
+			//System.out.println("Paid to: " + playerOrder[owner].getPlayerName()+" Money: "+playerOrder[owner].getStartMoney());
 			
 		}
 		
@@ -261,7 +262,7 @@ public class Players{
 				
 				 if(playerOrder[owner].hasCompletedColorGroup && bblock.getBlock()[position].getEstate().getNumberOfHouse()==0){
                    rent = rent*2;
-                   System.out.println("your rent is doubled! " +rent);
+                   //System.out.println("your rent is doubled! " +rent);
                      }
 				 break;
 				
@@ -298,23 +299,23 @@ public class Players{
 			estate.setMortgaged(true);
 			mortgagePrice = estate.getTitledeed().getEstateMortgageValue();
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + mortgagePrice);
-			System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
-			System.out.println("Price: " + mortgagePrice);
+			//System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
+			//System.out.println("Price: " + mortgagePrice);
 			
 		}
 		public void mortgageStation(Station station, Players[] playerOrder, int x){
 			station.setMortgaged(true);
 			mortgagePrice = station.getTitledeed().getStationMortgageValue();
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + mortgagePrice);
-			System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
-			System.out.println("Price: " + mortgagePrice);
+			//System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
+			//System.out.println("Price: " + mortgagePrice);
 		}
 		public void mortgageUtility(Utilities utility, Players[] playerOrder, int x){
 			utility.setMortgaged(true);
 			mortgagePrice = utility.getTitledeed().getUtilityMortgageValue();
 			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + mortgagePrice);
-			System.out.println("Mortgaged: " + bblock.getBlock()[position].getUtilities().isMortgaged());
-			System.out.println("Price: " + mortgagePrice);
+			//System.out.println("Mortgaged: " + bblock.getBlock()[position].getUtilities().isMortgaged());
+			//System.out.println("Price: " + mortgagePrice);
     
 		}
 		
@@ -322,22 +323,22 @@ public class Players{
         	estate.setMortgaged(false);
         	redeemPrice = estate.getTitledeed().getEstateRedeemValue();
         	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - redeemPrice);
-        	System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
-        	System.out.println("Price: " + redeemPrice);
+        	//System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
+        	//System.out.println("Price: " + redeemPrice);
         }
         public void redeemStation(Station station, Players[] playerOrder, int x){
         	station.setMortgaged(false);
         	redeemPrice = station.getTitledeed().getStationRedeemValue();
         	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - redeemPrice);
-        	System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
-        	System.out.println("Price: " + redeemPrice);	
+        	//System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
+        	//System.out.println("Price: " + redeemPrice);	
         }
         public void redeemUtility(Utilities utility, Players[] playerOrder, int x){
         	utility.setMortgaged(false);
         	redeemPrice = utility.getTitledeed().getUtilityRedeemValue();
         	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - redeemPrice);
-        	System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
-        	System.out.println("Price: " + redeemPrice);
+        	//System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
+        	//System.out.println("Price: " + redeemPrice);
        }
     
 }
