@@ -3,7 +3,7 @@ public class Property extends Block{
 	
 	private int price = 0, intOwner;
 	private String propertyName = null, ownerName = null;
-	private boolean isOwned = false;
+	private boolean isOwned = false, isMortgaged = false;
 	private TitleDeed titledeed;
 	//private String name;// = super.getBlockName();
 	
@@ -44,5 +44,11 @@ public class Property extends Block{
 	}
 	public int getIntOwner() {
 		return intOwner;
+	}
+	public void setMortgaged(boolean isMortgaged) {
+		this.isMortgaged = isMortgaged;
+	}
+	public boolean isMortgaged() {
+		return isMortgaged;
 	}
 }
