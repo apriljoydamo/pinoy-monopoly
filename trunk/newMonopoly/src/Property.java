@@ -5,10 +5,7 @@ public class Property extends Block{
 	private String propertyName = null, ownerName = null;
 	private boolean isOwned = false, isMortgaged = false;
 	private TitleDeed titledeed;
-	//private String name;// = super.getBlockName();
 	
-	
-	////////////////////////////GETTERS AND SETTERS/////////////////////
 	public void setPrice(int price) {
 		this.price = price;
 	}
