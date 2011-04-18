@@ -6,6 +6,7 @@ public class Players{
         
         private int tempOrder, totalSteps, tryForDice = 0;
         private int order = 1, startMoney = 1500, position = 0, doubleDice = 0, lastStep = 0, bailOutDice = 0;
+        int mortgagePrice = 0, redeemPrice = 0;
         private String playerName;
         private Token token;
         private boolean isJailed = false, hasJailKey = false, hasCompletedColorGroup = false;
@@ -293,54 +294,51 @@ public class Players{
 			}
 		}
 		
-		public void mortgageProperty(Players[] playerOrder, int x, int position){
-			int mortgagePrice = 0;
-            
-            switch(bblock.getBlock()[position].getType()){
-                    case 1:
-                    		bblock.getBlock()[position].getEstate().setMortgaged(true);
-                            mortgagePrice = bblock.getBlock()[position].getEstate().getTitledeed().getEstateMortgageValue();
-                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
-                            break;
-                    case 2:
-                    		bblock.getBlock()[position].getStation().setMortgaged(true);
-                            mortgagePrice = bblock.getBlock()[position].getStation().getTitledeed().getStationMortgageValue();
-                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
-                            break;
-                    case 3:
-                    		bblock.getBlock()[position].getUtilities().setMortgaged(true);
-                            mortgagePrice = bblock.getBlock()[position].getUtilities().getTitledeed().getUtilityMortgageValue();
-                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getUtilities().isMortgaged());
-                            break;
-            }
-            
-            playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + mortgagePrice);
-            System.out.println("Price: " + mortgagePrice);
+		public void mortgageEstate(Estate estate, Players[] playerOrder, int x){
+			estate.setMortgaged(true);
+			mortgagePrice = estate.getTitledeed().getEstateMortgageValue();
+			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + mortgagePrice);
+			System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
+			System.out.println("Price: " + mortgagePrice);
+			
+		}
+		public void mortgageStation(Station station, Players[] playerOrder, int x){
+			station.setMortgaged(true);
+			mortgagePrice = station.getTitledeed().getStationMortgageValue();
+			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + mortgagePrice);
+			System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
+			System.out.println("Price: " + mortgagePrice);
+		}
+		public void mortgageUtility(Utilities utility, Players[] playerOrder, int x){
+			utility.setMortgaged(true);
+			mortgagePrice = utility.getTitledeed().getUtilityMortgageValue();
+			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + mortgagePrice);
+			System.out.println("Mortgaged: " + bblock.getBlock()[position].getUtilities().isMortgaged());
+			System.out.println("Price: " + mortgagePrice);
+    
 		}
 		
-		public void redeemProperty(Players[] playerOrder, int x, int position){
-			int redeemPrice = 0;
-            
-            switch(bblock.getBlock()[position].getType()){
-                    case 1:
-                            bblock.getBlock()[position].getEstate().setMortgaged(false);
-                            redeemPrice = bblock.getBlock()[position].getEstate().getTitledeed().getEstateRedeemValue();
-                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
-                            break;
-                    case 2:
-                    		bblock.getBlock()[position].getStation().setMortgaged(false);
-                            redeemPrice = bblock.getBlock()[position].getStation().getTitledeed().getStationRedeemValue();
-                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
-                            break;
-                    case 3:
-                    	bblock.getBlock()[position].getUtilities().setMortgaged(false);
-                            redeemPrice = bblock.getBlock()[position].getUtilities().getTitledeed().getUtilityRedeemValue();
-                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
-                            break;
-            }
-            
-            playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - redeemPrice);
-            System.out.println("Price: " + redeemPrice);
-		}
+        public void redeemEstate(Estate estate, Players[] playerOrder, int x){
+        	estate.setMortgaged(false);
+        	redeemPrice = estate.getTitledeed().getEstateRedeemValue();
+        	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - redeemPrice);
+        	System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
+        	System.out.println("Price: " + redeemPrice);
+        }
+        public void redeemStation(Station station, Players[] playerOrder, int x){
+        	station.setMortgaged(false);
+        	redeemPrice = station.getTitledeed().getStationRedeemValue();
+        	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - redeemPrice);
+        	System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
+        	System.out.println("Price: " + redeemPrice);	
+        }
+        public void redeemUtility(Utilities utility, Players[] playerOrder, int x){
+        	utility.setMortgaged(false);
+        	redeemPrice = utility.getTitledeed().getUtilityRedeemValue();
+        	playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - redeemPrice);
+        	System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
+        	System.out.println("Price: " + redeemPrice);
+       }
+    
 }
 
