@@ -1,7 +1,7 @@
 
 public class Estate extends Property{
 	private int numberOfHouse, numberOfHotels, colorGroup;
-	private boolean isMortgaged;
+
     //0 brown
     //1 blue
     //2 pink
@@ -11,13 +11,15 @@ public class Estate extends Property{
     //6 green
     //7 dark blue
 	
-	public Estate(String name, int location, int price, int colorGroup, boolean isOwned, TitleDeed titledeed){
+	public Estate(String name, int location, int price, int colorGroup, boolean isOwned, boolean isMortgaged, TitleDeed titledeed){
 		this.setPrice(price);
 		this.setName(name);
 		this.setLocation(location);
 		this.setColorGroup(colorGroup);
 		this.setOwned(isOwned);
+		this.setMortgaged(isMortgaged);
 		this.setTitledeed(titledeed);
+		
 	}
 
 	public void setNumberOfHouse(int numberOfHouse) {
@@ -44,12 +46,5 @@ public class Estate extends Property{
 		return numberOfHotels;
 	}
 
-	public void setMortgaged(boolean isMortgaged) {
-		this.isMortgaged = isMortgaged;
-	}
-
-	public boolean isMortgaged() {
-		return isMortgaged;
-	}
-
+	
 }
