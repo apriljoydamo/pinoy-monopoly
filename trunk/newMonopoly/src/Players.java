@@ -300,19 +300,21 @@ public class Players{
                     case 1:
                     		bblock.getBlock()[position].getEstate().setMortgaged(true);
                             mortgagePrice = bblock.getBlock()[position].getEstate().getTitledeed().getEstateMortgageValue();
+                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
                             break;
                     case 2:
                     		bblock.getBlock()[position].getStation().setMortgaged(true);
                             mortgagePrice = bblock.getBlock()[position].getStation().getTitledeed().getStationMortgageValue();
+                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
                             break;
                     case 3:
-                    	bblock.getBlock()[position].getUtilities().setMortgaged(true);
+                    		bblock.getBlock()[position].getUtilities().setMortgaged(true);
                             mortgagePrice = bblock.getBlock()[position].getUtilities().getTitledeed().getUtilityMortgageValue();
+                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getUtilities().isMortgaged());
                             break;
             }
             
             playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + mortgagePrice);
-            System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
             System.out.println("Price: " + mortgagePrice);
 		}
 		
@@ -323,19 +325,21 @@ public class Players{
                     case 1:
                             bblock.getBlock()[position].getEstate().setMortgaged(false);
                             redeemPrice = bblock.getBlock()[position].getEstate().getTitledeed().getEstateRedeemValue();
+                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
                             break;
                     case 2:
                     		bblock.getBlock()[position].getStation().setMortgaged(false);
                             redeemPrice = bblock.getBlock()[position].getStation().getTitledeed().getStationRedeemValue();
+                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
                             break;
                     case 3:
                     	bblock.getBlock()[position].getUtilities().setMortgaged(false);
                             redeemPrice = bblock.getBlock()[position].getUtilities().getTitledeed().getUtilityRedeemValue();
+                            System.out.println("Mortgaged: " + bblock.getBlock()[position].getStation().isMortgaged());
                             break;
             }
             
             playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - redeemPrice);
-            System.out.println("Mortgaged: " + bblock.getBlock()[position].getEstate().isMortgaged());
             System.out.println("Price: " + redeemPrice);
 		}
 }
