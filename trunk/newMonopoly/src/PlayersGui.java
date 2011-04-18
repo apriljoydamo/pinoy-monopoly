@@ -59,7 +59,6 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(wheelBarrowNameField.getText());
 					playerArray[x].getToken().setAssignedToken(8);
-					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
 					wheelBarrowEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
@@ -80,7 +79,6 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(hatNameField.getText());
 					playerArray[x].getToken().setAssignedToken(7);
-					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
 					hatEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
@@ -101,7 +99,6 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(thimbleNameField.getText());
 					playerArray[x].getToken().setAssignedToken(6);
-					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
 					thimbleEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
@@ -122,7 +119,6 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(carNameField.getText());
 					playerArray[x].getToken().setAssignedToken(5);
-					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
 					carEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
@@ -143,7 +139,6 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(shoeNameField.getText());
 					playerArray[x].getToken().setAssignedToken(4);
-					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
 					shoeEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
@@ -164,7 +159,6 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(ironNameField.getText());
 					playerArray[x].getToken().setAssignedToken(3);
-					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
 					ironEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
@@ -185,7 +179,6 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(azkalNameField.getText());
 					playerArray[x].getToken().setAssignedToken(2);
-					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
 					azkalEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
@@ -206,7 +199,6 @@ public class PlayersGui extends JFrame{
 				public void actionPerformed(ActionEvent event) {
 					playerArray[x] = players.createPlayer(baporNameField.getText());
 					playerArray[x].getToken().setAssignedToken(1);
-					System.out.println(playerArray[x].getToken().getAssignedToken());
 					assignPlayerOrder();
 					baporEnterButton.setEnabled(false);
 					bPlay.setEnabled(true);
@@ -454,14 +446,10 @@ public class PlayersGui extends JFrame{
 	}
 
 	
-	/**
-	 * Main entry of the class.
-	 * Note: This class is only created so that you can easily preview the result at runtime.
-	 * It is not expected to be managed by the designer.
-	 * You can modify it as you like.
-	 */
-	
-/////////////////////////MAIN///////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////MAIN////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public static void main(String[] args) {
 		installLnF();
 		SwingUtilities.invokeLater(new Runnable() {
@@ -479,7 +467,10 @@ public class PlayersGui extends JFrame{
 		});
 	}
 
-/////////////////////////METHODS///////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////METHODS///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public void assignPlayerOrder(){
 		Random random = new Random();
 		do{
@@ -500,8 +491,8 @@ public class PlayersGui extends JFrame{
 	    initialNumPlayer = x;
 	    x++;
 	    numberOfPlayers = x;
-	    System.out.println("playerName " + playerArray[x-1].getPlayerName());
-		System.out.println("tempOrder " +playerArray[x-1].getTempOrder());
+	    //System.out.println("playerName " + playerArray[x-1].getPlayerName());
+		//System.out.println("tempOrder " +playerArray[x-1].getTempOrder());
 	}
 	
 	 public static void insertOrder(int b){                              
@@ -511,24 +502,24 @@ public class PlayersGui extends JFrame{
                          if(playerArray[x].getTempOrder() == z){
                                  playerArray[x].setOrder(y);
                                  y++;
-                                 System.out.println("insertOrder " +playerArray[x].getOrder());
+                                 //System.out.println("insertOrder " +playerArray[x].getOrder());
                          }
                  }
          }
- }
+	 }
 	public static void rearrangeArray(int a){                              
         int y = 0;
         for(int z = 1; z <= 8; z++){
                 for(int x = 0; x <= a; x++){
                         if(playerArray[x].getOrder()==z){
                                 playerOrder[y] = playerArray[x];
-                                System.out.println("playerOrder " + playerOrder[y].getOrder());
+                                //System.out.println("playerOrder " + playerOrder[y].getOrder());
                                 y++;
                                 
                         }
                 }
         }
-}
+	}
 	
 	public void runBoard(final int numberOfPlayers){
 		this.setVisible(false);
