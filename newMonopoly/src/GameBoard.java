@@ -87,19 +87,20 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Taft Avenue Station.jpg"));
   						if(bblock.getBlock()[25].getStation().isOwned() && bblock.getBlock()[25].getStation().getIntOwner() == x){	
-  							if(bblock.getBlock()[25].getStation().isMortgaged() != true){
-  								Object[] options = {"Mortgage" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].mortgageProperty(playerOrder, x, 25);
+  								Object[] options = {"Mortgage" , "Redeem"};
+  								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageStation(bblock.getBlock()[25].getStation(), playerOrder, x);
+  									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[25].getStation().isMortgaged());
   			                	}
-  							}else{
-  								Object[] options = {"Redeem" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].redeemProperty(playerOrder, x, 25);
-  			                	}
-  							}
+								if(res == JOptionPane.NO_OPTION){
+									System.out.println("REDEEM!"+bblock.getBlock()[25].getStation().isMortgaged());
+									if(bblock.getBlock()[25].getStation().isMortgaged() == true){
+										playerOrder[x].redeemStation(bblock.getBlock()[25].getStation(), playerOrder, x);
+									}else{
+										JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+									}
+								}
   						}else{
   							JOptionPane.showMessageDialog(null, null, "Taft Station", JOptionPane.PLAIN_MESSAGE, icon);
   						}
@@ -123,19 +124,20 @@ public class GameBoard extends JFrame implements Runnable {
                     public void actionPerformed(ActionEvent event) {
                     	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/North Edsa Station.jpg"));
   						if(bblock.getBlock()[35].getStation().isOwned() && bblock.getBlock()[35].getStation().getIntOwner() == x){	
-  							if(bblock.getBlock()[35].getStation().isMortgaged() != true){
-  								Object[] options = {"Mortgage" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].mortgageProperty(playerOrder, x, 35);
-  			                	}
-  							}else{
-  								Object[] options = {"Redeem" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].redeemProperty(playerOrder, x, 35);
-  			                	}
-  							}
+  							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageStation(bblock.getBlock()[35].getStation(), playerOrder, x);
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[35].getStation().isMortgaged());
+			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[35].getStation().isMortgaged());
+								if(bblock.getBlock()[35].getStation().isMortgaged() == true){
+									playerOrder[x].redeemStation(bblock.getBlock()[35].getStation(), playerOrder, x);
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
+							}
   						}else{
   							JOptionPane.showMessageDialog(null, null, "North Avenue Station", JOptionPane.PLAIN_MESSAGE, icon);
   						}
@@ -159,19 +161,20 @@ public class GameBoard extends JFrame implements Runnable {
                     public void actionPerformed(ActionEvent event) {
                     	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Buendia Station.jpg"));
   						if(bblock.getBlock()[15].getStation().isOwned() && bblock.getBlock()[15].getStation().getIntOwner() == x){	
-  							if(bblock.getBlock()[15].getStation().isMortgaged() != true){
-  								Object[] options = {"Mortgage" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].mortgageProperty(playerOrder, x, 15);
-  			                	}
-  							}else{ 
-  								Object[] options = {"Redeem" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].redeemProperty(playerOrder, x, 15);
-  			                	}
-  							}
+  							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+								if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageStation(bblock.getBlock()[15].getStation(), playerOrder, x);
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[15].getStation().isMortgaged());
+			                	}
+								if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[15].getStation().isMortgaged());
+								if(bblock.getBlock()[15].getStation().isMortgaged() == true){
+									playerOrder[x].redeemStation(bblock.getBlock()[15].getStation(), playerOrder, x);
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
+							}
   						}else{
   							JOptionPane.showMessageDialog(null, null, "Buendia Station", JOptionPane.PLAIN_MESSAGE, icon);
   						}
@@ -195,19 +198,20 @@ public class GameBoard extends JFrame implements Runnable {
                     public void actionPerformed(ActionEvent event) {
                     	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Ayala Avenue Station.jpg"));
   						if(bblock.getBlock()[5].getStation().isOwned() && bblock.getBlock()[5].getStation().getIntOwner() == x){	
-  							if(bblock.getBlock()[5].getStation().isMortgaged() != true){
-  								Object[] options = {"Mortgage" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].mortgageProperty(playerOrder, x, 5);
-  			                	}
-  							}else{
-  								Object[] options = {"Redeem" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].redeemProperty(playerOrder, x, 5);
-  			                	}
-  							}
+  							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageStation(bblock.getBlock()[5].getStation(), playerOrder, x);
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[5].getStation().isMortgaged());
+			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[5].getStation().isMortgaged());
+								if(bblock.getBlock()[5].getStation().isMortgaged() == true){
+									playerOrder[x].redeemStation(bblock.getBlock()[5].getStation(), playerOrder, x);
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
+							}
   						}else{
   							JOptionPane.showMessageDialog(null, null, "Ayala Station", JOptionPane.PLAIN_MESSAGE, icon);
   						}
@@ -231,19 +235,20 @@ public class GameBoard extends JFrame implements Runnable {
                     public void actionPerformed(ActionEvent event) {
                     	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Maynilad.jpg"));
   						if(bblock.getBlock()[28].getUtilities().isOwned() && bblock.getBlock()[28].getUtilities().getIntOwner() == x){	
-  							if(bblock.getBlock()[28].getUtilities().isMortgaged() != true){
-  								Object[] options = {"Mortgage" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].mortgageProperty(playerOrder, x, 28);
-  			                	}
-  							}else{
-  								Object[] options = {"Redeem" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].redeemProperty(playerOrder, x, 28);
-  			                	}
-  							}
+  							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageUtility(bblock.getBlock()[28].getUtilities(), playerOrder, x);
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[28].getUtilities().isMortgaged());
+			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[28].getUtilities().isMortgaged());
+								if(bblock.getBlock()[28].getUtilities().isMortgaged() == true){
+									playerOrder[x].redeemUtility(bblock.getBlock()[28].getUtilities(), playerOrder, x);;
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
+							}
   						}else{
   							JOptionPane.showMessageDialog(null, null, "Maynilad", JOptionPane.PLAIN_MESSAGE, icon);
   						}
@@ -267,19 +272,20 @@ public class GameBoard extends JFrame implements Runnable {
                       public void actionPerformed(ActionEvent event) {
                     	icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Meralco corp.jpg"));
   						if(bblock.getBlock()[12].getUtilities().isOwned() && bblock.getBlock()[12].getUtilities().getIntOwner() == x){	
-  							if(bblock.getBlock()[12].getUtilities().isMortgaged() != true){
-  								Object[] options = {"Mortgage" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].mortgageProperty(playerOrder, x, 12);
-  			                	}
-  							}else{
-  								Object[] options = {"Redeem" , "No"};
-  								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-  								if(res == JOptionPane.YES_OPTION){  
-  									playerOrder[x].redeemProperty(playerOrder, x, 12);
-  			                	}
-  							}
+  							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageUtility(bblock.getBlock()[12].getUtilities(), playerOrder, x);
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[12].getUtilities().isMortgaged());
+			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[12].getUtilities().isMortgaged());
+								if(bblock.getBlock()[12].getUtilities().isMortgaged() == true){
+									playerOrder[x].redeemUtility(bblock.getBlock()[12].getUtilities(), playerOrder, x);
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
+							}
   						}else{
   							JOptionPane.showMessageDialog(null, null, "Meralco Corporation", JOptionPane.PLAIN_MESSAGE, icon);
   						}
@@ -302,18 +308,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/MOA.jpg"));
 						if(bblock.getBlock()[39].getEstate().isOwned() && bblock.getBlock()[39].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[39].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 39);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[39].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[39].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 39);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[39].getEstate().isMortgaged());
+								if(bblock.getBlock()[39].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[39].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Mall of Asia", JOptionPane.PLAIN_MESSAGE, icon);
@@ -338,18 +347,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Boracay Island.jpg"));
 						if(bblock.getBlock()[37].getEstate().isOwned() && bblock.getBlock()[37].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[37].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 37);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[37].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[37].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 37);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[37].getEstate().isMortgaged());
+								if(bblock.getBlock()[37].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[37].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Boracay Island", JOptionPane.PLAIN_MESSAGE, icon);
@@ -374,18 +386,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Greenbelt.jpg"));
 						if(bblock.getBlock()[34].getEstate().isOwned() && bblock.getBlock()[34].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[34].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 34);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[34].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[34].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 34);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[34].getEstate().isMortgaged());
+								if(bblock.getBlock()[34].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[34].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Greenbelt", JOptionPane.PLAIN_MESSAGE, icon);
@@ -410,18 +425,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Glorietta.jpg"));
 						if(bblock.getBlock()[32].getEstate().isOwned() && bblock.getBlock()[32].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[32].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 32);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[32].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[32].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 32);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[32].getEstate().isMortgaged());
+								if(bblock.getBlock()[32].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[32].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Glorietta", JOptionPane.PLAIN_MESSAGE, icon);
@@ -446,18 +464,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Landmark.jpg"));
 						if(bblock.getBlock()[31].getEstate().isOwned() && bblock.getBlock()[31].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[31].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 31);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[31].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[31].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 31);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[31].getEstate().isMortgaged());
+								if(bblock.getBlock()[31].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[31].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Landmark", JOptionPane.PLAIN_MESSAGE, icon);
@@ -482,18 +503,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Star city.jpg"));
 						if(bblock.getBlock()[29].getEstate().isOwned() && bblock.getBlock()[29].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[29].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 29);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[29].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[29].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 29);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[29].getEstate().isMortgaged());
+								if(bblock.getBlock()[29].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[29].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Star City", JOptionPane.PLAIN_MESSAGE, icon);
@@ -518,18 +542,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Magsaysay Bridge.jpg"));
 						if(bblock.getBlock()[27].getEstate().isOwned() && bblock.getBlock()[27].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[27].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 27);
+							Object[] options = {"Mortgage" , "Redeem"};
+								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[27].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[27].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 27);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[27].getEstate().isMortgaged());
+								if(bblock.getBlock()[27].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[27].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Magsaysay Bridge", JOptionPane.PLAIN_MESSAGE, icon);
@@ -554,18 +581,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/EDSA.jpg"));
 						if(bblock.getBlock()[26].getEstate().isOwned() && bblock.getBlock()[26].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[26].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 26);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[26].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[26].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 26);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[26].getEstate().isMortgaged());
+								if(bblock.getBlock()[26].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[26].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "EDSA", JOptionPane.PLAIN_MESSAGE, icon);
@@ -590,18 +620,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Trinoma.jpg"));
 						if(bblock.getBlock()[24].getEstate().isOwned() && bblock.getBlock()[24].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[24].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 24);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[24].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[24].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 24);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[24].getEstate().isMortgaged());
+								if(bblock.getBlock()[24].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[24].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Trinoma", JOptionPane.PLAIN_MESSAGE, icon);
@@ -626,18 +659,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/National Bookstore.jpg"));
 						if(bblock.getBlock()[23].getEstate().isOwned() && bblock.getBlock()[23].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[23].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 23);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[23].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[23].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 23);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[23].getEstate().isMortgaged());
+								if(bblock.getBlock()[23].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[23].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "National Bookstore", JOptionPane.PLAIN_MESSAGE, icon);
@@ -662,18 +698,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/NLEX.jpg"));
 						if(bblock.getBlock()[21].getEstate().isOwned() && bblock.getBlock()[21].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[21].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 21);
+							Object[] options = {"Mortgage" , "Redeem"};
+								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[21].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[21].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 21);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[21].getEstate().isMortgaged());
+								if(bblock.getBlock()[21].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[21].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "NLEX", JOptionPane.PLAIN_MESSAGE, icon);
@@ -698,18 +737,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/China town.jpg"));
 						if(bblock.getBlock()[19].getEstate().isOwned() && bblock.getBlock()[19].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[19].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 19);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[19].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[19].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 19);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[19].getEstate().isMortgaged());
+								if(bblock.getBlock()[19].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[19].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "China Town", JOptionPane.PLAIN_MESSAGE, icon);
@@ -734,18 +776,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/C5 Road.jpg"));
 						if(bblock.getBlock()[18].getEstate().isOwned() && bblock.getBlock()[18].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[18].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 18);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[18].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[18].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 18);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[18].getEstate().isMortgaged());
+								if(bblock.getBlock()[18].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[18].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "C5", JOptionPane.PLAIN_MESSAGE, icon);
@@ -770,18 +815,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Intramuros.jpg"));
 						if(bblock.getBlock()[16].getEstate().isOwned() && bblock.getBlock()[16].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[16].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 16);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[16].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[16].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 16);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[16].getEstate().isMortgaged());
+								if(bblock.getBlock()[16].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[16].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Intramuros", JOptionPane.PLAIN_MESSAGE, icon);
@@ -806,18 +854,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Walter Mart.jpg"));
 						if(bblock.getBlock()[14].getEstate().isOwned() && bblock.getBlock()[14].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[14].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 14);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[14].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[14].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 14);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[14].getEstate().isMortgaged());
+								if(bblock.getBlock()[14].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[14].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Walter Mart", JOptionPane.PLAIN_MESSAGE, icon);
@@ -842,18 +893,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/SLEX.jpg"));
 						if(bblock.getBlock()[12].getEstate().isOwned() && bblock.getBlock()[12].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[12].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 12);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[12].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[12].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 12);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[12].getEstate().isMortgaged());
+								if(bblock.getBlock()[12].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[12].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "SLEX", JOptionPane.PLAIN_MESSAGE, icon);
@@ -878,18 +932,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Shopwise.jpg"));
 						if(bblock.getBlock()[11].getEstate().isOwned() && bblock.getBlock()[11].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[11].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 11);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[11].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[11].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 11);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[11].getEstate().isMortgaged());
+								if(bblock.getBlock()[11].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[11].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Shopwise", JOptionPane.PLAIN_MESSAGE, icon);
@@ -914,18 +971,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Dela Rosa Street.jpg"));
 						if(bblock.getBlock()[9].getEstate().isOwned() && bblock.getBlock()[9].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[9].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 9);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[91].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[9].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 9);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[9].getEstate().isMortgaged());
+								if(bblock.getBlock()[9].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[9].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Dela Rosa St.", JOptionPane.PLAIN_MESSAGE, icon);
@@ -950,18 +1010,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Rizal Park.jpg"));
 						if(bblock.getBlock()[8].getEstate().isOwned() && bblock.getBlock()[8].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[8].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 8);
+							Object[] options = {"Mortgage" , "Redeem"};
+							int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[8].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[8].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 8);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[8].getEstate().isMortgaged());
+								if(bblock.getBlock()[8].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[8].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Rizal Park", JOptionPane.PLAIN_MESSAGE, icon);
@@ -986,18 +1049,21 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Puregold.jpg"));
 						if(bblock.getBlock()[6].getEstate().isOwned() && bblock.getBlock()[6].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[6].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 6);
+							Object[] options = {"Mortgage" , "Redeem"};
+								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[6].getEstate(),playerOrder, x);
+								
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[6].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 6);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[6].getEstate().isMortgaged());
+								if(bblock.getBlock()[6].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[6].getEstate(),playerOrder, x);
+									
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Puregold", JOptionPane.PLAIN_MESSAGE, icon);
@@ -1020,18 +1086,19 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Makati Avenue.jpg"));
 						if(bblock.getBlock()[3].getEstate().isOwned() && bblock.getBlock()[3].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[3].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 3);
+							Object[] options = {"Mortgage" , "Redeem"};
+								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+								playerOrder[x].mortgageEstate(bblock.getBlock()[3].getEstate(),playerOrder, x);
+								System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[3].getEstate().isMortgaged());
 			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[3].getEstate().isMortgaged());
+								if(bblock.getBlock()[3].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[3].getEstate(),playerOrder, x);
 							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 3);
-			                	}
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Makati Avenue", JOptionPane.PLAIN_MESSAGE, icon);
@@ -1057,18 +1124,19 @@ public class GameBoard extends JFrame implements Runnable {
 					public void actionPerformed(ActionEvent event) {
 						icon = new ImageIcon(getClass().getResource("/Cards (Resized)/Ayala Avenue.jpg"));
 						if(bblock.getBlock()[1].getEstate().isOwned() && bblock.getBlock()[1].getEstate().getIntOwner() == x){	
-							if(bblock.getBlock()[1].getEstate().isMortgaged() != true){
-								Object[] options = {"Mortgage" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Mortgage this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].mortgageProperty(playerOrder, x, 1);
+							Object[] options = {"Mortgage" , "Redeem"};
+								int res = JOptionPane.showOptionDialog(null, null, "What do you want to do?" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
+							if(res == JOptionPane.YES_OPTION){  
+									playerOrder[x].mortgageEstate(bblock.getBlock()[1].getEstate(),playerOrder, x);
+									System.out.println("faholhvwehnoiwvfr"+bblock.getBlock()[1].getEstate().isMortgaged());
 			                	}
-							}else{
-								Object[] options = {"Redeem" , "No"};
-								int res = JOptionPane.showOptionDialog(null, null, "Redeem this property" , JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, options, options[1]);
-								if(res == JOptionPane.YES_OPTION){  
-									playerOrder[x].redeemProperty(playerOrder, x, 1);
-			                	}
+							if(res == JOptionPane.NO_OPTION){
+								System.out.println("REDEEM!"+bblock.getBlock()[1].getEstate().isMortgaged());
+								if(bblock.getBlock()[1].getEstate().isMortgaged() == true){
+									playerOrder[x].redeemEstate(bblock.getBlock()[1].getEstate(),playerOrder, x);
+								}else{
+									JOptionPane.showMessageDialog(null, "You haven't mortgaged this property yet. ", null, JOptionPane.ERROR_MESSAGE);
+								}
 							}
 						}else{
 							JOptionPane.showMessageDialog(null, null, "Ayala Avenue", JOptionPane.PLAIN_MESSAGE, icon);
