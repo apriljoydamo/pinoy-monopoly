@@ -2,15 +2,6 @@
 public class Estate extends Property{
 	private int numberOfHouse, numberOfHotels, colorGroup;
 
-    //0 brown
-    //1 blue
-    //2 pink
-    //3 orange
-    //4 red
-    //5 yellow
-    //6 green
-    //7 dark blue
-	
 	public Estate(String name, int location, int price, int colorGroup, boolean isOwned, boolean isMortgaged, TitleDeed titledeed){
 		this.setPrice(price);
 		this.setName(name);
