@@ -27,10 +27,8 @@ public class PlayersGui extends JFrame{
 	private static Players playerOrder[] = new Players[8];
 	private static int[] tempOrder = new int[8];
 	Players players = new Players();
-	
 	boolean willRepeat; 
 	int x = 0, tokenUsed, randomNumber, numberOfPlayers, initialNumPlayer;
-	
 	private JPanel pMonopoly, pSolo, pPlay;
 	private JLabel lMonopolyLogo, lTypeOfGame;
 	private JButton bNewGame, bExit, bPlay, bBackToMenu;
@@ -445,12 +443,7 @@ public class PlayersGui extends JFrame{
 		}
 	}
 
-	
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////MAIN////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	public static void main(String[] args) {
+		public static void main(String[] args) {
 		installLnF();
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -466,10 +459,6 @@ public class PlayersGui extends JFrame{
 			}
 		});
 	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////METHODS///////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void assignPlayerOrder(){
 		Random random = new Random();
@@ -491,8 +480,6 @@ public class PlayersGui extends JFrame{
 	    initialNumPlayer = x;
 	    x++;
 	    numberOfPlayers = x;
-	    //System.out.println("playerName " + playerArray[x-1].getPlayerName());
-		//System.out.println("tempOrder " +playerArray[x-1].getTempOrder());
 	}
 	
 	 public static void insertOrder(int b){                              
@@ -502,7 +489,6 @@ public class PlayersGui extends JFrame{
                          if(playerArray[x].getTempOrder() == z){
                                  playerArray[x].setOrder(y);
                                  y++;
-                                 //System.out.println("insertOrder " +playerArray[x].getOrder());
                          }
                  }
          }
@@ -513,7 +499,6 @@ public class PlayersGui extends JFrame{
                 for(int x = 0; x <= a; x++){
                         if(playerArray[x].getOrder()==z){
                                 playerOrder[y] = playerArray[x];
-                                //System.out.println("playerOrder " + playerOrder[y].getOrder());
                                 y++;
                                 
                         }
