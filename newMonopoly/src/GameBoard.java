@@ -52,6 +52,7 @@ public class GameBoard extends JFrame implements Runnable {
 	private JButton bTDMakatiAve, bTDPuregold, bTDRizalPark, bTDdlaRsaSt, bTDShopwise, bTDSlex, bTDWalterMart, bTDIntramuros;
 	private JButton bTDC5, bTDChinaTown, bTDNlex, bTDNationalbs, bTDTrinoma, bTDEdsa, bTDMagsaysayBrdge, bTDStarCity, bDTLandmark;
 	private JButton bTDGlorietta, bDTGreenbelt, bTDBoracay, bTDMoa, bTDMeralco, bTDMaynilad, bTDAyalaStation, bTDBuendiaStation, bDTNorthStation, bDTTaftStation;
+	private JLabel lCtoMortage;
 	
 	
 	public GameBoard() {
@@ -73,6 +74,15 @@ public class GameBoard extends JFrame implements Runnable {
 /////////////////////////////////////////////THIS IS FOR TITLEDEED//////////////////////////////////////////       
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
        
+	private JLabel getJLabel0() {
+		if (lCtoMortage == null) {
+			lCtoMortage = new JLabel();
+			lCtoMortage.setFont(new Font("Century Gothic", Font.ITALIC, 10));
+			lCtoMortage.setText("Click to mortage Title Deeds below.");
+		}
+		return lCtoMortage;
+	}
+
 	private JButton getBDTTaftStation() {
 		if (bDTTaftStation == null) {
 			bDTTaftStation = new JButton();
@@ -1417,13 +1427,13 @@ public class GameBoard extends JFrame implements Runnable {
         }
                 
         private JPanel getTitleDeedsPanel() {
-        	if (pTitleDeeds == null) {
-        		pTitleDeeds = new JPanel();
-        		pTitleDeeds.setBackground(Color.white);
-        		pTitleDeeds.setLayout(new GroupLayout());
-        		pTitleDeeds.add(gettdAyalaAveButton(), new Constraints(new Leading(12, 17, 10, 10), new Leading(46, 17, 10, 10)));
-        		pTitleDeeds.add(getBTDMakatiAve(), new Constraints(new Leading(35, 17, 10, 10), new Leading(46, 17, 12, 12)));
-        		pTitleDeeds.add(getBTDPuregold(), new Constraints(new Leading(11, 18, 12, 12), new Leading(71, 16, 10, 10)));
+			if (pTitleDeeds == null) {
+				pTitleDeeds = new JPanel();
+				pTitleDeeds.setBackground(Color.white);
+				pTitleDeeds.setLayout(new GroupLayout());
+				pTitleDeeds.add(gettdAyalaAveButton(), new Constraints(new Leading(12, 17, 10, 10), new Leading(46, 17, 10, 10)));
+				pTitleDeeds.add(getBTDMakatiAve(), new Constraints(new Leading(35, 17, 10, 10), new Leading(46, 17, 12, 12)));
+				pTitleDeeds.add(getBTDPuregold(), new Constraints(new Leading(11, 18, 12, 12), new Leading(71, 16, 10, 10)));
 				pTitleDeeds.add(getBTDRizalPark(), new Constraints(new Leading(34, 18, 12, 12), new Leading(71, 16, 12, 12)));
 				pTitleDeeds.add(getBTDdlaRsaSt(), new Constraints(new Leading(58, 17, 12, 12), new Leading(71, 16, 12, 12)));
 				pTitleDeeds.add(getTitleDeedImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(0, 185, 12, 12)));
@@ -1450,12 +1460,11 @@ public class GameBoard extends JFrame implements Runnable {
 				pTitleDeeds.add(getBTDBuendiaStation(), new Constraints(new Leading(114, 17, 12, 12), new Leading(143, 17, 12, 12)));
 				pTitleDeeds.add(getBDTTaftStation(), new Constraints(new Leading(135, 18, 12, 12), new Leading(143, 17, 12, 12)));
 				pTitleDeeds.add(getBDTNorthStation(), new Constraints(new Leading(161, 16, 10, 10), new Leading(143, 17, 12, 12)));
-				pTitleDeeds.setVisible(true);
-        	}
-        	return pTitleDeeds;
-        }
+			}
+			return pTitleDeeds;
+		}
 
-        private JPanel getDicePanel() {
+		private JPanel getDicePanel() {
         	if (pDice == null) {
                 pDice = new JPanel();
                 pDice.setBackground(Color.white);
@@ -1470,21 +1479,22 @@ public class GameBoard extends JFrame implements Runnable {
         }
 
         private JPanel getPlayerPanel() {
-        	if (pPlayer == null) {
-                pPlayer = new JPanel();
-                pPlayer.setBackground(Color.magenta);
-                pPlayer.setLayout(new GroupLayout());
-                pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(37, 151, 10, 10), new Leading(128, 32, 10, 10)));
-                pPlayer.add(getPlayerNameField(), new Constraints(new Leading(36, 152, 12, 12), new Leading(51, 33, 10, 10)));
-                pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(0, 12, 12), new Leading(172, 185, 12, 12)));
-                pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
-                pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
-                pPlayer.setVisible(false);
-        	}
-        	return pPlayer;
-        }
+			if (pPlayer == null) {
+				pPlayer = new JPanel();
+				pPlayer.setBackground(Color.magenta);
+				pPlayer.setLayout(new GroupLayout());
+				pPlayer.add(getPlayerMoneyField(), new Constraints(new Leading(37, 151, 10, 10), new Leading(128, 32, 10, 10)));
+				pPlayer.add(getPlayerNameField(), new Constraints(new Leading(36, 152, 12, 12), new Leading(51, 33, 10, 10)));
+				pPlayer.add(getEndTurnButton(), new Constraints(new Leading(21, 163, 12, 12), new Leading(365, 51, 10, 10)));
+				pPlayer.add(getTitleDeedsPanel(), new Constraints(new Leading(0, 12, 12), new Leading(185, 185, 10, 10)));
+				pPlayer.add(getJLabel0(), new Constraints(new Leading(4, 187, 10, 10), new Leading(172, 12, 12)));
+				pPlayer.add(getPlayerPanelImageLabel(), new Constraints(new Leading(0, 12, 12), new Leading(12, 12, 12)));
+				pPlayer.setVisible(false);
+			}
+			return pPlayer;
+		}
 
-        private JPanel getBoardPanel() {
+		private JPanel getBoardPanel() {
         	if (pBoard == null) {
 				pBoard = new JPanel();
 				pBoard.setBackground(new Color(64, 0, 64));
