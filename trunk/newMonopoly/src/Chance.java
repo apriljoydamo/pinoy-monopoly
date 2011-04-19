@@ -8,7 +8,7 @@ public class Chance{
 	
 	public void shuffleChance(){
 		Random random = new Random();
-		setChanceRandom(random.nextInt(16)+ 1);
+		setChanceRandom(random.nextInt(14)+ 1);
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
