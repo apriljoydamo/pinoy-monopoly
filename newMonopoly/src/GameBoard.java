@@ -70,10 +70,7 @@ public class GameBoard extends JFrame implements Runnable {
 		setSize(805, 590);
 			
 	}	
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////THIS IS FOR TITLEDEED//////////////////////////////////////////       
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-       
+      
 	private JLabel getJLabel0() {
 		if (lCtoMortage == null) {
 			lCtoMortage = new JLabel();
@@ -1090,11 +1087,6 @@ public class GameBoard extends JFrame implements Runnable {
 			return btdAyalaAve;
 		}
 		
-		
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////THIS IS FOR OTHER BUTTONS////////////////////////////////////////       
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			
 		private JButton getEndTurnButton() {
 			if (bEndTurn == null) {
 				bEndTurn = new JButton();
@@ -1102,8 +1094,7 @@ public class GameBoard extends JFrame implements Runnable {
 				bEndTurn.setEnabled(false);
 				bEndTurn.addActionListener(new ActionListener() {
 					
-					public void actionPerformed(ActionEvent event) {                //next player
-						
+					public void actionPerformed(ActionEvent event) {                						
 						x++;
 						if (x == numberOfPlayers) {
 							x = 0;
@@ -1128,7 +1119,7 @@ public class GameBoard extends JFrame implements Runnable {
 				bPlay.setContentAreaFilled(false);
 				bPlay.addActionListener(new ActionListener() {
 					
-					public void actionPerformed(ActionEvent event) { //hides what is not needed and shows all tokens used by the players
+					public void actionPerformed(ActionEvent event) { 
 						bPlay.setVisible(false);
 						pClicktoPlay.setVisible(false);
 						bRollDice.setEnabled(true);
@@ -1191,12 +1182,10 @@ public class GameBoard extends JFrame implements Runnable {
 						bEndTurn.setEnabled(true);
 						
 						playerOrder[x].setTotalSteps(dice[0].getDice1stResult() + dice[1].getDice2ndResult());
-						//System.out.println("Total Steps: "+playerOrder[x].getTotalSteps());
 						
 						checkForDoubles();
                         	if(playerOrder[x].isJailed() == true){
                         		playerOrder[x].setTryForDice(playerOrder[x].getTryForDice()+1);
-                               // System.out.println("TryForDice: "+playerOrder[x].getTryForDice());
                                 bailOutOfJail();
                         }
                         startThread();
@@ -1246,9 +1235,6 @@ public class GameBoard extends JFrame implements Runnable {
 			}
 			return bRollDice;
 		}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////TEXT FIELDS/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		private JTextField getPlayerMoneyField() {
 			if (fPlayerMoney == null) {
@@ -1274,11 +1260,7 @@ public class GameBoard extends JFrame implements Runnable {
 			}
 			return fPlayerName;
 		}   
-		
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////LABELS////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      
+	   
 		private JLabel getDicebgLabel() {
 			if (ldicebg == null) {
 				ldicebg = new JLabel();
@@ -1410,10 +1392,7 @@ public class GameBoard extends JFrame implements Runnable {
         	}
         	return lMonopoly;
         }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////PANELS ///////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+   
         private JPanel getClickToPlayPanel() {
         	if (pClicktoPlay == null) {
         		pClicktoPlay = new JPanel();
@@ -1512,13 +1491,8 @@ public class GameBoard extends JFrame implements Runnable {
 			}
         	return pBoard;
         }
-
-     
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////THIS IS WHERE THREAD STARTS///////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        public void startThread(){
+   
+           public void startThread(){
         	t = new Thread(this);
         	t.start();
         }	
@@ -1526,73 +1500,61 @@ public class GameBoard extends JFrame implements Runnable {
         @SuppressWarnings({ "static-access"})
         public void run(){      
         	for(int a = 0; a < playerOrder[x].getTotalSteps(); a++){
-        		if(playerOrder[x].getPosition() <= 9){ // from go to just visiting
+        		if(playerOrder[x].getPosition() <= 9){ 
         			try{
         				if(playerOrder[x].getPosition() == 0 || playerOrder[x].getPosition() == 9){
         					playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-63);
-        					//System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}else{
         					playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()-47);
-        					//System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}
         				playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-        				//System.out.println("updatedPosition "+playerOrder[x].getPosition());
         			}
         			catch(InterruptedException e){}
         			
-        		}else if(playerOrder[x].getPosition() >= 10 && playerOrder[x].getPosition() < 20){ // from just visiting to free parking
+        		}else if(playerOrder[x].getPosition() >= 10 && playerOrder[x].getPosition() < 20){ 
         			try{
         				if(playerOrder[x].getPosition() == 10 || playerOrder[x].getPosition() == 19){
         					playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-63);
-        					//System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}else{
         					playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()-47);
-        					//System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}
         				playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-        				//System.out.println("updatedPosition "+playerOrder[x].getPosition());
         			}catch(InterruptedException e){}
         			
-        		}else if(playerOrder[x].getPosition() >= 20 && playerOrder[x].getPosition() < 30){ //  from free parking to go to jail
+        		}else if(playerOrder[x].getPosition() >= 20 && playerOrder[x].getPosition() < 30){ 
         			try{
         				if(playerOrder[x].getPosition() == 20 || playerOrder[x].getPosition() == 29){
         					playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+63);
-        					//System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}else{
         					playerOrder[x].getToken().setxLocation(playerOrder[x].getToken().getxLocation()+47);
-        					//System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}
         				playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-        				//System.out.println("updatedPosition "+playerOrder[x].getPosition());
         			}catch(InterruptedException e){}
         			
-        		}else if(playerOrder[x].getPosition() >= 30 && playerOrder[x].getPosition() < 40){ // from  go to jail to go
+        		}else if(playerOrder[x].getPosition() >= 30 && playerOrder[x].getPosition() < 40){ 
         			try{
         				if(playerOrder[x].getPosition() == 30 || playerOrder[x].getPosition() == 39){
         					playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+63);
-        					//System.out.println(playerOrder[x].getToken().getxLocation() + " " + playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}else{
         					playerOrder[x].getToken().setyLocation(playerOrder[x].getToken().getyLocation()+47);
-        					//System.out.println(playerOrder[x].getToken().getxLocation()+" "+playerOrder[x].getToken().getyLocation());
         					updateTokenPosition();
         					t.sleep(250);
         				}
         				playerOrder[x].setPosition(playerOrder[x].getPosition()+1);
-        				//System.out.println("updatedPosition "+playerOrder[x].getPosition());
         			}catch(InterruptedException e){}
         		}
         		passedGo();
@@ -1602,29 +1564,21 @@ public class GameBoard extends JFrame implements Runnable {
         		
         	}
         		playerOrder[x].setLastStep(playerOrder[x].getPosition());
-                //System.out.println("Last Step: " +playerOrder[x].getLastStep());
                 checkBoard();
         }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
-//////////////////////////////////////////////////////////METHODS USED IN BOARD////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+   
         public void chanceRandom(){
         	chance.shuffleChance();
         	switch (chance.getChanceRandom()){
         	case 1:
-        		//chance.speedingFine();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 15);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		break;                                          
         	case 2:
-        		//chance.bankDividend();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		break;
         	case 3:
-        		//chance.advanceToTrinoma();
         		playerOrder[x].getToken().setxLocation(227);
         		playerOrder[x].getToken().setyLocation(23);
         		playerOrder[x].setPosition(24);
@@ -1636,7 +1590,6 @@ public class GameBoard extends JFrame implements Runnable {
         		}       
         		break;
         	case 4:
-        		//Go to GO!
         		playerOrder[x].getToken().setxLocation(525);
         		playerOrder[x].getToken().setyLocation(525);
         		playerOrder[x].setPosition(40);
@@ -1644,13 +1597,11 @@ public class GameBoard extends JFrame implements Runnable {
         		passedGo();
         		break;
         	case 5:
-        		//chance.paySchoolFees();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 150);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		updateTokenPosition();
         		break;
         	case 6:
-        		//chance.advanceToMoa();
         		playerOrder[x].getToken().setxLocation(525);
         		playerOrder[x].getToken().setyLocation(462);
         		playerOrder[x].setPosition(39);
@@ -1661,7 +1612,6 @@ public class GameBoard extends JFrame implements Runnable {
         		break;
         	
         	case 8:
-        		//chance.advanceToShopwise();
         		playerOrder[x].getToken().setxLocation(23);
         		playerOrder[x].getToken().setyLocation(462);
         		playerOrder[x].setPosition(11);
@@ -1673,7 +1623,6 @@ public class GameBoard extends JFrame implements Runnable {
         		}       
         		break;
         	case 9:
-        		//chance.tripToBuendiaStation();
         		playerOrder[x].getToken().setxLocation(23);
         		playerOrder[x].getToken().setyLocation(274);
         		playerOrder[x].setPosition(15);
@@ -1685,7 +1634,6 @@ public class GameBoard extends JFrame implements Runnable {
         		}       
         		break;
         	case 10:
-        		//chance.buildingMatures();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		updateTokenPosition();
@@ -1694,7 +1642,6 @@ public class GameBoard extends JFrame implements Runnable {
         		goToJail();
         		break;
         	case 12:
-        		//chance.goBackThreeSteps();
         		if(playerOrder[x].getPosition()==7){
         			playerOrder[x].getToken().setxLocation(321);
         			playerOrder[x].getToken().setyLocation(525);
@@ -1716,12 +1663,10 @@ public class GameBoard extends JFrame implements Runnable {
         		}
         		break;
         	case 13:
-        		//chance.drunkInCharge();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		break;
         	case 14:
-        		//chance.wonCrosswordCompetition();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		break;
@@ -1735,38 +1680,31 @@ public class GameBoard extends JFrame implements Runnable {
         	
         	switch (Cchest.getcChestRandom()){
         		case 1:
-        			//Cchest.bankError();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
         		case 2:
-        			//Cchest.payHospital();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 100);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
         		case 3:
-        			//Cchest.wonBeautyContest();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 10);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
         		case 4:
-        			//Cchest.taxRefund();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 20);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
         		
         		case 5:
-        			//Cchest.payInsurance();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
         		case 6:
-        			//Cchest.saleOfStock();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
         		case 7:
-        			//Cchest.recieveInterest();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 25);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
@@ -1786,7 +1724,6 @@ public class GameBoard extends JFrame implements Runnable {
         			playerOrder[x].setHasJailKey(true);
         			break;
         		case 11:
-        			//Cchest.yourBirthday();
         			for(int a = 0; a <= numberOfPlayers; a++){
         				playerOrder[a].setStartMoney(playerOrder[a].getStartMoney()-10);
         				if(playerOrder[a] == playerOrder[x]){
@@ -1796,12 +1733,10 @@ public class GameBoard extends JFrame implements Runnable {
         			}
         			break;
         		case 12:
-        			//Cchest.doctorsFee();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
         		case 13:
-        			//Cchest.annuityMatures();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
@@ -1809,7 +1744,6 @@ public class GameBoard extends JFrame implements Runnable {
         			goToJail();
         			break;
         		case 15:
-        			//Cchest.inheritMoney();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
@@ -2595,7 +2529,7 @@ public class GameBoard extends JFrame implements Runnable {
         }	
                
        public void passedGo(){
-    	   if(playerOrder[x].getPosition() == 40){ //position goes back to 0 if token passed GO
+    	   if(playerOrder[x].getPosition() == 40){ 
     		   playerOrder[x].setPosition(0);   
     		   playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 200);
     		   fPlayerMoney.setText("P " + playerOrder[x].getStartMoney());
@@ -2648,11 +2582,9 @@ public class GameBoard extends JFrame implements Runnable {
        public void checkForDoubles(){
     	   if(dice[0].getDice1stResult() == dice[1].getDice2ndResult()){
     		   playerOrder[x].setDoubleDice(playerOrder[x].getDoubleDice() + 1);
-    		   //System.out.println("doubleDice of player"+ x + " = " + playerOrder[x].getDoubleDice());
-    		   
+ 		 
     		   if(playerOrder[x].isJailed() == true){
     			   playerOrder[x].setBailOutDice(playerOrder[x].getBailOutDice()+1);
-    			   //System.out.println("BailOutDice: "+playerOrder[x].getBailOutDice());
     		   }
     	   }
         }	
@@ -2664,7 +2596,6 @@ public class GameBoard extends JFrame implements Runnable {
         			playerOrder[x].setBailOutDice(0);
         			playerOrder[x].setDoubleDice(0);
         			playerOrder[x].setTryForDice(0);
-        			//System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice());
         		}
                	}else if(playerOrder[x].getTryForDice() == 3 && playerOrder[x].getBailOutDice() == 0){
                		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney()-50);
@@ -2673,7 +2604,6 @@ public class GameBoard extends JFrame implements Runnable {
                		playerOrder[x].setBailOutDice(0);
                		playerOrder[x].setDoubleDice(0);
                		playerOrder[x].setTryForDice(0);
-               		//System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice());
                	}  
         }
         
@@ -2683,28 +2613,17 @@ public class GameBoard extends JFrame implements Runnable {
             playerOrder[x].setBailOutDice(0);
             playerOrder[x].setDoubleDice(0);
             playerOrder[x].setTryForDice(0);
-            //System.out.println("Jailed: " +playerOrder[x].isJailed()+ playerOrder[x].getDoubleDice()+playerOrder[x].getBailOutDice()+playerOrder[x].getTryForDice()+playerOrder[x].hasJailKey());
-            
-        }
+           }
 
     public void buy() {
     	if (isEstate == true) {
     		playerOrder[x].buyEstate(bblock.getBlock()[playerOrder[x].getPosition()].getEstate(), playerOrder, x);
-    		//System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getName());
-    		//System.out.println("Price: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getPrice());
-    		//System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getEstate().getOwnerName());
     	} 
     	if (isUtility == true) {
     		playerOrder[x].buyUtility(bblock.getBlock()[playerOrder[x].getPosition()].getUtilities(), playerOrder, x);
-    		//System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getName());
-    		//System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getPrice());
-    		//System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getUtilities().getOwnerName());
     	}
     	if (isStation == true) {
     		playerOrder[x].buyStation(bblock.getBlock()[playerOrder[x].getPosition()].getStation(), playerOrder, x);
-    		//System.out.println("Name: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getName());
-    		//System.out.println("price: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getPrice());
-    		//System.out.println("Owner: "+bblock.getBlock()[playerOrder[x].getPosition()].getStation().getOwnerName());
     	}
     	fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
     }
