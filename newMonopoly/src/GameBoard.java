@@ -66,7 +66,7 @@ public class GameBoard extends JFrame implements Runnable {
 		add(getClickToPlayPanel(), new Constraints(new Bilateral(0, 0, 0), new Bilateral(0, 0, 0)));
 		add(getPlayerPanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(-17, 443, 10, 10)));
 		add(getDicePanel(), new Constraints(new Leading(605, 210, 12, 12), new Leading(420, 183, 10, 10)));
-		setSize(820, 595);
+		setSize(805, 590);
 			
 	}	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1649,18 +1649,8 @@ public class GameBoard extends JFrame implements Runnable {
         	case 7:
         		playerOrder[x].setHasJailKey(true);
         		break;
+        	
         	case 8:
-                //chance.streetRepairs();
-        		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
-                fPlayerMoney.setText("P" + playerOrder[x].getStartMoney());
-                break;
-        	case 9:
-                //chance.generalRepairs();
-                playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
-                fPlayerMoney.setText("P" + playerOrder[x].getStartMoney());
-                System.out.println("Money: " + playerOrder[x].getStartMoney());
-                break;
-        	case 10:
         		//chance.advanceToShopwise();
         		playerOrder[x].getToken().setxLocation(23);
         		playerOrder[x].getToken().setyLocation(462);
@@ -1672,7 +1662,7 @@ public class GameBoard extends JFrame implements Runnable {
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		}       
         		break;
-        	case 11:
+        	case 9:
         		//chance.tripToBuendiaStation();
         		playerOrder[x].getToken().setxLocation(23);
         		playerOrder[x].getToken().setyLocation(274);
@@ -1684,16 +1674,16 @@ public class GameBoard extends JFrame implements Runnable {
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		}       
         		break;
-        	case 12:
+        	case 10:
         		//chance.buildingMatures();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 150);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		updateTokenPosition();
         		break;
-        	case 13:
+        	case 11:
         		goToJail();
         		break;
-        	case 14:
+        	case 12:
         		//chance.goBackThreeSteps();
         		if(playerOrder[x].getPosition()==7){
         			playerOrder[x].getToken().setxLocation(321);
@@ -1715,12 +1705,12 @@ public class GameBoard extends JFrame implements Runnable {
         			
         		}
         		break;
-        	case 15:
+        	case 13:
         		//chance.drunkInCharge();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 20);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         		break;
-        	case 16:
+        	case 14:
         		//chance.wonCrosswordCompetition();
         		playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
         		fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
@@ -1754,42 +1744,38 @@ public class GameBoard extends JFrame implements Runnable {
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 20);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
+        		
         		case 5:
-                    //Cchest.pay;
-                    playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 10);
-                    fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
-                    break;
-        		case 6:
         			//Cchest.payInsurance();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
-        		case 7:
+        		case 6:
         			//Cchest.saleOfStock();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 50);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
-        		case 8:
+        		case 7:
         			//Cchest.recieveInterest();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 25);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
-        		case 9:
+        		case 8:
         			playerOrder[x].getToken().setxLocation(525);
         			playerOrder[x].getToken().setyLocation(525);
         			playerOrder[x].setPosition(40);
         			updateTokenPosition();
         			passedGo();
         			break;
-        		case 10:
+        		case 9:
         			playerOrder[x].getToken().setxLocation(462);
         			playerOrder[x].getToken().setyLocation(525);
         			playerOrder[x].setPosition(1);
         			break;
-        		case 11:
+        		case 10:
         			playerOrder[x].setHasJailKey(true);
         			break;
-        		case 12:
+        		case 11:
         			//Cchest.yourBirthday();
         			for(int a = 0; a <= numberOfPlayers; a++){
         				playerOrder[a].setStartMoney(playerOrder[a].getStartMoney()-10);
@@ -1799,20 +1785,20 @@ public class GameBoard extends JFrame implements Runnable {
         				}
         			}
         			break;
-        		case 13:
+        		case 12:
         			//Cchest.doctorsFee();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() - 50);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
-        		case 14:
+        		case 13:
         			//Cchest.annuityMatures();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
         			break;
-        		case 15:
+        		case 14:
         			goToJail();
         			break;
-        		case 16:
+        		case 15:
         			//Cchest.inheritMoney();
         			playerOrder[x].setStartMoney(playerOrder[x].getStartMoney() + 100);
         			fPlayerMoney.setText("P "+playerOrder[x].getStartMoney());
@@ -2732,50 +2718,46 @@ public class GameBoard extends JFrame implements Runnable {
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
 		case 5:
-			//lcChest = new ImageIcon(getClass().getResource("/Cchest/BankError.gif"));
-			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
-			break;
-		case 6:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/payInsurance.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 7:
+		case 6:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/saleOfStock.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 8:
+		case 7:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/interestReceive.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 9:
+		case 8:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/advanceToGo.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 10:
+		case 9:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/ayalaAve.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 11:
+		case 10:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/getOutOfJailKey.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 12:
+		case 11:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/birthday.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 13:
+		case 12:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/Doctorsfee.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 14:
+		case 13:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/annuityMatures.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 15:
+		case 14:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/goToJail.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
-		case 16:
+		case 15:
 			lcChest = new ImageIcon(getClass().getResource("/Cchest/inherit.gif"));
 			JOptionPane.showMessageDialog(null, lcChest, "Chest", messageType);
 			break;
@@ -2814,38 +2796,30 @@ public void checkChance(int c){
 			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
 			break;
 		case 8:
-			lChance=new ImageIcon(getClass().getResource("/newChances/street-repairs.gif"));
-			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
-			break;
-		case 9:
-			lChance=new ImageIcon(getClass().getResource("/newChances/General-repairs-for-buildings.gif"));
-			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
-			break;
-		case 10:
 			lChance=new ImageIcon(getClass().getResource("/newChances/Advance-to-Shopwise.gif"));
 			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
 			break;
-		case 11:
+		case 9:
 			lChance=new ImageIcon(getClass().getResource("/newChances/take_a_trip_to_buendia_station.gif"));
 			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
 			break;
-		case 12:
+		case 10:
 			lChance=new ImageIcon(getClass().getResource("/newChances/building_laon_matures.gif"));
 			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
 			break;
-		case 13:
+		case 11:
 			lChance=new ImageIcon(getClass().getResource("/newChances/go_to_jail.gif"));
 			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
 			break;
-		case 14:
+		case 12:
 			lChance=new ImageIcon(getClass().getResource("/newChances/Go-back-three-spaces.gif"));
 			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
 			break;
-		case 15:
+		case 13:
 			lChance=new ImageIcon(getClass().getResource("/newChances/Drunk-in-Charge.gif"));
 			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
 			break;
-		case 16:
+		case 14:
 			lChance=new ImageIcon(getClass().getResource("/newChances/crossword_competition.gif"));
 			JOptionPane.showMessageDialog(null, lChance, "Chance", messageType);
 			break;
